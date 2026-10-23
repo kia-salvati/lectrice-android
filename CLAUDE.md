@@ -23,3 +23,4 @@ rules, agent workflow and "how the user likes to work" apply here too.
 - **Public repo:** no text from the user's copyrighted books in tracked files.
 - License: MIT OR Apache-2.0.
 - Git: author `kia <limsclaude@gmail.com>`, remote `origin` = `personal:kia-salvati/lectrice-android.git`.
+  Push only `main` and version tags; feature branches stay local.
