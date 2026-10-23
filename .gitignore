@@ -1,0 +1,34 @@
+# Gradle / Android
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio
+.idea/
+*.iml
+
+# Rust
+/ffi/target/
+/target/
+
+# Local core override for side-by-side development
+.cargo/config.toml
+
+# Signing keys and secrets: never commit
+*.jks
+*.keystore
+keystore.properties
+
+# Model files and audio
+*.onnx
+*.wav
+*.m4b
+*.mp3
+
+# Text from copyrighted test books: never commit
+/test-data/
