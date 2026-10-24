@@ -32,3 +32,8 @@ keystore.properties
 
 # Text from copyrighted test books: never commit
 /test-data/
+
+# Native libraries: downloaded and unpacked by native/fetch-libs.sh, never committed
+/native/downloads/
+/native/lib/
+**/jniLibs/

@@ -1,0 +1,21 @@
+[workspace]
+resolver = "3"
+members = ["rust/lectrice-ffi", "rust/uniffi-bindgen"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.dependencies]
+uniffi = "=0.32.2"
+
+# uniffi needs unwinding to turn a Rust panic into a Kotlin exception. Symbols stay in, because uniffi-bindgen reads
+# the API metadata from the symbol table; the Android Gradle plugin strips the libraries when it packages the APK.
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"
+panic = "unwind"

@@ -1,0 +1,5 @@
+# Copy to .cargo/config.toml (gitignored) to build against a local checkout of the core instead of the pinned tag.
+[patch."https://github.com/kia-salvati/lectrice"]
+lectrice-domain = { path = "../lectrice/backend/crates/lectrice-domain" }
+lectrice-app = { path = "../lectrice/backend/crates/lectrice-app" }
+lectrice-infra = { path = "../lectrice/backend/crates/lectrice-infra" }
