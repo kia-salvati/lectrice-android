@@ -1,0 +1,778 @@
+{
+ "note": "Derived from S10plus-variants-cores.json and S26U-variants-cores.json. medianRtf over runs 2-3 (run 1 is warm-up). mAh from the charge counter (coarse on the S26: 5 mAh steps).",
+ "models": {
+  "FP32": "official fp32",
+  "INT8": "official int8",
+  "SMALL": "lectrice w8",
+  "FAST": "lectrice q8"
+ },
+ "bench": [
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:12:45.006Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 1.413,
+   "runRtfs": [
+    1.295,
+    1.403,
+    1.423
+   ],
+   "firstSentenceMs": 4352,
+   "rssMb": 774,
+   "batteryTempC": [
+    35.2,
+    35
+   ],
+   "thermalStatus": [
+    0,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:17:53.926Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "big",
+   "medianRtf": 1.442,
+   "runRtfs": [
+    1.435,
+    1.434,
+    1.449
+   ],
+   "firstSentenceMs": 4367,
+   "rssMb": 780,
+   "batteryTempC": [
+    35,
+    37.4
+   ],
+   "thermalStatus": [
+    1,
+    2
+   ],
+   "charging": false,
+   "requestedCpus": "4-7",
+   "appliedCpus": "4-7",
+   "engineThreadsAllowed": [
+    "0-7",
+    "4-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:23:26.978Z",
+   "bundle": "SMALL",
+   "threads": 4,
+   "cores": "big",
+   "medianRtf": 1.509,
+   "runRtfs": [
+    1.454,
+    1.502,
+    1.516
+   ],
+   "firstSentenceMs": 4698,
+   "rssMb": 653,
+   "batteryTempC": [
+    37.8,
+    39.6
+   ],
+   "thermalStatus": [
+    2,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "4-7",
+   "appliedCpus": "4-7",
+   "engineThreadsAllowed": [
+    "4-7"
+   ],
+   "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:28:58.587Z",
+   "bundle": "SMALL",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 1.546,
+   "runRtfs": [
+    1.523,
+    1.539,
+    1.554
+   ],
+   "firstSentenceMs": 4773,
+   "rssMb": 651,
+   "batteryTempC": [
+    39.6,
+    41.2
+   ],
+   "thermalStatus": [
+    3,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:33:03.058Z",
+   "bundle": "FAST",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 1.11,
+   "runRtfs": [
+    1.117,
+    1.109,
+    1.11
+   ],
+   "firstSentenceMs": 3378,
+   "rssMb": 648,
+   "batteryTempC": [
+    41.2,
+    41
+   ],
+   "thermalStatus": [
+    3,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:37:10.451Z",
+   "bundle": "FAST",
+   "threads": 4,
+   "cores": "big",
+   "medianRtf": 1.126,
+   "runRtfs": [
+    1.142,
+    1.121,
+    1.131
+   ],
+   "firstSentenceMs": 3361,
+   "rssMb": 648,
+   "batteryTempC": [
+    41,
+    39.9
+   ],
+   "thermalStatus": [
+    3,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "4-7",
+   "appliedCpus": "4-7",
+   "engineThreadsAllowed": [
+    "4-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:46:39.831Z",
+   "bundle": "INT8",
+   "threads": 4,
+   "cores": "big",
+   "medianRtf": 2.615,
+   "runRtfs": [
+    2.677,
+    2.619,
+    2.611
+   ],
+   "firstSentenceMs": 8029,
+   "rssMb": 597,
+   "batteryTempC": [
+    39.9,
+    38.7
+   ],
+   "thermalStatus": [
+    3,
+    2
+   ],
+   "charging": false,
+   "requestedCpus": "4-7",
+   "appliedCpus": "4-7",
+   "engineThreadsAllowed": [
+    "4-7"
+   ],
+   "modelSha256": "4b86207ef680e394d8343bee22dfc4c512e5c707c6d9578e3f35ab09bffd6b36"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T16:48:48.770589Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 0.538,
+   "runRtfs": [
+    0.407,
+    0.495,
+    0.582
+   ],
+   "firstSentenceMs": 1541,
+   "rssMb": 752,
+   "batteryTempC": [
+    29.7,
+    34.3
+   ],
+   "thermalStatus": [
+    0,
+    0
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T16:51:09.445616Z",
+   "bundle": "SMALL",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 0.639,
+   "runRtfs": [
+    0.627,
+    0.638,
+    0.639
+   ],
+   "firstSentenceMs": 1969,
+   "rssMb": 631,
+   "batteryTempC": [
+    35.7,
+    37.2
+   ],
+   "thermalStatus": [
+    0,
+    0
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T16:52:28.723278Z",
+   "bundle": "FAST",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 0.348,
+   "runRtfs": [
+    0.312,
+    0.337,
+    0.36
+   ],
+   "firstSentenceMs": 1036,
+   "rssMb": 626,
+   "batteryTempC": [
+    37.2,
+    38.2
+   ],
+   "thermalStatus": [
+    0,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T16:55:59.264867Z",
+   "bundle": "INT8",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 0.968,
+   "runRtfs": [
+    1.001,
+    0.954,
+    0.982
+   ],
+   "firstSentenceMs": 2896,
+   "rssMb": 602,
+   "batteryTempC": [
+    38.2,
+    38.7
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "4b86207ef680e394d8343bee22dfc4c512e5c707c6d9578e3f35ab09bffd6b36"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T16:58:39.487530Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "big",
+   "medianRtf": 0.739,
+   "runRtfs": [
+    0.711,
+    0.739,
+    0.739
+   ],
+   "firstSentenceMs": 2269,
+   "rssMb": 769,
+   "batteryTempC": [
+    38.7,
+    39.9
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:00:17.676693Z",
+   "bundle": "FAST",
+   "threads": 2,
+   "cores": "all",
+   "medianRtf": 0.447,
+   "runRtfs": [
+    0.432,
+    0.446,
+    0.447
+   ],
+   "firstSentenceMs": 1387,
+   "rssMb": 630,
+   "batteryTempC": [
+    39.9,
+    39.9
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:03:06.515451Z",
+   "bundle": "SMALL",
+   "threads": 2,
+   "cores": "all",
+   "medianRtf": 0.788,
+   "runRtfs": [
+    0.772,
+    0.788,
+    0.788
+   ],
+   "firstSentenceMs": 2438,
+   "rssMb": 637,
+   "batteryTempC": [
+    39.9,
+    40.7
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:05:55.661206Z",
+   "bundle": "FP32",
+   "threads": 2,
+   "cores": "all",
+   "medianRtf": 0.777,
+   "runRtfs": [
+    0.763,
+    0.777,
+    0.777
+   ],
+   "firstSentenceMs": 2406,
+   "rssMb": 770,
+   "batteryTempC": [
+    40.7,
+    41
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:08:47.072786Z",
+   "bundle": "FP32",
+   "threads": 2,
+   "cores": "6-7",
+   "medianRtf": 0.778,
+   "runRtfs": [
+    0.762,
+    0.778,
+    0.777
+   ],
+   "firstSentenceMs": 2409,
+   "rssMb": 770,
+   "batteryTempC": [
+    41,
+    41.2
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "6-7",
+   "appliedCpus": "6-7",
+   "engineThreadsAllowed": [
+    "6-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:10:27.510013Z",
+   "bundle": "FAST",
+   "threads": 2,
+   "cores": "6-7",
+   "medianRtf": 0.446,
+   "runRtfs": [
+    0.428,
+    0.445,
+    0.447
+   ],
+   "firstSentenceMs": 1390,
+   "rssMb": 634,
+   "batteryTempC": [
+    41.2,
+    41.1
+   ],
+   "thermalStatus": [
+    1,
+    1
+   ],
+   "charging": false,
+   "requestedCpus": "6-7",
+   "appliedCpus": "6-7",
+   "engineThreadsAllowed": [
+    "6-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:12:22.818046Z",
+   "bundle": "FP32",
+   "threads": 8,
+   "cores": "all",
+   "medianRtf": 0.521,
+   "runRtfs": [
+    0.527,
+    0.502,
+    0.541
+   ],
+   "firstSentenceMs": 1542,
+   "rssMb": 773,
+   "batteryTempC": [
+    41.1,
+    42.7
+   ],
+   "thermalStatus": [
+    1,
+    2
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:20:08.711729Z",
+   "bundle": "FAST",
+   "threads": 8,
+   "cores": "all",
+   "medianRtf": 0.193,
+   "runRtfs": [
+    0.172,
+    0.184,
+    0.202
+   ],
+   "firstSentenceMs": 564,
+   "rssMb": 637,
+   "batteryTempC": [
+    35.3,
+    40.9
+   ],
+   "thermalStatus": [
+    0,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:21:51.875101Z",
+   "bundle": "SMALL",
+   "threads": 8,
+   "cores": "all",
+   "medianRtf": 0.482,
+   "runRtfs": [
+    0.428,
+    0.487,
+    0.477
+   ],
+   "firstSentenceMs": 1384,
+   "rssMb": 638,
+   "batteryTempC": [
+    40.9,
+    42.2
+   ],
+   "thermalStatus": [
+    3,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:28:26.917371Z",
+   "bundle": "FP32",
+   "threads": 8,
+   "cores": "all",
+   "medianRtf": 0.455,
+   "runRtfs": [
+    0.311,
+    0.415,
+    0.496
+   ],
+   "firstSentenceMs": 1354,
+   "rssMb": 769,
+   "batteryTempC": [
+    35.5,
+    41.6
+   ],
+   "thermalStatus": [
+    0,
+    3
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:33:05.738649Z",
+   "bundle": "FAST",
+   "threads": 4,
+   "cores": "all",
+   "medianRtf": 0.24,
+   "runRtfs": [
+    0.201,
+    0.223,
+    0.256
+   ],
+   "firstSentenceMs": 703,
+   "rssMb": 632,
+   "batteryTempC": [
+    34,
+    39.1
+   ],
+   "thermalStatus": [
+    0,
+    2
+   ],
+   "charging": false,
+   "requestedCpus": "0-7",
+   "appliedCpus": "0-7",
+   "engineThreadsAllowed": [
+    "0-7"
+   ],
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  }
+ ],
+ "soak": [
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T16:58:29.707Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "all",
+   "minutes": 10,
+   "audioMinutes": 5.9,
+   "usedMah": 217.7,
+   "mahPerAudioMinute": 36.9,
+   "rtfMinute1": 1.281,
+   "rtfLast2Min": 1.76,
+   "rtfMedian": 1.761,
+   "maxThermalStatus": 2,
+   "batteryTempC": [
+    38.6,
+    39.8
+   ],
+   "batteryPct": [
+    47,
+    41
+   ],
+   "maxRssMb": 794,
+   "appliedCpus": "0-7",
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S10+",
+   "at": "2026-10-25T17:09:42.636Z",
+   "bundle": "FAST",
+   "threads": 4,
+   "cores": "big",
+   "minutes": 10,
+   "audioMinutes": 8.99,
+   "usedMah": 193.9,
+   "mahPerAudioMinute": 21.58,
+   "rtfMinute1": 1.123,
+   "rtfLast2Min": 1.087,
+   "rtfMedian": 1.107,
+   "maxThermalStatus": 2,
+   "batteryTempC": [
+    39.7,
+    40.2
+   ],
+   "batteryPct": [
+    41,
+    36
+   ],
+   "maxRssMb": 654,
+   "appliedCpus": "4-7",
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:46:07.860681Z",
+   "bundle": "FP32",
+   "threads": 4,
+   "cores": "all",
+   "minutes": 10,
+   "audioMinutes": 14.7,
+   "usedMah": 195,
+   "mahPerAudioMinute": 13.26,
+   "rtfMinute1": 0.594,
+   "rtfLast2Min": 0.749,
+   "rtfMedian": 0.698,
+   "maxThermalStatus": 1,
+   "batteryTempC": [
+    34.3,
+    39
+   ],
+   "batteryPct": [
+    46,
+    41
+   ],
+   "maxRssMb": 780,
+   "appliedCpus": "0-7",
+   "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11"
+  },
+  {
+   "phone": "S26 Ultra",
+   "at": "2026-10-25T17:59:56.581804Z",
+   "bundle": "FAST",
+   "threads": 8,
+   "cores": "all",
+   "minutes": 10,
+   "audioMinutes": 31.28,
+   "usedMah": 275,
+   "mahPerAudioMinute": 8.79,
+   "rtfMinute1": 0.191,
+   "rtfLast2Min": 0.375,
+   "rtfMedian": 0.344,
+   "maxThermalStatus": 3,
+   "batteryTempC": [
+    34.3,
+    42.9
+   ],
+   "batteryPct": [
+    41,
+    35
+   ],
+   "maxRssMb": 652,
+   "appliedCpus": "0-7",
+   "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe"
+  }
+ ]
+}

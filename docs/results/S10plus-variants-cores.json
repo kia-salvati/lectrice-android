@@ -1,0 +1,6106 @@
+{
+  "device": {
+    "manufacturer": "samsung",
+    "model": "SM-G975F",
+    "board": "exynos9820",
+    "hardware": "exynos9820",
+    "socManufacturer": "Samsung",
+    "socModel": "Exynos 9820",
+    "ramMb": 7419,
+    "android": "12",
+    "api": 31,
+    "pageSize": 4096,
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "armeabi"
+    ],
+    "cpus": 8
+  },
+  "app": {
+    "versionName": "0.1.0-spike-sherpa1",
+    "sherpaSet": "sherpa1",
+    "coreRevision": "v0.3.0-dirty"
+  },
+  "startedAt": "2026-10-25T16:07:45.597Z",
+  "runs": [
+    {
+      "openMs": 50,
+      "pdfiumBinding": "bareName",
+      "nativeLibraryDir": "\/data\/app\/~~EpdafxKKatbhtsyfPZMpuQ==\/app.lectrice.spike.sherpa1-XNWNUj-Xmteezu5h_BHkhw==\/lib\/arm64",
+      "memoryKb": {
+        "VmHWM": 122180,
+        "VmRSS": 122180
+      },
+      "kind": "load",
+      "at": "2026-10-25T16:07:45.598Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "wallMs": 2225,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 674120,
+        "VmRSS": 674120
+      },
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 1024,
+          "7": 1024
+        },
+        "appliedCpus": "0-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 18007,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 18008,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 18009,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 18027,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 18028,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 18030,
+          "name": "process reaper",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 2199,
+      "kind": "engine",
+      "at": "2026-10-25T16:07:53.251Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "providerEngaged": true,
+      "loadMs": 2199,
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "medianRtf": 1.412818326694675,
+      "runs": [
+        {
+          "engineLoadMs": 2199,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 91700,
+          "rtf": 1.2954722045631137,
+          "firstSentenceMs": 3475,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 3475,
+              "atMs": 3475
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 3715,
+              "atMs": 7190
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 4301,
+              "atMs": 11492
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 4796,
+              "atMs": 16288
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 3703,
+              "atMs": 19991
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 4949,
+              "atMs": 24941
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 4717,
+              "atMs": 29658
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4262,
+              "atMs": 33920
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4161,
+              "synthMs": 5176,
+              "atMs": 39097
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 4781,
+              "atMs": 43878
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5024,
+              "atMs": 48902
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4596,
+              "atMs": 53499
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 4560,
+              "atMs": 58059
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 4856,
+              "atMs": 62915
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 4533,
+              "atMs": 67449
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4342,
+              "atMs": 71791
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 4875,
+              "atMs": 76667
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 4775,
+              "atMs": 81443
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 4814,
+              "atMs": 86257
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5450,
+              "atMs": 91707
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2199,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 99312,
+          "rtf": 1.4030091121000212,
+          "firstSentenceMs": 4362,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4362,
+              "atMs": 4362
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 4489,
+              "atMs": 8852
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 5199,
+              "atMs": 14051
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5596,
+              "atMs": 19648
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4391,
+              "atMs": 24040
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5512,
+              "atMs": 29553
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3672,
+              "synthMs": 5258,
+              "atMs": 34811
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4868,
+              "atMs": 39680
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 5540,
+              "atMs": 45221
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3681,
+              "synthMs": 5197,
+              "atMs": 50418
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5256,
+              "atMs": 55675
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4858,
+              "atMs": 60534
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 4931,
+              "atMs": 65466
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 5023,
+              "atMs": 70489
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 4780,
+              "atMs": 75269
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4706,
+              "atMs": 79976
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 4921,
+              "atMs": 84897
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3440,
+              "synthMs": 4886,
+              "atMs": 89784
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 4954,
+              "atMs": 94739
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4585,
+              "atMs": 99324
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2199,
+          "sentences": 20,
+          "audioMs": 70781,
+          "synthMs": 100695,
+          "rtf": 1.422627541289329,
+          "firstSentenceMs": 4343,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4343,
+              "atMs": 4343
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4483,
+              "atMs": 8827
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 5286,
+              "atMs": 14114
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5644,
+              "atMs": 19758
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3214,
+              "synthMs": 4606,
+              "atMs": 24364
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5781,
+              "atMs": 30146
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 5213,
+              "atMs": 35359
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4933,
+              "atMs": 40293
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 5692,
+              "atMs": 45985
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 5161,
+              "atMs": 51146
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5423,
+              "atMs": 56570
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4915,
+              "atMs": 61486
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 4903,
+              "atMs": 66390
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 5114,
+              "atMs": 71505
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 4909,
+              "atMs": 76414
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4660,
+              "atMs": 81075
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 5122,
+              "atMs": 86198
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3440,
+              "synthMs": 4913,
+              "atMs": 91111
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5015,
+              "atMs": 96126
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4579,
+              "atMs": 100705
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 797328,
+        "VmRSS": 793276
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 1024,
+          "7": 1024
+        },
+        "appliedCpus": "0-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 18007,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 18008,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 18009,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 18027,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 18028,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 0,
+        "thermalHeadroom": 0.7800225615501404,
+        "batteryTempC": 35.2,
+        "batteryPct": 70,
+        "charging": false,
+        "chargeCounterUah": 2794348,
+        "currentNow": -1838
+      },
+      "powerAfter": {
+        "thermalStatus": 1,
+        "thermalHeadroom": 0.9107673764228821,
+        "batteryTempC": 35,
+        "batteryPct": 66,
+        "charging": false,
+        "chargeCounterUah": 2659776,
+        "currentNow": -1231
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:12:45.006Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "wallMs": 2828,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 797328,
+        "VmRSS": 679684
+      },
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 239,
+          "1": 239,
+          "2": 239,
+          "3": 239,
+          "4": 587,
+          "5": 587,
+          "6": 780,
+          "7": 780
+        },
+        "appliedCpus": "4-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 19283,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19284,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19285,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19317,
+          "name": "Binder:17927_4",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 19327,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19328,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19330,
+          "name": "process reaper",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 2548,
+      "kind": "engine",
+      "at": "2026-10-25T16:12:48.227Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "providerEngaged": true,
+      "loadMs": 2548,
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "medianRtf": 1.4416034221290126,
+      "runs": [
+        {
+          "engineLoadMs": 2548,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 101566,
+          "rtf": 1.4348520166701986,
+          "firstSentenceMs": 4151,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4151,
+              "atMs": 4151
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4415,
+              "atMs": 8567
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 5329,
+              "atMs": 13896
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5587,
+              "atMs": 19483
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4477,
+              "atMs": 23961
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5892,
+              "atMs": 29854
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 5233,
+              "atMs": 35088
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4881,
+              "atMs": 39970
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4161,
+              "synthMs": 5640,
+              "atMs": 45610
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 5287,
+              "atMs": 50897
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5359,
+              "atMs": 56257
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4952,
+              "atMs": 61209
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 4886,
+              "atMs": 66095
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 5099,
+              "atMs": 71195
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 5022,
+              "atMs": 76218
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4653,
+              "atMs": 80872
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 5220,
+              "atMs": 86092
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 4900,
+              "atMs": 90993
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5526,
+              "atMs": 96520
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5057,
+              "atMs": 101578
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2548,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 101512,
+          "rtf": 1.4340891431800522,
+          "firstSentenceMs": 4305,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4305,
+              "atMs": 4305
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 4710,
+              "atMs": 9015
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 5411,
+              "atMs": 14426
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5750,
+              "atMs": 20176
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4464,
+              "atMs": 24641
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5837,
+              "atMs": 30479
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3672,
+              "synthMs": 5358,
+              "atMs": 35837
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4822,
+              "atMs": 40660
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 5762,
+              "atMs": 46422
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3681,
+              "synthMs": 5167,
+              "atMs": 51590
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5464,
+              "atMs": 57055
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4880,
+              "atMs": 61936
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 5041,
+              "atMs": 66978
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 5023,
+              "atMs": 72001
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 4924,
+              "atMs": 76926
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4679,
+              "atMs": 81605
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 5034,
+              "atMs": 86640
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3440,
+              "synthMs": 5052,
+              "atMs": 91693
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5052,
+              "atMs": 96745
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4777,
+              "atMs": 101523
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2548,
+          "sentences": 20,
+          "audioMs": 70781,
+          "synthMs": 102570,
+          "rtf": 1.449117701077973,
+          "firstSentenceMs": 4430,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4430,
+              "atMs": 4430
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4576,
+              "atMs": 9006
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 5244,
+              "atMs": 14251
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5797,
+              "atMs": 20048
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3214,
+              "synthMs": 4402,
+              "atMs": 24451
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5731,
+              "atMs": 30182
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 5407,
+              "atMs": 35589
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 4871,
+              "atMs": 40461
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 6052,
+              "atMs": 46513
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 5224,
+              "atMs": 51738
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5542,
+              "atMs": 57280
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 4929,
+              "atMs": 62210
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 5135,
+              "atMs": 67345
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 5186,
+              "atMs": 72532
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 5088,
+              "atMs": 77621
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4811,
+              "atMs": 82432
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 5009,
+              "atMs": 87441
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3440,
+              "synthMs": 5076,
+              "atMs": 92517
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5159,
+              "atMs": 97676
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4901,
+              "atMs": 102578
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 801040,
+        "VmRSS": 798764
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 239,
+          "1": 239,
+          "2": 239,
+          "3": 239,
+          "4": 587,
+          "5": 587,
+          "6": 780,
+          "7": 780
+        },
+        "appliedCpus": "4-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 19283,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 19284,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19285,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 19317,
+          "name": "Binder:17927_4",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 19327,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19328,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 1,
+        "thermalHeadroom": 0.9111867547035217,
+        "batteryTempC": 35,
+        "batteryPct": 66,
+        "charging": false,
+        "chargeCounterUah": 2659776,
+        "currentNow": -916
+      },
+      "powerAfter": {
+        "thermalStatus": 2,
+        "thermalHeadroom": 0.968896210193634,
+        "batteryTempC": 37.4,
+        "batteryPct": 63,
+        "charging": false,
+        "chargeCounterUah": 2509372,
+        "currentNow": -1440
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:17:53.926Z"
+    },
+    {
+      "bundle": "SMALL",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "wallMs": 2206,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 518684
+      },
+      "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 926,
+          "7": 926
+        },
+        "appliedCpus": "4-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 19924,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19925,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19926,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19930,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19931,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19933,
+          "name": "process reaper",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 2011,
+      "kind": "engine",
+      "at": "2026-10-25T16:18:10.342Z"
+    },
+    {
+      "bundle": "SMALL",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "providerEngaged": true,
+      "loadMs": 2011,
+      "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a",
+      "medianRtf": 1.5091440327114753,
+      "runs": [
+        {
+          "engineLoadMs": 2011,
+          "sentences": 20,
+          "audioMs": 70780,
+          "synthMs": 102942,
+          "rtf": 1.454393896580955,
+          "firstSentenceMs": 3739,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 3739,
+              "atMs": 3739
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4118,
+              "atMs": 7858
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 5354,
+              "atMs": 13213
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3997,
+              "synthMs": 5569,
+              "atMs": 18782
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4453,
+              "atMs": 23235
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 6073,
+              "atMs": 29309
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 5378,
+              "atMs": 34688
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 5086,
+              "atMs": 39775
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 5972,
+              "atMs": 45747
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 5466,
+              "atMs": 51214
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5427,
+              "atMs": 56642
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5161,
+              "atMs": 61803
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 5059,
+              "atMs": 66862
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 5346,
+              "atMs": 72208
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 5229,
+              "atMs": 77438
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 5003,
+              "atMs": 82441
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 5416,
+              "atMs": 87858
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 4977,
+              "atMs": 92836
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5347,
+              "atMs": 98183
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4769,
+              "atMs": 102953
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2011,
+          "sentences": 20,
+          "audioMs": 70783,
+          "synthMs": 106346,
+          "rtf": 1.5024228981535115,
+          "firstSentenceMs": 4743,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4743,
+              "atMs": 4743
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4721,
+              "atMs": 9464
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 5680,
+              "atMs": 15145
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 5917,
+              "atMs": 21062
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4592,
+              "atMs": 25655
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 5967,
+              "atMs": 31623
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 5646,
+              "atMs": 37269
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 5169,
+              "atMs": 42439
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 6153,
+              "atMs": 48593
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 5590,
+              "atMs": 54184
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3844,
+              "synthMs": 5593,
+              "atMs": 59777
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5134,
+              "atMs": 64911
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 5246,
+              "atMs": 70157
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 5392,
+              "atMs": 75550
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 5163,
+              "atMs": 80714
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 4994,
+              "atMs": 85708
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 5137,
+              "atMs": 90846
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 5223,
+              "atMs": 96069
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5342,
+              "atMs": 101412
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 4944,
+              "atMs": 106356
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2011,
+          "sentences": 20,
+          "audioMs": 70784,
+          "synthMs": 107299,
+          "rtf": 1.5158651672694394,
+          "firstSentenceMs": 4654,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4654,
+              "atMs": 4654
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4792,
+              "atMs": 9446
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 5630,
+              "atMs": 15077
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3995,
+              "synthMs": 5943,
+              "atMs": 21020
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4697,
+              "atMs": 25717
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 6158,
+              "atMs": 31876
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 5512,
+              "atMs": 37389
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 5218,
+              "atMs": 42607
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 6083,
+              "atMs": 48691
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 5572,
+              "atMs": 54264
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5622,
+              "atMs": 59886
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5295,
+              "atMs": 65181
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 5396,
+              "atMs": 70578
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3576,
+              "synthMs": 5461,
+              "atMs": 76039
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3346,
+              "synthMs": 5223,
+              "atMs": 81263
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 5013,
+              "atMs": 86276
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 5359,
+              "atMs": 91636
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 5271,
+              "atMs": 96907
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 5324,
+              "atMs": 102232
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5076,
+              "atMs": 107308
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 669180
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 926,
+          "7": 926
+        },
+        "appliedCpus": "4-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 19924,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 19925,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 19926,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 19930,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 19931,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 2,
+        "thermalHeadroom": 0.9544644951820374,
+        "batteryTempC": 37.8,
+        "batteryPct": 62,
+        "charging": false,
+        "chargeCounterUah": 2497498,
+        "currentNow": -876
+      },
+      "powerAfter": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 1.008497953414917,
+        "batteryTempC": 39.6,
+        "batteryPct": 59,
+        "charging": false,
+        "chargeCounterUah": 2358968,
+        "currentNow": -1121
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:23:26.978Z"
+    },
+    {
+      "bundle": "SMALL",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "wallMs": 2346,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 516348
+      },
+      "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a",
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 948,
+          "7": 948
+        },
+        "appliedCpus": "0-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 20755,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 20756,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 20757,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 20761,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 20762,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 1
+        },
+        {
+          "tid": 20764,
+          "name": "process reaper",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 2124,
+      "kind": "engine",
+      "at": "2026-10-25T16:23:31.820Z"
+    },
+    {
+      "bundle": "SMALL",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "providerEngaged": true,
+      "loadMs": 2124,
+      "modelSha256": "9892dbe1bf94d5b20e1199cd00dc4c849c0adae27b0bc2f8c76c4189f58c7a7a",
+      "medianRtf": 1.546476176185906,
+      "runs": [
+        {
+          "engineLoadMs": 2124,
+          "sentences": 20,
+          "audioMs": 70780,
+          "synthMs": 107785,
+          "rtf": 1.5228171799943486,
+          "firstSentenceMs": 4161,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 4161,
+              "atMs": 4161
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4732,
+              "atMs": 8894
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 5608,
+              "atMs": 14502
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3997,
+              "synthMs": 6070,
+              "atMs": 20572
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4650,
+              "atMs": 25223
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 6174,
+              "atMs": 31397
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 5603,
+              "atMs": 37001
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 5251,
+              "atMs": 42252
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 6258,
+              "atMs": 48511
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 5711,
+              "atMs": 54223
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5861,
+              "atMs": 60084
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5309,
+              "atMs": 65394
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 5319,
+              "atMs": 70713
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 5521,
+              "atMs": 76235
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 5225,
+              "atMs": 81461
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4961,
+              "atMs": 86423
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 5533,
+              "atMs": 91956
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 5303,
+              "atMs": 97260
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5393,
+              "atMs": 102653
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5142,
+              "atMs": 107796
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2124,
+          "sentences": 20,
+          "audioMs": 70783,
+          "synthMs": 108957,
+          "rtf": 1.5393102863681958,
+          "firstSentenceMs": 4791,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4791,
+              "atMs": 4791
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4937,
+              "atMs": 9729
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 5875,
+              "atMs": 15604
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 6145,
+              "atMs": 21749
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4765,
+              "atMs": 26515
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 6420,
+              "atMs": 32936
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 5628,
+              "atMs": 38565
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 5394,
+              "atMs": 43959
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 6215,
+              "atMs": 50175
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 5617,
+              "atMs": 55792
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3844,
+              "synthMs": 5706,
+              "atMs": 61499
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5305,
+              "atMs": 66804
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 5403,
+              "atMs": 72208
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 5406,
+              "atMs": 77615
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 5105,
+              "atMs": 82721
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 5015,
+              "atMs": 87736
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 5385,
+              "atMs": 93121
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 5362,
+              "atMs": 98484
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 5424,
+              "atMs": 103908
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5059,
+              "atMs": 108968
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2124,
+          "sentences": 20,
+          "audioMs": 70784,
+          "synthMs": 109973,
+          "rtf": 1.5536420660036165,
+          "firstSentenceMs": 4755,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4755,
+              "atMs": 4755
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 4886,
+              "atMs": 9642
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 5835,
+              "atMs": 15478
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3995,
+              "synthMs": 6502,
+              "atMs": 21980
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 4774,
+              "atMs": 26755
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 6310,
+              "atMs": 33065
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 5789,
+              "atMs": 38854
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 5228,
+              "atMs": 44083
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 6348,
+              "atMs": 50431
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 5592,
+              "atMs": 56024
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 5943,
+              "atMs": 61967
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 5263,
+              "atMs": 67231
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 5383,
+              "atMs": 72615
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3576,
+              "synthMs": 5276,
+              "atMs": 77891
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3346,
+              "synthMs": 5151,
+              "atMs": 83043
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 4847,
+              "atMs": 87891
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3511,
+              "synthMs": 5381,
+              "atMs": 93272
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 5317,
+              "atMs": 98590
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 5559,
+              "atMs": 104149
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 5834,
+              "atMs": 109984
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 666800
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 948,
+          "7": 948
+        },
+        "appliedCpus": "0-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 20755,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 20756,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 20757,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 20761,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 20762,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 1
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 1.0106868743896484,
+        "batteryTempC": 39.6,
+        "batteryPct": 59,
+        "charging": false,
+        "chargeCounterUah": 2358968,
+        "currentNow": -797
+      },
+      "powerAfter": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 1.0466667413711548,
+        "batteryTempC": 41.2,
+        "batteryPct": 55,
+        "charging": false,
+        "chargeCounterUah": 2212522,
+        "currentNow": -1056
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:28:58.587Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "wallMs": 3181,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 486812
+      },
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 975,
+          "7": 975
+        },
+        "appliedCpus": "0-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 21642,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 21643,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 21644,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 21649,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 21650,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 2
+        },
+        {
+          "tid": 21652,
+          "name": "process reaper",
+          "cpusAllowed": "0-7",
+          "lastCpu": 0
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 2943,
+      "kind": "engine",
+      "at": "2026-10-25T16:29:06.858Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "providerEngaged": true,
+      "loadMs": 2943,
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "medianRtf": 1.1095649000942376,
+      "runs": [
+        {
+          "engineLoadMs": 2943,
+          "sentences": 20,
+          "audioMs": 70799,
+          "synthMs": 79054,
+          "rtf": 1.1165976920577974,
+          "firstSentenceMs": 4064,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4064,
+              "atMs": 4064
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 4028,
+              "atMs": 8092
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3888,
+              "synthMs": 4267,
+              "atMs": 12359
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4000,
+              "synthMs": 4388,
+              "atMs": 16748
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3403,
+              "atMs": 20151
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4101,
+              "synthMs": 4470,
+              "atMs": 24621
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 3993,
+              "atMs": 28615
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 3694,
+              "atMs": 32309
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 4456,
+              "atMs": 36766
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 4060,
+              "atMs": 40826
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 4224,
+              "atMs": 45051
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 3707,
+              "atMs": 48759
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 3758,
+              "atMs": 52517
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 3944,
+              "atMs": 56461
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3346,
+              "synthMs": 3673,
+              "atMs": 60135
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 3633,
+              "atMs": 63768
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 4006,
+              "atMs": 67775
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 3744,
+              "atMs": 71519
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 3921,
+              "atMs": 75440
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3621,
+              "atMs": 79061
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2943,
+          "sentences": 20,
+          "audioMs": 70777,
+          "synthMs": 78471,
+          "rtf": 1.1087076310100739,
+          "firstSentenceMs": 3392,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 3392,
+              "atMs": 3392
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 3478,
+              "atMs": 6870
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3890,
+              "synthMs": 4254,
+              "atMs": 11124
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3995,
+              "synthMs": 4358,
+              "atMs": 15483
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3415,
+              "atMs": 18898
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 4390,
+              "atMs": 23288
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 4029,
+              "atMs": 27318
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 3730,
+              "atMs": 31049
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4151,
+              "synthMs": 4390,
+              "atMs": 35439
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 3965,
+              "atMs": 39404
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 4309,
+              "atMs": 43713
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 3795,
+              "atMs": 47509
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 3737,
+              "atMs": 51247
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3579,
+              "synthMs": 3926,
+              "atMs": 55173
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 3971,
+              "atMs": 59145
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 3930,
+              "atMs": 63075
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3518,
+              "synthMs": 4073,
+              "atMs": 67149
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3437,
+              "synthMs": 3747,
+              "atMs": 70896
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 4030,
+              "atMs": 74927
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3552,
+              "atMs": 78480
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2943,
+          "sentences": 20,
+          "audioMs": 70801,
+          "synthMs": 78619,
+          "rtf": 1.1104221691784015,
+          "firstSentenceMs": 3365,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 3365,
+              "atMs": 3365
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 3480,
+              "atMs": 6846
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3888,
+              "synthMs": 4280,
+              "atMs": 11126
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4000,
+              "synthMs": 4325,
+              "atMs": 15452
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3414,
+              "atMs": 18867
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 4418,
+              "atMs": 23285
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 4033,
+              "atMs": 27319
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 3721,
+              "atMs": 31041
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4167,
+              "synthMs": 4387,
+              "atMs": 35428
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 4011,
+              "atMs": 39440
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3847,
+              "synthMs": 4131,
+              "atMs": 43572
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3424,
+              "synthMs": 3819,
+              "atMs": 47391
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 3848,
+              "atMs": 51239
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3576,
+              "synthMs": 4869,
+              "atMs": 56109
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 3728,
+              "atMs": 59837
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3129,
+              "synthMs": 3500,
+              "atMs": 63337
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3513,
+              "synthMs": 4001,
+              "atMs": 67338
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 3800,
+              "atMs": 71139
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 3904,
+              "atMs": 75044
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3585,
+              "atMs": 78629
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 663640
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 975,
+          "7": 975
+        },
+        "appliedCpus": "0-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 21642,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 21643,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 21644,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 21649,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 21650,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 2
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 1.0424104928970337,
+        "batteryTempC": 41.2,
+        "batteryPct": 55,
+        "charging": false,
+        "chargeCounterUah": 2212522,
+        "currentNow": -368
+      },
+      "powerAfter": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 0.9974053502082825,
+        "batteryTempC": 41,
+        "batteryPct": 53,
+        "charging": false,
+        "chargeCounterUah": 2125446,
+        "currentNow": -1222
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:33:03.058Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "wallMs": 3095,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 487140
+      },
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 1024,
+          "7": 1024
+        },
+        "appliedCpus": "4-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 22559,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 22560,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 22561,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 22570,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 22571,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 22573,
+          "name": "process reaper",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 2868,
+      "kind": "engine",
+      "at": "2026-10-25T16:33:10.114Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "providerEngaged": true,
+      "loadMs": 2868,
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "medianRtf": 1.125965006661474,
+      "runs": [
+        {
+          "engineLoadMs": 2868,
+          "sentences": 20,
+          "audioMs": 70799,
+          "synthMs": 80865,
+          "rtf": 1.1421771493947654,
+          "firstSentenceMs": 4147,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4147,
+              "atMs": 4147
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 4764,
+              "atMs": 8911
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3888,
+              "synthMs": 4269,
+              "atMs": 13181
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4000,
+              "synthMs": 4433,
+              "atMs": 17614
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3472,
+              "atMs": 21086
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4101,
+              "synthMs": 4465,
+              "atMs": 25552
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 4044,
+              "atMs": 29597
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 3876,
+              "atMs": 33473
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 4424,
+              "atMs": 37897
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 4033,
+              "atMs": 41930
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 4326,
+              "atMs": 46257
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 3788,
+              "atMs": 50045
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 3716,
+              "atMs": 53761
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 3967,
+              "atMs": 57729
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3346,
+              "synthMs": 4119,
+              "atMs": 61848
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 3578,
+              "atMs": 65426
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3956,
+              "atMs": 69383
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 3750,
+              "atMs": 73133
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 4049,
+              "atMs": 77182
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3689,
+              "atMs": 80872
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2868,
+          "sentences": 20,
+          "audioMs": 70777,
+          "synthMs": 79320,
+          "rtf": 1.1207030532517626,
+          "firstSentenceMs": 3373,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 3373,
+              "atMs": 3373
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 3573,
+              "atMs": 6947
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3890,
+              "synthMs": 4970,
+              "atMs": 11917
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3995,
+              "synthMs": 4364,
+              "atMs": 16282
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3374,
+              "atMs": 19656
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 4551,
+              "atMs": 24207
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 4204,
+              "atMs": 28412
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 3826,
+              "atMs": 32239
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4151,
+              "synthMs": 4397,
+              "atMs": 36636
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 3971,
+              "atMs": 40607
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 4199,
+              "atMs": 44807
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 3748,
+              "atMs": 48556
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 3761,
+              "atMs": 52318
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3579,
+              "synthMs": 3913,
+              "atMs": 56232
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 3761,
+              "atMs": 59993
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 3687,
+              "atMs": 63681
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3518,
+              "synthMs": 3948,
+              "atMs": 67630
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3437,
+              "synthMs": 4118,
+              "atMs": 71748
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 3981,
+              "atMs": 75729
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3601,
+              "atMs": 79330
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2868,
+          "sentences": 20,
+          "audioMs": 70801,
+          "synthMs": 80092,
+          "rtf": 1.1312269600711855,
+          "firstSentenceMs": 3349,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 3349,
+              "atMs": 3349
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 3442,
+              "atMs": 6791
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3888,
+              "synthMs": 4392,
+              "atMs": 11184
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4000,
+              "synthMs": 5312,
+              "atMs": 16496
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 3418,
+              "atMs": 19915
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 4876,
+              "atMs": 24791
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 4378,
+              "atMs": 29170
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 3753,
+              "atMs": 32923
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4167,
+              "synthMs": 4444,
+              "atMs": 37368
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 4068,
+              "atMs": 41436
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3847,
+              "synthMs": 4190,
+              "atMs": 45627
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3424,
+              "synthMs": 3978,
+              "atMs": 49606
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 3818,
+              "atMs": 53424
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3576,
+              "synthMs": 3941,
+              "atMs": 57365
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 3732,
+              "atMs": 61097
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3129,
+              "synthMs": 3547,
+              "atMs": 64644
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3513,
+              "synthMs": 3931,
+              "atMs": 68576
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 3907,
+              "atMs": 72483
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 3943,
+              "atMs": 76426
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 3673,
+              "atMs": 80100
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 664328
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 1024,
+          "7": 1024
+        },
+        "appliedCpus": "4-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 22559,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 22560,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 22561,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 22570,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 22571,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 0.999572217464447,
+        "batteryTempC": 41,
+        "batteryPct": 53,
+        "charging": false,
+        "chargeCounterUah": 2125446,
+        "currentNow": -327
+      },
+      "powerAfter": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 0.9685227870941162,
+        "batteryTempC": 39.9,
+        "batteryPct": 51,
+        "charging": false,
+        "chargeCounterUah": 2038370,
+        "currentNow": -1131
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:37:10.451Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "wallMs": 5100,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 399032
+      },
+      "modelSha256": "4b86207ef680e394d8343bee22dfc4c512e5c707c6d9578e3f35ab09bffd6b36",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 948,
+          "7": 948
+        },
+        "appliedCpus": "4-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 23230,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 23231,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 23232,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 23242,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 23243,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 23245,
+          "name": "process reaper",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 4878,
+      "kind": "engine",
+      "at": "2026-10-25T16:37:21.041Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "providerEngaged": true,
+      "loadMs": 4878,
+      "modelSha256": "4b86207ef680e394d8343bee22dfc4c512e5c707c6d9578e3f35ab09bffd6b36",
+      "medianRtf": 2.6149507738697357,
+      "runs": [
+        {
+          "engineLoadMs": 4878,
+          "sentences": 20,
+          "audioMs": 70650,
+          "synthMs": 189144,
+          "rtf": 2.6771974522292994,
+          "firstSentenceMs": 10147,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 10147,
+              "atMs": 10147
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3037,
+              "synthMs": 8275,
+              "atMs": 18422
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3907,
+              "synthMs": 10383,
+              "atMs": 28806
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3969,
+              "synthMs": 10671,
+              "atMs": 39477
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 8342,
+              "atMs": 47819
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 10746,
+              "atMs": 58566
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3660,
+              "synthMs": 9753,
+              "atMs": 68320
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 9403,
+              "atMs": 77723
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 10548,
+              "atMs": 88272
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 9578,
+              "atMs": 97850
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3846,
+              "synthMs": 10096,
+              "atMs": 107947
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 9114,
+              "atMs": 117061
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 9234,
+              "atMs": 126296
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3478,
+              "synthMs": 9356,
+              "atMs": 135652
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 9020,
+              "atMs": 144673
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 8377,
+              "atMs": 153051
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 9186,
+              "atMs": 162237
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 9079,
+              "atMs": 171317
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 9219,
+              "atMs": 180536
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3202,
+              "synthMs": 8617,
+              "atMs": 189154
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 4878,
+          "sentences": 20,
+          "audioMs": 70666,
+          "synthMs": 185040,
+          "rtf": 2.6185152690119717,
+          "firstSentenceMs": 8119,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 8119,
+              "atMs": 8119
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 8205,
+              "atMs": 16324
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3908,
+              "synthMs": 10098,
+              "atMs": 26422
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3970,
+              "synthMs": 10310,
+              "atMs": 36733
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3230,
+              "synthMs": 8039,
+              "atMs": 44772
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 10454,
+              "atMs": 55226
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3662,
+              "synthMs": 9364,
+              "atMs": 64591
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 8956,
+              "atMs": 73547
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 10452,
+              "atMs": 84000
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 9567,
+              "atMs": 93567
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3847,
+              "synthMs": 10111,
+              "atMs": 103679
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3441,
+              "synthMs": 9124,
+              "atMs": 112804
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 9192,
+              "atMs": 121996
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3481,
+              "synthMs": 9131,
+              "atMs": 131127
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 8827,
+              "atMs": 139955
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 8402,
+              "atMs": 148357
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 9195,
+              "atMs": 157553
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 9438,
+              "atMs": 166991
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 9546,
+              "atMs": 176537
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3214,
+              "synthMs": 8510,
+              "atMs": 185048
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 4878,
+          "sentences": 20,
+          "audioMs": 70664,
+          "synthMs": 184531,
+          "rtf": 2.6113862787274993,
+          "firstSentenceMs": 7939,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 7939,
+              "atMs": 7939
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 8212,
+              "atMs": 16152
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3906,
+              "synthMs": 10015,
+              "atMs": 26167
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 10215,
+              "atMs": 36383
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 8129,
+              "atMs": 44512
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4094,
+              "synthMs": 10499,
+              "atMs": 55012
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3660,
+              "synthMs": 9450,
+              "atMs": 64462
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 8870,
+              "atMs": 73333
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4165,
+              "synthMs": 10472,
+              "atMs": 83806
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 9465,
+              "atMs": 93271
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 10220,
+              "atMs": 103491
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3441,
+              "synthMs": 8981,
+              "atMs": 112473
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 9470,
+              "atMs": 121944
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3479,
+              "synthMs": 9066,
+              "atMs": 131011
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 8767,
+              "atMs": 139779
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 8390,
+              "atMs": 148169
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3507,
+              "synthMs": 9079,
+              "atMs": 157248
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 9131,
+              "atMs": 166380
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 9348,
+              "atMs": 175728
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3215,
+              "synthMs": 8813,
+              "atMs": 184541
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 612220
+      },
+      "peakMemoryReset": false,
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 587,
+          "5": 587,
+          "6": 948,
+          "7": 948
+        },
+        "appliedCpus": "4-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 23230,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 23231,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 23232,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 23242,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 23243,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        }
+      ],
+      "powerBefore": {
+        "thermalStatus": 3,
+        "thermalHeadroom": 0.9681439995765686,
+        "batteryTempC": 39.9,
+        "batteryPct": 51,
+        "charging": false,
+        "chargeCounterUah": 2030454,
+        "currentNow": -388
+      },
+      "powerAfter": {
+        "thermalStatus": 2,
+        "thermalHeadroom": 0.8968147039413452,
+        "batteryTempC": 38.7,
+        "batteryPct": 47,
+        "charging": false,
+        "chargeCounterUah": 1895882,
+        "currentNow": -482
+      },
+      "kind": "bench",
+      "at": "2026-10-25T16:46:39.831Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "wallMs": 3880,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 806184,
+        "VmRSS": 695612
+      },
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 480,
+          "5": 480,
+          "6": 624,
+          "7": 624
+        },
+        "appliedCpus": "0-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 25109,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 25110,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 25111,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 25127,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 25128,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 25130,
+          "name": "process reaper",
+          "cpusAllowed": "0-7",
+          "lastCpu": 0
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 3476,
+      "kind": "engine",
+      "at": "2026-10-25T16:48:26.196Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "all",
+      "minutes": 10,
+      "sentences": 100,
+      "audioMs": 353927,
+      "usedMah": 217.69,
+      "mahPerAudioMinute": 36.90422036182603,
+      "samples": [
+        {
+          "thermalStatus": 1,
+          "thermalHeadroom": 0.8590760827064514,
+          "batteryTempC": 38.6,
+          "batteryPct": 47,
+          "charging": false,
+          "chargeCounterUah": 1876092,
+          "currentNow": -480,
+          "atMs": 0,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 698708
+          }
+        },
+        {
+          "thermalStatus": 1,
+          "thermalHeadroom": 0.853356659412384,
+          "batteryTempC": 38.6,
+          "batteryPct": 47,
+          "charging": false,
+          "chargeCounterUah": 1876092,
+          "currentNow": -2098,
+          "atMs": 12502,
+          "rtf": 1.2552057137108943,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 753816
+          }
+        },
+        {
+          "thermalStatus": 1,
+          "thermalHeadroom": 0.8723429441452026,
+          "batteryTempC": 38.3,
+          "batteryPct": 47,
+          "charging": false,
+          "chargeCounterUah": 1876092,
+          "currentNow": -1350,
+          "atMs": 26123,
+          "rtf": 1.2028818953323903,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 754424
+          }
+        },
+        {
+          "thermalStatus": 1,
+          "thermalHeadroom": 0.8724805116653442,
+          "batteryTempC": 38.3,
+          "batteryPct": 47,
+          "charging": false,
+          "chargeCounterUah": 1876092,
+          "currentNow": -1208,
+          "atMs": 41046,
+          "rtf": 1.3066070802663863,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 756760
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9042891263961792,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1864218,
+          "currentNow": -1292,
+          "atMs": 51165,
+          "rtf": 1.3421856327180985,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 756584
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9357036352157593,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1864218,
+          "currentNow": -1543,
+          "atMs": 65607,
+          "rtf": 1.382158273381295,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 761524
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9421622157096863,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1864218,
+          "currentNow": -1060,
+          "atMs": 76482,
+          "rtf": 1.6791344667697063,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 761564
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.946194052696228,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1844428,
+          "currentNow": -1113,
+          "atMs": 89083,
+          "rtf": 1.8097224219761254,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 793428
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9456260800361633,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1844428,
+          "currentNow": -928,
+          "atMs": 101285,
+          "rtf": 1.8089304257528556,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 793512
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9462792873382568,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1828596,
+          "currentNow": -1059,
+          "atMs": 112473,
+          "rtf": 1.8440336689222645,
+          "memoryKb": {
+            "VmHWM": 806184,
+            "VmRSS": 801156
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9386113286018372,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1828596,
+          "currentNow": -978,
+          "atMs": 126511,
+          "rtf": 1.77856689917565,
+          "memoryKb": {
+            "VmHWM": 813588,
+            "VmRSS": 811476
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9366666078567505,
+          "batteryTempC": 38.5,
+          "batteryPct": 46,
+          "charging": false,
+          "chargeCounterUah": 1828596,
+          "currentNow": -983,
+          "atMs": 140029,
+          "rtf": 1.8474900834359185,
+          "memoryKb": {
+            "VmHWM": 815580,
+            "VmRSS": 813944
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9366666078567505,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1820680,
+          "currentNow": -1122,
+          "atMs": 152752,
+          "rtf": 1.7533094318808604,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813496
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9366666078567505,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1820680,
+          "currentNow": -1313,
+          "atMs": 166164,
+          "rtf": 1.708476736775016,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813484
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9375898838043213,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1808806,
+          "currentNow": -1170,
+          "atMs": 178927,
+          "rtf": 1.7540938489060134,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813528
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9382986426353455,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1808806,
+          "currentNow": -1025,
+          "atMs": 191264,
+          "rtf": 1.7598857958601,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813488
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9368810057640076,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1796932,
+          "currentNow": -898,
+          "atMs": 203058,
+          "rtf": 1.820401854714065,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813496
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9399999976158142,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1796932,
+          "currentNow": -876,
+          "atMs": 215416,
+          "rtf": 1.7755395683453237,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813464
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.940597653388977,
+          "batteryTempC": 38.8,
+          "batteryPct": 45,
+          "charging": false,
+          "chargeCounterUah": 1796932,
+          "currentNow": -1200,
+          "atMs": 227449,
+          "rtf": 1.7828215398308855,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813492
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9416607022285461,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1789016,
+          "currentNow": -973,
+          "atMs": 239403,
+          "rtf": 1.971442720369759,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813416
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9416095614433289,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1789016,
+          "currentNow": -1004,
+          "atMs": 253352,
+          "rtf": 1.767250126839168,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813536
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9447286128997803,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1773184,
+          "currentNow": -1069,
+          "atMs": 265928,
+          "rtf": 1.7192502394308387,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813908
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9474347233772278,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1773184,
+          "currentNow": -925,
+          "atMs": 278336,
+          "rtf": 1.7099710384774514,
+          "memoryKb": {
+            "VmHWM": 817984,
+            "VmRSS": 813472
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9482992887496948,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1765268,
+          "currentNow": -1022,
+          "atMs": 291739,
+          "rtf": 1.7051331040631768,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813472
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9514777064323425,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1765268,
+          "currentNow": -1140,
+          "atMs": 304413,
+          "rtf": 1.742809962845741,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813508
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9501182436943054,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1765268,
+          "currentNow": -861,
+          "atMs": 316857,
+          "rtf": 1.7760639817195087,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813444
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9531558752059937,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1757352,
+          "currentNow": -920,
+          "atMs": 328483,
+          "rtf": 1.7956407481836452,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813452
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9491140842437744,
+          "batteryTempC": 39,
+          "batteryPct": 44,
+          "charging": false,
+          "chargeCounterUah": 1757352,
+          "currentNow": -915,
+          "atMs": 341368,
+          "rtf": 1.85292847891783,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813448
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9531190395355225,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1741520,
+          "currentNow": -907,
+          "atMs": 354068,
+          "rtf": 1.8814715917519655,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813344
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.951477587223053,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1741520,
+          "currentNow": -1105,
+          "atMs": 365028,
+          "rtf": 1.8076923076923077,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813420
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9517870545387268,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1741520,
+          "currentNow": -1064,
+          "atMs": 378558,
+          "rtf": 1.7147748890298034,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813520
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9549869298934937,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1733604,
+          "currentNow": -1096,
+          "atMs": 391025,
+          "rtf": 1.7028579242444961,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813888
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9537466764450073,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1733604,
+          "currentNow": -1081,
+          "atMs": 403499,
+          "rtf": 1.7190732312784442,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813428
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9572648406028748,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1721730,
+          "currentNow": -925,
+          "atMs": 417290,
+          "rtf": 1.7554479418886197,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813424
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9583199620246887,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1721730,
+          "currentNow": -994,
+          "atMs": 429997,
+          "rtf": 1.7473510389431677,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813460
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.957080066204071,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1709856,
+          "currentNow": -1123,
+          "atMs": 442427,
+          "rtf": 1.7720525264059377,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813400
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9599999785423279,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1709856,
+          "currentNow": -961,
+          "atMs": 454074,
+          "rtf": 1.7987635239567232,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813408
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9599999785423279,
+          "batteryTempC": 39.3,
+          "batteryPct": 43,
+          "charging": false,
+          "chargeCounterUah": 1709856,
+          "currentNow": -888,
+          "atMs": 466676,
+          "rtf": 1.8102431304848223,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813408
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9607678651809692,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1701940,
+          "currentNow": -910,
+          "atMs": 478570,
+          "rtf": 1.7626464916184543,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813440
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9616612792015076,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1701940,
+          "currentNow": -1136,
+          "atMs": 489709,
+          "rtf": 1.8370749422251569,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813352
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9602140784263611,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1690066,
+          "currentNow": -1226,
+          "atMs": 504030,
+          "rtf": 1.814711477488903,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813732
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9637467861175537,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1690066,
+          "currentNow": -1134,
+          "atMs": 516398,
+          "rtf": 1.6906976744186046,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813836
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9649868011474609,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1690066,
+          "currentNow": -963,
+          "atMs": 528888,
+          "rtf": 1.7212798234726245,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813652
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9639313817024231,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1678192,
+          "currentNow": -981,
+          "atMs": 542317,
+          "rtf": 1.7084447841039359,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813772
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9681429266929626,
+          "batteryTempC": 39.6,
+          "batteryPct": 42,
+          "charging": false,
+          "chargeCounterUah": 1678192,
+          "currentNow": -876,
+          "atMs": 555115,
+          "rtf": 1.760011008669327,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813644
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9683789610862732,
+          "batteryTempC": 39.8,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1666318,
+          "currentNow": -1074,
+          "atMs": 567353,
+          "rtf": 1.7462516064543767,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813616
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9708858728408813,
+          "batteryTempC": 39.8,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1666318,
+          "currentNow": -1166,
+          "atMs": 579084,
+          "rtf": 1.8114665430381702,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813628
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9691137671470642,
+          "batteryTempC": 39.8,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1666318,
+          "currentNow": -1088,
+          "atMs": 591384,
+          "rtf": 1.7683453237410072,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813636
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.974219024181366,
+          "batteryTempC": 39.8,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1658402,
+          "currentNow": -1275,
+          "atMs": 603494,
+          "rtf": 1.794095831479009,
+          "memoryKb": {
+            "VmHWM": 817988,
+            "VmRSS": 813668
+          }
+        }
+      ],
+      "modelSha256": "b40f62b166ac8164b0627ef48a0b358eda0985e272fb03ef5252e7206305da11",
+      "affinity": {
+        "policy": "all",
+        "requestedCpus": "0-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 480,
+          "5": 480,
+          "6": 624,
+          "7": 624
+        },
+        "appliedCpus": "0-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 25109,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 25110,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 25111,
+          "name": "spike-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 6
+        },
+        {
+          "tid": 25127,
+          "name": "speech-worker",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 25128,
+          "name": "export-runner",
+          "cpusAllowed": "0-7",
+          "lastCpu": 7
+        }
+      ],
+      "kind": "soak",
+      "at": "2026-10-25T16:58:29.707Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "wallMs": 6568,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 819944,
+        "VmRSS": 451564
+      },
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 428,
+          "5": 428,
+          "6": 516,
+          "7": 516
+        },
+        "appliedCpus": "4-7"
+      },
+      "peakMemoryReset": false,
+      "newThreads": [
+        {
+          "tid": 26586,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 26587,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 26588,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 26611,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 26612,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 26614,
+          "name": "process reaper",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        }
+      ],
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 6062,
+      "kind": "engine",
+      "at": "2026-10-25T16:59:40.275Z"
+    },
+    {
+      "bundle": "FAST",
+      "threads": 4,
+      "provider": "cpu",
+      "cores": "big",
+      "minutes": 10,
+      "sentences": 152,
+      "audioMs": 539122,
+      "usedMah": 193.942,
+      "mahPerAudioMinute": 21.584205430310767,
+      "samples": [
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9270249605178833,
+          "batteryTempC": 39.7,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1638612,
+          "currentNow": -344,
+          "atMs": 0,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 452712
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9148006439208984,
+          "batteryTempC": 39.5,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1634654,
+          "currentNow": -1029,
+          "atMs": 13237,
+          "rtf": 1.3289434000201066,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 597524
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9127776026725769,
+          "batteryTempC": 39.5,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1634654,
+          "currentNow": -1035,
+          "atMs": 25914,
+          "rtf": 1.1189466242488513,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 601432
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9199422001838684,
+          "batteryTempC": 39.5,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1634654,
+          "currentNow": -989,
+          "atMs": 39433,
+          "rtf": 1.1819614711033275,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 617868
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9226160645484924,
+          "batteryTempC": 39.5,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1630696,
+          "currentNow": -1161,
+          "atMs": 51737,
+          "rtf": 1.1228534892217756,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 619064
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9303873777389526,
+          "batteryTempC": 39.5,
+          "batteryPct": 41,
+          "charging": false,
+          "chargeCounterUah": 1630696,
+          "currentNow": -1148,
+          "atMs": 63211,
+          "rtf": 1.1072360158438799,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 619004
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9351373314857483,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1622780,
+          "currentNow": -1119,
+          "atMs": 74538,
+          "rtf": 1.1222707423580787,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 656400
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9368401765823364,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1622780,
+          "currentNow": -1130,
+          "atMs": 85507,
+          "rtf": 1.1288659793814433,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 656260
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.941830575466156,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1622780,
+          "currentNow": -1130,
+          "atMs": 97494,
+          "rtf": 1.090313182811362,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 668624
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9449281096458435,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1610906,
+          "currentNow": -847,
+          "atMs": 109349,
+          "rtf": 1.0780296822361832,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670276
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.947926938533783,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1610906,
+          "currentNow": -1254,
+          "atMs": 121564,
+          "rtf": 1.0694943475593726,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670192
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9469285607337952,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1602990,
+          "currentNow": -720,
+          "atMs": 133370,
+          "rtf": 1.1027582982702198,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670260
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9505860805511475,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1602990,
+          "currentNow": -772,
+          "atMs": 144635,
+          "rtf": 1.118917305204498,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670084
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9484972357749939,
+          "batteryTempC": 39.5,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 1602990,
+          "currentNow": -1122,
+          "atMs": 156190,
+          "rtf": 1.1000190694126621,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670280
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.951654314994812,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1595074,
+          "currentNow": -813,
+          "atMs": 166930,
+          "rtf": 1.1528497409326426,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670092
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9504135251045227,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1595074,
+          "currentNow": -1126,
+          "atMs": 178754,
+          "rtf": 1.0639466810771863,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670204
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.954876184463501,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1579242,
+          "currentNow": -1166,
+          "atMs": 191117,
+          "rtf": 1.088082445168678,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670160
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9545223116874695,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1579242,
+          "currentNow": -1094,
+          "atMs": 203605,
+          "rtf": 1.0665127810549713,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670348
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9566667079925537,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1579242,
+          "currentNow": -905,
+          "atMs": 215086,
+          "rtf": 1.1004412893323101,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670180
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9566667079925537,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1571326,
+          "currentNow": -1216,
+          "atMs": 226409,
+          "rtf": 1.1326857600640898,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670184
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9578551054000854,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1571326,
+          "currentNow": -824,
+          "atMs": 238036,
+          "rtf": 1.1407385582400313,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670172
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9569620490074158,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1571326,
+          "currentNow": -737,
+          "atMs": 249127,
+          "rtf": 1.1133782289677354,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670184
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9614766240119934,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1559452,
+          "currentNow": -1022,
+          "atMs": 261227,
+          "rtf": 1.0693498452012384,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670612
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9574124813079834,
+          "batteryTempC": 39.6,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 1559452,
+          "currentNow": -1120,
+          "atMs": 273454,
+          "rtf": 1.0689141856392295,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670508
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9630380272865295,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1547578,
+          "currentNow": -1168,
+          "atMs": 285427,
+          "rtf": 1.0926365795724466,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670228
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9616321325302124,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1547578,
+          "currentNow": -902,
+          "atMs": 297605,
+          "rtf": 1.175913396481732,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670124
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9591132998466492,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1547578,
+          "currentNow": -844,
+          "atMs": 308827,
+          "rtf": 1.1118936613431207,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670356
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.963185727596283,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1535704,
+          "currentNow": -1064,
+          "atMs": 319753,
+          "rtf": 1.1243170807133285,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670064
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9613956212997437,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1535704,
+          "currentNow": -844,
+          "atMs": 331806,
+          "rtf": 1.096621437027593,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670172
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.964101254940033,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1527788,
+          "currentNow": -1648,
+          "atMs": 343732,
+          "rtf": 1.0848584175544023,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670220
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9659886956214905,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1527788,
+          "currentNow": -550,
+          "atMs": 357190,
+          "rtf": 1.173406862745098,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670140
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9653159976005554,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1527788,
+          "currentNow": -1283,
+          "atMs": 369014,
+          "rtf": 1.104751215862327,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670208
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9699999690055847,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1519872,
+          "currentNow": -1042,
+          "atMs": 381008,
+          "rtf": 1.1915804140127388,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670060
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.96840500831604,
+          "batteryTempC": 39.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1519872,
+          "currentNow": -970,
+          "atMs": 392613,
+          "rtf": 1.1058756199923694,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670260
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9686998724937439,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1504040,
+          "currentNow": -931,
+          "atMs": 403295,
+          "rtf": 1.1515216922080724,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670060
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9674351811408997,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1504040,
+          "currentNow": -994,
+          "atMs": 415181,
+          "rtf": 1.0699162086674474,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670180
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9683217406272888,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1504040,
+          "currentNow": -1103,
+          "atMs": 427419,
+          "rtf": 1.0767333274601356,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670132
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9668807983398438,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1496124,
+          "currentNow": -1069,
+          "atMs": 439906,
+          "rtf": 1.0668776190883436,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670116
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9699999690055847,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1496124,
+          "currentNow": -998,
+          "atMs": 451551,
+          "rtf": 1.115875299760192,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670176
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9690026640892029,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1488208,
+          "currentNow": -805,
+          "atMs": 463007,
+          "rtf": 1.1466786895100691,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670072
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9697335362434387,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1488208,
+          "currentNow": -1256,
+          "atMs": 473084,
+          "rtf": 1.4421505376344086,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670160
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9668434262275696,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1488208,
+          "currentNow": -953,
+          "atMs": 483904,
+          "rtf": 1.1658931462493254,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670072
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9708861112594604,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1476334,
+          "currentNow": -1187,
+          "atMs": 495876,
+          "rtf": 1.0777547526804216,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670112
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9670799374580383,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1476334,
+          "currentNow": -879,
+          "atMs": 508077,
+          "rtf": 1.0723527858463164,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670092
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9699999690055847,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1476334,
+          "currentNow": -1165,
+          "atMs": 520740,
+          "rtf": 1.0834475668265935,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670284
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9704134464263916,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1468418,
+          "currentNow": -942,
+          "atMs": 532330,
+          "rtf": 1.1091937494008244,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670108
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9716314673423767,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1468418,
+          "currentNow": -1141,
+          "atMs": 543703,
+          "rtf": 1.138362889490031,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670008
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9710624814033508,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1452586,
+          "currentNow": -1094,
+          "atMs": 555040,
+          "rtf": 1.1122569239835003,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670080
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1452586,
+          "currentNow": -1148,
+          "atMs": 566107,
+          "rtf": 1.112161754350669,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670092
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1452586,
+          "currentNow": -1123,
+          "atMs": 578328,
+          "rtf": 1.079345422379478,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670520
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9748101830482483,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1444670,
+          "currentNow": -1177,
+          "atMs": 590377,
+          "rtf": 1.055414291977203,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670676
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9734513759613037,
+          "batteryTempC": 40.2,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1444670,
+          "currentNow": -1130,
+          "atMs": 602344,
+          "rtf": 1.0914817858121062,
+          "memoryKb": {
+            "VmHWM": 819944,
+            "VmRSS": 670400
+          }
+        }
+      ],
+      "modelSha256": "d12189cf0a4aa9ae0a147b1d6af13deeaa585923c630a7433ab0a3f1a2b91dbe",
+      "affinity": {
+        "policy": "big",
+        "requestedCpus": "4-7",
+        "capacities": {
+          "0": 253,
+          "1": 253,
+          "2": 253,
+          "3": 253,
+          "4": 428,
+          "5": 428,
+          "6": 516,
+          "7": 516
+        },
+        "appliedCpus": "4-7"
+      },
+      "engineThreads": [
+        {
+          "tid": 26586,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        },
+        {
+          "tid": 26587,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 26588,
+          "name": "spike-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 7
+        },
+        {
+          "tid": 26611,
+          "name": "speech-worker",
+          "cpusAllowed": "4-7",
+          "lastCpu": 4
+        },
+        {
+          "tid": 26612,
+          "name": "export-runner",
+          "cpusAllowed": "4-7",
+          "lastCpu": 5
+        }
+      ],
+      "kind": "soak",
+      "at": "2026-10-25T17:09:42.636Z"
+    }
+  ]
+}

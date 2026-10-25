@@ -1,0 +1,4424 @@
+{
+  "device": {
+    "manufacturer": "samsung",
+    "model": "SM-S948B",
+    "board": "canoe",
+    "hardware": "qcom",
+    "socManufacturer": "QTI",
+    "socModel": "SM8850",
+    "ramMb": 11084,
+    "android": "17",
+    "api": 37,
+    "pageSize": 4096,
+    "abis": [
+      "arm64-v8a"
+    ],
+    "cpus": 8
+  },
+  "app": {
+    "versionName": "0.1.0-spike-sherpa1",
+    "sherpaSet": "sherpa1",
+    "coreRevision": "v0.2.0-dirty"
+  },
+  "startedAt": "2026-10-25T12:02:47.281903Z",
+  "runs": [
+    {
+      "openMs": 139,
+      "pdfiumBinding": "bareName",
+      "nativeLibraryDir": "\/data\/app\/~~00T3dHkRS3-VKXIWzhElYQ==\/app.lectrice.spike.sherpa1-NJXw64LbIN_LltpOUEf3EQ==\/lib\/arm64",
+      "memoryKb": {
+        "VmHWM": 138504,
+        "VmRSS": 138504
+      },
+      "kind": "load",
+      "at": "2026-10-25T12:02:47.282302Z"
+    },
+    {
+      "kokoro-multi-lang-v1_0": {
+        "copied": false
+      },
+      "kokoro-int8-multi-lang-v1_0": {
+        "copied": false
+      },
+      "kind": "bundledModels",
+      "at": "2026-10-25T12:02:47.282498Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "wallMs": 975,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 581132,
+        "VmRSS": 581132
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 964,
+      "kind": "engine",
+      "at": "2026-10-25T12:04:02.479001Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "minutes": 10,
+      "sentences": 367,
+      "audioMs": 1299117,
+      "usedMah": 345,
+      "mahPerAudioMinute": 15.933899718039253,
+      "samples": [
+        {
+          "thermalStatus": 0,
+          "thermalHeadroom": 0.4599999785423279,
+          "batteryTempC": 26.2,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 2015000,
+          "currentNow": -2210937,
+          "atMs": 0,
+          "memoryKb": {
+            "VmHWM": 581192,
+            "VmRSS": 581192
+          }
+        },
+        {
+          "thermalStatus": 0,
+          "thermalHeadroom": 0.5699999332427979,
+          "batteryTempC": 26.2,
+          "batteryPct": 40,
+          "charging": false,
+          "chargeCounterUah": 2015000,
+          "currentNow": -4825000,
+          "atMs": 10568,
+          "rtf": 0.26253327693877043,
+          "memoryKb": {
+            "VmHWM": 733104,
+            "VmRSS": 732912
+          }
+        },
+        {
+          "thermalStatus": 0,
+          "thermalHeadroom": 0.6933333277702332,
+          "batteryTempC": 28.4,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 2015000,
+          "currentNow": -4638281,
+          "atMs": 21237,
+          "rtf": 0.2907046558593963,
+          "memoryKb": {
+            "VmHWM": 778288,
+            "VmRSS": 778260
+          }
+        },
+        {
+          "thermalStatus": 0,
+          "thermalHeadroom": 0.7900000214576721,
+          "batteryTempC": 28.4,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 2015000,
+          "currentNow": -4175781,
+          "atMs": 32061,
+          "rtf": 0.2877452676978781,
+          "memoryKb": {
+            "VmHWM": 790940,
+            "VmRSS": 790056
+          }
+        },
+        {
+          "thermalStatus": 1,
+          "thermalHeadroom": 0.8500000238418579,
+          "batteryTempC": 28.4,
+          "batteryPct": 39,
+          "charging": false,
+          "chargeCounterUah": 2015000,
+          "currentNow": -4320312,
+          "atMs": 42496,
+          "rtf": 0.31365113759479957,
+          "memoryKb": {
+            "VmHWM": 790940,
+            "VmRSS": 790232
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9099999666213989,
+          "batteryTempC": 34.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1990000,
+          "currentNow": -3767968,
+          "atMs": 53081,
+          "rtf": 0.30973580926717825,
+          "memoryKb": {
+            "VmHWM": 790940,
+            "VmRSS": 789852
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9466667175292969,
+          "batteryTempC": 34.8,
+          "batteryPct": 38,
+          "charging": false,
+          "chargeCounterUah": 1990000,
+          "currentNow": -4035937,
+          "atMs": 63388,
+          "rtf": 0.33663560568906326,
+          "memoryKb": {
+            "VmHWM": 790940,
+            "VmRSS": 790680
+          }
+        },
+        {
+          "thermalStatus": 2,
+          "thermalHeadroom": 0.9900000095367432,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1940000,
+          "currentNow": -3283593,
+          "atMs": 74079,
+          "rtf": 0.3269148349966326,
+          "memoryKb": {
+            "VmHWM": 791516,
+            "VmRSS": 790704
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 1.006666660308838,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1940000,
+          "currentNow": -2330468,
+          "atMs": 84901,
+          "rtf": 0.34450782320512413,
+          "memoryKb": {
+            "VmHWM": 791716,
+            "VmRSS": 791036
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9933332800865173,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1940000,
+          "currentNow": -2144531,
+          "atMs": 96154,
+          "rtf": 0.4016217760948775,
+          "memoryKb": {
+            "VmHWM": 792444,
+            "VmRSS": 791536
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1895000,
+          "currentNow": -2432812,
+          "atMs": 107347,
+          "rtf": 0.38064603968821265,
+          "memoryKb": {
+            "VmHWM": 792616,
+            "VmRSS": 791648
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9699999690055847,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1895000,
+          "currentNow": -2781250,
+          "atMs": 117913,
+          "rtf": 0.35051477914314183,
+          "memoryKb": {
+            "VmHWM": 792812,
+            "VmRSS": 792160
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 38.6,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1895000,
+          "currentNow": -1845312,
+          "atMs": 128060,
+          "rtf": 0.3837882860712528,
+          "memoryKb": {
+            "VmHWM": 793516,
+            "VmRSS": 792496
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1875000,
+          "currentNow": -2133593,
+          "atMs": 139427,
+          "rtf": 0.4101119537739256,
+          "memoryKb": {
+            "VmHWM": 793516,
+            "VmRSS": 792816
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1875000,
+          "currentNow": -2183593,
+          "atMs": 150468,
+          "rtf": 0.3940768791083167,
+          "memoryKb": {
+            "VmHWM": 794096,
+            "VmRSS": 793288
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 40,
+          "batteryPct": 37,
+          "charging": false,
+          "chargeCounterUah": 1875000,
+          "currentNow": -1913281,
+          "atMs": 160605,
+          "rtf": 0.39257880656042804,
+          "memoryKb": {
+            "VmHWM": 794312,
+            "VmRSS": 793408
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1850000,
+          "currentNow": -1900000,
+          "atMs": 171085,
+          "rtf": 0.4410934669980203,
+          "memoryKb": {
+            "VmHWM": 794428,
+            "VmRSS": 793520
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1850000,
+          "currentNow": -1948437,
+          "atMs": 181760,
+          "rtf": 0.427797833935018,
+          "memoryKb": {
+            "VmHWM": 794968,
+            "VmRSS": 793992
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1850000,
+          "currentNow": -1875781,
+          "atMs": 192543,
+          "rtf": 0.41924813200498134,
+          "memoryKb": {
+            "VmHWM": 795152,
+            "VmRSS": 794236
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1835000,
+          "currentNow": -1771093,
+          "atMs": 203160,
+          "rtf": 0.45884693568617274,
+          "memoryKb": {
+            "VmHWM": 795288,
+            "VmRSS": 794316
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1835000,
+          "currentNow": -1886718,
+          "atMs": 214189,
+          "rtf": 0.4312666353530609,
+          "memoryKb": {
+            "VmHWM": 795820,
+            "VmRSS": 794796
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 40.3,
+          "batteryPct": 36,
+          "charging": false,
+          "chargeCounterUah": 1835000,
+          "currentNow": -1911718,
+          "atMs": 225258,
+          "rtf": 0.4343335166129919,
+          "memoryKb": {
+            "VmHWM": 796084,
+            "VmRSS": 795036
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1820000,
+          "currentNow": -1760937,
+          "atMs": 235772,
+          "rtf": 0.459103825136612,
+          "memoryKb": {
+            "VmHWM": 796340,
+            "VmRSS": 795436
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9900000095367432,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1820000,
+          "currentNow": -1555468,
+          "atMs": 246207,
+          "rtf": 0.46425867367389656,
+          "memoryKb": {
+            "VmHWM": 796920,
+            "VmRSS": 795828
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1820000,
+          "currentNow": -1332031,
+          "atMs": 256543,
+          "rtf": 0.5570658036677454,
+          "memoryKb": {
+            "VmHWM": 797136,
+            "VmRSS": 796120
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1795000,
+          "currentNow": -1474218,
+          "atMs": 266736,
+          "rtf": 0.5989647667784248,
+          "memoryKb": {
+            "VmHWM": 797136,
+            "VmRSS": 796344
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9699999690055847,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1795000,
+          "currentNow": -1668750,
+          "atMs": 277954,
+          "rtf": 0.46875,
+          "memoryKb": {
+            "VmHWM": 797772,
+            "VmRSS": 796452
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1785000,
+          "currentNow": -1586718,
+          "atMs": 288761,
+          "rtf": 0.4685005206525512,
+          "memoryKb": {
+            "VmHWM": 797900,
+            "VmRSS": 796948
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1785000,
+          "currentNow": -1544531,
+          "atMs": 299477,
+          "rtf": 0.5247243322715021,
+          "memoryKb": {
+            "VmHWM": 797900,
+            "VmRSS": 797048
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1785000,
+          "currentNow": -1589843,
+          "atMs": 309811,
+          "rtf": 0.5131722835271896,
+          "memoryKb": {
+            "VmHWM": 798076,
+            "VmRSS": 797428
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1770000,
+          "currentNow": -1326562,
+          "atMs": 320265,
+          "rtf": 0.5626413874824949,
+          "memoryKb": {
+            "VmHWM": 798564,
+            "VmRSS": 797504
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1770000,
+          "currentNow": -1389062,
+          "atMs": 331081,
+          "rtf": 0.5827850285837558,
+          "memoryKb": {
+            "VmHWM": 798704,
+            "VmRSS": 797792
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 41,
+          "batteryPct": 35,
+          "charging": false,
+          "chargeCounterUah": 1770000,
+          "currentNow": -1558593,
+          "atMs": 341541,
+          "rtf": 0.5089120483101198,
+          "memoryKb": {
+            "VmHWM": 798828,
+            "VmRSS": 797992
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1760000,
+          "currentNow": -1648437,
+          "atMs": 351835,
+          "rtf": 0.5048605655930872,
+          "memoryKb": {
+            "VmHWM": 799344,
+            "VmRSS": 798100
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1760000,
+          "currentNow": -1200000,
+          "atMs": 363733,
+          "rtf": 0.516084219665726,
+          "memoryKb": {
+            "VmHWM": 799556,
+            "VmRSS": 798604
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1760000,
+          "currentNow": -1438281,
+          "atMs": 374172,
+          "rtf": 0.6172101556489318,
+          "memoryKb": {
+            "VmHWM": 799556,
+            "VmRSS": 798536
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9733333587646484,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1745000,
+          "currentNow": -1672656,
+          "atMs": 384629,
+          "rtf": 0.5289352437851248,
+          "memoryKb": {
+            "VmHWM": 799608,
+            "VmRSS": 798756
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1745000,
+          "currentNow": -1522656,
+          "atMs": 395821,
+          "rtf": 0.49808463251670376,
+          "memoryKb": {
+            "VmHWM": 800096,
+            "VmRSS": 799140
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1745000,
+          "currentNow": -1187500,
+          "atMs": 406465,
+          "rtf": 0.5738332883733477,
+          "memoryKb": {
+            "VmHWM": 800304,
+            "VmRSS": 799416
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1735000,
+          "currentNow": -1372656,
+          "atMs": 418360,
+          "rtf": 0.5788448426999123,
+          "memoryKb": {
+            "VmHWM": 800640,
+            "VmRSS": 799612
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1735000,
+          "currentNow": -1450781,
+          "atMs": 429275,
+          "rtf": 0.5354512422665226,
+          "memoryKb": {
+            "VmHWM": 801008,
+            "VmRSS": 799720
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1735000,
+          "currentNow": -1453906,
+          "atMs": 439789,
+          "rtf": 0.5473349658729745,
+          "memoryKb": {
+            "VmHWM": 801232,
+            "VmRSS": 800112
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1725000,
+          "currentNow": -1414843,
+          "atMs": 451491,
+          "rtf": 0.5637748951150118,
+          "memoryKb": {
+            "VmHWM": 801232,
+            "VmRSS": 800152
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1725000,
+          "currentNow": -1335937,
+          "atMs": 462467,
+          "rtf": 0.5552461008709743,
+          "memoryKb": {
+            "VmHWM": 801312,
+            "VmRSS": 800492
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1710000,
+          "currentNow": -1121093,
+          "atMs": 473799,
+          "rtf": 0.600180218382275,
+          "memoryKb": {
+            "VmHWM": 801956,
+            "VmRSS": 800956
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1710000,
+          "currentNow": -1407812,
+          "atMs": 484634,
+          "rtf": 0.5790233727335936,
+          "memoryKb": {
+            "VmHWM": 802096,
+            "VmRSS": 801048
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 41.6,
+          "batteryPct": 34,
+          "charging": false,
+          "chargeCounterUah": 1710000,
+          "currentNow": -1379687,
+          "atMs": 495966,
+          "rtf": 0.5544186046511628,
+          "memoryKb": {
+            "VmHWM": 802204,
+            "VmRSS": 801392
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1700000,
+          "currentNow": -1358593,
+          "atMs": 507724,
+          "rtf": 0.567899444041576,
+          "memoryKb": {
+            "VmHWM": 802780,
+            "VmRSS": 801772
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1700000,
+          "currentNow": -1272656,
+          "atMs": 518203,
+          "rtf": 0.5589962626801922,
+          "memoryKb": {
+            "VmHWM": 802840,
+            "VmRSS": 802024
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1700000,
+          "currentNow": -1377343,
+          "atMs": 529841,
+          "rtf": 0.6472324312284219,
+          "memoryKb": {
+            "VmHWM": 803172,
+            "VmRSS": 802288
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1690000,
+          "currentNow": -1131250,
+          "atMs": 541493,
+          "rtf": 0.5773446411744284,
+          "memoryKb": {
+            "VmHWM": 803588,
+            "VmRSS": 802412
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9866666197776794,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1690000,
+          "currentNow": -1151562,
+          "atMs": 551941,
+          "rtf": 0.6079813574133411,
+          "memoryKb": {
+            "VmHWM": 803760,
+            "VmRSS": 802616
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1690000,
+          "currentNow": -1156250,
+          "atMs": 564146,
+          "rtf": 0.6351703302427336,
+          "memoryKb": {
+            "VmHWM": 804092,
+            "VmRSS": 803004
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9766666293144226,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1680000,
+          "currentNow": -1484375,
+          "atMs": 574432,
+          "rtf": 0.5833995685250369,
+          "memoryKb": {
+            "VmHWM": 804092,
+            "VmRSS": 803072
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9833333492279053,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1680000,
+          "currentNow": -1178906,
+          "atMs": 585494,
+          "rtf": 0.6572328913728521,
+          "memoryKb": {
+            "VmHWM": 804164,
+            "VmRSS": 803232
+          }
+        },
+        {
+          "thermalStatus": 3,
+          "thermalHeadroom": 0.9800000786781311,
+          "batteryTempC": 42.5,
+          "batteryPct": 33,
+          "charging": false,
+          "chargeCounterUah": 1670000,
+          "currentNow": -1223437,
+          "atMs": 596160,
+          "rtf": 0.6210734891310682,
+          "memoryKb": {
+            "VmHWM": 804684,
+            "VmRSS": 803428
+          }
+        }
+      ],
+      "kind": "soak",
+      "at": "2026-10-25T12:14:04.498951Z"
+    },
+    {
+      "documentId": "d7037c40d5ec690b41f53b5c77ed835d2685554acea0803219b9e8ebb9d2609e",
+      "bytes": 8449671,
+      "copyMs": 15,
+      "importMs": 16,
+      "alreadyInLibrary": true,
+      "pages": 429,
+      "sentences": 5519,
+      "getDocumentMs": 8,
+      "blocks": 2238,
+      "sentenceRecords": 5519,
+      "tocEntries": 222,
+      "kind": "import",
+      "at": "2026-10-25T12:14:34.899600Z"
+    },
+    {
+      "timeToFirstSoundMs": 2347,
+      "playedMs": 120133,
+      "sentencesStarted": 20,
+      "rebufferCount": 0,
+      "rebufferTotalMs": 0,
+      "rebuffers": [],
+      "transitionsAtMs": [
+        11620,
+        12374,
+        14888,
+        20737,
+        25028,
+        37982,
+        53005,
+        58262,
+        68148,
+        72883,
+        77659,
+        79174,
+        85128,
+        92608,
+        94670,
+        100854,
+        102260,
+        109837,
+        117627
+      ],
+      "error": null,
+      "playlistItems": 80,
+      "opens": [
+        {
+          "sentenceId": 51,
+          "openMs": 2307,
+          "durationMs": 9189,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 52,
+          "openMs": 310,
+          "durationMs": 746,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 53,
+          "openMs": 508,
+          "durationMs": 2523,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 54,
+          "openMs": 1396,
+          "durationMs": 5842,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 55,
+          "openMs": 1012,
+          "durationMs": 4291,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 56,
+          "openMs": 3709,
+          "durationMs": 12957,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 57,
+          "openMs": 4076,
+          "durationMs": 15016,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 58,
+          "openMs": 1669,
+          "durationMs": 5256,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 59,
+          "openMs": 4997,
+          "durationMs": 9895,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 60,
+          "openMs": 2832,
+          "durationMs": 4731,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 61,
+          "openMs": 3247,
+          "durationMs": 4771,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 62,
+          "openMs": 1140,
+          "durationMs": 1516,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 63,
+          "openMs": 3989,
+          "durationMs": 5958,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 64,
+          "openMs": 4842,
+          "durationMs": 7473,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 65,
+          "openMs": 1316,
+          "durationMs": 2062,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 66,
+          "openMs": 3724,
+          "durationMs": 6189,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 67,
+          "openMs": 14,
+          "durationMs": 1399,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 68,
+          "openMs": 3282,
+          "durationMs": 7583,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 69,
+          "openMs": 4473,
+          "durationMs": 7787,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 70,
+          "openMs": 39,
+          "durationMs": 13155,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 71,
+          "openMs": 2617,
+          "durationMs": 3777,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 72,
+          "openMs": 33,
+          "durationMs": 6696,
+          "readyAheadMs": 15667
+        },
+        {
+          "sentenceId": 73,
+          "openMs": 40,
+          "durationMs": 12243,
+          "readyAheadMs": 2889
+        },
+        {
+          "sentenceId": 74,
+          "openMs": 15,
+          "durationMs": 2886,
+          "readyAheadMs": 30778
+        },
+        {
+          "sentenceId": 75,
+          "openMs": 30,
+          "durationMs": 9840,
+          "readyAheadMs": 21056
+        },
+        {
+          "sentenceId": 76,
+          "openMs": 9,
+          "durationMs": 3597,
+          "readyAheadMs": 17389
+        },
+        {
+          "sentenceId": 77,
+          "openMs": 18,
+          "durationMs": 8212,
+          "readyAheadMs": 8444
+        },
+        {
+          "sentenceId": 78,
+          "openMs": 9,
+          "durationMs": 5100,
+          "readyAheadMs": 3333
+        },
+        {
+          "sentenceId": 79,
+          "openMs": 7,
+          "durationMs": 3490,
+          "readyAheadMs": 0
+        }
+      ],
+      "documentId": "d7037c40d5ec690b41f53b5c77ed835d2685554acea0803219b9e8ebb9d2609e",
+      "startSentenceId": 51,
+      "kind": "play",
+      "at": "2026-10-25T12:16:47.685384Z"
+    },
+    {
+      "documentId": "19560e409b408a7dcf01042957e6e68a93b2a20ef0fc70894bcb7665ea33adaa",
+      "bytes": 51559391,
+      "copyMs": 261,
+      "importMs": 139,
+      "alreadyInLibrary": true,
+      "pages": 368,
+      "sentences": 3857,
+      "getDocumentMs": 14,
+      "blocks": 2781,
+      "sentenceRecords": 3857,
+      "tocEntries": 198,
+      "kind": "import",
+      "at": "2026-10-25T12:16:58.508806Z"
+    },
+    {
+      "timeToFirstSoundMs": 3001,
+      "playedMs": 120203,
+      "sentencesStarted": 31,
+      "rebufferCount": 10,
+      "rebufferTotalMs": 43054,
+      "rebuffers": [
+        {
+          "itemIndex": 1,
+          "atMs": 5144,
+          "durationMs": 4598
+        },
+        {
+          "itemIndex": 2,
+          "atMs": 15755,
+          "durationMs": 1552
+        },
+        {
+          "itemIndex": 4,
+          "atMs": 22152,
+          "durationMs": 6499
+        },
+        {
+          "itemIndex": 7,
+          "atMs": 39292,
+          "durationMs": 5947
+        },
+        {
+          "itemIndex": 10,
+          "atMs": 63477,
+          "durationMs": 5089
+        },
+        {
+          "itemIndex": 13,
+          "atMs": 84570,
+          "durationMs": 3904
+        },
+        {
+          "itemIndex": 17,
+          "atMs": 97943,
+          "durationMs": 5474
+        },
+        {
+          "itemIndex": 18,
+          "atMs": 104754,
+          "durationMs": 6044
+        },
+        {
+          "itemIndex": 22,
+          "atMs": 126716,
+          "durationMs": 2642
+        },
+        {
+          "itemIndex": 26,
+          "atMs": 140131,
+          "durationMs": 1305
+        }
+      ],
+      "transitionsAtMs": [
+        5144,
+        15755,
+        21077,
+        22152,
+        36094,
+        38288,
+        39292,
+        54023,
+        59307,
+        63477,
+        75814,
+        81666,
+        84570,
+        93579,
+        95556,
+        97236,
+        97943,
+        104754,
+        117522,
+        124138,
+        124778,
+        126716,
+        133962,
+        137802,
+        138463,
+        140131,
+        146864,
+        152681,
+        161074,
+        165784
+      ],
+      "error": null,
+      "playlistItems": 80,
+      "opens": [
+        {
+          "sentenceId": 1,
+          "openMs": 2944,
+          "durationMs": 1951,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 2,
+          "openMs": 6722,
+          "durationMs": 5806,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 3,
+          "openMs": 7569,
+          "durationMs": 3613,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 4,
+          "openMs": 2015,
+          "durationMs": 958,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 5,
+          "openMs": 9315,
+          "durationMs": 7360,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 6,
+          "openMs": 3107,
+          "durationMs": 2186,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 7,
+          "openMs": 4678,
+          "durationMs": 892,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 8,
+          "openMs": 8773,
+          "durationMs": 8551,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 9,
+          "openMs": 8678,
+          "durationMs": 5154,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 10,
+          "openMs": 5106,
+          "durationMs": 4037,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 11,
+          "openMs": 9510,
+          "durationMs": 7166,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 12,
+          "openMs": 5235,
+          "durationMs": 5854,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 13,
+          "openMs": 5625,
+          "durationMs": 2776,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 14,
+          "openMs": 9007,
+          "durationMs": 5028,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 15,
+          "openMs": 3367,
+          "durationMs": 1971,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 16,
+          "openMs": 2640,
+          "durationMs": 1682,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 17,
+          "openMs": 2174,
+          "durationMs": 587,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 18,
+          "openMs": 6218,
+          "durationMs": 1110,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 19,
+          "openMs": 7350,
+          "durationMs": 6655,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 20,
+          "openMs": 5169,
+          "durationMs": 6619,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 21,
+          "openMs": 4168,
+          "durationMs": 641,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 22,
+          "openMs": 3983,
+          "durationMs": 1812,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 23,
+          "openMs": 4974,
+          "durationMs": 4521,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 24,
+          "openMs": 3802,
+          "durationMs": 3844,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 25,
+          "openMs": 1819,
+          "durationMs": 653,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 26,
+          "openMs": 2125,
+          "durationMs": 1550,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 27,
+          "openMs": 4052,
+          "durationMs": 5262,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 28,
+          "openMs": 4269,
+          "durationMs": 5823,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 29,
+          "openMs": 6296,
+          "durationMs": 8391,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 30,
+          "openMs": 4177,
+          "durationMs": 4711,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 31,
+          "openMs": 3396,
+          "durationMs": 2751,
+          "readyAheadMs": 0
+        },
+        {
+          "sentenceId": 32,
+          "openMs": 3394,
+          "durationMs": 1666,
+          "readyAheadMs": 0
+        }
+      ],
+      "documentId": "19560e409b408a7dcf01042957e6e68a93b2a20ef0fc70894bcb7665ea33adaa",
+      "startSentenceId": 1,
+      "kind": "play",
+      "at": "2026-10-25T12:19:54.882086Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "wallMs": 4761,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 627860
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 1931,
+      "kind": "engine",
+      "at": "2026-10-25T12:20:20.666608Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1931,
+      "medianRtf": 0.659556257451815,
+      "runs": [
+        {
+          "engineLoadMs": 1931,
+          "sentences": 20,
+          "audioMs": 70777,
+          "synthMs": 44183,
+          "rtf": 0.6242564674965031,
+          "firstSentenceMs": 2065,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2065,
+              "atMs": 2065
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1820,
+              "atMs": 3885
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 2137,
+              "atMs": 6023
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2177,
+              "atMs": 8201
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1870,
+              "atMs": 10071
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2353,
+              "atMs": 12425
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3672,
+              "synthMs": 2070,
+              "atMs": 14495
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1973,
+              "atMs": 16468
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2612,
+              "atMs": 19080
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2507,
+              "atMs": 21588
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2505,
+              "atMs": 24093
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2399,
+              "atMs": 26493
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2452,
+              "atMs": 28946
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3577,
+              "synthMs": 2406,
+              "atMs": 31352
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2161,
+              "atMs": 33514
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1784,
+              "atMs": 35298
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2270,
+              "atMs": 37569
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2213,
+              "atMs": 39782
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2302,
+              "atMs": 42085
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2107,
+              "atMs": 44193
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1931,
+          "sentences": 20,
+          "audioMs": 70788,
+          "synthMs": 46066,
+          "rtf": 0.6507600158218907,
+          "firstSentenceMs": 1695,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 1695,
+              "atMs": 1695
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1765,
+              "atMs": 3461
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 2024,
+              "atMs": 5485
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2530,
+              "atMs": 8015
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 1988,
+              "atMs": 10003
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 2751,
+              "atMs": 12755
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 2513,
+              "atMs": 15269
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2322,
+              "atMs": 17591
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2556,
+              "atMs": 20147
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2457,
+              "atMs": 22605
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2491,
+              "atMs": 25096
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2335,
+              "atMs": 27431
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2351,
+              "atMs": 29783
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 2357,
+              "atMs": 32141
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2343,
+              "atMs": 34485
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2226,
+              "atMs": 36712
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2354,
+              "atMs": 39067
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2369,
+              "atMs": 41437
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2466,
+              "atMs": 43904
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3212,
+              "synthMs": 2173,
+              "atMs": 46077
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1931,
+          "sentences": 20,
+          "audioMs": 70786,
+          "synthMs": 47310,
+          "rtf": 0.6683524990817393,
+          "firstSentenceMs": 2077,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2077,
+              "atMs": 2077
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 2140,
+              "atMs": 4218
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 2535,
+              "atMs": 6753
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2525,
+              "atMs": 9278
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1994,
+              "atMs": 11273
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2776,
+              "atMs": 14050
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2492,
+              "atMs": 16542
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2431,
+              "atMs": 18973
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2748,
+              "atMs": 21722
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2380,
+              "atMs": 24102
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2485,
+              "atMs": 26588
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 2328,
+              "atMs": 28916
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2229,
+              "atMs": 31146
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 2378,
+              "atMs": 33524
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2343,
+              "atMs": 35868
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2146,
+              "atMs": 38015
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2409,
+              "atMs": 40425
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2307,
+              "atMs": 42732
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2289,
+              "atMs": 45021
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2298,
+              "atMs": 47320
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 825012
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:22:38.264305Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "xnnpack",
+      "wallMs": 1829,
+      "providerLines": [
+        "         1792930960.193  9138  9163 W sherpa-onnx: Available providers: NnapiExecutionProvider, CPUExecutionProvider, . Fallback to cpu!"
+      ],
+      "providerEngaged": false,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 617856
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 1654,
+      "kind": "engine",
+      "at": "2026-10-25T12:22:41.869370Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "xnnpack",
+      "providerEngaged": false,
+      "loadMs": 1654,
+      "medianRtf": 0.6679334769166515,
+      "runs": [
+        {
+          "engineLoadMs": 1654,
+          "sentences": 20,
+          "audioMs": 70777,
+          "synthMs": 44127,
+          "rtf": 0.6234652500105967,
+          "firstSentenceMs": 1965,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 1965,
+              "atMs": 1965
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1738,
+              "atMs": 3704
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 1955,
+              "atMs": 5659
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2023,
+              "atMs": 7683
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1680,
+              "atMs": 9363
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2635,
+              "atMs": 11999
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3672,
+              "synthMs": 2302,
+              "atMs": 14301
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2224,
+              "atMs": 16526
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2666,
+              "atMs": 19193
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2394,
+              "atMs": 21587
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2604,
+              "atMs": 24192
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2259,
+              "atMs": 26452
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2321,
+              "atMs": 28773
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3577,
+              "synthMs": 2358,
+              "atMs": 31132
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2140,
+              "atMs": 33272
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2083,
+              "atMs": 35355
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2278,
+              "atMs": 37634
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2314,
+              "atMs": 39949
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2246,
+              "atMs": 42196
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1942,
+              "atMs": 44138
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1654,
+          "sentences": 20,
+          "audioMs": 70788,
+          "synthMs": 46784,
+          "rtf": 0.6609029779058597,
+          "firstSentenceMs": 1950,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 1950,
+              "atMs": 1950
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1993,
+              "atMs": 3944
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 2380,
+              "atMs": 6325
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2522,
+              "atMs": 8848
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 2064,
+              "atMs": 10912
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 2564,
+              "atMs": 13476
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 2412,
+              "atMs": 15888
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2174,
+              "atMs": 18063
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2511,
+              "atMs": 20575
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2334,
+              "atMs": 22909
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2426,
+              "atMs": 25335
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2392,
+              "atMs": 27728
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2364,
+              "atMs": 30093
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 2567,
+              "atMs": 32660
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2329,
+              "atMs": 34990
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2203,
+              "atMs": 37194
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2478,
+              "atMs": 39672
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2399,
+              "atMs": 42072
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2469,
+              "atMs": 44541
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3212,
+              "synthMs": 2253,
+              "atMs": 46795
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1654,
+          "sentences": 20,
+          "audioMs": 70786,
+          "synthMs": 47778,
+          "rtf": 0.6749639759274433,
+          "firstSentenceMs": 2165,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2165,
+              "atMs": 2165
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 2080,
+              "atMs": 4245
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 2572,
+              "atMs": 6818
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2557,
+              "atMs": 9375
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 2140,
+              "atMs": 11515
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2727,
+              "atMs": 14242
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2374,
+              "atMs": 16617
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2127,
+              "atMs": 18744
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2601,
+              "atMs": 21346
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2346,
+              "atMs": 23692
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2571,
+              "atMs": 26263
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 2419,
+              "atMs": 28683
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2475,
+              "atMs": 31159
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 2538,
+              "atMs": 33697
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2375,
+              "atMs": 36073
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2262,
+              "atMs": 38335
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2362,
+              "atMs": 40698
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2385,
+              "atMs": 43083
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2434,
+              "atMs": 45518
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2268,
+              "atMs": 47786
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 817576
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:25:00.596051Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "xnnpack",
+      "providerEngaged": false,
+      "medianRtf": 0.6679334769166515,
+      "cpuMedianRtf": 0.659556257451815,
+      "maxDurationDeviation": 0,
+      "durationsAgree": true,
+      "kind": "accelerator",
+      "at": "2026-10-25T12:25:02.822766Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "nnapi",
+      "wallMs": 2360,
+      "providerLines": [
+        "         1792931103.065  9138  9163 W sherpa-onnx: Android NNAPI requires API level >= 27. Current API level 21 Fallback to cpu!"
+      ],
+      "providerEngaged": false,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 626012
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 2096,
+      "kind": "engine",
+      "at": "2026-10-25T12:25:05.185858Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "nnapi",
+      "providerEngaged": false,
+      "loadMs": 2096,
+      "medianRtf": 0.6509667796381824,
+      "runs": [
+        {
+          "engineLoadMs": 2096,
+          "sentences": 20,
+          "audioMs": 70777,
+          "synthMs": 46249,
+          "rtf": 0.65344674117298,
+          "firstSentenceMs": 2109,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2109,
+              "atMs": 2109
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 2181,
+              "atMs": 4290
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 2255,
+              "atMs": 6546
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2488,
+              "atMs": 9035
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1702,
+              "atMs": 10738
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2286,
+              "atMs": 13024
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3672,
+              "synthMs": 2013,
+              "atMs": 15037
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2145,
+              "atMs": 17183
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2765,
+              "atMs": 19948
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2442,
+              "atMs": 22391
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2643,
+              "atMs": 25034
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2424,
+              "atMs": 27459
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2265,
+              "atMs": 29725
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3577,
+              "synthMs": 2442,
+              "atMs": 32168
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2416,
+              "atMs": 34585
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2277,
+              "atMs": 36862
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2391,
+              "atMs": 39254
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2376,
+              "atMs": 41630
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2407,
+              "atMs": 44038
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2222,
+              "atMs": 46260
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 2096,
+          "sentences": 20,
+          "audioMs": 70788,
+          "synthMs": 47112,
+          "rtf": 0.6655365316155281,
+          "firstSentenceMs": 2038,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2038,
+              "atMs": 2038
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 2050,
+              "atMs": 4089
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 2426,
+              "atMs": 6515
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2536,
+              "atMs": 9052
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 1977,
+              "atMs": 11029
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 2608,
+              "atMs": 13637
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 2290,
+              "atMs": 15928
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2306,
+              "atMs": 18234
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2624,
+              "atMs": 20859
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2450,
+              "atMs": 23310
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2655,
+              "atMs": 25965
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2308,
+              "atMs": 28273
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2353,
+              "atMs": 30626
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 2561,
+              "atMs": 33188
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2275,
+              "atMs": 35463
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2259,
+              "atMs": 37723
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2402,
+              "atMs": 40125
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2280,
+              "atMs": 42405
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2373,
+              "atMs": 44779
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3212,
+              "synthMs": 2341,
+              "atMs": 47121
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 2096,
+          "sentences": 20,
+          "audioMs": 70786,
+          "synthMs": 45048,
+          "rtf": 0.6363970276608368,
+          "firstSentenceMs": 2223,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2223,
+              "atMs": 2223
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 2209,
+              "atMs": 4433
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3882,
+              "synthMs": 2457,
+              "atMs": 6890
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2545,
+              "atMs": 9435
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 2067,
+              "atMs": 11502
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2685,
+              "atMs": 14188
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2535,
+              "atMs": 16723
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2356,
+              "atMs": 19079
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2660,
+              "atMs": 21740
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3680,
+              "synthMs": 2503,
+              "atMs": 24244
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2397,
+              "atMs": 26641
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 2190,
+              "atMs": 28832
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2263,
+              "atMs": 31095
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3578,
+              "synthMs": 2336,
+              "atMs": 33431
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2141,
+              "atMs": 35573
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1846,
+              "atMs": 37419
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1951,
+              "atMs": 39371
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1921,
+              "atMs": 41293
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1967,
+              "atMs": 43260
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1796,
+              "atMs": 45056
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 811560
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:27:23.631353Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "nnapi",
+      "providerEngaged": false,
+      "medianRtf": 0.6509667796381824,
+      "cpuMedianRtf": 0.659556257451815,
+      "maxDurationDeviation": 0,
+      "durationsAgree": true,
+      "kind": "accelerator",
+      "at": "2026-10-25T12:27:25.389352Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "cpu",
+      "wallMs": 2147,
+      "providerLines": [
+        "         1792931245.391  9138  9163 I LectriceSpike: nnapi FP32: engaged=false RTF 0.651 vs cpu 0.660"
+      ],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 437704
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 1909,
+      "kind": "engine",
+      "at": "2026-10-25T12:27:27.538940Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1909,
+      "medianRtf": 0.8036603768865997,
+      "runs": [
+        {
+          "engineLoadMs": 1909,
+          "sentences": 20,
+          "audioMs": 70661,
+          "synthMs": 68370,
+          "rtf": 0.9675775887689108,
+          "firstSentenceMs": 4083,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4083,
+              "atMs": 4083
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3037,
+              "synthMs": 3766,
+              "atMs": 7850
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 4441,
+              "atMs": 12292
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3973,
+              "synthMs": 4172,
+              "atMs": 16464
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 3201,
+              "atMs": 19665
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 4198,
+              "atMs": 23863
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3622,
+              "atMs": 27486
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 3263,
+              "atMs": 30750
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4172,
+              "synthMs": 3633,
+              "atMs": 34384
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3321,
+              "atMs": 37705
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3466,
+              "atMs": 41171
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 3141,
+              "atMs": 44313
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 3138,
+              "atMs": 47452
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 3171,
+              "atMs": 50623
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 3070,
+              "atMs": 53693
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3105,
+              "synthMs": 2725,
+              "atMs": 56419
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3507,
+              "synthMs": 3194,
+              "atMs": 59613
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2929,
+              "atMs": 62543
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2942,
+              "atMs": 65485
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3202,
+              "synthMs": 2894,
+              "atMs": 68379
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1909,
+          "sentences": 20,
+          "audioMs": 70653,
+          "synthMs": 57509,
+          "rtf": 0.8139640213437505,
+          "firstSentenceMs": 2551,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 2551,
+              "atMs": 2551
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2564,
+              "atMs": 5116
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3164,
+              "atMs": 8280
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3263,
+              "atMs": 11543
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2547,
+              "atMs": 14090
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3346,
+              "atMs": 17437
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3660,
+              "synthMs": 3034,
+              "atMs": 20472
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2818,
+              "atMs": 23290
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4170,
+              "synthMs": 3337,
+              "atMs": 26627
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3051,
+              "atMs": 29679
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3123,
+              "atMs": 32802
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2694,
+              "atMs": 35497
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2829,
+              "atMs": 38327
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3504,
+              "synthMs": 2910,
+              "atMs": 41237
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2681,
+              "atMs": 43919
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2493,
+              "atMs": 46412
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2930,
+              "atMs": 49343
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2751,
+              "atMs": 52094
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2882,
+              "atMs": 54977
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2541,
+              "atMs": 57518
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1909,
+          "sentences": 20,
+          "audioMs": 70658,
+          "synthMs": 56057,
+          "rtf": 0.7933567324294489,
+          "firstSentenceMs": 2368,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2368,
+              "atMs": 2368
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2528,
+              "atMs": 4897
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3885,
+              "synthMs": 3166,
+              "atMs": 8064
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3122,
+              "atMs": 11186
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2493,
+              "atMs": 13680
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4100,
+              "synthMs": 3121,
+              "atMs": 16801
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 2824,
+              "atMs": 19626
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2712,
+              "atMs": 22338
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3180,
+              "atMs": 25519
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3048,
+              "atMs": 28568
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 2994,
+              "atMs": 31563
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2688,
+              "atMs": 34251
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2691,
+              "atMs": 36943
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3501,
+              "synthMs": 2706,
+              "atMs": 39649
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2619,
+              "atMs": 42269
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2592,
+              "atMs": 44861
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3508,
+              "synthMs": 2935,
+              "atMs": 47797
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3468,
+              "synthMs": 2791,
+              "atMs": 50588
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2745,
+              "atMs": 53333
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2734,
+              "atMs": 56068
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 646764
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:30:29.510877Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "xnnpack",
+      "wallMs": 1181,
+      "providerLines": [
+        "         1792931432.162  9138  9163 W sherpa-onnx: Available providers: NnapiExecutionProvider, CPUExecutionProvider, . Fallback to cpu!"
+      ],
+      "providerEngaged": false,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 439776
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 1057,
+      "kind": "engine",
+      "at": "2026-10-25T12:30:33.246422Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "xnnpack",
+      "providerEngaged": false,
+      "loadMs": 1057,
+      "medianRtf": 0.8142395175357724,
+      "runs": [
+        {
+          "engineLoadMs": 1057,
+          "sentences": 20,
+          "audioMs": 70661,
+          "synthMs": 56500,
+          "rtf": 0.7995924201468986,
+          "firstSentenceMs": 2534,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2534,
+              "atMs": 2534
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3037,
+              "synthMs": 2389,
+              "atMs": 4924
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 2952,
+              "atMs": 7876
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3973,
+              "synthMs": 3128,
+              "atMs": 11005
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2425,
+              "atMs": 13430
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3258,
+              "atMs": 16689
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 2948,
+              "atMs": 19637
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 2772,
+              "atMs": 22410
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4172,
+              "synthMs": 3106,
+              "atMs": 25517
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3022,
+              "atMs": 28539
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3053,
+              "atMs": 31593
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2707,
+              "atMs": 34300
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 2800,
+              "atMs": 37101
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2714,
+              "atMs": 39815
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 2799,
+              "atMs": 42615
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3105,
+              "synthMs": 2668,
+              "atMs": 45283
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3507,
+              "synthMs": 2787,
+              "atMs": 48070
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2902,
+              "atMs": 50973
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2950,
+              "atMs": 53923
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3202,
+              "synthMs": 2586,
+              "atMs": 56510
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1057,
+          "sentences": 20,
+          "audioMs": 70653,
+          "synthMs": 57535,
+          "rtf": 0.8143320170410315,
+          "firstSentenceMs": 2492,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 2492,
+              "atMs": 2492
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2469,
+              "atMs": 4961
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3166,
+              "atMs": 8128
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3160,
+              "atMs": 11288
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2512,
+              "atMs": 13801
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3357,
+              "atMs": 17159
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3660,
+              "synthMs": 3018,
+              "atMs": 20177
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2688,
+              "atMs": 22865
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4170,
+              "synthMs": 3316,
+              "atMs": 26182
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2919,
+              "atMs": 29101
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3030,
+              "atMs": 32132
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2882,
+              "atMs": 35014
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2878,
+              "atMs": 37893
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3504,
+              "synthMs": 2915,
+              "atMs": 40808
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2812,
+              "atMs": 43621
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2521,
+              "atMs": 46143
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2937,
+              "atMs": 49080
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2884,
+              "atMs": 51964
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2942,
+              "atMs": 54906
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2637,
+              "atMs": 57543
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1057,
+          "sentences": 20,
+          "audioMs": 70658,
+          "synthMs": 57526,
+          "rtf": 0.8141470180305131,
+          "firstSentenceMs": 2492,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2492,
+              "atMs": 2492
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2562,
+              "atMs": 5054
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3885,
+              "synthMs": 3167,
+              "atMs": 8222
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3228,
+              "atMs": 11450
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2446,
+              "atMs": 13897
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4100,
+              "synthMs": 3325,
+              "atMs": 17222
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 2907,
+              "atMs": 20130
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2816,
+              "atMs": 22946
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3329,
+              "atMs": 26276
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3034,
+              "atMs": 29310
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3048,
+              "atMs": 32358
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2887,
+              "atMs": 35246
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2880,
+              "atMs": 38126
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3501,
+              "synthMs": 2911,
+              "atMs": 41038
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2664,
+              "atMs": 43702
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2662,
+              "atMs": 46364
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3508,
+              "synthMs": 2931,
+              "atMs": 49296
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3468,
+              "synthMs": 2819,
+              "atMs": 52116
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2852,
+              "atMs": 54968
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2566,
+              "atMs": 57535
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 643528
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:33:24.839613Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "xnnpack",
+      "providerEngaged": false,
+      "medianRtf": 0.8142395175357724,
+      "cpuMedianRtf": 0.8036603768865997,
+      "maxDurationDeviation": 0,
+      "durationsAgree": true,
+      "kind": "accelerator",
+      "at": "2026-10-25T12:33:27.214031Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "nnapi",
+      "wallMs": 1079,
+      "providerLines": [
+        "         1792931607.215  9138  9163 I LectriceSpike: xnnpack INT8: engaged=false RTF 0.814 vs cpu 0.804",
+        "         1792931607.311  9138  9163 W sherpa-onnx: Android NNAPI requires API level >= 27. Current API level 21 Fallback to cpu!"
+      ],
+      "providerEngaged": false,
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 440088
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 949,
+      "kind": "engine",
+      "at": "2026-10-25T12:33:28.294560Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "nnapi",
+      "providerEngaged": false,
+      "loadMs": 949,
+      "medianRtf": 0.8279680985172069,
+      "runs": [
+        {
+          "engineLoadMs": 949,
+          "sentences": 20,
+          "audioMs": 70661,
+          "synthMs": 58256,
+          "rtf": 0.8244434695234996,
+          "firstSentenceMs": 2434,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2434,
+              "atMs": 2434
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3037,
+              "synthMs": 2415,
+              "atMs": 4850
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 3167,
+              "atMs": 8018
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3973,
+              "synthMs": 3263,
+              "atMs": 11281
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2555,
+              "atMs": 13836
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3346,
+              "atMs": 17182
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3028,
+              "atMs": 20211
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 2814,
+              "atMs": 23026
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4172,
+              "synthMs": 3331,
+              "atMs": 26358
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3042,
+              "atMs": 29401
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3180,
+              "atMs": 32582
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2885,
+              "atMs": 35468
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3446,
+              "synthMs": 2881,
+              "atMs": 38349
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2914,
+              "atMs": 41264
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 2811,
+              "atMs": 44076
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3105,
+              "synthMs": 2664,
+              "atMs": 46741
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3507,
+              "synthMs": 2934,
+              "atMs": 49675
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2906,
+              "atMs": 52581
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2949,
+              "atMs": 55531
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3202,
+              "synthMs": 2737,
+              "atMs": 58268
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 949,
+          "sentences": 20,
+          "audioMs": 70653,
+          "synthMs": 58498,
+          "rtf": 0.827962011521096,
+          "firstSentenceMs": 2549,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 2549,
+              "atMs": 2549
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2564,
+              "atMs": 5114
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3168,
+              "atMs": 8282
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3270,
+              "atMs": 11553
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2556,
+              "atMs": 14109
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3352,
+              "atMs": 17462
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3660,
+              "synthMs": 3036,
+              "atMs": 20498
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2817,
+              "atMs": 23315
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4170,
+              "synthMs": 3330,
+              "atMs": 26646
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3050,
+              "atMs": 29697
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3176,
+              "atMs": 32874
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2883,
+              "atMs": 35757
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2878,
+              "atMs": 38636
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3504,
+              "synthMs": 2911,
+              "atMs": 41547
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2810,
+              "atMs": 44357
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2660,
+              "atMs": 47018
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2930,
+              "atMs": 49949
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2886,
+              "atMs": 52835
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2940,
+              "atMs": 55775
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2732,
+              "atMs": 58508
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 949,
+          "sentences": 20,
+          "audioMs": 70658,
+          "synthMs": 58503,
+          "rtf": 0.8279741855133177,
+          "firstSentenceMs": 2546,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2546,
+              "atMs": 2546
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2561,
+              "atMs": 5107
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3885,
+              "synthMs": 3162,
+              "atMs": 8270
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3264,
+              "atMs": 11534
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2550,
+              "atMs": 14085
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4100,
+              "synthMs": 3357,
+              "atMs": 17442
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3035,
+              "atMs": 20478
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2814,
+              "atMs": 23293
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3332,
+              "atMs": 26626
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3045,
+              "atMs": 29672
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 3177,
+              "atMs": 32849
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2886,
+              "atMs": 35735
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3448,
+              "synthMs": 2876,
+              "atMs": 38612
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3501,
+              "synthMs": 2909,
+              "atMs": 41521
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3338,
+              "synthMs": 2814,
+              "atMs": 44336
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2668,
+              "atMs": 47004
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3508,
+              "synthMs": 2938,
+              "atMs": 49943
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3468,
+              "synthMs": 2887,
+              "atMs": 52831
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3534,
+              "synthMs": 2947,
+              "atMs": 55778
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2735,
+              "atMs": 58514
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 1069336,
+        "VmRSS": 648336
+      },
+      "kind": "bench",
+      "at": "2026-10-25T12:36:23.590888Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "nnapi",
+      "providerEngaged": false,
+      "medianRtf": 0.8279680985172069,
+      "cpuMedianRtf": 0.8036603768865997,
+      "maxDurationDeviation": 0,
+      "durationsAgree": true,
+      "kind": "accelerator",
+      "at": "2026-10-25T12:36:26.147866Z"
+    }
+  ]
+}

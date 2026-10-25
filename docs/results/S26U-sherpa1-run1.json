@@ -1,0 +1,4005 @@
+{
+  "device": {
+    "manufacturer": "samsung",
+    "model": "SM-S948B",
+    "board": "canoe",
+    "hardware": "qcom",
+    "socManufacturer": "QTI",
+    "socModel": "SM8850",
+    "ramMb": 11084,
+    "android": "17",
+    "api": 37,
+    "pageSize": 4096,
+    "abis": [
+      "arm64-v8a"
+    ],
+    "cpus": 8
+  },
+  "app": {
+    "versionName": "0.1.0-spike-sherpa1",
+    "sherpaSet": "sherpa1",
+    "coreRevision": "v0.2.0-dirty"
+  },
+  "startedAt": "2026-10-25T10:28:44.613796Z",
+  "runs": [
+    {
+      "openMs": 14,
+      "pdfiumBinding": "bareName",
+      "nativeLibraryDir": "\/data\/app\/~~00T3dHkRS3-VKXIWzhElYQ==\/app.lectrice.spike.sherpa1-NJXw64LbIN_LltpOUEf3EQ==\/lib\/arm64",
+      "memoryKb": {
+        "VmHWM": 454940,
+        "VmRSS": 152308
+      },
+      "kind": "load",
+      "at": "2026-10-25T10:28:44.614076Z"
+    },
+    {
+      "kokoro-multi-lang-v1_0": {
+        "copied": true,
+        "files": 360,
+        "bytes": 384077374,
+        "copyMs": 299
+      },
+      "kokoro-int8-multi-lang-v1_0": {
+        "copied": true,
+        "files": 360,
+        "bytes": 172720574,
+        "copyMs": 130
+      },
+      "kind": "bundledModels",
+      "at": "2026-10-25T10:28:44.614176Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "wallMs": 889,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 598616,
+        "VmRSS": 598616
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 879,
+      "kind": "engine",
+      "at": "2026-10-25T10:28:50.283215Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 4,
+      "provider": "cpu",
+      "wallMs": 804,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 599112,
+        "VmRSS": 409264
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 735,
+      "kind": "engine",
+      "at": "2026-10-25T10:28:55.389860Z"
+    },
+    {
+      "documentId": "19560e409b408a7dcf01042957e6e68a93b2a20ef0fc70894bcb7665ea33adaa",
+      "bytes": 51559391,
+      "copyMs": 53,
+      "importMs": 436,
+      "alreadyInLibrary": false,
+      "pages": 368,
+      "sentences": 3857,
+      "getDocumentMs": 5,
+      "blocks": 2781,
+      "sentenceRecords": 3857,
+      "tocEntries": 198,
+      "kind": "import",
+      "at": "2026-10-25T10:29:25.859436Z"
+    },
+    {
+      "documentId": "d7037c40d5ec690b41f53b5c77ed835d2685554acea0803219b9e8ebb9d2609e",
+      "bytes": 8449671,
+      "copyMs": 10,
+      "importMs": 561,
+      "alreadyInLibrary": false,
+      "pages": 429,
+      "sentences": 5519,
+      "getDocumentMs": 6,
+      "blocks": 2238,
+      "sentenceRecords": 5519,
+      "tocEntries": 222,
+      "kind": "import",
+      "at": "2026-10-25T10:29:31.228413Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 2,
+      "provider": "cpu",
+      "wallMs": 821,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 624252,
+        "VmRSS": 624252
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 726,
+      "kind": "engine",
+      "at": "2026-10-25T10:29:36.683252Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 2,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 726,
+      "medianRtf": 0.477695352473547,
+      "runs": [
+        {
+          "engineLoadMs": 726,
+          "sentences": 20,
+          "audioMs": 70794,
+          "synthMs": 27410,
+          "rtf": 0.3871797044947312,
+          "firstSentenceMs": 1057,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1057,
+              "atMs": 1057
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1094,
+              "atMs": 2152
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1343,
+              "atMs": 3495
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1411,
+              "atMs": 4907
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 1109,
+              "atMs": 6017
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 1464,
+              "atMs": 7481
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 1328,
+              "atMs": 8809
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1254,
+              "atMs": 10063
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 1480,
+              "atMs": 11544
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 1372,
+              "atMs": 12917
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 1450,
+              "atMs": 14367
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 1381,
+              "atMs": 15748
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 1381,
+              "atMs": 17130
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1426,
+              "atMs": 18556
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1382,
+              "atMs": 19938
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1404,
+              "atMs": 21343
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1550,
+              "atMs": 22893
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1522,
+              "atMs": 24415
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1557,
+              "atMs": 25973
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1445,
+              "atMs": 27419
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 726,
+          "sentences": 20,
+          "audioMs": 70793,
+          "synthMs": 32467,
+          "rtf": 0.4586187899933609,
+          "firstSentenceMs": 1350,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1350,
+              "atMs": 1350
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 1382,
+              "atMs": 2733
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1668,
+              "atMs": 4401
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1728,
+              "atMs": 6130
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1347,
+              "atMs": 7477
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 1764,
+              "atMs": 9242
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 1597,
+              "atMs": 10840
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1601,
+              "atMs": 12441
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 1893,
+              "atMs": 14335
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 1728,
+              "atMs": 16064
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 1801,
+              "atMs": 17866
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1629,
+              "atMs": 19495
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 1629,
+              "atMs": 21124
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3582,
+              "synthMs": 1682,
+              "atMs": 22807
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1603,
+              "atMs": 24410
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1533,
+              "atMs": 25944
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 1666,
+              "atMs": 27610
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1628,
+              "atMs": 29239
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1677,
+              "atMs": 30916
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1561,
+              "atMs": 32478
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 726,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 35164,
+          "rtf": 0.49677191495373313,
+          "firstSentenceMs": 1455,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 1455,
+              "atMs": 1455
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1490,
+              "atMs": 2945
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 1797,
+              "atMs": 4743
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1868,
+              "atMs": 6612
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1456,
+              "atMs": 8068
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 1996,
+              "atMs": 10065
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 1852,
+              "atMs": 11917
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1723,
+              "atMs": 13640
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4163,
+              "synthMs": 2034,
+              "atMs": 15675
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 1860,
+              "atMs": 17535
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 1944,
+              "atMs": 19479
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1752,
+              "atMs": 21232
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 1749,
+              "atMs": 22981
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1806,
+              "atMs": 24788
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1723,
+              "atMs": 26511
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 1646,
+              "atMs": 28157
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1789,
+              "atMs": 29947
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 1752,
+              "atMs": 31699
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1799,
+              "atMs": 33499
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1673,
+              "atMs": 35172
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 830376,
+        "VmRSS": 828852
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:31:11.756410Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "wallMs": 1140,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 830376,
+        "VmRSS": 643824
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 1013,
+      "kind": "engine",
+      "at": "2026-10-25T10:31:12.897475Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 4,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1013,
+      "medianRtf": 0.6272513740022726,
+      "runs": [
+        {
+          "engineLoadMs": 1013,
+          "sentences": 20,
+          "audioMs": 70794,
+          "synthMs": 42156,
+          "rtf": 0.5954741927281973,
+          "firstSentenceMs": 1604,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1604,
+              "atMs": 1604
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1714,
+              "atMs": 3319
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 2061,
+              "atMs": 5381
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2133,
+              "atMs": 7515
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 1688,
+              "atMs": 9203
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 2410,
+              "atMs": 11614
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2194,
+              "atMs": 13808
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2030,
+              "atMs": 15839
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2388,
+              "atMs": 18227
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 2214,
+              "atMs": 20441
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 2285,
+              "atMs": 22727
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 2176,
+              "atMs": 24903
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 2194,
+              "atMs": 27098
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 2231,
+              "atMs": 29329
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2135,
+              "atMs": 31465
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2025,
+              "atMs": 33491
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2215,
+              "atMs": 35706
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2174,
+              "atMs": 37881
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2215,
+              "atMs": 40096
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2070,
+              "atMs": 42167
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1013,
+          "sentences": 20,
+          "audioMs": 70793,
+          "synthMs": 44449,
+          "rtf": 0.6278728122837004,
+          "firstSentenceMs": 1939,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1939,
+              "atMs": 1939
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 1983,
+              "atMs": 3923
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 2400,
+              "atMs": 6323
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2496,
+              "atMs": 8819
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1949,
+              "atMs": 10769
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2533,
+              "atMs": 13302
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2325,
+              "atMs": 15627
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2156,
+              "atMs": 17784
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2507,
+              "atMs": 20292
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 2303,
+              "atMs": 22595
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2391,
+              "atMs": 24986
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 2196,
+              "atMs": 27182
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 2193,
+              "atMs": 29375
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3582,
+              "synthMs": 2232,
+              "atMs": 31608
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2130,
+              "atMs": 33739
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 2028,
+              "atMs": 35767
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2213,
+              "atMs": 37980
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 2165,
+              "atMs": 40145
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2222,
+              "atMs": 42367
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2088,
+              "atMs": 44455
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1013,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 44356,
+          "rtf": 0.6266299357208448,
+          "firstSentenceMs": 1929,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 1929,
+              "atMs": 1929
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1981,
+              "atMs": 3910
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 2383,
+              "atMs": 6293
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2476,
+              "atMs": 8770
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1954,
+              "atMs": 10724
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2529,
+              "atMs": 13253
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 2317,
+              "atMs": 15570
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2130,
+              "atMs": 17700
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4163,
+              "synthMs": 2517,
+              "atMs": 20218
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 2312,
+              "atMs": 22531
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2390,
+              "atMs": 24921
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 2164,
+              "atMs": 27086
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 2179,
+              "atMs": 29266
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 2262,
+              "atMs": 31528
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 2113,
+              "atMs": 33642
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 2027,
+              "atMs": 35669
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 2239,
+              "atMs": 37909
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 2170,
+              "atMs": 40080
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 2223,
+              "atMs": 42303
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 2061,
+              "atMs": 44365
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 830500,
+        "VmRSS": 829068
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:33:23.890707Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 6,
+      "provider": "cpu",
+      "wallMs": 1430,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 830500,
+        "VmRSS": 640852
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 1278,
+      "kind": "engine",
+      "at": "2026-10-25T10:33:25.321757Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 6,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1278,
+      "medianRtf": 0.55064353156165,
+      "runs": [
+        {
+          "engineLoadMs": 1278,
+          "sentences": 20,
+          "audioMs": 70794,
+          "synthMs": 34960,
+          "rtf": 0.49382716049382713,
+          "firstSentenceMs": 1481,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1481,
+              "atMs": 1481
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1493,
+              "atMs": 2975
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1775,
+              "atMs": 4750
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1867,
+              "atMs": 6618
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 1447,
+              "atMs": 8065
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 1880,
+              "atMs": 9946
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 1777,
+              "atMs": 11723
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1636,
+              "atMs": 13359
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 1873,
+              "atMs": 15233
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 1800,
+              "atMs": 17034
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 1890,
+              "atMs": 18924
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 1720,
+              "atMs": 20644
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 1751,
+              "atMs": 22396
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1862,
+              "atMs": 24259
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1775,
+              "atMs": 26034
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1692,
+              "atMs": 27727
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1838,
+              "atMs": 29566
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1815,
+              "atMs": 31381
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1865,
+              "atMs": 33247
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1723,
+              "atMs": 34970
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1278,
+          "sentences": 20,
+          "audioMs": 70793,
+          "synthMs": 38894,
+          "rtf": 0.54940460214993,
+          "firstSentenceMs": 1623,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1623,
+              "atMs": 1623
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 1627,
+              "atMs": 3250
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1992,
+              "atMs": 5242
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2168,
+              "atMs": 7411
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1712,
+              "atMs": 9123
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2277,
+              "atMs": 11401
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 2016,
+              "atMs": 13417
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1875,
+              "atMs": 15293
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2188,
+              "atMs": 17481
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 2027,
+              "atMs": 19509
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2102,
+              "atMs": 21611
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1918,
+              "atMs": 23530
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 1924,
+              "atMs": 25455
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3582,
+              "synthMs": 2089,
+              "atMs": 27545
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1878,
+              "atMs": 29423
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1795,
+              "atMs": 31219
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 1952,
+              "atMs": 33171
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1915,
+              "atMs": 35086
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1975,
+              "atMs": 37062
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1841,
+              "atMs": 38904
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1278,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 39065,
+          "rtf": 0.55188246097337,
+          "firstSentenceMs": 1728,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 1728,
+              "atMs": 1728
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1755,
+              "atMs": 3484
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 2088,
+              "atMs": 5573
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 2115,
+              "atMs": 7688
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1665,
+              "atMs": 9354
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2146,
+              "atMs": 11500
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 1955,
+              "atMs": 13456
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1987,
+              "atMs": 15443
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4163,
+              "synthMs": 2267,
+              "atMs": 17711
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 2037,
+              "atMs": 19748
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2102,
+              "atMs": 21850
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1917,
+              "atMs": 23767
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 1921,
+              "atMs": 25689
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1979,
+              "atMs": 27668
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1896,
+              "atMs": 29564
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 1794,
+              "atMs": 31358
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1991,
+              "atMs": 33349
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 1914,
+              "atMs": 35264
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1970,
+              "atMs": 37234
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1838,
+              "atMs": 39072
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 832960
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:35:18.274902Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "wallMs": 1650,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 639040
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0",
+      "loadMs": 1478,
+      "kind": "engine",
+      "at": "2026-10-25T10:35:19.926349Z"
+    },
+    {
+      "bundle": "FP32",
+      "threads": 8,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1478,
+      "medianRtf": 0.4646395873899107,
+      "runs": [
+        {
+          "engineLoadMs": 1478,
+          "sentences": 20,
+          "audioMs": 70794,
+          "synthMs": 21920,
+          "rtf": 0.30963075966889847,
+          "firstSentenceMs": 1096,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1096,
+              "atMs": 1096
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 867,
+              "atMs": 1963
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1047,
+              "atMs": 3011
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1148,
+              "atMs": 4159
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3215,
+              "synthMs": 929,
+              "atMs": 5089
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4097,
+              "synthMs": 1171,
+              "atMs": 6260
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 1092,
+              "atMs": 7353
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1018,
+              "atMs": 8371
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 1279,
+              "atMs": 9650
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 1140,
+              "atMs": 10791
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3848,
+              "synthMs": 1189,
+              "atMs": 11980
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3420,
+              "synthMs": 1104,
+              "atMs": 13084
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 1087,
+              "atMs": 14171
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1119,
+              "atMs": 15291
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1058,
+              "atMs": 16349
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 989,
+              "atMs": 17338
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1065,
+              "atMs": 18404
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1210,
+              "atMs": 19615
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1161,
+              "atMs": 20776
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1151,
+              "atMs": 21927
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1478,
+          "sentences": 20,
+          "audioMs": 70793,
+          "synthMs": 35163,
+          "rtf": 0.496701651293207,
+          "firstSentenceMs": 1148,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2959,
+              "synthMs": 1148,
+              "atMs": 1148
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3099,
+              "synthMs": 1270,
+              "atMs": 2419
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3884,
+              "synthMs": 1676,
+              "atMs": 4095
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1863,
+              "atMs": 5959
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1593,
+              "atMs": 7552
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 2052,
+              "atMs": 9604
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3676,
+              "synthMs": 1794,
+              "atMs": 11399
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1678,
+              "atMs": 13077
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4164,
+              "synthMs": 2030,
+              "atMs": 15108
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3683,
+              "synthMs": 1807,
+              "atMs": 16916
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 2015,
+              "atMs": 18931
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1825,
+              "atMs": 20756
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3425,
+              "synthMs": 2050,
+              "atMs": 22807
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3582,
+              "synthMs": 2137,
+              "atMs": 24944
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1775,
+              "atMs": 26720
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3125,
+              "synthMs": 1694,
+              "atMs": 28415
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 1828,
+              "atMs": 30243
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3441,
+              "synthMs": 1722,
+              "atMs": 31965
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1665,
+              "atMs": 33630
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1541,
+              "atMs": 35172
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1478,
+          "sentences": 20,
+          "audioMs": 70785,
+          "synthMs": 30620,
+          "rtf": 0.4325775234866144,
+          "firstSentenceMs": 1437,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2958,
+              "synthMs": 1437,
+              "atMs": 1437
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3098,
+              "synthMs": 1477,
+              "atMs": 2915
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3883,
+              "synthMs": 1649,
+              "atMs": 4565
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 4001,
+              "synthMs": 1720,
+              "atMs": 6285
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3216,
+              "synthMs": 1271,
+              "atMs": 7557
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4095,
+              "synthMs": 1675,
+              "atMs": 9232
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3671,
+              "synthMs": 1589,
+              "atMs": 10821
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 1447,
+              "atMs": 12269
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4163,
+              "synthMs": 1701,
+              "atMs": 13971
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 1536,
+              "atMs": 15507
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3845,
+              "synthMs": 1592,
+              "atMs": 17100
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3422,
+              "synthMs": 1441,
+              "atMs": 18542
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3424,
+              "synthMs": 1410,
+              "atMs": 19952
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3580,
+              "synthMs": 1494,
+              "atMs": 21447
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3345,
+              "synthMs": 1487,
+              "atMs": 22935
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3126,
+              "synthMs": 1429,
+              "atMs": 24364
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3509,
+              "synthMs": 1528,
+              "atMs": 25893
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3442,
+              "synthMs": 1600,
+              "atMs": 27493
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3533,
+              "synthMs": 1614,
+              "atMs": 29108
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3208,
+              "synthMs": 1523,
+              "atMs": 30631
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 833736
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:36:47.663075Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "cpu",
+      "wallMs": 1668,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 457212
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 1491,
+      "kind": "engine",
+      "at": "2026-10-25T10:36:49.332802Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 2,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1491,
+      "medianRtf": 0.7185546116653774,
+      "runs": [
+        {
+          "engineLoadMs": 1491,
+          "sentences": 20,
+          "audioMs": 70665,
+          "synthMs": 58083,
+          "rtf": 0.8219486308639354,
+          "firstSentenceMs": 4195,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 4195,
+              "atMs": 4195
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 4082,
+              "atMs": 8278
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 4289,
+              "atMs": 12567
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3985,
+              "atMs": 16553
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3227,
+              "synthMs": 2711,
+              "atMs": 19264
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3287,
+              "atMs": 22552
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3658,
+              "synthMs": 2822,
+              "atMs": 25375
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 2620,
+              "atMs": 27995
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3022,
+              "atMs": 31018
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 2682,
+              "atMs": 33700
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3852,
+              "synthMs": 2740,
+              "atMs": 36441
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2483,
+              "atMs": 38925
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3449,
+              "synthMs": 2478,
+              "atMs": 41403
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2511,
+              "atMs": 43914
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 2402,
+              "atMs": 46317
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 2098,
+              "atMs": 48416
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2364,
+              "atMs": 50781
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2403,
+              "atMs": 53185
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 2539,
+              "atMs": 55724
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2370,
+              "atMs": 58094
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1491,
+          "sentences": 20,
+          "audioMs": 70652,
+          "synthMs": 50170,
+          "rtf": 0.7101002094774387,
+          "firstSentenceMs": 2193,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2193,
+              "atMs": 2193
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2284,
+              "atMs": 4478
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 2730,
+              "atMs": 7209
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 2899,
+              "atMs": 10108
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3229,
+              "synthMs": 2193,
+              "atMs": 12301
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 2887,
+              "atMs": 15188
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 2616,
+              "atMs": 17805
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2428,
+              "atMs": 20233
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 2775,
+              "atMs": 23008
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2631,
+              "atMs": 25640
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3843,
+              "synthMs": 2739,
+              "atMs": 28380
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2488,
+              "atMs": 30868
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3441,
+              "synthMs": 2485,
+              "atMs": 33354
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2511,
+              "atMs": 35865
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2424,
+              "atMs": 38289
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2298,
+              "atMs": 40588
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2429,
+              "atMs": 43018
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2383,
+              "atMs": 45401
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 2514,
+              "atMs": 47915
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2263,
+              "atMs": 50178
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1491,
+          "sentences": 20,
+          "audioMs": 70669,
+          "synthMs": 51377,
+          "rtf": 0.7270090138533162,
+          "firstSentenceMs": 2196,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2196,
+              "atMs": 2196
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2220,
+              "atMs": 4416
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 2735,
+              "atMs": 7152
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3971,
+              "synthMs": 2816,
+              "atMs": 9968
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2195,
+              "atMs": 12163
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 2891,
+              "atMs": 15055
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3661,
+              "synthMs": 2621,
+              "atMs": 17676
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 2427,
+              "atMs": 20104
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 2874,
+              "atMs": 22978
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2647,
+              "atMs": 25626
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3850,
+              "synthMs": 2808,
+              "atMs": 28434
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2485,
+              "atMs": 30919
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3444,
+              "synthMs": 2561,
+              "atMs": 33481
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2507,
+              "atMs": 35988
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2501,
+              "atMs": 38489
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2459,
+              "atMs": 40948
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2669,
+              "atMs": 43618
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2591,
+              "atMs": 46209
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3537,
+              "synthMs": 2665,
+              "atMs": 48874
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2509,
+              "atMs": 51384
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 662784
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:39:28.995192Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 4,
+      "provider": "cpu",
+      "wallMs": 1021,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 457696
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 895,
+      "kind": "engine",
+      "at": "2026-10-25T10:39:30.017661Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 4,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 895,
+      "medianRtf": 0.8230325377731339,
+      "runs": [
+        {
+          "engineLoadMs": 895,
+          "sentences": 20,
+          "audioMs": 70665,
+          "synthMs": 57851,
+          "rtf": 0.8186655345644944,
+          "firstSentenceMs": 2213,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2213,
+              "atMs": 2213
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2199,
+              "atMs": 4413
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 2723,
+              "atMs": 7136
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 2809,
+              "atMs": 9945
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3227,
+              "synthMs": 2295,
+              "atMs": 12240
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3213,
+              "atMs": 15454
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3658,
+              "synthMs": 2847,
+              "atMs": 18302
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 2658,
+              "atMs": 20961
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3326,
+              "atMs": 24287
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 3115,
+              "atMs": 27403
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3852,
+              "synthMs": 3163,
+              "atMs": 30566
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2869,
+              "atMs": 33436
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3449,
+              "synthMs": 2868,
+              "atMs": 36304
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 3150,
+              "atMs": 39454
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 2980,
+              "atMs": 42434
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 2898,
+              "atMs": 45332
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3182,
+              "atMs": 48515
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3156,
+              "atMs": 51672
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 3217,
+              "atMs": 54890
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2970,
+              "atMs": 57860
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 895,
+          "sentences": 20,
+          "audioMs": 70650,
+          "synthMs": 58650,
+          "rtf": 0.8301486199575372,
+          "firstSentenceMs": 2772,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2772,
+              "atMs": 2772
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2786,
+              "atMs": 5559
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 3623,
+              "atMs": 9183
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3550,
+              "atMs": 12733
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3229,
+              "synthMs": 2867,
+              "atMs": 15601
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3646,
+              "atMs": 19247
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3300,
+              "atMs": 22548
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2955,
+              "atMs": 25504
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3161,
+              "atMs": 28665
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 2830,
+              "atMs": 31496
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3842,
+              "synthMs": 2954,
+              "atMs": 34451
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2680,
+              "atMs": 37131
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3441,
+              "synthMs": 2672,
+              "atMs": 39804
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2701,
+              "atMs": 42506
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2609,
+              "atMs": 45115
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2473,
+              "atMs": 47588
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2844,
+              "atMs": 50432
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2690,
+              "atMs": 53123
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 2818,
+              "atMs": 55942
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2719,
+              "atMs": 58662
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 895,
+          "sentences": 20,
+          "audioMs": 70669,
+          "synthMs": 57660,
+          "rtf": 0.8159164555887306,
+          "firstSentenceMs": 2384,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2384,
+              "atMs": 2384
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2549,
+              "atMs": 4934
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3157,
+              "atMs": 8091
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3971,
+              "synthMs": 3254,
+              "atMs": 11346
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2418,
+              "atMs": 13765
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3160,
+              "atMs": 16925
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3661,
+              "synthMs": 3023,
+              "atMs": 19948
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 2776,
+              "atMs": 22725
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3213,
+              "atMs": 25938
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3031,
+              "atMs": 28969
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3850,
+              "synthMs": 3159,
+              "atMs": 32129
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2868,
+              "atMs": 34997
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3444,
+              "synthMs": 2867,
+              "atMs": 37865
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2897,
+              "atMs": 40763
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2799,
+              "atMs": 43562
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2655,
+              "atMs": 46218
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2920,
+              "atMs": 49138
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2869,
+              "atMs": 52008
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3537,
+              "synthMs": 2927,
+              "atMs": 54935
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2734,
+              "atMs": 57670
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 663320
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:42:24.214494Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 6,
+      "provider": "cpu",
+      "wallMs": 1198,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 458284
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 1014,
+      "kind": "engine",
+      "at": "2026-10-25T10:42:25.414434Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 6,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1014,
+      "medianRtf": 0.8476530247681502,
+      "runs": [
+        {
+          "engineLoadMs": 1014,
+          "sentences": 20,
+          "audioMs": 70665,
+          "synthMs": 60339,
+          "rtf": 0.8538739121205688,
+          "firstSentenceMs": 2572,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2572,
+              "atMs": 2572
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2619,
+              "atMs": 5191
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3379,
+              "atMs": 8571
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3479,
+              "atMs": 12050
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3227,
+              "synthMs": 2715,
+              "atMs": 14766
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3569,
+              "atMs": 18335
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3658,
+              "synthMs": 3092,
+              "atMs": 21428
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 2913,
+              "atMs": 24341
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3260,
+              "atMs": 27602
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 3138,
+              "atMs": 30740
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3852,
+              "synthMs": 3093,
+              "atMs": 33834
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2854,
+              "atMs": 36689
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3449,
+              "synthMs": 3060,
+              "atMs": 39749
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2909,
+              "atMs": 42658
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 2989,
+              "atMs": 45647
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 2822,
+              "atMs": 48470
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2946,
+              "atMs": 51416
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3064,
+              "atMs": 54481
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 2958,
+              "atMs": 57440
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2908,
+              "atMs": 60348
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1014,
+          "sentences": 20,
+          "audioMs": 70650,
+          "synthMs": 59599,
+          "rtf": 0.843581033262562,
+          "firstSentenceMs": 2708,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2708,
+              "atMs": 2708
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2724,
+              "atMs": 5433
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 3377,
+              "atMs": 8810
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3476,
+              "atMs": 12286
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3229,
+              "synthMs": 2535,
+              "atMs": 14822
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3579,
+              "atMs": 18401
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3218,
+              "atMs": 21619
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 2816,
+              "atMs": 24436
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3555,
+              "atMs": 27991
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3061,
+              "atMs": 31052
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3842,
+              "synthMs": 3388,
+              "atMs": 34441
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2980,
+              "atMs": 37422
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3441,
+              "synthMs": 2807,
+              "atMs": 40230
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2835,
+              "atMs": 43065
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2741,
+              "atMs": 45807
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 2597,
+              "atMs": 48404
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 2862,
+              "atMs": 51267
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 2806,
+              "atMs": 54073
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 2868,
+              "atMs": 56942
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 2666,
+              "atMs": 59609
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1014,
+          "sentences": 20,
+          "audioMs": 70666,
+          "synthMs": 60188,
+          "rtf": 0.8517250162737384,
+          "firstSentenceMs": 2483,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2483,
+              "atMs": 2483
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2681,
+              "atMs": 5164
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3364,
+              "atMs": 8529
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3971,
+              "synthMs": 3396,
+              "atMs": 11925
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2480,
+              "atMs": 14405
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3429,
+              "atMs": 17835
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3661,
+              "synthMs": 3100,
+              "atMs": 20936
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 2769,
+              "atMs": 23705
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3387,
+              "atMs": 27093
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3061,
+              "atMs": 30155
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3847,
+              "synthMs": 3372,
+              "atMs": 33528
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 2890,
+              "atMs": 36418
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3444,
+              "synthMs": 3054,
+              "atMs": 39473
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 2901,
+              "atMs": 42375
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 2984,
+              "atMs": 45360
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 2827,
+              "atMs": 48187
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3114,
+              "atMs": 51302
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3058,
+              "atMs": 54361
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3537,
+              "synthMs": 3123,
+              "atMs": 57484
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 2715,
+              "atMs": 60200
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 664072
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:45:25.577575Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 8,
+      "provider": "cpu",
+      "wallMs": 1281,
+      "providerLines": [],
+      "providerEngaged": true,
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 459188
+      },
+      "status": "ready",
+      "engineId": "kokoro-v1.0-int8",
+      "loadMs": 1129,
+      "kind": "engine",
+      "at": "2026-10-25T10:45:26.860260Z"
+    },
+    {
+      "bundle": "INT8",
+      "threads": 8,
+      "provider": "cpu",
+      "providerEngaged": true,
+      "loadMs": 1129,
+      "medianRtf": 0.9724121188082792,
+      "runs": [
+        {
+          "engineLoadMs": 1129,
+          "sentences": 20,
+          "audioMs": 70665,
+          "synthMs": 66415,
+          "rtf": 0.9398570721007571,
+          "firstSentenceMs": 2566,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2566,
+              "atMs": 2566
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2685,
+              "atMs": 5252
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3346,
+              "atMs": 8599
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 3462,
+              "atMs": 12061
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3227,
+              "synthMs": 2665,
+              "atMs": 14727
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3783,
+              "atMs": 18510
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3658,
+              "synthMs": 3348,
+              "atMs": 21859
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3579,
+              "synthMs": 3194,
+              "atMs": 25054
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3892,
+              "atMs": 28946
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3686,
+              "synthMs": 3525,
+              "atMs": 32471
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3852,
+              "synthMs": 3714,
+              "atMs": 36186
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 3324,
+              "atMs": 39511
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3449,
+              "synthMs": 3345,
+              "atMs": 42856
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 3361,
+              "atMs": 46218
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3339,
+              "synthMs": 3231,
+              "atMs": 49450
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3099,
+              "synthMs": 3145,
+              "atMs": 52595
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3450,
+              "atMs": 56045
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3419,
+              "atMs": 59465
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 3653,
+              "atMs": 63119
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 3307,
+              "atMs": 66426
+            }
+          ],
+          "warmUp": true
+        },
+        {
+          "engineLoadMs": 1129,
+          "sentences": 20,
+          "audioMs": 70650,
+          "synthMs": 69847,
+          "rtf": 0.9886341118188252,
+          "firstSentenceMs": 3144,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 3144,
+              "atMs": 3144
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 3093,
+              "atMs": 6237
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3880,
+              "synthMs": 3955,
+              "atMs": 10193
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3972,
+              "synthMs": 4003,
+              "atMs": 14196
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3229,
+              "synthMs": 3081,
+              "atMs": 17278
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 4130,
+              "atMs": 21409
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3659,
+              "synthMs": 3862,
+              "atMs": 25272
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3580,
+              "synthMs": 3667,
+              "atMs": 28940
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 4002,
+              "atMs": 32942
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3609,
+              "atMs": 36551
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3842,
+              "synthMs": 3721,
+              "atMs": 40273
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 3383,
+              "atMs": 43656
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3441,
+              "synthMs": 3336,
+              "atMs": 46992
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 3406,
+              "atMs": 50399
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 3239,
+              "atMs": 53639
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3098,
+              "synthMs": 3107,
+              "atMs": 56747
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3419,
+              "atMs": 60166
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3298,
+              "atMs": 63465
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3531,
+              "synthMs": 3248,
+              "atMs": 66713
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3207,
+              "synthMs": 3144,
+              "atMs": 69858
+            }
+          ],
+          "warmUp": false
+        },
+        {
+          "engineLoadMs": 1129,
+          "sentences": 20,
+          "audioMs": 70669,
+          "synthMs": 67573,
+          "rtf": 0.9561901257977331,
+          "firstSentenceMs": 2941,
+          "perSentence": [
+            {
+              "index": 0,
+              "chars": 61,
+              "audioMs": 2960,
+              "synthMs": 2941,
+              "atMs": 2941
+            },
+            {
+              "index": 1,
+              "chars": 61,
+              "audioMs": 3036,
+              "synthMs": 2947,
+              "atMs": 5888
+            },
+            {
+              "index": 2,
+              "chars": 74,
+              "audioMs": 3881,
+              "synthMs": 3705,
+              "atMs": 9594
+            },
+            {
+              "index": 3,
+              "chars": 77,
+              "audioMs": 3971,
+              "synthMs": 3832,
+              "atMs": 13426
+            },
+            {
+              "index": 4,
+              "chars": 71,
+              "audioMs": 3231,
+              "synthMs": 2925,
+              "atMs": 16352
+            },
+            {
+              "index": 5,
+              "chars": 68,
+              "audioMs": 4096,
+              "synthMs": 3873,
+              "atMs": 20225
+            },
+            {
+              "index": 6,
+              "chars": 76,
+              "audioMs": 3661,
+              "synthMs": 3539,
+              "atMs": 23765
+            },
+            {
+              "index": 7,
+              "chars": 62,
+              "audioMs": 3583,
+              "synthMs": 3251,
+              "atMs": 27017
+            },
+            {
+              "index": 8,
+              "chars": 71,
+              "audioMs": 4171,
+              "synthMs": 3912,
+              "atMs": 30930
+            },
+            {
+              "index": 9,
+              "chars": 65,
+              "audioMs": 3682,
+              "synthMs": 3528,
+              "atMs": 34458
+            },
+            {
+              "index": 10,
+              "chars": 73,
+              "audioMs": 3850,
+              "synthMs": 3634,
+              "atMs": 38092
+            },
+            {
+              "index": 11,
+              "chars": 67,
+              "audioMs": 3442,
+              "synthMs": 3305,
+              "atMs": 41398
+            },
+            {
+              "index": 12,
+              "chars": 71,
+              "audioMs": 3444,
+              "synthMs": 3301,
+              "atMs": 44700
+            },
+            {
+              "index": 13,
+              "chars": 70,
+              "audioMs": 3503,
+              "synthMs": 3373,
+              "atMs": 48073
+            },
+            {
+              "index": 14,
+              "chars": 68,
+              "audioMs": 3344,
+              "synthMs": 3222,
+              "atMs": 51296
+            },
+            {
+              "index": 15,
+              "chars": 70,
+              "audioMs": 3097,
+              "synthMs": 3052,
+              "atMs": 54348
+            },
+            {
+              "index": 16,
+              "chars": 72,
+              "audioMs": 3510,
+              "synthMs": 3351,
+              "atMs": 57700
+            },
+            {
+              "index": 17,
+              "chars": 69,
+              "audioMs": 3467,
+              "synthMs": 3309,
+              "atMs": 61010
+            },
+            {
+              "index": 18,
+              "chars": 70,
+              "audioMs": 3537,
+              "synthMs": 3386,
+              "atMs": 64396
+            },
+            {
+              "index": 19,
+              "chars": 64,
+              "audioMs": 3203,
+              "synthMs": 3187,
+              "atMs": 67584
+            }
+          ],
+          "warmUp": false
+        }
+      ],
+      "memoryKb": {
+        "VmHWM": 847960,
+        "VmRSS": 664956
+      },
+      "kind": "bench",
+      "at": "2026-10-25T10:48:50.735089Z"
+    }
+  ]
+}
