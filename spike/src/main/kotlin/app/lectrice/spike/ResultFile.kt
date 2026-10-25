@@ -11,7 +11,7 @@ private val FILE_STAMP = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss").withZone
 private const val JSON_INDENT = 2
 
 /**
- * `files/results/<model>-<timestamp>.json`, rewritten after every part so an interrupted session keeps what it has.
+ * `<external files>/results/<model>-<timestamp>.json`, rewritten after every part so an interrupted session keeps what it has.
  * Holds only ids, counts and durations: no book text, no file names, no titles.
  */
 class ResultFile(resultsDir: File, device: JSONObject, app: JSONObject) {

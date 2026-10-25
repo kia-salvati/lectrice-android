@@ -5,7 +5,7 @@ use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
 use std::time::Instant;
 
 use lectrice_app::documents::{GetDocumentArgs, ImportPdfArgs};
-use lectrice_app::services::Services;
+use lectrice_app::services::{Services, purge_removed_at_start};
 use lectrice_app::speech::{SpeakSentenceArgs, playback_order};
 use lectrice_app::{RequestContext, UseCase};
 use lectrice_domain::{AppError, AudioDecoder, DocumentId, DocumentReader, ErrorName, SentenceId, VoiceId};
@@ -45,6 +45,7 @@ impl LectriceCore {
         let started = Instant::now();
         let storage = Storage::open(&config)?;
         let services = assemble_services(&config, &storage, None)?;
+        purge_removed_at_start(&services)?;
         info!(target: TARGET, open_ms = elapsed_ms(started), "core opened");
         let loaded = Loaded { services, engine: None, status: EngineStatus::Missing };
         Ok(Arc::new(Self { config, storage, loaded: RwLock::new(loaded), next_request: AtomicU64::new(0) }))

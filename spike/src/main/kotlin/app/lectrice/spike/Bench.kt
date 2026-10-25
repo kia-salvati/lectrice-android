@@ -17,23 +17,42 @@ private const val UAH_PER_MAH = 1000.0
 
 data class BestThreads(val threads: Int, val rtf: Double)
 
-data class EngineChoice(val bundle: ModelBundle, val threads: Int, val provider: String) {
-    fun toJson(): JSONObject = JSONObject().put("bundle", bundle.name).put("threads", threads).put("provider", provider)
+data class EngineChoice(val bundle: ModelBundle, val threads: Int, val provider: String, val cores: CorePolicy = CorePolicy.All) {
+    fun toJson(): JSONObject = JSONObject().put("bundle", bundle.name).put("threads", threads).put("provider", provider).put("cores", cores.label)
 }
 
 /** The bench, accelerator and soak runs (plan §5.2, buttons 2–4). Every method blocks; call them off the main thread. */
 class Bench(private val spike: SpikeCore, private val results: ResultFile, private val power: PowerProbe, private val texts: List<String>, private val log: (String) -> Unit) {
     private val core = spike.core
+    /** The process's threads before the last engine load: the ones that appear after it are ONNX Runtime's. */
+    private var threadsBeforeLoad: Set<Int> = emptySet()
 
-    /** Button 2. Records the load time and whether the provider was really taken. */
+    /** The bundle of the engine loaded last (null before the first load). */
+    var loadedBundle: ModelBundle? = null
+        private set
+
+    /**
+     * Button 2. Records the load time and whether the provider was really taken. Pins the calling thread (the speech
+     * thread) to [EngineChoice.cores] first, so the engine's worker threads inherit the mask, and records each new
+     * thread's allowed CPUs.
+     */
     fun loadEngine(choice: EngineChoice): JSONObject {
         if (spike.adoptPushedModel(choice.bundle)) log("model ${choice.bundle} moved in from the pushed folder")
+        val modelSha256 = spike.modelSha256(choice.bundle)
+        val pin = CpuAffinity.pinCurrentThread(choice.cores)
+        threadsBeforeLoad = ThreadCensus.threadIds()
         val startedAt = System.currentTimeMillis()
         val config = EngineConfig.Kokoro(spike.modelDir(choice.bundle).path, choice.bundle.variant, choice.threads.toUInt(), choice.provider)
         val status = core.reloadEngine(config)
+        loadedBundle = choice.bundle
+        // After the load, so VmHWM later is this engine's synthesis peak (the old engine is gone by now).
+        val peakReset = ThreadCensus.resetPeakMemory()
         val lines = SherpaLog.providerLines(startedAt)
         val json = choice.toJson().put("wallMs", System.currentTimeMillis() - startedAt).put("providerLines", JSONArray(lines))
             .put("providerEngaged", SherpaLog.engaged(choice.provider, lines)).put("memoryKb", processMemoryKb())
+            .put("modelSha256", modelSha256 ?: JSONObject.NULL).put("affinity", pin).put("peakMemoryReset", peakReset)
+            .put("newThreads", engineThreads())
+        log("cores ${pin.getString("policy")}: asked ${pin.getString("requestedCpus")}, speech thread on ${pin.getString("appliedCpus")}; engine threads ${allowedSummary(json.getJSONArray("newThreads"))}")
         when (status) {
             is EngineStatus.Ready -> json.put("status", "ready").put("engineId", status.engineId).put("loadMs", status.loadMs.toLong())
             is EngineStatus.Missing -> json.put("status", "missing")
@@ -48,24 +67,39 @@ class Bench(private val spike: SpikeCore, private val results: ResultFile, priva
     fun benchCombination(choice: EngineChoice): JSONObject? {
         val engine = loadEngine(choice)
         if (engine.getString("status") != "ready") return null
+        val powerBefore = power.sample()
         val runs = (1..RUNS).map { core.benchSynthesize(texts, SpikeCore.VOICE) }
         val kept = runs.drop(WARM_UP_RUNS)
         val json = choice.toJson()
             .put("providerEngaged", engine.getBoolean("providerEngaged"))
             .put("loadMs", engine.getLong("loadMs"))
+            .put("modelSha256", engine.get("modelSha256"))
             .put("medianRtf", median(kept.map(BenchResult::rtf)))
             .put("runs", JSONArray(runs.mapIndexed { index, run -> run.toJson().put("warmUp", index < WARM_UP_RUNS) }))
             .put("memoryKb", processMemoryKb())
+            .put("peakMemoryReset", engine.getBoolean("peakMemoryReset"))
+            .put("affinity", engine.getJSONObject("affinity"))
+            // Read again after synthesis, in case ONNX Runtime starts some workers on the first run.
+            .put("engineThreads", engineThreads())
+            .put("powerBefore", powerBefore).put("powerAfter", power.sample())
         results.add("bench", json)
-        log("bench ${choice.bundle} ${choice.threads}t ${choice.provider}: RTF ${"%.3f".format(json.getDouble("medianRtf"))}")
+        log("bench ${choice.bundle} ${choice.threads}t ${choice.provider} cores ${choice.cores.label}: RTF ${"%.3f".format(json.getDouble("medianRtf"))}; threads ${allowedSummary(json.getJSONArray("engineThreads"))}")
         return json
     }
 
     /** Button 3: every bundle × thread count on the CPU. Returns the fastest thread count per bundle that loaded. */
-    fun benchAll(threadCounts: List<Int>): Map<ModelBundle, BestThreads> = ModelBundle.entries.mapNotNull { bundle ->
-        val rtfs = threadCounts.mapNotNull { threads -> benchCombination(EngineChoice(bundle, threads, "cpu"))?.let { BestThreads(threads, it.getDouble("medianRtf")) } }
+    fun benchAll(threadCounts: List<Int>, bundles: List<ModelBundle>, cores: CorePolicy): Map<ModelBundle, BestThreads> = bundles.mapNotNull { bundle ->
+        val rtfs = threadCounts.mapNotNull { threads -> benchCombination(EngineChoice(bundle, threads, "cpu", cores))?.let { BestThreads(threads, it.getDouble("medianRtf")) } }
         rtfs.minByOrNull(BestThreads::rtf)?.let { bundle to it }
     }.toMap()
+
+    /** The threads that appeared with the last engine load and are still alive. */
+    private fun engineThreads(): JSONArray = ThreadCensus.describe(ThreadCensus.threadIds() - threadsBeforeLoad)
+
+    /** e.g. "3× 0-3, 1× 0-7" (allowed-CPU lists and how many threads have each). */
+    private fun allowedSummary(threads: JSONArray): String =
+        (0 until threads.length()).map { threads.getJSONObject(it).optString("cpusAllowed") }.groupingBy { it }.eachCount()
+            .entries.joinToString(", ") { "${it.value}× ${it.key}" }.ifEmpty { "none new" }
 
     /**
      * Button 3b: xnnpack and nnapi at the best thread count, compared with the CPU (clip durations within ±3 %).
@@ -104,7 +138,8 @@ class Bench(private val spike: SpikeCore, private val results: ResultFile, priva
             log("soak refused: the phone is charging, unplug it first")
             return false
         }
-        if (loadEngine(choice).getString("status") != "ready") return false
+        val engine = loadEngine(choice)
+        if (engine.getString("status") != "ready") return false
         val durationMs = minutes * MS_PER_MINUTE.toLong()
         val startedAt = System.currentTimeMillis()
         val startCharge = power.chargeCounterUah()
@@ -135,6 +170,7 @@ class Bench(private val spike: SpikeCore, private val results: ResultFile, priva
         val json = choice.toJson().put("minutes", minutes).put("sentences", index).put("audioMs", totalAudio)
             .put("usedMah", usedMah).put("mahPerAudioMinute", if (audioMinutes > 0) usedMah / audioMinutes else JSONObject.NULL)
             .put("samples", samples)
+            .put("modelSha256", engine.get("modelSha256")).put("affinity", engine.getJSONObject("affinity")).put("engineThreads", engineThreads())
         results.add("soak", json)
         log("soak done: $index sentences, ${"%.1f".format(audioMinutes)} audio min, ${"%.1f".format(usedMah)} mAh")
         return true

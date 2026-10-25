@@ -10,7 +10,10 @@ SERIAL="$1"
 case "$2" in
   fp32) BUNDLE="kokoro-multi-lang-v1_0" ;;
   int8) BUNDLE="kokoro-int8-multi-lang-v1_0" ;;
-  *) echo "usage: $0 <serial> fp32|int8 [sherpa1|sherpa2]" >&2; exit 2 ;;
+  # Our own files (research 2026-10-25-kokoro-variants), each in its own folder; the model is named model.int8.onnx.
+  small) BUNDLE="kokoro-lectrice-w8-multi-lang-v1_0" ;;
+  fast) BUNDLE="kokoro-lectrice-q8-multi-lang-v1_0" ;;
+  *) echo "usage: $0 <serial> fp32|int8|small|fast [sherpa1|sherpa2]" >&2; exit 2 ;;
 esac
 SET="${3:-sherpa1}"
 PACKAGE="app.lectrice.spike.$SET"
@@ -30,6 +33,11 @@ STAGE="/data/local/tmp/lectrice-$BUNDLE"
 for file in "${FILES[@]}"; do
   "${ADB[@]}" push "$SOURCE/$file" "$STAGE/"
 done
+MODEL="${FILES[4]}"
+LOCAL_SHA="$(sha256sum "$SOURCE/$MODEL" | cut -d' ' -f1)"
+PHONE_SHA="$("${ADB[@]}" shell sha256sum "$STAGE/$MODEL" | cut -d' ' -f1)"
+[ "$LOCAL_SHA" = "$PHONE_SHA" ] || { echo "$MODEL damaged in transfer ($PHONE_SHA)" >&2; exit 1; }
+echo "$MODEL sha256 $LOCAL_SHA checked on the phone"
 
 TARGET="/sdcard/Android/data/$PACKAGE/files/models/$BUNDLE"
 if "${ADB[@]}" shell "mkdir -p $TARGET && cp -r $STAGE/. $TARGET/"; then

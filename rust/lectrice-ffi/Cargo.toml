@@ -17,9 +17,9 @@ bench = []
 
 [dependencies]
 # Local builds use the .cargo/config.toml path override instead.
-lectrice-domain = { git = "https://github.com/kia-salvati/lectrice", tag = "v1.1.0" }
-lectrice-app = { git = "https://github.com/kia-salvati/lectrice", tag = "v1.1.0" }
-lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v1.1.0", default-features = false, features = ["pdfium", "kokoro"] }
+lectrice-domain = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0" }
+lectrice-app = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0" }
+lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0", default-features = false, features = ["pdfium", "kokoro"] }
 uniffi.workspace = true
 thiserror = "=2.0.21"
 tracing = "=0.1.44"
