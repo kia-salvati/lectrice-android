@@ -17,14 +17,17 @@ bench = []
 
 [dependencies]
 # Local builds use the .cargo/config.toml path override instead.
-lectrice-domain = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0" }
-lectrice-app = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0" }
-lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.2.0", default-features = false, features = ["pdfium", "kokoro"] }
+lectrice-domain = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0" }
+lectrice-app = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0" }
+lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0", default-features = false, features = ["pdfium", "kokoro", "time-stretch"] }
 uniffi.workspace = true
 thiserror = "=2.0.21"
 tracing = "=0.1.44"
 tracing-subscriber = { version = "=0.3.23", default-features = false, features = ["registry", "std"] }
 serde_json = "=1.0.154"
+# Unpacking a downloaded or imported voice model (the desktop app's pins).
+tar = { version = "=0.4.46", default-features = false }
+bzip2 = "=0.6.1"
 
 [dev-dependencies]
 tempfile = "=3.27.0"

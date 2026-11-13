@@ -41,3 +41,11 @@ impl From<AppError> for CoreError {
 }
 
 pub type CoreResult<T> = Result<T, CoreError>;
+
+/// A Kotlin callback (the encoder sink) that threw something other than `CoreException`.
+impl From<uniffi::UnexpectedUniFFICallbackError> for CoreError {
+    fn from(error: uniffi::UnexpectedUniFFICallbackError) -> Self {
+        warn!(target: "lectrice_ffi", reason = %error.reason, "callback failed");
+        CoreErrorInfo::from(ErrorName::Internal).into()
+    }
+}

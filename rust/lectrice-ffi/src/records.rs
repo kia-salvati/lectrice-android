@@ -1,8 +1,9 @@
 //! uniffi records (camelCase in Kotlin) and their mappers from the core's types.
 
 use lectrice_app::documents::ImportedPdf;
-use lectrice_app::speech::VoiceList as CoreVoiceList;
-use lectrice_domain::{self as domain, Document, DocumentSummary, SentenceId};
+use lectrice_app::library::{PurgeReport, StorageUsage};
+use lectrice_app::speech::{SpeechStats, VoiceList as CoreVoiceList};
+use lectrice_domain::{self as domain, AudioEviction, Document, DocumentSummary, Page, SentenceId};
 use lectrice_infra::KokoroVariant as CoreKokoroVariant;
 
 use crate::errors::CoreErrorInfo;
@@ -39,15 +40,24 @@ impl From<KokoroVariant> for CoreKokoroVariant {
 
 #[derive(Debug, Clone, PartialEq, Eq, uniffi::Enum)]
 pub enum EngineConfig {
-    /// `provider`: "cpu" (default), "xnnpack" or "nnapi".
-    Kokoro { model_dir: String, variant: KokoroVariant, num_threads: u32, provider: String },
+    /// `provider`: "cpu" (default), "xnnpack" or "nnapi". `engine_id`: the model bundle's own id when several bundles
+    /// share a model file slot (our Fast and Small use `model.int8.onnx`), so their clips and exports never mix; `None`
+    /// keeps the core's id for the slot.
+    Kokoro { model_dir: String, variant: KokoroVariant, num_threads: u32, provider: String, engine_id: Option<String> },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, uniffi::Enum)]
 pub enum EngineStatus {
-    Ready { engine_id: String, load_ms: u64 },
+    Ready {
+        engine_id: String,
+        load_ms: u64,
+    },
     Missing,
-    Failed { error: CoreErrorInfo },
+    /// Unloaded to save memory; the model is still installed.
+    Unloaded,
+    Failed {
+        error: CoreErrorInfo,
+    },
 }
 
 #[derive(Debug, Clone, uniffi::Record)]
@@ -260,6 +270,8 @@ pub struct SpeakArgs {
     /// The listener's speed; audio is always made at 1x, the speed sizes the read-ahead.
     pub rate: f32,
     pub read_skipped: bool,
+    /// False while the read-ahead governor is Off, and for the player's own preloads (spec 08 §3.3).
+    pub plan_ahead: bool,
 }
 
 #[derive(Debug, Clone, uniffi::Record)]
@@ -269,4 +281,119 @@ pub struct SpokenAudio {
     pub duration_ms: u32,
     /// Estimated 1x audio already cached right after this sentence.
     pub ready_ahead_ms: u32,
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct SummaryPage {
+    pub items: Vec<DocumentSummaryRecord>,
+    pub total: u32,
+    pub limit: u32,
+    pub offset: u32,
+}
+
+impl From<Page<DocumentSummary>> for SummaryPage {
+    fn from(page: Page<DocumentSummary>) -> Self {
+        Self {
+            items: page.items.into_iter().map(DocumentSummaryRecord::from).collect(),
+            total: to_u32(page.total),
+            limit: to_u32(page.limit),
+            offset: to_u32(page.offset),
+        }
+    }
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct PurgeReportRecord {
+    pub documents: u32,
+    pub failed: u32,
+    pub exports_cancelled: u32,
+    pub exports_deleted: u32,
+    pub clips: u32,
+}
+
+impl From<PurgeReport> for PurgeReportRecord {
+    fn from(report: PurgeReport) -> Self {
+        Self {
+            documents: to_u32(report.documents),
+            failed: to_u32(report.failed),
+            exports_cancelled: to_u32(report.exports_cancelled),
+            exports_deleted: to_u32(report.exports_deleted),
+            clips: to_u32(report.clips),
+        }
+    }
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct DocumentUsageRecord {
+    pub document_id: String,
+    pub library_bytes: u64,
+    pub cache_bytes: u64,
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct StorageUsageRecord {
+    pub library_documents: u32,
+    pub library_bytes: u64,
+    pub cache_bytes: u64,
+    pub cache_cap_bytes: u64,
+    pub export_files: u32,
+    pub export_bytes: u64,
+    pub export_parts_bytes: u64,
+    /// Largest total first.
+    pub documents: Vec<DocumentUsageRecord>,
+}
+
+impl From<StorageUsage> for StorageUsageRecord {
+    fn from(usage: StorageUsage) -> Self {
+        Self {
+            library_documents: usage.library_documents,
+            library_bytes: usage.library_bytes,
+            cache_bytes: usage.cache_bytes,
+            cache_cap_bytes: usage.cache_cap_bytes,
+            export_files: usage.export_files,
+            export_bytes: usage.export_bytes,
+            export_parts_bytes: usage.export_parts_bytes,
+            documents: usage
+                .documents
+                .into_iter()
+                .map(|document| DocumentUsageRecord {
+                    document_id: document.document_id.to_string(),
+                    library_bytes: document.library_bytes,
+                    cache_bytes: document.cache_bytes,
+                })
+                .collect(),
+        }
+    }
+}
+
+/// What a clear freed.
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct EvictionRecord {
+    pub clips: u32,
+    pub freed_bytes: u64,
+}
+
+impl From<AudioEviction> for EvictionRecord {
+    fn from(eviction: AudioEviction) -> Self {
+        Self { clips: to_u32(eviction.window_clips.saturating_add(eviction.cap_clips)), freed_bytes: eviction.freed_bytes }
+    }
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct SpeechStatsRecord {
+    pub engine_id: String,
+    /// Median real-time factor of the last 50 sentences; `None` below 10 measured sentences.
+    pub rtf_median: Option<f32>,
+    pub samples: u32,
+    pub engine_load_ms: Option<u32>,
+}
+
+impl From<SpeechStats> for SpeechStatsRecord {
+    fn from(stats: SpeechStats) -> Self {
+        Self { engine_id: stats.engine_id, rtf_median: stats.rtf_median, samples: stats.samples, engine_load_ms: stats.engine_load_ms }
+    }
+}
+
+fn to_u32(value: usize) -> u32 {
+    u32::try_from(value).unwrap_or(u32::MAX)
 }

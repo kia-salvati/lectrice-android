@@ -12,12 +12,12 @@ use lectrice_domain::cleaning::RuleBasedCleaner;
 use lectrice_domain::{AppResult, SpeechEngine, VoiceId};
 use lectrice_infra::{
     CachedLibrary, FsAudioCache, FsDocumentRepository, FsExportRecordStore, FsVoiceSampleCache, KokoroSettings, KokoroSpeechEngine, PdfiumTextSource,
-    SentencexSplitter, Sha256ContentHasher, SystemClock, WavDecoder, WavEncoder,
+    SentencexSplitter, Sha256ContentHasher, SonicTimeStretch, SystemClock, WavDecoder, WavEncoder,
 };
 use tracing::{info, warn};
 
 use crate::errors::CoreErrorInfo;
-use crate::no_exporter::NoExporter;
+use crate::exporter_slot::ExporterSlot;
 use crate::records::{CoreConfig, EngineConfig, EngineStatus};
 
 const TARGET: &str = "lectrice_ffi";
@@ -34,6 +34,7 @@ pub struct Storage {
     pdf_source: Arc<PdfiumTextSource>,
     voice_samples: Arc<FsVoiceSampleCache>,
     export_records: Arc<FsExportRecordStore>,
+    pub exporter: Arc<ExporterSlot>,
 }
 
 impl Storage {
@@ -49,6 +50,7 @@ impl Storage {
             pdf_source: Arc::new(PdfiumTextSource::new(Path::new(&config.pdfium_library))?),
             voice_samples: Arc::new(FsVoiceSampleCache::new(&cache_dir)),
             export_records: Arc::new(FsExportRecordStore::new(&data_dir)),
+            exporter: Arc::new(ExporterSlot::default()),
         })
     }
 }
@@ -60,7 +62,7 @@ pub struct LoadedEngine {
 
 /// `Missing` when the model folder isn't there (not downloaded yet); `Failed` when it is there but doesn't load.
 pub fn load_engine(config: &EngineConfig) -> (EngineStatus, Option<LoadedEngine>) {
-    let EngineConfig::Kokoro { model_dir, variant, num_threads, provider } = config;
+    let EngineConfig::Kokoro { model_dir, variant, num_threads, provider, engine_id } = config;
     if !Path::new(model_dir).is_dir() {
         info!(target: TARGET, variant = ?variant, "model folder missing, no engine");
         return (EngineStatus::Missing, None);
@@ -70,9 +72,13 @@ pub fn load_engine(config: &EngineConfig) -> (EngineStatus, Option<LoadedEngine>
     match KokoroSpeechEngine::load(&settings) {
         Ok(engine) => {
             let load_ms = elapsed_ms(started);
+            let engine: Arc<dyn SpeechEngine> = match engine_id {
+                Some(id) => Arc::new(BundleSpeechEngine::new(Arc::new(engine), id.clone())),
+                None => Arc::new(engine),
+            };
             info!(target: TARGET, engine_id = engine.id(), num_threads, provider = provider.as_str(), load_ms, "speech engine loaded");
             let status = EngineStatus::Ready { engine_id: engine.id().to_string(), load_ms };
-            (status, Some(LoadedEngine { engine: Arc::new(engine), load_ms }))
+            (status, Some(LoadedEngine { engine, load_ms }))
         }
         Err(error) => {
             warn!(target: TARGET, variant = ?variant, num_threads, provider = provider.as_str(), error = %error, "speech engine failed to load");
@@ -97,9 +103,9 @@ pub fn assemble_services(config: &CoreConfig, storage: &Storage, engine: Option<
         audio_encoder: Arc::new(WavEncoder),
         audio_decoder: Arc::new(WavDecoder),
         voice_samples: storage.voice_samples.clone(),
-        exporter: Arc::new(NoExporter),
+        exporter: storage.exporter.clone(),
         export_records: storage.export_records.clone(),
-        time_stretch: None,
+        time_stretch: Some(Arc::new(SonicTimeStretch)),
     };
     let settings = Settings {
         import_max_bytes: usize::try_from(config.import_max_mb.saturating_mul(BYTES_PER_MB)).unwrap_or(usize::MAX),
@@ -112,4 +118,36 @@ pub fn assemble_services(config: &CoreConfig, storage: &Storage, engine: Option<
 
 pub fn elapsed_ms(started: Instant) -> u64 {
     u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX)
+}
+
+/// The core's Kokoro adapter names an engine after its model file slot, and our Fast and Small bundles share the
+/// official int8 slot. Each bundle's engine reports the bundle's own id (as the desktop app does), so clips and exports
+/// never mix. Another engine kind plugs in next to it in [`load_engine`].
+pub struct BundleSpeechEngine {
+    inner: Arc<dyn SpeechEngine>,
+    engine_id: String,
+}
+
+impl BundleSpeechEngine {
+    pub fn new(inner: Arc<dyn SpeechEngine>, engine_id: String) -> Self {
+        Self { inner, engine_id }
+    }
+}
+
+impl SpeechEngine for BundleSpeechEngine {
+    fn id(&self) -> &str {
+        &self.engine_id
+    }
+
+    fn voices(&self) -> Vec<lectrice_domain::Voice> {
+        self.inner.voices()
+    }
+
+    fn sample_rate(&self) -> u32 {
+        self.inner.sample_rate()
+    }
+
+    fn synthesize(&self, request: lectrice_domain::SpeechRequest) -> AppResult<lectrice_domain::Audio> {
+        self.inner.synthesize(request)
+    }
 }
