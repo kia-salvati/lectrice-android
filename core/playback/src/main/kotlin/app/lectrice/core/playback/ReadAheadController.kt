@@ -7,12 +7,18 @@ import app.lectrice.core.model.SettingsStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /**
  * Applies [ReadAheadGovernor]'s mode to the core (file 08 §3.3): Full = the setting's minutes, Reduced = 2, Off =
  * `stop_read_ahead` once and `plan_ahead = false` until the mode leaves Off. Every input change re-decides at once; a
  * pause re-decides again after 60 s, a cool-down after 2 minutes.
+ *
+ * Computer helper (file 24 §3.10): the mode is published in [modes]; the helper runs in Full and Reduced and stops in
+ * Off. While the computer is lost, Full uses the helper's "lost" length ([onHelperLostMinutes]) instead of the setting.
  */
 class ReadAheadController(
     private val core: RustCore,
@@ -20,6 +26,9 @@ class ReadAheadController(
     private val params: SpeechParams,
     private val scope: CoroutineScope,
 ) {
+    private val mutableModes = MutableStateFlow(AheadMode.Off)
+    val modes: StateFlow<AheadMode> = mutableModes.asStateFlow()
+    private var helperLostMinutes: UInt? = null
     private var documentId: String? = null
     private var playing = false
     private var pausedSinceMs: Long? = null
@@ -83,6 +92,14 @@ class ReadAheadController(
         update()
     }
 
+    /** The computer helper went away (`minutes`: the local read-ahead's length until it is back) or is back (`null`). */
+    @Synchronized
+    fun onHelperLostMinutes(minutes: UInt?) {
+        if (minutes == helperLostMinutes) return
+        helperLostMinutes = minutes
+        update()
+    }
+
     private fun update() {
         val now = SystemClock.elapsedRealtime()
         val decision = ReadAheadGovernor.decide(
@@ -101,11 +118,12 @@ class ReadAheadController(
         if (decision.mode != mode) {
             Log.i(SCOPE, "read_ahead_mode from=$mode to=${decision.mode} reason=${decision.reason}")
             mode = decision.mode
+            mutableModes.value = decision.mode
             if (decision.mode == AheadMode.Off) documentId?.let(::stopFor)
         }
         params.planAhead = decision.mode != AheadMode.Off
         val minutes = when (decision.mode) {
-            AheadMode.Full -> settings.settings.value.readAhead.minutes.toUInt()
+            AheadMode.Full -> helperLostMinutes ?: settings.settings.value.readAhead.minutes.toUInt()
             AheadMode.Reduced -> ReadAheadGovernor.REDUCED_MINUTES
             AheadMode.Off -> null
         }

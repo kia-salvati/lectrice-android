@@ -43,5 +43,5 @@ dependencyResolutionManagement {
 rootProject.name = "lectrice-android"
 include(":spike")
 include(":app")
-include(":core:model", ":core:data", ":core:playback", ":core:work", ":core:designsystem")
+include(":core:model", ":core:data", ":core:playback", ":core:work", ":core:designsystem", ":core:link")
 include(":feature:library", ":feature:reader", ":feature:settings")

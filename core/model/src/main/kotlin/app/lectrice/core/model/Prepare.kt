@@ -17,7 +17,8 @@ data class PrepareRequest(
 sealed interface PrepareState {
     data object WaitingForCharger : PrepareState
 
-    data class Running(val percent: Int) : PrepareState
+    /** [onComputer]: the paired computer makes the range (file 24 §3.13; no charger needed). */
+    data class Running(val percent: Int, val onComputer: Boolean = false) : PrepareState
 
     data class Ready(val upToLabel: String) : PrepareState
 }

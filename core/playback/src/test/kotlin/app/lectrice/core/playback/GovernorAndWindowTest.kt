@@ -26,6 +26,17 @@ class GovernorAndWindowTest {
         assertEquals(AheadMode.Off, mode(base.copy(lowMemoryWhileStopped = true)))
     }
 
+    /** File 24 §3.10: battery saver and heat reduce local synthesis but the computer keeps filling; Off stops it. */
+    @Test
+    fun helperRunsInFullAndReducedOnly() {
+        assertTrue(ReadAheadGovernor.helperRuns(mode(base)))
+        assertTrue(ReadAheadGovernor.helperRuns(mode(base.copy(batterySaver = true))))
+        assertTrue(ReadAheadGovernor.helperRuns(mode(base.copy(heat = Heat.Severe))))
+        assertEquals(false, ReadAheadGovernor.helperRuns(mode(base.copy(playing = false, pausedSinceMs = base.nowMs - 60_000))))
+        assertEquals(false, ReadAheadGovernor.helperRuns(mode(base.copy(heat = Heat.Critical))))
+        assertEquals(false, ReadAheadGovernor.helperRuns(mode(base.copy(sleepTimerFired = true))))
+    }
+
     @Test
     fun heatEpisodesLastTwoCoolMinutes() {
         val now = 10_000_000L

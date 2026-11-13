@@ -31,9 +31,15 @@ import app.lectrice.core.work.AacEncoderSink
 import app.lectrice.core.work.AndroidVoiceModels
 import app.lectrice.core.work.PrepareCenter
 import app.lectrice.core.work.WorkCenter
+import app.lectrice.core.link.ComputerHelperHub
+import app.lectrice.core.model.AudioSource
+import app.lectrice.core.playback.ReadAheadGovernor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /** Builds everything once per process, by hand (no DI framework, spec §4.1). Only this class knows concrete types. */
@@ -66,6 +72,7 @@ class AppContainer(context: Context, debug: Boolean) {
     val voiceModels: VoiceModelRepository = AndroidVoiceModels(appContext, models, installer, work, engine, settings, playback, { media3.modelChanged() }, scope)
     val imports = ImportQueue(library, scope)
     val removal = RemovalController(library, playback, settings, scope) { documentId -> scope.launch { audiobooks.unlink(documentId) } }
+    val computerHelper = ComputerHelperHub(appContext, core, engine, media3.state, { settings.settings.value.readAhead.minutes }, scope)
 
     /** Battery and heat feed the read-ahead governor (file 08 §3.3). Main thread. */
     fun start() {
@@ -78,6 +85,32 @@ class AppContainer(context: Context, debug: Boolean) {
             }
         }, android.content.IntentFilter(android.content.Intent.ACTION_POWER_CONNECTED))
         scope.launch(Dispatchers.Main) { conditions.conditions.collect(media3.readAhead::onConditions) }
+        startComputerHelper()
+    }
+
+    /** File 24: the governor runs the computer helper; a lost computer gives the local read-ahead its length. */
+    private fun startComputerHelper() {
+        computerHelper.onLostMinutes = media3.readAhead::onHelperLostMinutes
+        computerHelper.keepAlive = prepare::runsOnHelper
+        prepare.helperConnected = { computerHelper.state.value.link.makesAudio }
+        computerHelper.start()
+        scope.launch { media3.readAhead.modes.collect { computerHelper.onActive(ReadAheadGovernor.helperRuns(it)) } }
+        scope.launch { media3.state.map { it.isPlaying }.distinctUntilChanged().filter { it }.collect { computerHelper.onPlayPressed() } }
+        // File 24 §3.12: a book playing from its audiobook file gets nothing from the computer.
+        scope.launch {
+            media3.state.map { it.documentId to it.source }.distinctUntilChanged().collect { (documentId, source) ->
+                if (documentId != null && source == AudioSource.Audiobook) runCatching { core.call("helper_stop_document") { it.helperStopDocument(documentId) } }
+            }
+        }
+        scope.launch { prepare.states.map { prepare.runsOnHelper() }.distinctUntilChanged().collect { computerHelper.onKeepAliveChanged() } }
+        // A Prepare range on the computer starts as soon as the computer is there (no charger needed).
+        scope.launch { computerHelper.state.map { it.link.makesAudio }.distinctUntilChanged().filter { it }.collect { if (prepare.hasWork()) work.startService() } }
+    }
+
+    /** The app's page in Android's settings (permissions), e.g. after "Nearby devices" was denied. */
+    fun openAppSettings() {
+        val intent = android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.fromParts("package", appContext.packageName, null))
+        appContext.startActivity(intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 
     /** File 10 §3.7: exports pause at thermal CRITICAL, and in battery saver or at ≤ 15 % while not charging. */

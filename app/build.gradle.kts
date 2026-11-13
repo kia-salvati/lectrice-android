@@ -89,6 +89,7 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:playback"))
     implementation(project(":core:work"))
+    implementation(project(":core:link"))
     implementation(project(":core:designsystem"))
     implementation(project(":feature:library"))
     implementation(project(":feature:reader"))

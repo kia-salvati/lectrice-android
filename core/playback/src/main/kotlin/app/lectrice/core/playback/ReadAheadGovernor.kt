@@ -48,6 +48,12 @@ object ReadAheadGovernor {
     }
 
     /**
+     * File 24 §3.10: the computer helper keeps filling its 30 minutes in Full and in Reduced (battery saver, heat: the
+     * radio costs a fraction of synthesis, and sparing the phone is the point), and stops in Off.
+     */
+    fun helperRuns(mode: AheadMode): Boolean = mode != AheadMode.Off
+
+    /**
      * The next heat episode level from the system's thermal status (`PowerManager.THERMAL_STATUS_*`: 0 none … 3 severe,
      * 4 critical …) and how long it has been cool.
      */
