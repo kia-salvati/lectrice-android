@@ -2,7 +2,7 @@
 
 use std::path::Path;
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
+use std::sync::{Arc, Mutex, RwLock, RwLockReadGuard, RwLockWriteGuard};
 use std::time::Instant;
 
 use lectrice_app::documents::{GetDocumentArgs, ImportPdfArgs, SaveReadingPositionArgs};
@@ -16,14 +16,15 @@ use lectrice_domain::{
     SentenceId, VoiceId, match_audiobook,
 };
 use lectrice_infra::export::mp4_map;
-use lectrice_infra::{KokoroSpeechEngine, WavDecoder};
+use lectrice_infra::{DeferredSpeechEngine, KokoroSpeechEngine, WavDecoder};
 use tracing::{info, warn};
 
 use crate::android_exporter::{AndroidExporter, AudioEncoderSink};
 use crate::audiobook_records::{AudiobookFileRecord, AudiobookTimelineRecord};
-use crate::composition::{LoadedEngine, Storage, assemble_services, elapsed_ms, load_engine};
+use crate::composition::{LoadedEngine, Storage, assemble_services, elapsed_ms, load_engine, load_engine_deferred};
 use crate::errors::{CoreErrorInfo, CoreResult};
 use crate::export_records::{AudioExportRecord, ExportEstimateRecord, ExportRequest, PauseReasonRecord, pause_reason};
+use crate::helper::{HelperConfig, HelperLink, HelperListener, HelperStateRecord, NetworkBinder, PairOutcome, lock};
 use crate::log_bridge::{self, LogSink};
 use crate::records::{
     CoreConfig, DocumentRecord, DocumentSummaryRecord, EngineConfig, EngineStatus, EvictionRecord, ImportResult, PurgeReportRecord, SpeakArgs,
@@ -38,6 +39,24 @@ pub(crate) struct Loaded {
     pub(crate) services: Services,
     pub(crate) engine: Option<LoadedEngine>,
     status: EngineStatus,
+    /// With the computer helper on: the engine loads on first use, and these say which config and link it was built
+    /// for (the same pair is not built again, so the session to the computer stays up).
+    deferred: Option<Arc<DeferredSpeechEngine>>,
+    built_for: Option<(EngineConfig, Arc<HelperLink>)>,
+}
+
+impl Loaded {
+    fn without_engine(services: Services) -> Self {
+        Self { services, engine: None, status: EngineStatus::Missing, deferred: None, built_for: None }
+    }
+}
+
+/// The computer helper's parts Kotlin hands over (file 24 C49).
+#[derive(Default)]
+struct HelperSlot {
+    binder: Option<Arc<dyn NetworkBinder>>,
+    listener: Option<Arc<dyn HelperListener>>,
+    link: Option<Arc<HelperLink>>,
 }
 
 #[derive(uniffi::Object)]
@@ -45,6 +64,7 @@ pub struct LectriceCore {
     config: CoreConfig,
     storage: Storage,
     loaded: RwLock<Loaded>,
+    helper: Mutex<HelperSlot>,
     next_request: AtomicU64,
 }
 
@@ -56,30 +76,50 @@ impl LectriceCore {
         log_bridge::install(log);
         let started = Instant::now();
         let storage = Storage::open(&config)?;
-        let services = assemble_services(&config, &storage, None)?;
+        let services = assemble_services(&config, &storage, None, None)?;
         purge_removed_at_start(&services)?;
         info!(target: TARGET, open_ms = elapsed_ms(started), "core opened");
-        let loaded = Loaded { services, engine: None, status: EngineStatus::Missing };
-        Ok(Arc::new(Self { config, storage, loaded: RwLock::new(loaded), next_request: AtomicU64::new(0) }))
+        let loaded = Loaded::without_engine(services);
+        Ok(Arc::new(Self { config, storage, loaded: RwLock::new(loaded), helper: Mutex::default(), next_request: AtomicU64::new(0) }))
     }
 
     pub fn engine_status(&self) -> EngineStatus {
         self.read().status.clone()
     }
 
-    /// Drops the old engine before loading the new one, so two models are never in memory at once.
+    /// Drops the old engine before loading the new one, so two models are never in memory at once. With the computer
+    /// helper configured, the engine is deferred (loads on the first sentence this phone makes itself, or
+    /// `preload_engine`) and the services fill through the computer.
     pub fn reload_engine(&self, engine: EngineConfig) -> EngineStatus {
+        let link = lock(&self.helper).link.clone();
         let mut loaded = self.write();
-        let without_engine = match assemble_services(&self.config, &self.storage, None) {
+        if let (Some(link), Some((built_config, built_link))) = (&link, &loaded.built_for)
+            && *built_config == engine
+            && Arc::ptr_eq(link, built_link)
+        {
+            return loaded.status.clone();
+        }
+        let without_engine = match assemble_services(&self.config, &self.storage, None, None) {
             Ok(services) => services,
             Err(error) => return failed(error),
         };
-        *loaded = Loaded { services: without_engine, engine: None, status: EngineStatus::Missing };
+        *loaded = Loaded::without_engine(without_engine);
 
-        let (status, new_engine) = load_engine(&engine);
-        loaded.status = match new_engine.map(|new_engine| (assemble_services(&self.config, &self.storage, Some(&new_engine)), new_engine)) {
+        let (status, new_engine, deferred) = match &link {
+            Some(_) => match load_engine_deferred(&engine) {
+                (status, Some((new_engine, deferred))) => (status, Some(new_engine), Some(deferred)),
+                (status, None) => (status, None, None),
+            },
+            None => {
+                let (status, new_engine) = load_engine(&engine);
+                (status, new_engine, None)
+            }
+        };
+        let helper = link.as_ref().map(|link| link.port.clone());
+        loaded.status = match new_engine.map(|new_engine| (assemble_services(&self.config, &self.storage, Some(&new_engine), helper), new_engine)) {
             Some((Ok(services), new_engine)) => {
-                *loaded = Loaded { services, engine: Some(new_engine), status: status.clone() };
+                let built_for = link.map(|link| (engine, link));
+                *loaded = Loaded { services, engine: Some(new_engine), status: status.clone(), deferred, built_for };
                 status
             }
             Some((Err(error), _)) => failed(error),
@@ -149,14 +189,19 @@ impl LectriceCore {
     }
 
     /// Drops the engine (idle for 5 minutes, or the system asked for memory); `reload_engine` brings it back.
+    /// With the helper on, only the model goes: the services and the link to the computer stay.
     pub fn unload_engine(&self) {
         let mut loaded = self.write();
         if loaded.engine.is_none() {
             return;
         }
-        match assemble_services(&self.config, &self.storage, None) {
+        if let Some(deferred) = &loaded.deferred {
+            deferred.unload();
+            return;
+        }
+        match assemble_services(&self.config, &self.storage, None, None) {
             Ok(services) => {
-                *loaded = Loaded { services, engine: None, status: EngineStatus::Unloaded };
+                *loaded = Loaded { status: EngineStatus::Unloaded, ..Loaded::without_engine(services) };
                 info!(target: TARGET, "speech engine unloaded");
             }
             Err(error) => warn!(target: TARGET, error = %error, "engine unload failed, kept loaded"),
@@ -342,6 +387,148 @@ impl LectriceCore {
     pub fn prepare_status(&self, document_id: String) -> CoreResult<PrepareStatusRecord> {
         Ok(self.services().speech()?.prepare.status(&DocumentId::parse(&document_id)?).into())
     }
+}
+
+/// The computer helper (file 24 C49). Kotlin owns discovery, the Wi-Fi network, the keys' storage and when the helper
+/// runs; the core owns the link, the fill and the rules.
+#[uniffi::export]
+impl LectriceCore {
+    /// The Wi-Fi socket binder and the state listener, once at start.
+    pub fn helper_set_platform(&self, binder: Arc<dyn NetworkBinder>, listener: Arc<dyn HelperListener>) {
+        let mut slot = lock(&self.helper);
+        slot.binder = Some(binder);
+        slot.listener = Some(listener);
+    }
+
+    /// Pairs with the computer at `address` ("ip:port") with the code its screen shows. Blocks up to 5 s.
+    pub fn helper_pair(&self, address: String, code: String, private_key: Vec<u8>, device_name: String, app_version: String) -> PairOutcome {
+        let Some(binder) = lock(&self.helper).binder.clone() else {
+            warn!(target: TARGET, "pairing before the platform was set");
+            return PairOutcome::Unreachable;
+        };
+        crate::helper::pair(binder, &address, &code, private_key, device_name, app_version)
+    }
+
+    /// Uses this computer from the next `reload_engine` on (`None`: the helper is off or nothing is paired; the
+    /// session ends at once). `false` when the config is unusable (a key isn't 32 bytes) or the platform isn't set.
+    pub fn helper_configure(&self, config: Option<HelperConfig>) -> bool {
+        let mut slot = lock(&self.helper);
+        if let Some(old) = slot.link.take() {
+            old.port.close();
+        }
+        let Some(config) = config else {
+            info!(target: TARGET, "helper off");
+            return true;
+        };
+        let (Some(binder), Some(listener)) = (slot.binder.clone(), slot.listener.clone()) else { return false };
+        match HelperLink::new(config, binder, listener) {
+            Some(link) => {
+                info!(target: TARGET, peer = &link.peer_id[..8.min(link.peer_id.len())], "helper configured");
+                slot.link = Some(Arc::new(link));
+                true
+            }
+            None => false,
+        }
+    }
+
+    /// Starts helping (the governor is Full or Reduced). `false` without a helper or an engine.
+    pub fn helper_start(&self) -> bool {
+        let Some(fill) = self.read().services.speech.as_ref().and_then(|speech| speech.helper.clone()) else { return false };
+        fill.start().map_err(|error| warn!(target: TARGET, error = %error, "helper start failed")).is_ok()
+    }
+
+    /// Stops helping (Off): the computer's queue is dropped and the session ends; the local read-ahead takes over.
+    pub fn helper_stop(&self) {
+        if let Some(fill) = self.read().services.speech.as_ref().and_then(|speech| speech.helper.clone()) {
+            fill.stop();
+        }
+    }
+
+    /// New "ip:port" candidates for the computer (an NSD sighting); tried at once.
+    pub fn helper_set_addresses(&self, addresses: Vec<String>) {
+        if let Some(link) = lock(&self.helper).link.clone() {
+            link.set_addresses(&addresses);
+        }
+    }
+
+    /// Skips the reconnect wait (Wi-Fi back, play pressed, the person fixed what needed attention).
+    pub fn helper_retry_now(&self) {
+        if let Some(link) = lock(&self.helper).link.clone() {
+            link.retry_now();
+        }
+    }
+
+    pub fn helper_status(&self) -> HelperStatusRecord {
+        let loaded = self.read();
+        let fill = loaded.services.speech.as_ref().and_then(|speech| speech.helper.clone());
+        let engine_loaded = match &loaded.deferred {
+            Some(deferred) => deferred.is_loaded(),
+            None => loaded.engine.is_some(),
+        };
+        let Some(fill) = fill else {
+            return HelperStatusRecord { state: HelperStateRecord::Off, in_flight: 0, sent: 0, stored: 0, failed: 0, engine_loaded };
+        };
+        let status = fill.status();
+        HelperStatusRecord {
+            state: HelperStateRecord::from(&status.state),
+            in_flight: u32::try_from(status.in_flight).unwrap_or(u32::MAX),
+            sent: status.stats.sent,
+            stored: status.stats.stored,
+            failed: status.stats.failed,
+            engine_loaded,
+        }
+    }
+
+    /// Loads the deferred model now (the link was lost), so the first local sentence doesn't wait. `false` when it
+    /// failed or there is no deferred engine.
+    pub fn preload_engine(&self) -> bool {
+        let Some(deferred) = self.read().deferred.clone() else { return false };
+        deferred.preload().map_err(|error| warn!(target: TARGET, error = %error, "engine preload failed")).is_ok()
+    }
+
+    /// Stops filling a book through the computer (it switched to its audiobook file, or was removed).
+    pub fn helper_stop_document(&self, document_id: String) -> CoreResult<()> {
+        let id = DocumentId::parse(&document_id)?;
+        if let Some(fill) = self.services().speech.and_then(|speech| speech.helper.clone()) {
+            fill.stop_document(&id);
+        }
+        Ok(())
+    }
+
+    /// Prepare through the computer (file 24 §3.13); `HelperUnreachable` when it isn't connected.
+    pub fn start_prepare_on_helper(
+        &self,
+        document_id: String,
+        voice_id: String,
+        read_skipped: bool,
+        from_sentence: u32,
+        to_sentence: u32,
+    ) -> CoreResult<PrepareStatusRecord> {
+        let args = PrepareArgs {
+            document_id: DocumentId::parse(&document_id)?,
+            voice_id: VoiceId::new(voice_id),
+            read_skipped,
+            from: SentenceId(from_sentence),
+            to: SentenceId(to_sentence),
+        };
+        Ok(self.services().speech()?.prepare.start_on_helper(args)?.into())
+    }
+
+    /// Whether the book's Prepare range is being made by the computer.
+    pub fn prepare_on_helper(&self, document_id: String) -> CoreResult<bool> {
+        Ok(self.services().speech()?.prepare.on_helper(&DocumentId::parse(&document_id)?))
+    }
+}
+
+#[derive(Debug, Clone, uniffi::Record)]
+pub struct HelperStatusRecord {
+    pub state: HelperStateRecord,
+    pub in_flight: u32,
+    pub sent: u64,
+    pub stored: u64,
+    pub failed: u64,
+    /// The phone's own model is in memory (it stays unloaded while the computer makes the audio).
+    pub engine_loaded: bool,
 }
 
 #[derive(Debug, Clone, uniffi::Record)]

@@ -19,7 +19,11 @@ bench = []
 # Local builds use the .cargo/config.toml path override instead.
 lectrice-domain = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0" }
 lectrice-app = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0" }
-lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0", default-features = false, features = ["pdfium", "kokoro", "time-stretch"] }
+lectrice-infra = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0", default-features = false, features = ["pdfium", "kokoro", "time-stretch", "helper-client"] }
+# The computer helper (file 24): pairing and the phone's side of the link.
+lectrice-link = { git = "https://github.com/kia-salvati/lectrice", tag = "v0.3.0", features = ["client"] }
+# An unconnected TCP socket that Kotlin binds to the Wi-Fi network before it connects (safe API, no `unsafe` here).
+socket2 = "=0.6.5"
 uniffi.workspace = true
 thiserror = "=2.0.21"
 tracing = "=0.1.44"

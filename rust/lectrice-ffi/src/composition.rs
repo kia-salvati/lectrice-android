@@ -6,13 +6,13 @@ use std::sync::Arc;
 use std::time::Instant;
 
 use lectrice_app::exports::ExportSettings;
-use lectrice_app::services::{Adapters, Services, Settings, assemble};
+use lectrice_app::services::{Adapters, Services, Settings, SpeechOptions, assemble_with};
 use lectrice_app::speech::ReadAheadSettings;
 use lectrice_domain::cleaning::RuleBasedCleaner;
-use lectrice_domain::{AppResult, SpeechEngine, VoiceId};
+use lectrice_domain::{AppResult, SpeechEngine, SpeechHelper, VoiceId};
 use lectrice_infra::{
-    CachedLibrary, FsAudioCache, FsDocumentRepository, FsExportRecordStore, FsVoiceSampleCache, KokoroSettings, KokoroSpeechEngine, PdfiumTextSource,
-    SentencexSplitter, Sha256ContentHasher, SonicTimeStretch, SystemClock, WavDecoder, WavEncoder,
+    CachedLibrary, DeferredSpeechEngine, FsAudioCache, FsDocumentRepository, FsExportRecordStore, FsVoiceSampleCache, KokoroSettings, KokoroSpeechEngine,
+    PdfiumTextSource, SentencexSplitter, Sha256ContentHasher, SonicTimeStretch, SystemClock, WavDecoder, WavEncoder,
 };
 use tracing::{info, warn};
 
@@ -87,7 +87,23 @@ pub fn load_engine(config: &EngineConfig) -> (EngineStatus, Option<LoadedEngine>
     }
 }
 
-pub fn assemble_services(config: &CoreConfig, storage: &Storage, engine: Option<&LoadedEngine>) -> AppResult<Services> {
+/// With the computer helper on (file 24): the engine knows its id, voices and sample rate without loading the model,
+/// and loads only when this phone has to speak itself (C46). `Missing` when the model folder isn't there.
+pub fn load_engine_deferred(config: &EngineConfig) -> (EngineStatus, Option<(LoadedEngine, Arc<DeferredSpeechEngine>)>) {
+    let EngineConfig::Kokoro { model_dir, variant, num_threads, provider, engine_id } = config;
+    if !Path::new(model_dir).is_dir() {
+        info!(target: TARGET, variant = ?variant, "model folder missing, no engine");
+        return (EngineStatus::Missing, None);
+    }
+    let settings = KokoroSettings { model_dir: PathBuf::from(model_dir), variant: (*variant).into(), num_threads: *num_threads, provider: provider.clone() };
+    let deferred = Arc::new(KokoroSpeechEngine::deferred(settings, engine_id.clone()));
+    info!(target: TARGET, engine_id = deferred.id(), num_threads, "speech engine ready to load on first use");
+    let status = EngineStatus::Ready { engine_id: deferred.id().to_string(), load_ms: 0 };
+    (status, Some((LoadedEngine { engine: deferred.clone(), load_ms: 0 }, deferred)))
+}
+
+/// `helper`: the paired computer, when the helper is on (file 24); the services then fill through it.
+pub fn assemble_services(config: &CoreConfig, storage: &Storage, engine: Option<&LoadedEngine>, helper: Option<Arc<dyn SpeechHelper>>) -> AppResult<Services> {
     let adapters = Adapters {
         hasher: Arc::new(Sha256ContentHasher),
         pdf_source: storage.pdf_source.clone(),
@@ -113,7 +129,7 @@ pub fn assemble_services(config: &CoreConfig, storage: &Storage, engine: Option<
         read_ahead: ReadAheadSettings { read_ahead_minutes: config.read_ahead_minutes, keep_minutes_per_document: config.keep_minutes_per_document },
         export: ExportSettings::default(),
     };
-    assemble(adapters, settings)
+    assemble_with(adapters, settings, SpeechOptions { helper, ..SpeechOptions::default() })
 }
 
 pub fn elapsed_ms(started: Instant) -> u64 {
@@ -149,5 +165,9 @@ impl SpeechEngine for BundleSpeechEngine {
 
     fn synthesize(&self, request: lectrice_domain::SpeechRequest) -> AppResult<lectrice_domain::Audio> {
         self.inner.synthesize(request)
+    }
+
+    fn revision(&self) -> &str {
+        self.inner.revision()
     }
 }
