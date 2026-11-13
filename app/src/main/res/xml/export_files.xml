@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Finished exports in app storage, shared through FileProvider (file 10 §3.9). -->
+<paths>
+    <files-path name="exports" path="lectrice/exports/" />
+</paths>

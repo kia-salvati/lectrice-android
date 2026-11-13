@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_back">Back</string>
+    <string name="common_close">Close</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_ok">OK</string>
+    <string name="common_loading">…</string>
+    <string name="common_try_again">Try again</string>
+    <string name="common_something_wrong">Something went wrong.</string>
+
+    <!-- T1 -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_listening">Listening</string>
+    <string name="settings_reading">Reading</string>
+    <string name="settings_voice_model">Voice model</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_battery">Battery</string>
+    <string name="settings_about">About</string>
+    <string name="settings_default_voice">Default voice</string>
+    <string name="settings_default_speed">Default speed</string>
+    <string name="settings_read_code">Read code &amp; tables aloud</string>
+    <string name="settings_read_ahead">Read ahead</string>
+    <string name="settings_read_ahead_value">%1$d min of listening</string>
+    <string name="settings_lock_sentence">Sentence on the lock screen</string>
+    <string name="settings_lock_sentence_sub">Shows what’s being read. Off: the section title.</string>
+    <string name="settings_lock_stage">Listen view over the lock screen</string>
+    <string name="settings_lock_stage_sub">Keeps the Listen view up when the screen turns off while it’s open.</string>
+    <string name="settings_text_size">Text size</string>
+    <string name="settings_preview">The quick reader turns the page.</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_theme_black">Black</string>
+    <string name="settings_keep_exports">Keep exports running</string>
+    <string name="settings_keep_exports_sub">Allow unrestricted battery use</string>
+    <string name="settings_licenses">Open-source licenses</string>
+    <string name="settings_source">Source code on GitHub</string>
+    <string name="settings_copy_version">Copy the version</string>
+    <string name="settings_hear_voice">Hear %1$s</string>
+    <string name="settings_voice_making">Making a sample of %1$s</string>
+    <string name="settings_voice_playing">Playing a sample of %1$s</string>
+    <string name="settings_speed_a11y">Speed</string>
+    <string name="settings_theme_a11y">Theme</string>
+
+    <!-- S1 -->
+    <string name="welcome_mark">L</string>
+    <string name="welcome_title">Lectrice</string>
+    <string name="welcome_tagline">Your PDFs, read aloud.</string>
+    <string name="welcome_point_clean">Cleans up the text: no running headers, page numbers or footnotes.</string>
+    <string name="welcome_point_voice">Reads with a natural voice that runs on this phone.</string>
+    <string name="welcome_point_offline">Works offline. Your books never leave your device.</string>
+    <string name="welcome_get_voice">Get the voice</string>
+    <string name="welcome_not_now">Not now, just read</string>
+
+    <!-- S2 -->
+    <string name="choose_title">Choose a voice model</string>
+    <string name="choose_body">The voice is a one-time download. You can switch later in Settings.</string>
+    <string name="choose_recommended">Recommended</string>
+    <string name="choose_hint">Not sure? Pick Fast.</string>
+    <string name="choose_wifi">Wi-Fi recommended</string>
+    <string name="choose_disabled">Choose a model</string>
+    <string name="choose_download">Download %1$s</string>
+    <string name="choose_import">Import from a file…</string>
+    <string name="metered_title">You’re on mobile data</string>
+    <string name="metered_body">This download is %1$s and may use your data plan. If you wait for Wi-Fi, it starts by itself when you connect.</string>
+    <string name="metered_wait">Wait for Wi-Fi</string>
+    <string name="metered_now">Download now</string>
+    <string name="import_failed_title">This file isn’t a Lectrice voice model.</string>
+    <string name="import_failed_body">Pick the .tar.bz2 file you downloaded for Lectrice.</string>
+    <string name="import_unreadable">This file couldn’t be opened.</string>
+    <string name="space_short">Not enough space. The voice needs %1$s free. Free up space and try again.</string>
+    <string name="space_short_unknown">Not enough space. Free up space and try again.</string>
+
+    <!-- S3 -->
+    <string name="download_title">Downloading the voice</string>
+    <string name="download_paused">Paused · %1$s</string>
+    <string name="download_installing">Checking and unpacking the voice…</string>
+    <string name="download_reassure">You can leave this screen. The download keeps going in the background and shows in your notifications.</string>
+    <string name="download_pause">Pause</string>
+    <string name="download_resume">Resume</string>
+    <string name="download_cancel">Cancel</string>
+    <string name="download_meanwhile">Meanwhile, open a PDF</string>
+    <string name="download_waiting_network">Waiting for a network. The download continues on its own.</string>
+    <string name="download_waiting_wifi">Waiting for Wi-Fi. The download starts by itself when you connect.</string>
+    <string name="download_damaged">Part of the download was damaged. Retrying…</string>
+    <string name="download_failed">The download failed. Check your connection and try again.</string>
+
+    <!-- S4 -->
+    <string name="ready_title">The voice is ready</string>
+    <string name="ready_voice">Heart · American English</string>
+    <string name="ready_sample">This is how I sound when I read your books aloud.</string>
+    <string name="ready_hear">Hear a sample</string>
+    <string name="ready_slow">This phone makes speech slower than real time. Prepare books while charging for smooth listening.</string>
+    <string name="ready_open">Open a PDF</string>
+    <string name="ready_library">Go to library</string>
+
+    <!-- T2 -->
+    <string name="model_title">Voice model</string>
+    <string name="model_installed_in_use">Installed · in use</string>
+    <string name="model_installed">Installed</string>
+    <string name="model_not_installed">Not installed</string>
+    <string name="model_use">Use this</string>
+    <string name="model_delete">Delete (%1$s)</string>
+    <string name="model_delete_title">Delete the %1$s model?</string>
+    <string name="model_delete_body">You can download it again later.</string>
+    <string name="model_delete_confirm">Delete</string>
+
+    <!-- T3 -->
+    <string name="storage_title">Storage</string>
+    <string name="storage_used">%1$s used by Lectrice</string>
+    <string name="storage_free">%1$s free on this phone</string>
+    <string name="storage_models">Voice models</string>
+    <string name="storage_books">Books</string>
+    <string name="storage_cache">Audio cache</string>
+    <string name="storage_exports">Exported audiobooks</string>
+    <string name="storage_phone">Phone</string>
+    <string name="storage_no_voice">No voice installed</string>
+    <string name="storage_no_books">No books yet.</string>
+    <string name="storage_clear_cache">Clear audio cache</string>
+    <string name="storage_cache_note">Audio is made again when it’s needed. Android may also clear it when the phone is low on space.</string>
+    <string name="storage_free_up_phone">Free up space on the phone</string>
+    <string name="storage_delete_all">Delete all Lectrice data</string>
+    <string name="storage_free_up">Free up about %1$s to export this book.</string>
+    <string name="storage_open_phone">Open phone storage</string>
+    <string name="storage_delete_all_title">Delete all Lectrice data?</string>
+    <string name="storage_delete_all_body">This deletes your books, reading places, voice models, audio and exports kept in Lectrice. Audiobooks you saved to Audiobooks stay. The app closes.</string>
+    <string name="storage_delete_all_confirm">Delete all</string>
+    <string name="storage_book_sheet">Book</string>
+    <string name="storage_book_meta">PDF and text %1$s · audio %2$s</string>
+    <string name="storage_book_meta_no_audio">PDF and text %1$s</string>
+    <string name="storage_book_clear">Clear this book’s audio · %1$s</string>
+    <string name="storage_book_remove">Remove from library</string>
+    <string name="storage_remove_title">Remove “%1$s”?</string>
+    <string name="storage_remove_body">This removes the book, its reading place and its audio from this phone, and frees about %1$s. You can open the PDF again later.</string>
+    <string name="storage_remove_confirm">Remove</string>
+    <string name="storage_export_sheet">Exported audiobook</string>
+    <string name="storage_export_open">Open</string>
+    <string name="storage_export_share">Share</string>
+    <string name="storage_export_save">Save to Audiobooks</string>
+    <string name="storage_export_save_sub">Moves the file to Audiobooks/Lectrice</string>
+    <string name="storage_export_delete">Delete</string>
+    <string name="storage_export_cancel_note">To delete it, cancel the export on its page.</string>
+    <string name="storage_export_in_lectrice">In Lectrice</string>
+    <string name="storage_export_in_audiobooks">In Audiobooks/Lectrice</string>
+    <string name="storage_export_delete_title">Delete this audiobook?</string>
+    <string name="storage_export_delete_body">This deletes the file from your phone (%1$s).</string>
+
+    <!-- Licenses -->
+    <string name="licenses_title">Open-source licenses</string>
+</resources>

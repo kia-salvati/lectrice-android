@@ -1,0 +1,15 @@
+Kokoro 82M (voice model and voices)
+==================================
+
+Model and voices: Kokoro-82M v1.0 by hexgrad (https://huggingface.co/hexgrad/Kokoro-82M), licensed under the
+Apache License, Version 2.0 (LICENSE-APACHE.txt in this folder has the full text).
+
+Lectrice downloads the model in the format of the sherpa-onnx project. "Full quality" is the unchanged
+kokoro-multi-lang-v1_0 from https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models. "Fast" and "Small" are
+Lectrice's own modified versions of that model (smaller stored weights; Fast also runs part of the vocoder in int8),
+released at https://github.com/kia-salvati/lectrice/releases (tags model-kokoro-lectrice-fast-v1 and
+model-kokoro-lectrice-small-v1); their NOTICE file, kept in the model folder, says what was changed. The archive's
+own LICENSE file is kept in the model folder next to the model.
+
+The model folder also holds espeak-ng-data (the espeak-ng pronunciation data), licensed under the GNU GPL
+version 3 or later (GPL-3.0.txt in this folder).
