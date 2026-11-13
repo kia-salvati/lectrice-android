@@ -166,6 +166,21 @@ data class ReaderUiState(
     /** Snackbar once: "Already in your library. Continuing where you left off." etc. */
     val message: ReaderMessage? = null,
     val voiceSample: VoiceSampleState = VoiceSampleState(),
+    /** File 24 §11.2: the computer helper's line in the player sheet and the pill's mark; null when no computer helps. */
+    val helper: HelperLineUi? = null,
+)
+
+/** The player sheet's computer-helper row and the pill's `computer` mark (file 24 §11.2, design option A). */
+data class HelperLineUi(
+    /** "Making audio on Kia's laptop · 12 min ready", "Kia's laptop is busy · 22 min ready", "Looking for Kia's laptop…",
+     *  "Computer not reachable · 24 min ready", or a Needs-attention text. */
+    val text: String,
+    /** The row shows this text in `warnFg` with a "Fix" button instead of the chevron. */
+    val needsAttention: Boolean,
+    /** The pill shows the 16 dp `computer` mark (Connected or Busy only). */
+    val pillMark: Boolean,
+    /** TalkBack addition for the pill: ", audio from Kia's laptop". */
+    val pillSpoken: String?,
 )
 
 /** The player sheet's "Prepare while charging" row (file 14 §2). */
@@ -175,9 +190,15 @@ data class PrepareInfo(
     val active: Boolean,
     /** "Prepared with Heart. Switch back to use it." when the voice changed. */
     val voiceWarning: String?,
+    /** File 24 §11.4: the computer's name while it is connected; the row then reads "Prepare on <name>" with the `bolt`
+     *  icon (no charger needed). Null: the phone prepares while charging (battery icon). */
+    val onComputer: String? = null,
 )
 
 sealed interface ReaderMessage {
+    /** File 24 §2, once per session: "Your computer isn't reachable. The phone carries on by itself." */
+    data object ComputerLost : ReaderMessage
+
     /** "Lectrice will prepare this chapter while the phone charges." */
     data object PrepareQueued : ReaderMessage
 
@@ -230,4 +251,6 @@ interface ReaderActions {
     fun linkAudiobook(uri: String)
     /** B2 "Remove link" (the file itself stays). */
     fun removeAudiobookLink()
+    /** File 24: the helper row (or its "Fix") opens Settings → Computer helper. */
+    fun openComputerHelper()
 }

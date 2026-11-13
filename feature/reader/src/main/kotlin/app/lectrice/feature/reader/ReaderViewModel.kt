@@ -14,6 +14,8 @@ import app.lectrice.core.model.LibraryRepository
 import app.lectrice.core.model.Pages
 import app.lectrice.core.model.PlaceLabels
 import app.lectrice.core.model.PlaybackController
+import app.lectrice.core.model.ComputerHelperRepository
+import app.lectrice.core.model.HelperNotice
 import app.lectrice.core.model.PrepareController
 import app.lectrice.core.model.PrepareRequest
 import app.lectrice.core.model.PrepareScope
@@ -51,6 +53,7 @@ interface ReaderNavigation {
     fun backToLibrary(message: ReaderMessage? = null)
     fun openModelSetup()
     fun openExport(documentId: String)
+    fun openComputerHelper()
 }
 
 /** Opened book + what the player shows about it (files 04, 05, 06, 07, 13). */
@@ -67,6 +70,7 @@ class ReaderViewModel(
     private val prepares: PrepareController,
     private val models: VoiceModelRepository,
     private val audiobooks: AudiobookRepository,
+    private val helper: ComputerHelperRepository? = null,
     private val clockMs: () -> Long = System::currentTimeMillis,
 ) : ViewModel(), ReaderActions {
     private val state = MutableStateFlow(ReaderUiState())
@@ -130,6 +134,15 @@ class ReaderViewModel(
         }
         viewModelScope.launch {
             prepares.states.collect { publishPrepare() }
+        }
+        helper?.let { repository ->
+            viewModelScope.launch {
+                combine(repository.state, playback.state) { h, p -> h to p }.distinctUntilChanged().collect { (h, p) ->
+                    state.update { it.copy(helper = HelperLines.of(h, p)) }
+                }
+            }
+            viewModelScope.launch { repository.state.map { it.link.makesAudio to it.active?.shownName }.distinctUntilChanged().collect { publishPrepare() } }
+            viewModelScope.launch { repository.notices.collect { if (it == HelperNotice.ComputerLost) state.update { s -> s.copy(message = ReaderMessage.ComputerLost) } } }
         }
         viewModelScope.launch {
             audiobooks.links.map { it[documentId] }.distinctUntilChanged().collect { onPlayback(playback.state.value, voice.state.value) }
@@ -211,7 +224,11 @@ class ReaderViewModel(
     }
 
     private fun publishPrepare() {
-        if (!models.isSlowPhone()) return
+        val computer = helper?.state?.value?.takeIf { it.link.makesAudio }?.active?.shownName
+        if (!models.isSlowPhone() && computer == null) {
+            state.update { it.copy(prepare = null) }
+            return
+        }
         // File 23 §3.4: nothing to prepare while the book plays from its audiobook file.
         if (playback.state.value.source == AudioSource.Audiobook) {
             state.update { it.copy(prepare = null) }
@@ -220,10 +237,14 @@ class ReaderViewModel(
         val info = when (val prepared = prepares.states.value[documentId]) {
             null -> PrepareInfo("Off", active = false, voiceWarning = null)
             PrepareState.WaitingForCharger -> PrepareInfo("Waits for the charger", active = true, voiceWarning = null)
-            is PrepareState.Running -> PrepareInfo("Preparing · ${prepared.percent} %", active = true, voiceWarning = null)
+            is PrepareState.Running -> PrepareInfo(
+                if (prepared.onComputer && computer != null) "Preparing on $computer · ${prepared.percent} %" else "Preparing · ${prepared.percent} %",
+                active = true,
+                voiceWarning = null,
+            )
             is PrepareState.Ready -> PrepareInfo("Ready up to ${prepared.upToLabel}", active = true, voiceWarning = null)
         }
-        state.update { it.copy(prepare = info) }
+        state.update { it.copy(prepare = info.copy(onComputer = computer)) }
     }
 
     override fun prepare(scope: PrepareScope) {
@@ -469,6 +490,8 @@ class ReaderViewModel(
     override fun openModelSetup() = navigation.openModelSetup()
 
     override fun openExport() = navigation.openExport(documentId)
+
+    override fun openComputerHelper() = navigation.openComputerHelper()
 
     private companion object {
         const val MAX_TICKS = 60

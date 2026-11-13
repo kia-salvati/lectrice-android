@@ -26,6 +26,9 @@ sealed interface Screen {
     data class Storage(val requestedBytes: Long? = null) : Screen
 
     data object Licenses : Screen
+
+    /** File 24 H1 (and the pairing pages H2–H5 inside it). */
+    data object ComputerHelper : Screen
 }
 
 /** A tiny back stack. [push] and [replaceTop] animate forward; [pop] animates back. */

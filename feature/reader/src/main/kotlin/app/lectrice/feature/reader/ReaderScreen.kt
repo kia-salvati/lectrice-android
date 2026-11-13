@@ -281,7 +281,7 @@ fun ReaderScreen(
             },
     ) {
         val screenWidth = maxWidth
-        val status = rememberPillStatus(player, state.voiceMissing, screenWidth)
+        val status = rememberPillStatus(player, state.voiceMissing, screenWidth, state.helper)
         val navInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
         val statusInset = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
         val pillHeight = if (tall) PILL_HEIGHT_TALL else PILL_HEIGHT
@@ -339,6 +339,7 @@ fun ReaderScreen(
 
         state.message?.let { message ->
             val text = when (message) {
+                ReaderMessage.ComputerLost -> stringResource(R.string.reader_snack_computer_lost)
                 ReaderMessage.PrepareQueued -> stringResource(R.string.reader_snack_prepare_queued)
                 ReaderMessage.BookGone -> stringResource(R.string.reader_snack_book_gone)
                 is ReaderMessage.SentenceSkipped -> stringResource(R.string.reader_snack_skipped)

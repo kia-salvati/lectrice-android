@@ -49,7 +49,10 @@ import app.lectrice.feature.reader.ReaderMessage
 import app.lectrice.feature.reader.ReaderNavigation
 import app.lectrice.feature.reader.ReaderScreen
 import app.lectrice.feature.reader.ReaderViewModel
+import app.lectrice.core.link.ComputerHelperHub
 import app.lectrice.feature.settings.ChooseModelScreen
+import app.lectrice.feature.settings.ComputerHelperScreen
+import app.lectrice.feature.settings.ComputerHelperViewModel
 import app.lectrice.feature.settings.DownloadScreen
 import app.lectrice.feature.settings.LicensesScreen
 import app.lectrice.feature.settings.ModelPageScreen
@@ -214,6 +217,7 @@ private fun AppScreens(navigator: Navigator, container: AppContainer) {
                 Screen.ChooseModel, Screen.Download, Screen.ModelPage -> ModelRoute(screen, navigator, container)
                 is Screen.Storage -> StorageRoute(screen, navigator, container, closeInsteadOfBack = false, onClose = { navigator.pop() })
                 Screen.Licenses -> LicensesScreen(onBack = { navigator.pop() })
+                Screen.ComputerHelper -> ComputerHelperRoute(navigator, container)
             }
         }
     }
@@ -246,12 +250,13 @@ private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: 
             override fun backToLibrary(message: ReaderMessage?) = navigator.resetTo(Screen.Library)
             override fun openModelSetup() = navigator.push(Screen.ChooseModel)
             override fun openExport(documentId: String) = Unit
+            override fun openComputerHelper() = navigator.push(Screen.ComputerHelper)
         }
     }
     val viewModel: ReaderViewModel = viewModel(key = screen.documentId) {
         ReaderViewModel(
             screen.documentId, screen.play, container.library, container.playback, container.settings, container.voices, container.voiceSamples,
-            container.engine, navigation, container.prepare, container.voiceModels, container.audiobooks,
+            container.engine, navigation, container.prepare, container.voiceModels, container.audiobooks, container.computerHelper,
         )
     }
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -300,11 +305,12 @@ private fun SettingsRoute(navigator: Navigator, container: AppContainer) {
             override fun openModelPage() = navigator.push(Screen.ModelPage)
             override fun openStorage() = navigator.push(Screen.Storage())
             override fun openLicenses() = navigator.push(Screen.Licenses)
+            override fun openComputerHelper() = navigator.push(Screen.ComputerHelper)
         }
     }
     val context = LocalContext.current
     val viewModel: SettingsViewModel = viewModel {
-        SettingsViewModel(container.settings, container.voices, container.voiceSamples, AndroidSettingsPlatform(context.applicationContext, container), navigation)
+        SettingsViewModel(container.settings, container.voices, container.voiceSamples, AndroidSettingsPlatform(context.applicationContext, container), navigation, container.computerHelper)
     }
     LaunchedEffect(viewModel) { viewModel.refresh() }
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -361,3 +367,20 @@ private const val EXPORT_MIME = "audio/mp4"
 private const val AUDIO_MIME = "audio/*"
 private const val TRANSITION_MS = 220
 private const val SLIDE_DIVISOR = 6
+
+/** File 24 H1–H6: Settings → Computer helper, with the pairing pages on top of it. */
+@Composable
+private fun ComputerHelperRoute(navigator: Navigator, container: AppContainer) {
+    val viewModel: ComputerHelperViewModel = viewModel { ComputerHelperViewModel(container.computerHelper) }
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    // Android 17+ only (target SDK 37): asked when the person turns the helper on or pairs, after the H6 rationale.
+    val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { viewModel.permissionChanged() }
+    BackHandler(enabled = state.pair != null) { viewModel.pairBack() }
+    ComputerHelperScreen(
+        state,
+        viewModel,
+        onBack = { navigator.pop() },
+        onRequestPermission = { permission.launch(ComputerHelperHub.LOCAL_NETWORK_PERMISSION) },
+        onOpenAppSettings = { container.openAppSettings() },
+    )
+}

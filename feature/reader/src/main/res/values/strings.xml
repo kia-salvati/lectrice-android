@@ -176,4 +176,8 @@
     <string name="reader_snack_audiobook_other_book">This audiobook belongs to another book.</string>
     <string name="reader_snack_audiobook_not_lectrice">This audiobook can’t follow the text, so it can’t be played here yet.</string>
     <string name="reader_snack_audiobook_failed">The audiobook couldn’t be opened.</string>
+    <string name="reader_snack_computer_lost">Your computer isn’t reachable. The phone carries on by itself.</string>
+    <string name="sheet_helper">Computer helper</string>
+    <string name="sheet_helper_fix">Fix</string>
+    <string name="sheet_prepare_on">Prepare on %1$s</string>
 </resources>

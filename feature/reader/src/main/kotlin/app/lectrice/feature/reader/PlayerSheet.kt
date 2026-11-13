@@ -224,6 +224,24 @@ private fun ColumnScope.PlayerContent(state: ReaderUiState, actions: ReaderActio
         Divider(inset = 0.dp)
     }
 
+    state.helper?.let { helper ->
+        ListRow(
+            stringResource(R.string.sheet_helper),
+            subtitle = helper.text,
+            leadingIcon = LectriceIcons.Computer,
+            subtitleColor = if (helper.needsAttention) c.warnFg else c.fg2,
+            onClick = if (helper.needsAttention) null else actions::openComputerHelper,
+            trailing = {
+                if (helper.needsAttention) {
+                    LectriceTextButton(stringResource(R.string.sheet_helper_fix), actions::openComputerHelper, style = LectriceTheme.type.label)
+                } else {
+                    LectriceIcon(LectriceIcons.ChevronRight, null, tint = c.fg2)
+                }
+            },
+        )
+        Divider(inset = 0.dp)
+    }
+
     ListRow(stringResource(R.string.sheet_sleep), subtitle = player?.sleepSummary, leadingIcon = LectriceIcons.Bedtime, onClick = { sleepOpen = !sleepOpen }, trailing = { ExpandIcon(sleepOpen) })
     if (sleepOpen && player != null) SleepChips(player.sleep, player.hasToc, actions::setSleep, Modifier.padding(horizontal = 16.dp))
     Divider(inset = 0.dp)
@@ -240,9 +258,9 @@ private fun ColumnScope.PlayerContent(state: ReaderUiState, actions: ReaderActio
 
     state.prepare?.let { prepare ->
         ListRow(
-            stringResource(R.string.sheet_prepare),
+            prepare.onComputer?.let { stringResource(R.string.sheet_prepare_on, it) } ?: stringResource(R.string.sheet_prepare),
             subtitle = prepare.summary,
-            leadingIcon = LectriceIcons.BatteryFull,
+            leadingIcon = if (prepare.onComputer != null) LectriceIcons.Bolt else LectriceIcons.BatteryFull,
             onClick = { prepareOpen = !prepareOpen },
             extra = { prepare.voiceWarning?.let { Text(it, style = LectriceTheme.type.rowMeta, color = c.warnFg) } },
             trailing = { ExpandIcon(prepareOpen) },

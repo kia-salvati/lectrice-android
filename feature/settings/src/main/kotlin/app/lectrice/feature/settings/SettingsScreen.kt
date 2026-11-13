@@ -108,6 +108,9 @@ fun SettingsScreen(state: SettingsUiState, actions: SettingsActions, onBack: () 
             SectionHeader(stringResource(R.string.settings_storage))
             ListRow(stringResource(R.string.settings_storage), subtitle = state.storageSummary ?: stringResource(R.string.common_loading), onClick = actions::openStorage, trailing = { ChevronRight() })
 
+            SectionHeader(stringResource(R.string.helper_title))
+            ListRow(stringResource(R.string.helper_title), subtitle = state.helperSummary, leadingIcon = LectriceIcons.Computer, onClick = actions::openComputerHelper, trailing = { ChevronRight() })
+
             SectionHeader(stringResource(R.string.settings_battery))
             ListRow(stringResource(R.string.settings_keep_exports), subtitle = stringResource(R.string.settings_keep_exports_sub), onClick = actions::openBatterySettings, trailing = { ChevronRight() })
 

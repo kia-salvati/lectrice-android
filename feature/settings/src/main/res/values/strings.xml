@@ -146,6 +146,74 @@
     <string name="storage_export_delete_title">Delete this audiobook?</string>
     <string name="storage_export_delete_body">This deletes the file from your phone (%1$s).</string>
 
+    <!-- H1, H9 -->
+    <string name="helper_title">Computer helper</string>
+    <string name="helper_switch">Let a computer make the audio</string>
+    <string name="helper_pair_first">Pair a computer first</string>
+    <string name="helper_explain">When your phone and computer are on the same Wi-Fi, Lectrice on your computer makes the speech, so your phone stays cool and saves battery. If the computer isn’t reachable, your phone carries on by itself.</string>
+    <string name="helper_computers">Computers</string>
+    <string name="helper_connected">Connected</string>
+    <string name="helper_needs_attention">Needs attention</string>
+    <string name="helper_seen_never">Not seen yet</string>
+    <string name="helper_seen_now">Last seen just now</string>
+    <string name="helper_seen_minutes">Last seen %1$d min ago</string>
+    <string name="helper_seen_hours">Last seen %1$d h ago</string>
+    <string name="helper_seen_days">Last seen %1$d d ago</string>
+    <string name="helper_more_a11y">More for %1$s</string>
+    <string name="helper_rename">Rename</string>
+    <string name="helper_rename_body">Leave it empty to use the computer’s own name.</string>
+    <string name="helper_rename_label">Name</string>
+    <string name="helper_rename_save">Save</string>
+    <string name="helper_forget">Forget</string>
+    <string name="helper_forget_title">Forget %1$s?</string>
+    <string name="helper_forget_body">You’ll need a new code to pair again.</string>
+    <string name="helper_pair">Pair with a computer</string>
+    <string name="helper_help">Needs Lectrice open on the computer, with ‘Let my phone use this computer’ turned on.</string>
+    <string name="helper_your_computer">Your computer</string>
+    <string name="helper_attention_model">Your computer needs this phone’s voice model to help. Open Lectrice on the computer to download it.</string>
+    <string name="helper_attention_forgot">%1$s forgot this phone. Pair again.</string>
+    <string name="helper_mismatch">Lectrice on the computer and on this phone don’t match. Update the older one.</string>
+    <string name="helper_retry">Retry</string>
+    <string name="helper_pair_again">Pair again</string>
+
+    <!-- H6 -->
+    <string name="helper_nearby_a11y">Nearby devices</string>
+    <string name="helper_nearby">To find your computer, Lectrice needs permission to see devices on your Wi-Fi. It never looks beyond your home network.</string>
+    <string name="helper_continue">Continue</string>
+    <string name="helper_not_now">Not now</string>
+    <string name="helper_denied">Allow Nearby devices to use your computer</string>
+    <string name="helper_open_settings">Open settings</string>
+
+    <!-- H2, H4 -->
+    <string name="pair_looking">Looking on this Wi-Fi…</string>
+    <string name="pair_no_wifi">Connect to Wi-Fi to pair.</string>
+    <string name="pair_help_wifi">Make sure the phone and the computer are on the same Wi-Fi, and not on a guest network.</string>
+    <string name="pair_help_open">Open Lectrice on the computer.</string>
+    <string name="pair_help_click">On the computer, click %1$s.</string>
+    <string name="pair_a_phone">Pair a phone</string>
+    <string name="pair_enter_address">Enter the address instead</string>
+    <string name="pair_address_title">Enter the address</string>
+    <string name="pair_address_label">Address</string>
+    <string name="pair_address_placeholder" translatable="false">192.168.1.20:47878</string>
+    <string name="pair_address_invalid">That isn’t an address like 192.168.1.20:47878.</string>
+
+    <!-- H3 -->
+    <string name="pair_code_type">Type the code shown on %1$s.</string>
+    <string name="pair_code_your_computer">your computer</string>
+    <string name="pair_code_a11y">6-digit code</string>
+    <string name="pair_code_checking">Checking…</string>
+    <string name="pair_code_wrong">That code didn’t work. Check the code on your computer.</string>
+    <string name="pair_code_try">Try %1$d of %2$d</string>
+    <string name="pair_code_none">No code is showing on %1$s. On the computer, click %2$s to get a new code.</string>
+    <string name="pair_code_new">Type a new code</string>
+    <string name="pair_code_unreachable">Couldn’t reach the computer. Check that both are on the same Wi-Fi and Lectrice is open there.</string>
+    <string name="pair_code_not_local">That address isn’t on your home network.</string>
+
+    <!-- H5 -->
+    <string name="pair_done_title">Paired with %1$s</string>
+    <string name="pair_done_line">Lectrice on your computer now makes the audio when you’re both on this Wi-Fi.</string>
+    <string name="pair_done">Done</string>
+
     <!-- Licenses -->
     <string name="licenses_title">Open-source licenses</string>
 </resources>

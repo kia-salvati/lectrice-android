@@ -2,6 +2,9 @@ package app.lectrice.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.lectrice.core.model.ComputerHelperRepository
+import app.lectrice.core.model.HelperLink
+import app.lectrice.core.model.HelperState
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.ReadAheadMinutes
 import app.lectrice.core.model.SettingsStore
@@ -36,6 +39,7 @@ interface SettingsNavigation {
     fun openModelPage()
     fun openStorage()
     fun openLicenses()
+    fun openComputerHelper()
 }
 
 class SettingsViewModel(
@@ -44,6 +48,7 @@ class SettingsViewModel(
     private val samples: VoiceSamplePlayer,
     private val platform: SettingsPlatform,
     private val navigation: SettingsNavigation,
+    private val helper: ComputerHelperRepository? = null,
 ) : ViewModel(), SettingsActions {
     private val state = MutableStateFlow(SettingsUiState(versionLine = platform.versionLine()))
     val uiState: StateFlow<SettingsUiState> = state.asStateFlow()
@@ -55,6 +60,7 @@ class SettingsViewModel(
             }
         }
         viewModelScope.launch { samples.state.collect { sample -> state.update { it.copy(voiceSample = sample) } } }
+        helper?.let { repository -> viewModelScope.launch { repository.state.collect { h -> state.update { it.copy(helperSummary = helperSummary(h)) } } } }
         refresh()
     }
 
@@ -98,4 +104,18 @@ class SettingsViewModel(
     override fun openSourceCode() = platform.openSourceCode()
 
     override fun copyVersion() = platform.copyToClipboard(state.value.versionLine)
+
+    override fun openComputerHelper() = navigation.openComputerHelper()
+}
+
+/** File 24 §11.1: the Settings row's meta line. */
+internal fun helperSummary(state: HelperState): String {
+    val name = state.active?.shownName ?: return "Off"
+    if (!state.enabled) return "Off"
+    return when (state.link) {
+        HelperLink.Connected, HelperLink.Busy -> "$name · connected"
+        HelperLink.Lost -> "$name · not reachable"
+        is HelperLink.NeedsAttention -> "$name · needs attention"
+        HelperLink.Searching, HelperLink.Off -> name
+    }
 }

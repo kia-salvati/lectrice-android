@@ -21,6 +21,8 @@ data class SettingsUiState(
     /** "Version 0.1.0 · core 0.3.0" */
     val versionLine: String = "",
     val voiceSample: VoiceSampleState = VoiceSampleState(),
+    /** File 24 §11.1: "Off" / "Kia's laptop · connected" / "Kia's laptop · not reachable". */
+    val helperSummary: String = "Off",
 )
 
 interface SettingsActions {
@@ -39,4 +41,5 @@ interface SettingsActions {
     fun openLicenses()
     fun openSourceCode()
     fun copyVersion()
+    fun openComputerHelper()
 }

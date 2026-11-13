@@ -275,10 +275,12 @@ internal class PillStatus(
     val sleepText: String?,
     /** File 23 B3: the headphones mark before the text while the book plays from its audiobook file. */
     val audiobookMark: Boolean = false,
+    /** File 24 H7: the computer mark before the text while a computer makes the audio (the audiobook mark wins). */
+    val computerMark: Boolean = false,
 )
 
 @Composable
-internal fun rememberPillStatus(player: PlayerInfo?, voiceMissing: Boolean, screenWidth: Dp): PillStatus? {
+internal fun rememberPillStatus(player: PlayerInfo?, voiceMissing: Boolean, screenWidth: Dp, helper: HelperLineUi?): PillStatus? {
     if (player == null) return null
     val noVoice = voiceMissing || player.status == PlaybackStatus.VoiceMissing
     // At 200 % font on a narrow screen only the page part ("p. 3") fits; the spoken label keeps the whole location.
@@ -298,8 +300,10 @@ internal fun rememberPillStatus(player: PlayerInfo?, voiceMissing: Boolean, scre
             val parts = location + listOfNotNull(if (player.speed != PlaybackSpeed.X1 && screenWidth >= WIDE_STATUS) StatusPart(player.speed.label) else null)
             val sleepOn = player.sleep != SleepTimer.Off
             val sleepText = if (sleepOn && player.sleep is SleepTimer.Minutes && screenWidth >= WIDE_STATUS) player.sleepShort else null
-            val spoken = listOfNotNull(player.locationSpoken.substringBefore(". "), speedPart, sleepPart).joinToString(", ") + ". " + stringResource(R.string.pill_listen)
-            PillStatus(parts, false, false, spoken, sleepOn, sleepText, fromFile)
+            val computerMark = helper?.pillMark == true && !fromFile
+            val helperSpoken = helper?.pillSpoken.orEmpty()
+            val spoken = listOfNotNull(player.locationSpoken.substringBefore(". "), speedPart, sleepPart).joinToString(", ") + helperSpoken + ". " + stringResource(R.string.pill_listen)
+            PillStatus(parts, false, false, spoken, sleepOn, sleepText, fromFile, computerMark)
         }
     }
 }
@@ -453,6 +457,7 @@ private fun StatusButton(status: PillStatus?, enabled: Boolean, showExpandIcon: 
         val color = if (!enabled) c.fg2 else if (status.accent) c.accent else c.fg
         if (status.spinner) Spinner()
         if (status.audiobookMark) LectriceIcon(LectriceIcons.Headphones, stringResource(R.string.pill_audiobook_a11y), tint = color, size = 16.dp)
+        if (status.computerMark) LectriceIcon(LectriceIcons.Computer, null, tint = color, size = 16.dp)
         StatusLine(status.parts, Modifier.weight(1f, fill = false), style = LectriceTheme.type.label, color = color)
         if (status.sleepIcon) {
             Text(SEPARATOR, style = LectriceTheme.type.label, color = color, maxLines = 1)
