@@ -30,6 +30,7 @@
     <string name="library_error_too_large">“%1$s” is %2$s. Lectrice opens PDFs up to 200 MB.</string>
     <string name="library_error_too_large_unknown">“%1$s” is larger than 200 MB, the most Lectrice opens.</string>
     <string name="library_error_invalid">“%1$s” looks damaged or isn’t a PDF.</string>
+    <string name="library_error_too_complex">“%1$s” is too long or too complex to open on this phone.</string>
     <string name="library_error_storage_full">Your phone is out of space. Free up about %1$s and try again.</string>
     <string name="library_error_storage_full_unknown">Your phone is out of space. Free up space and try again.</string>
     <string name="library_error_unreadable">“%1$s” couldn’t be opened. If it’s in a cloud folder, download it first and try again.</string>

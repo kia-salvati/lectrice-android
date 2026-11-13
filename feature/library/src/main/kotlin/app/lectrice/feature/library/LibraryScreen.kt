@@ -437,6 +437,7 @@ private fun importErrorText(error: ImportError): String = when (error.name) {
     ErrorName.UploadTooLarge -> error.bytes?.let { stringResource(R.string.library_error_too_large, error.displayName, Sizes.format(it)) }
         ?: stringResource(R.string.library_error_too_large_unknown, error.displayName)
     ErrorName.PdfInvalid -> stringResource(R.string.library_error_invalid, error.displayName)
+    ErrorName.PdfTooComplex -> stringResource(R.string.library_error_too_complex, error.displayName)
     ErrorName.StorageFull -> error.bytes?.let { stringResource(R.string.library_error_storage_full, Sizes.format(it)) }
         ?: stringResource(R.string.library_error_storage_full_unknown)
     ErrorName.FileUnreadable -> stringResource(R.string.library_error_unreadable, error.displayName)
