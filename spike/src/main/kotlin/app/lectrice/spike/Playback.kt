@@ -49,7 +49,7 @@ class SentenceDataSource(private val core: LectriceCore, private val voice: Stri
         transferInitializing(dataSpec)
         val (documentId, sentenceId) = dataSpec.uri.pathSegments
         val startedAt = SystemClock.elapsedRealtime()
-        val spoken = core.speakSentence(SpeakArgs(documentId, sentenceId.toUInt(), voice, 1f, false))
+        val spoken = core.speakSentence(SpeakArgs(documentId, sentenceId.toUInt(), voice, 1f, false, true))
         opens += SentenceOpen(sentenceId.toLong(), SystemClock.elapsedRealtime() - startedAt, spoken.durationMs.toLong(), spoken.readyAheadMs.toLong())
         bytes = spoken.wav
         uri = dataSpec.uri
