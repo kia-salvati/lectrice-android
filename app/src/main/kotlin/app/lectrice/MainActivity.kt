@@ -74,7 +74,7 @@ import kotlinx.coroutines.launch
 /** The one Activity (spec §4.5). Screens are composables on our own back stack. */
 class MainActivity : ComponentActivity() {
     private val container: AppContainer get() = (application as LectriceApplication).container
-    private val navigator by lazy { Navigator(listOf(startScreen())) }
+    private lateinit var navigator: Navigator
 
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         container.settings.update { it.copy(notificationAsked = true) }
@@ -85,7 +85,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         volumeControlStream = AudioManager.STREAM_MUSIC
-        handleIntent(intent)
+        val restored = savedInstanceState?.getStringArrayList(STACK_KEY)?.let(ScreenCodec::decode).orEmpty()
+        navigator = Navigator(restored.ifEmpty { listOf(startScreen()) })
+        // A recreated Activity gets its first intent again: it was handled then.
+        if (savedInstanceState == null) handleIntent(intent)
         askNotificationsBeforeFirstWork()
         setContent {
             val settings by container.settings.settings.collectAsStateWithLifecycle()
@@ -114,6 +117,11 @@ class MainActivity : ComponentActivity() {
             downloading.cancel()
             if (!container.settings.settings.value.notificationAsked) notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putStringArrayList(STACK_KEY, ScreenCodec.encode(navigator.stack))
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -184,6 +192,7 @@ class MainActivity : ComponentActivity() {
     private companion object {
         const val SCOPE = "MainActivity"
         const val POLL_MS = 500L
+        const val STACK_KEY = "lectrice.stack"
         const val DEBUG_PLAY_EXTRA = "lectrice.play"
         const val DEBUG_EXPORT_EXTRA = "lectrice.export"
         const val DEBUG_SPEED_EXTRA = "lectrice.speed"
