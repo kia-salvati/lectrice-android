@@ -78,7 +78,7 @@ class Media3PlaybackController(
     private val mutable = MutableStateFlow(PlaybackState())
     override val state: StateFlow<PlaybackState> = mutable.asStateFlow()
 
-    val readAhead = ReadAheadController(core, settings, params, scope)
+    val readAhead = ReadAheadController(core, settings, params, engine.assembled, scope)
 
     private var document: Document? = null
     private var order: PlaybackOrder? = null

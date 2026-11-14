@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 /**
@@ -19,11 +20,15 @@ import kotlinx.coroutines.launch
  *
  * Computer helper (file 24 §3.10): the mode is published in [modes]; the helper runs in Full and Reduced and stops in
  * Off. While the computer is lost, Full uses the helper's "lost" length ([onHelperLostMinutes]) instead of the setting.
+ *
+ * The core keeps the minutes with its speech services, which only exist once an engine is assembled ([engineAssembled])
+ * and are rebuilt on every engine load: the minutes are sent then, never before.
  */
 class ReadAheadController(
     private val core: RustCore,
     private val settings: SettingsStore,
     private val params: SpeechParams,
+    private val engineAssembled: StateFlow<Long?>,
     private val scope: CoroutineScope,
 ) {
     private val mutableModes = MutableStateFlow(AheadMode.Off)
@@ -41,6 +46,16 @@ class ReadAheadController(
     private var mode: AheadMode? = null
     private var appliedMinutes: UInt? = null
     private var recheck: Job? = null
+
+    init {
+        scope.launch { engineAssembled.filterNotNull().collect { onEngineAssembled() } }
+    }
+
+    @Synchronized
+    private fun onEngineAssembled() {
+        appliedMinutes = null
+        update()
+    }
 
     @Synchronized
     fun onBook(documentId: String?) {
@@ -127,10 +142,9 @@ class ReadAheadController(
             AheadMode.Reduced -> ReadAheadGovernor.REDUCED_MINUTES
             AheadMode.Off -> null
         }
-        if (minutes != null && minutes != appliedMinutes) {
+        if (minutes != null && minutes != appliedMinutes && engineAssembled.value != null) {
             appliedMinutes = minutes
             scope.launch {
-                // Without a loaded engine the core can't take it yet: forget it, so the next update tries again.
                 runCatching { core.call("set_read_ahead_minutes") { it.setReadAheadMinutes(minutes) } }
                     .onFailure { synchronized(this@ReadAheadController) { if (appliedMinutes == minutes) appliedMinutes = null } }
             }

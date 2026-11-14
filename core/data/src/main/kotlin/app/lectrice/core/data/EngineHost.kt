@@ -33,8 +33,16 @@ class EngineHost(
     private var loadedThreads: Int? = null
     private var idleTimer: Job? = null
     private var users = 0
+    private var loads = 0L
+    private val assembledLoad = MutableStateFlow<Long?>(null)
 
     override val state: StateFlow<VoiceState> = voiceState.asStateFlow()
+
+    /**
+     * A new number each time the core's speech services are built around a fresh engine, `null` while there is none.
+     * Settings the core keeps per engine (the read-ahead minutes) are applied again on each new number.
+     */
+    val assembled: StateFlow<Long?> = assembledLoad.asStateFlow()
 
     /** Downloads report here (file 01); the model page and the library banner read it. */
     fun setDownloading(percent: Int?) {
@@ -87,17 +95,20 @@ class EngineHost(
                 loadedModelId = spec.info.id
                 loadedThreads = threads
                 voiceState.value = VoiceState.Installed
+                assembledLoad.value = ++loads
                 Log.i(SCOPE, "engine loaded id=${status.engineId} threads=$threads ms=${(System.nanoTime() - started) / NANOS_PER_MS}")
                 status.engineId
             }
             is EngineStatus.Failed -> {
                 loadedModelId = null
+                assembledLoad.value = null
                 voiceState.value = VoiceState.Failed
                 Log.w(SCOPE, "engine failed ${status.error.name}")
                 null
             }
             EngineStatus.Missing, EngineStatus.Unloaded -> {
                 loadedModelId = null
+                assembledLoad.value = null
                 voiceState.value = VoiceState.NotInstalled
                 null
             }
@@ -132,6 +143,7 @@ class EngineHost(
         if (loadedModelId == null || users > 0) return@withLock
         core.blocking("unload_engine") { it.unloadEngine() }
         loadedModelId = null
+        assembledLoad.value = null
         Log.i(SCOPE, "engine unloaded ($reason)")
     }
 
