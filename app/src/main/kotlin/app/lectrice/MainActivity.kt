@@ -23,6 +23,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -31,7 +32,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -217,19 +220,22 @@ private fun AppScreens(navigator: Navigator, container: AppContainer) {
         },
         label = "screens",
     ) { screen ->
-        stores.Scope(screen, navigator.stack) {
-            when (screen) {
-                Screen.Library -> LibraryRoute(navigator, container)
-                is Screen.Reader -> ReaderRoute(screen, navigator, container)
-                Screen.Settings -> SettingsRoute(navigator, container)
-                Screen.Welcome -> WelcomeScreen(onGetVoice = { navigator.push(Screen.ChooseModel) }, onNotNow = {
-                    container.settings.update { it.copy(firstRunDone = true) }
-                    navigator.resetTo(Screen.Library)
-                })
-                Screen.ChooseModel, Screen.Download, Screen.ModelPage -> ModelRoute(screen, navigator, container)
-                is Screen.Storage -> StorageRoute(screen, navigator, container, closeInsteadOfBack = false, onClose = { navigator.pop() })
-                Screen.Licenses -> LicensesScreen(onBack = { navigator.pop() })
-                Screen.ComputerHelper -> ComputerHelperRoute(navigator, container)
+        // The outgoing screen of a transition stays out of the accessibility tree.
+        Box(if (screen != navigator.top) Modifier.clearAndSetSemantics { } else Modifier) {
+            stores.Scope(screen, navigator.stack) {
+                when (screen) {
+                    Screen.Library -> LibraryRoute(navigator, container)
+                    is Screen.Reader -> ReaderRoute(screen, navigator, container)
+                    Screen.Settings -> SettingsRoute(navigator, container)
+                    Screen.Welcome -> WelcomeScreen(onGetVoice = { navigator.push(Screen.ChooseModel) }, onNotNow = {
+                        container.settings.update { it.copy(firstRunDone = true) }
+                        navigator.resetTo(Screen.Library)
+                    })
+                    Screen.ChooseModel, Screen.Download, Screen.ModelPage -> ModelRoute(screen, navigator, container)
+                    is Screen.Storage -> StorageRoute(screen, navigator, container, closeInsteadOfBack = false, onClose = { navigator.pop() })
+                    Screen.Licenses -> LicensesScreen(onBack = { navigator.pop() })
+                    Screen.ComputerHelper -> ComputerHelperRoute(navigator, container)
+                }
             }
         }
     }

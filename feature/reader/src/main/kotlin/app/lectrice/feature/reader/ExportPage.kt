@@ -260,7 +260,7 @@ private fun QualityRowView(row: QualityRow, selected: Boolean, onSelect: () -> U
         Row(
             Modifier
                 .weight(1f)
-                .heightIn(min = 40.dp)
+                .heightIn(min = 48.dp)
                 .selectable(selected = selected, enabled = row.installed, role = Role.RadioButton, onClick = onSelect),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,

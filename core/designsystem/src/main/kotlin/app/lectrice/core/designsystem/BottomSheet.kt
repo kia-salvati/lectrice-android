@@ -39,6 +39,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -87,11 +89,13 @@ fun BottomSheet(
 
         fun close() = scope.launch { state.animateTo(SheetDetent.Hidden, snapSpec) }
 
+        val closeLabel = stringResource(R.string.designsystem_close)
         Box(
             Modifier
                 .fillMaxSize()
                 .background(c.scrim.copy(alpha = c.scrim.alpha * shown))
-                .clickable(interactionSource = null, indication = null, onClick = ::close),
+                .clickable(interactionSource = null, indication = null, onClickLabel = closeLabel, role = Role.Button, onClick = ::close)
+                .semantics { this.contentDescription = closeLabel },
         )
         val flingPx = with(LocalDensity.current) { FLING_VELOCITY.toPx() }
         val halfPx = with(LocalDensity.current) { halfHeight?.toPx() }

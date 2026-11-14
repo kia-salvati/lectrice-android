@@ -9,6 +9,8 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -164,19 +166,23 @@ fun SearchField(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LectriceIcon(LectriceIcons.Search, null, tint = c.fg2)
-        Box(Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
-            if (value.isEmpty()) Text(placeholder, style = LectriceTheme.type.body, color = c.fg2, maxLines = 1)
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                modifier = Modifier.fillMaxWidth().then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier),
-                textStyle = LectriceTheme.type.body.copy(color = c.fg),
-                singleLine = true,
-                cursorBrush = SolidColor(c.accent),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
-            )
-        }
+        // The text field fills the row's height so its touch and accessibility target is the whole 48 dp.
+        BasicTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier.weight(1f).fillMaxHeight().then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier),
+            textStyle = LectriceTheme.type.body.copy(color = c.fg),
+            singleLine = true,
+            cursorBrush = SolidColor(c.accent),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
+            decorationBox = { field ->
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.CenterStart) {
+                    if (value.isEmpty()) Text(placeholder, style = LectriceTheme.type.body, color = c.fg2, maxLines = 1)
+                    field()
+                }
+            },
+        )
         if (value.isNotEmpty()) LectriceIconButton(LectriceIcons.Close, clearDescription, { onValueChange("") }, size = 40.dp, tint = c.fg2)
     }
 }

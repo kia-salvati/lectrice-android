@@ -130,7 +130,7 @@ private fun OutlineRowView(row: OutlineRow, header: Boolean, onPick: (OutlineRow
         Modifier
             .fillMaxWidth()
             .then(if (header) Modifier.background(c.bg2) else Modifier)
-            .heightIn(min = if (row.level >= 3) 40.dp else 48.dp)
+            .heightIn(min = 48.dp)
             .clickable(role = Role.Button) { onPick(row) }
             .drawBehind { if (row.onPath) drawRect(c.accent, size = Size(PATH_BAR.toPx(), size.height)) }
             .semantics(mergeDescendants = true) {

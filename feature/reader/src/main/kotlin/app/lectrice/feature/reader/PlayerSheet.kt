@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -102,7 +103,9 @@ internal fun PlayerSheet(
     ) {
         val reveal by animateFloatAsState(if (exportOpen) 0f else 1f, motionSpring(reduced), label = "exportPage")
         Box(Modifier.weight(1f).fillMaxWidth()) {
-            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+            // Fully covered by the export page: out of the accessibility tree until the page leaves.
+            val covered = exportOpen && reveal == 0f
+            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).then(if (covered) Modifier.clearAndSetSemantics { } else Modifier)) {
                 PlayerContent(state, actions, scrubber, onOpenExport, onChapters, onAudioSource, onLibrary)
             }
             // Slides in from the right over the sheet, covering its handle too (the mockup's `.page`).
