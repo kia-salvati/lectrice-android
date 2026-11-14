@@ -229,7 +229,12 @@ private fun ContinueCardView(card: ContinueCard, actions: LibraryActions, stacke
                     Text(if (card.timeLeft != null) "${card.percent} % · ${card.timeLeft}" else "${card.percent} %", Modifier.padding(top = 4.dp), style = LectriceTheme.type.caption, color = c.fg2)
                 }
             }
-            val play: @Composable () -> Unit = { PlayButton(card.playing, actions::togglePlayOnCard, card.playLabel) }
+            val playLabel = when (val label = card.playLabel) {
+                is CardPlayLabel.Book -> stringResource(R.string.library_card_play, label.title)
+                is CardPlayLabel.FromPage -> stringResource(R.string.library_card_play_from_page, label.title, label.page)
+                is CardPlayLabel.Again -> stringResource(R.string.library_card_play_again, label.title)
+            }
+            val play: @Composable () -> Unit = { PlayButton(card.playing, actions::togglePlayOnCard, playLabel) }
             if (stacked) {
                 Column(Modifier.padding(16.dp), horizontalAlignment = Alignment.End) {
                     text()
@@ -251,7 +256,11 @@ private fun ContinueCardView(card: ContinueCard, actions: LibraryActions, stacke
 private fun RecentRowView(row: RecentRow, actions: LibraryActions, stacked: Boolean) {
     val c = LectriceTheme.colors
     val removeLabel = stringResource(R.string.book_sheet_remove)
-    val progressText = row.percent?.let { stringResource(R.string.library_row_continue, it) } ?: stringResource(R.string.library_row_start)
+    val progressText = when {
+        row.finished -> stringResource(R.string.library_finished)
+        row.percent != null -> stringResource(R.string.library_row_continue, row.percent)
+        else -> stringResource(R.string.library_row_start)
+    }
     val description = if (row.percent != null) {
         stringResource(R.string.library_row_a11y_started, row.title, row.percent, row.meta)
     } else {

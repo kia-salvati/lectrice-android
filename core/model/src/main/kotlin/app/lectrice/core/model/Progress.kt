@@ -18,6 +18,9 @@ object Progress {
         return minOf(PERCENT, Math.round((lastSentenceId + 1).toDouble() / sentenceCount * PERCENT).toInt())
     }
 
+    /** A finished book in the library: read to 100 % (rows know only the summary; the card also asks the playback order). */
+    fun isFinished(percent: Int?): Boolean = percent == PERCENT
+
     /** "under a minute left", "12 min left", "4 h 5 min left". */
     fun formatTimeLeft(seconds: Double): String {
         val minutes = ceil(seconds / SECONDS_PER_MINUTE).toInt()

@@ -119,9 +119,9 @@ class LibraryViewModel(
                         percent = percent,
                         location = keep?.location,
                         timeLeft = keep?.timeLeft,
-                        finished = keep?.finished ?: false,
+                        finished = keep?.finished ?: Progress.isFinished(percent),
                         playing = playingNow.documentId == summary.id && playingNow.isPlaying,
-                        playLabel = keep?.playLabel ?: "Play ${summary.title}",
+                        playLabel = keep?.playLabel ?: CardPlayLabel.Book(summary.title),
                     )
                 },
                 recent = summaries.filter { it.id != card?.id }.map(::row),
@@ -137,30 +137,30 @@ class LibraryViewModel(
             val document = runCatching { library.getDocument(summary.id, markOpened = false) }.getOrNull() ?: return@launch
             val listening = settings.bookListening(summary.id)
             val order = PlaybackOrder(library.playbackOrder(summary.id, settings.settings.value.readSkipped), document)
-            val sentence = order.startingSentenceId(summary.lastSentenceId) ?: return@launch
+            val finished = order.isFinishedAt(summary.lastSentenceId) || Progress.isFinished(Progress.percentRead(summary.lastSentenceId, summary.sentenceCount))
+            // A finished book shows where it ended (its saved place can be past the last sentence that is read).
+            val sentence = (if (finished) order.lastSentenceId else order.startingSentenceId(summary.lastSentenceId)) ?: return@launch
             val labels = PlaceLabels.of(document, order, sentence, listening.speed.rate, Pages.labelLookup(document.pages))
-            val finished = sentence == order.lastSentenceId && summary.lastSentenceId == order.lastSentenceId
-            val chapterNumber = labels.chapter?.number
-            val playLabel = if (chapterNumber != null) "Play ${summary.title} from chapter $chapterNumber" else "Play ${summary.title} from page ${labels.pageLabel}"
             state.update { current ->
                 current.copy(continueCard = current.continueCard?.takeIf { it.documentId == summary.id }?.copy(
                     location = labels.cardLocation(),
-                    timeLeft = Progress.formatTimeLeft(order.secondsLeft(sentence, listening.speed.rate)),
+                    timeLeft = if (finished) null else Progress.formatTimeLeft(order.secondsLeft(sentence, listening.speed.rate)),
                     finished = finished,
-                    playLabel = playLabel,
+                    playLabel = if (finished) CardPlayLabel.Again(summary.title) else CardPlayLabel.FromPage(summary.title, labels.pageLabel),
                 ))
             }
         }
     }
 
-    private fun row(summary: DocumentSummary) = RecentRow(
+    private fun row(summary: DocumentSummary) = Progress.percentRead(summary.lastSentenceId, summary.sentenceCount).let { percent -> RecentRow(
         documentId = summary.id,
         title = summary.title,
         initials = Covers.initials(summary.title),
         hue = Covers.hue(summary.title),
         meta = "${summary.pageCount} pages · opened ${Progress.formatRelativeTime(summary.lastOpenedAtEpochS, now())}",
-        percent = Progress.percentRead(summary.lastSentenceId, summary.sentenceCount),
-    )
+        percent = percent,
+        finished = Progress.isFinished(percent),
+    ) }
 
     override fun openBook(documentId: String, play: Boolean) = navigation.openReader(documentId, play)
 

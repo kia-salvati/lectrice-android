@@ -4,6 +4,9 @@
     <string name="library_settings">Settings</string>
     <string name="library_continue">Continue listening</string>
     <string name="library_finished">Finished · listen again</string>
+    <string name="library_card_play">Play %1$s</string>
+    <string name="library_card_play_from_page">Play %1$s from page %2$s</string>
+    <string name="library_card_play_again">Play %1$s again</string>
     <string name="library_recent">Recent</string>
     <string name="library_open_pdf">Open PDF</string>
     <string name="library_row_continue">Continue · %1$d %%</string>

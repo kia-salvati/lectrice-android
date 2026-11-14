@@ -46,6 +46,14 @@ class DocumentHelpersTest {
     }
 
     @Test
+    fun finishedAtTheLastSentenceReadOrPastIt() {
+        val order = PlaybackOrder(listOf(0, 1, 2, 4), document)
+        assertEquals(listOf(false, true, true), listOf(2, 4, 5).map(order::isFinishedAt))
+        assertEquals(false, order.isFinishedAt(null))
+        assertEquals(listOf(false, true, false), listOf(99, 100, null).map(Progress::isFinished))
+    }
+
+    @Test
     fun placeLabels() {
         val order = PlaybackOrder(listOf(0, 1, 2, 4, 5), document)
         val labels = PlaceLabels.of(document, order, 2, 1f, Pages.labelLookup(document.pages))

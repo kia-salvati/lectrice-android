@@ -61,6 +61,12 @@ class PlaybackOrder(val sentenceIds: List<Int>, document: Document) {
 
     val lastSentenceId: Int? get() = sentenceIds.lastOrNull()
 
+    /** The saved place is the last sentence read aloud, or past it (a caption or code block that isn't read). */
+    fun isFinishedAt(savedSentenceId: Int?): Boolean {
+        val last = lastSentenceId ?: return false
+        return savedSentenceId != null && savedSentenceId >= last
+    }
+
     /** Listening seconds from (after) [fromSentenceId] to [toSentenceId] (null = the end of the book). */
     fun secondsBetween(fromSentenceId: Int, toSentenceId: Int?, rate: Float): Double {
         val from = positionOfAny(fromSentenceId)?.plus(1) ?: sentenceIds.size

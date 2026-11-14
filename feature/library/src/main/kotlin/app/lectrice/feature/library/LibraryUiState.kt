@@ -14,9 +14,22 @@ data class ContinueCard(
     val finished: Boolean,
     /** The card's book is the one playing: its button pauses. */
     val playing: Boolean,
-    /** TalkBack label of the play button: "Play The Long Book from chapter 7". */
-    val playLabel: String,
+    val playLabel: CardPlayLabel,
 )
+
+/** TalkBack label of the card's play button; it names the page the card shows. */
+sealed interface CardPlayLabel {
+    val title: String
+
+    /** Before the book's place is known: "Play {title}". */
+    data class Book(override val title: String) : CardPlayLabel
+
+    /** "Play {title} from page {page}" */
+    data class FromPage(override val title: String, val page: String) : CardPlayLabel
+
+    /** Finished: "Play {title} again" (it starts over). */
+    data class Again(override val title: String) : CardPlayLabel
+}
 
 /** A Recent row (file 02 §3.3). */
 data class RecentRow(
@@ -29,6 +42,8 @@ data class RecentRow(
     val meta: String,
     /** Null = never started ("Start"). */
     val percent: Int?,
+    /** Read to the end: "Finished · listen again" instead of "Continue · 100 %". */
+    val finished: Boolean,
 )
 
 /** An import row: running ("Reading… cleaning text") or queued ("Waiting…"). */
