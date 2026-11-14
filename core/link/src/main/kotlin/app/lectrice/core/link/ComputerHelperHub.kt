@@ -238,9 +238,12 @@ class ComputerHelperHub(
      * rebuilt its services (an engine reload makes a new, stopped fill). While the computer is lost, browses again
      * now and then: Android doesn't report a computer that went away without a goodbye (crash, sleep) when it comes
      * back, and the fresh sighting is what brings the link back at once instead of at the next 60 s retry.
+     * The phone's model, loaded when the computer was lost, is let go once the computer has been back for a while
+     * (playback holds the engine, so the engine's own idle unload never comes while listening).
      */
     private suspend fun watchLoop() {
         var lostForMs = 0L
+        var connectedForMs = 0L
         while (true) {
             delay(WATCH_MS)
             val status = runCatching { core.call("helper_status") { it.helperStatus() } }.getOrNull() ?: continue
@@ -249,7 +252,14 @@ class ComputerHelperHub(
                 lostForMs = 0L
                 finder.restart()
             }
-            val busy = (status.state == HelperStateRecord.Connected || status.state == HelperStateRecord.Busy) && status.inFlight > 0u
+            val connected = status.state == HelperStateRecord.Connected || status.state == HelperStateRecord.Busy
+            connectedForMs = if (connected && status.engineLoaded) connectedForMs + WATCH_MS else 0L
+            if (connectedForMs >= RELEASE_MODEL_MS) {
+                connectedForMs = 0L
+                runCatching { core.blocking("unload_engine") { it.unloadEngine() } }
+                Log.i(SCOPE, "phone model released, the computer makes the audio")
+            }
+            val busy = connected && status.inFlight > 0u
             if (busy && !wifiLock.isHeld) wifiLock.acquire() else if (!busy && wifiLock.isHeld) wifiLock.release()
             if (status.state == HelperStateRecord.Off) {
                 mutex.withLock { if (running && core.call("helper_start") { it.helperStart() }) Log.i(SCOPE, "helper fill restarted after an engine reload") }
@@ -358,6 +368,8 @@ class ComputerHelperHub(
         private const val LOG_ID = 8
         private const val WATCH_MS = 2_000L
         private const val REDISCOVER_MS = 10_000L
+        /** Like the engine's own idle unload (file 08): 5 minutes. */
+        private const val RELEASE_MODEL_MS = 5 * 60_000L
         private const val WIFI_LOCK_TAG = "lectrice:helper"
         /** Deprecated on API 34+ in favour of the low-latency mode, which only works with the screen on (file 24 §3.10). */
         @Suppress("DEPRECATION")
