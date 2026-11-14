@@ -25,9 +25,6 @@ class SpeechParams {
 
     /** Updated with every clip: estimated 1× audio already made after it (core C25). */
     @Volatile var readyAheadMs: Long = 0
-
-    /** Set while the current book plays from its audiobook file (file 23): clips are slices of that file. */
-    @Volatile var audiobook: AudiobookPlayback? = null
 }
 
 /** The current book's audiobook file and where each sentence is in it. */
@@ -51,36 +48,15 @@ object SentenceUri {
 /** The core's error, carried through ExoPlayer's `IOException` path to the controller's `onPlayerError`. */
 class SpeechIOException(val error: LectriceError) : IOException(error.name.name)
 
-/**
- * Gets a sentence's WAV from the Rust core (spec §7.3). `open` blocks on ExoPlayer's loader thread until the clip is
- * cached or made: the core's one speech queue is the only place speech is made (playback and read-ahead share it).
- */
-@UnstableApi
-class SentenceDataSource(
-    private val core: RustCore,
-    private val engine: EngineHost,
-    private val params: SpeechParams,
-    private val slicer: AudiobookSlicer,
-) : BaseDataSource(false) {
-    private var uri: Uri? = null
-    private var bytes: ByteArray = EMPTY
-    private var position = 0
-    private var opened = false
+/** Where a sentence's audio comes from, chosen when a book loads. [audio] blocks on ExoPlayer's loader thread. */
+sealed interface SentenceAudioSource {
+    /** The sentence's WAV; throws [SpeechIOException]. */
+    fun audio(documentId: String, sentenceId: Int): ByteArray
+}
 
-    override fun open(dataSpec: DataSpec): Long {
-        val (documentId, sentenceId) = SentenceUri.parse(dataSpec.uri) ?: throw IOException("not a sentence uri")
-        uri = dataSpec.uri
-        transferInitializing(dataSpec)
-        val audiobook = params.audiobook?.takeIf { it.documentId == documentId }
-        bytes = if (audiobook != null) fromAudiobook(audiobook, sentenceId) else generated(documentId, sentenceId)
-        position = dataSpec.position.toInt().coerceIn(0, bytes.size)
-        opened = true
-        transferStarted(dataSpec)
-        val remaining = bytes.size - position
-        return if (dataSpec.length != C.LENGTH_UNSET.toLong()) minOf(dataSpec.length, remaining.toLong()) else remaining.toLong()
-    }
-
-    private fun generated(documentId: String, sentenceId: Int): ByteArray {
+/** Speech made by the core (on the phone, or by the computer helper), cached or made now. */
+class GeneratedSpeech(private val core: RustCore, private val engine: EngineHost, private val params: SpeechParams) : SentenceAudioSource {
+    override fun audio(documentId: String, sentenceId: Int): ByteArray {
         if (engine.ensureLoadedBlocking() == null) {
             throw SpeechIOException(LectriceError(if (engine.activeModel() == null) ErrorName.ModelMissing else ErrorName.SpeechEngineUnavailable))
         }
@@ -92,15 +68,41 @@ class SentenceDataSource(
         params.readyAheadMs = spoken.readyAheadMs.toLong()
         return spoken.wav
     }
+}
 
-    /** File 23 §3.4: the sentence's slice of the file; no engine, nothing cached. */
-    private fun fromAudiobook(audiobook: AudiobookPlayback, sentenceId: Int): ByteArray {
-        val slice = audiobook.slices[sentenceId] ?: throw SpeechIOException(LectriceError(ErrorName.SentenceNotFound))
+/** The book's audiobook file: each sentence is its slice of the file; no engine, nothing cached. */
+class AudiobookSlices(val playback: AudiobookPlayback, private val slicer: AudiobookSlicer) : SentenceAudioSource {
+    override fun audio(documentId: String, sentenceId: Int): ByteArray {
+        val slice = playback.slices[sentenceId]?.takeIf { documentId == playback.documentId } ?: throw SpeechIOException(LectriceError(ErrorName.SentenceNotFound))
         return try {
-            slicer.slice(audiobook.uri, slice.startMs, slice.endMs)
+            slicer.slice(playback.uri, slice.startMs, slice.endMs)
         } catch (error: LectriceError) {
             throw SpeechIOException(error)
         }
+    }
+}
+
+/**
+ * Gets a sentence's WAV from the current [SentenceAudioSource]. `open` blocks on ExoPlayer's loader thread until the clip
+ * is ready: for speech, the core's one speech queue is the only place it is made (playback and read-ahead share it).
+ */
+@UnstableApi
+class SentenceDataSource(private val source: () -> SentenceAudioSource) : BaseDataSource(false) {
+    private var uri: Uri? = null
+    private var bytes: ByteArray = EMPTY
+    private var position = 0
+    private var opened = false
+
+    override fun open(dataSpec: DataSpec): Long {
+        val (documentId, sentenceId) = SentenceUri.parse(dataSpec.uri) ?: throw IOException("not a sentence uri")
+        uri = dataSpec.uri
+        transferInitializing(dataSpec)
+        bytes = source().audio(documentId, sentenceId)
+        position = dataSpec.position.toInt().coerceIn(0, bytes.size)
+        opened = true
+        transferStarted(dataSpec)
+        val remaining = bytes.size - position
+        return if (dataSpec.length != C.LENGTH_UNSET.toLong()) minOf(dataSpec.length, remaining.toLong()) else remaining.toLong()
     }
 
     override fun read(buffer: ByteArray, offset: Int, length: Int): Int {
@@ -125,8 +127,8 @@ class SentenceDataSource(
         bytes = EMPTY
     }
 
-    class Factory(private val core: RustCore, private val engine: EngineHost, private val params: SpeechParams, private val slicer: AudiobookSlicer) : DataSource.Factory {
-        override fun createDataSource(): DataSource = SentenceDataSource(core, engine, params, slicer)
+    class Factory(private val source: () -> SentenceAudioSource) : DataSource.Factory {
+        override fun createDataSource(): DataSource = SentenceDataSource(source)
     }
 
     private companion object {

@@ -76,6 +76,9 @@ class Media3PlaybackController(
     private val main = Handler(Looper.getMainLooper())
     private val params = SpeechParams()
     private val slicer = AudiobookSlicer(context)
+    private val generated = GeneratedSpeech(core, engine, params)
+    /** Read on ExoPlayer's loader thread. */
+    @Volatile private var sentenceAudio: SentenceAudioSource = generated
     private val mutable = MutableStateFlow(PlaybackState())
     override val state: StateFlow<PlaybackState> = mutable.asStateFlow()
 
@@ -119,7 +122,7 @@ class Media3PlaybackController(
             .build()
         val attributes = AudioAttributes.Builder().setUsage(C.USAGE_MEDIA).setContentType(C.AUDIO_CONTENT_TYPE_SPEECH).build()
         return ExoPlayer.Builder(context)
-            .setMediaSourceFactory(ProgressiveMediaSource.Factory(SentenceDataSource.Factory(core, engine, params, slicer)))
+            .setMediaSourceFactory(ProgressiveMediaSource.Factory(SentenceDataSource.Factory { sentenceAudio }))
             .setAudioAttributes(attributes, true)
             .setHandleAudioBecomingNoisy(true)
             .setWakeMode(C.WAKE_MODE_LOCAL)
@@ -148,10 +151,10 @@ class Media3PlaybackController(
         val source = settings.audioSource(opened.id)
         val timeline = if (source == AudioSource.Audiobook) audiobooks.timeline(opened.id)?.takeIf { it.mode == AudiobookMode.Sentences } else null
         audiobookMissing = source == AudioSource.Audiobook && timeline == null
-        params.audiobook = timeline?.let { found ->
+        sentenceAudio = timeline?.let { found ->
             val uri = audiobooks.links.value[opened.id]?.uri ?: return@let null
-            AudiobookPlayback(opened.id, uri, found.sentences.associateBy { it.sentenceId })
-        }
+            AudiobookSlices(AudiobookPlayback(opened.id, uri, found.sentences.associateBy { it.sentenceId }), slicer)
+        } ?: generated
         fileSpeedPercent = timeline?.fileSpeedPercent ?: PERCENT
         val built = try {
             buildOrder(opened, readSkipped)
@@ -187,12 +190,12 @@ class Media3PlaybackController(
 
     /** The audiobook's sentences (file 23 §3.4), else the core's playback order. */
     private suspend fun buildOrder(opened: Document, readSkipped: Boolean): PlaybackOrder {
-        val fromFile = params.audiobook?.takeIf { it.documentId == opened.id }
+        val fromFile = (sentenceAudio as? AudiobookSlices)?.playback?.takeIf { it.documentId == opened.id }
         val ids = fromFile?.slices?.values?.sortedBy { it.startMs }?.map { it.sentenceId } ?: library.playbackOrder(opened.id, readSkipped)
         return withContext(Dispatchers.Default) { PlaybackOrder(ids, opened) }
     }
 
-    private fun fromFile(): Boolean = params.audiobook != null
+    private fun fromFile(): Boolean = sentenceAudio is AudiobookSlices
 
     /** A file made at 1.5× plays at 1.0 for "1.5×" (file 23 §3.4). */
     private fun playerRate(speed: PlaybackSpeed): Float = if (fromFile()) speed.rate * PERCENT / fileSpeedPercent else speed.rate
@@ -316,7 +319,7 @@ class Media3PlaybackController(
         setSleep(SleepTimer.Off)
         document = null
         order = null
-        params.audiobook = null
+        sentenceAudio = generated
         audiobookMissing = false
         slicer.close()
         readAhead.onBook(null)
