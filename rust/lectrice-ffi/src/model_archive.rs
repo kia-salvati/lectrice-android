@@ -1,9 +1,10 @@
 //! Unpacks a voice model archive (`.tar.bz2`) the app downloaded and checked (its SHA-256 is checked in Kotlin while it
 //! downloads). Only the kept files are written; an entry that is a link or whose path leaves the archive refuses the whole
-//! archive.
+//! archive. The folders are written `0700` and the files `0600`: only the app reads them.
 
-use std::fs::{self, File};
+use std::fs::{self, DirBuilder, File, OpenOptions, Permissions};
 use std::io::{self, BufReader};
+use std::os::unix::fs::{DirBuilderExt, OpenOptionsExt, PermissionsExt};
 use std::path::{Component, Path, PathBuf};
 
 use bzip2::read::BzDecoder;
@@ -16,6 +17,8 @@ use crate::errors::CoreResult;
 const TARGET: &str = "lectrice_ffi";
 /// `ENOSPC` on Linux/Android.
 const NO_SPACE: i32 = 28;
+const DIR_MODE: u32 = 0o700;
+const FILE_MODE: u32 = 0o600;
 
 /// Writes the entries under `archive_root/` whose first path part is in `keep` into `target_dir`; returns the bytes written.
 #[uniffi::export]
@@ -23,6 +26,7 @@ pub fn unpack_model_archive(archive_path: String, archive_root: String, keep: Ve
     let file = File::open(&archive_path).map_err(|error| AppError::new(ErrorName::FileUnreadable).with_source(error))?;
     let mut archive = Archive::new(BzDecoder::new(BufReader::new(file)));
     let target = PathBuf::from(target_dir);
+    private_dir(&target)?;
     let mut written = 0u64;
     let mut files = 0u32;
     for entry in archive.entries().map_err(not_a_model)? {
@@ -38,15 +42,22 @@ pub fn unpack_model_archive(archive_path: String, archive_root: String, keep: Ve
         }
         let output_path = target.join(&relative);
         if let Some(parent) = output_path.parent() {
-            fs::create_dir_all(parent).map_err(write_error)?;
+            private_dir(parent)?;
         }
-        let mut output = File::create(&output_path).map_err(write_error)?;
+        let mut output = OpenOptions::new().write(true).create(true).truncate(true).mode(FILE_MODE).open(&output_path).map_err(write_error)?;
         written += io::copy(&mut entry, &mut output).map_err(write_error)?;
         output.sync_all().map_err(write_error)?;
         files += 1;
     }
     info!(target: TARGET, files, bytes = written, "model archive unpacked");
     Ok(written)
+}
+
+/// Creates the folder (and its parents) if needed and makes it the app's alone, whatever mode it was made with.
+fn private_dir(path: &Path) -> CoreResult<()> {
+    DirBuilder::new().recursive(true).mode(DIR_MODE).create(path).map_err(write_error)?;
+    fs::set_permissions(path, Permissions::from_mode(DIR_MODE)).map_err(write_error)?;
+    Ok(())
 }
 
 /// The path below `root/`; `None` for entries outside it. `..` or an absolute path refuses the archive.
@@ -107,6 +118,10 @@ mod tests {
         assert!(target.join("model.onnx").is_file());
         assert!(target.join("espeak-ng-data/phontab").is_file());
         assert!(!target.join("lexicon-zh.txt").exists());
+        let mode = |path: PathBuf| fs::metadata(path).unwrap().permissions().mode() & 0o777;
+        assert_eq!(mode(target.clone()), DIR_MODE);
+        assert_eq!(mode(target.join("espeak-ng-data")), DIR_MODE);
+        assert_eq!(mode(target.join("espeak-ng-data/phontab")), FILE_MODE);
     }
 
     #[test]
