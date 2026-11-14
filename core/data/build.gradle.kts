@@ -36,6 +36,7 @@ android {
         ndk { abiFilters += "arm64-v8a" }
         consumerProguardFiles("consumer-rules.pro")
     }
+    testOptions { unitTests.isReturnDefaultValues = true }
 }
 
 androidComponents {

@@ -1,14 +1,13 @@
 package app.lectrice.core.data
 
-import android.content.Context
 import java.io.File
 
 /**
- * Where installed models live: `filesDir/models/<model id>/` (file 20 §3.1). A folder counts as installed only once its
+ * Where installed models live: `filesDir/models/<model id>/`. A folder counts as installed only once its
  * `.installed` marker is written (after a checked unpack), so a half-unpacked folder is never loaded.
  */
-class ModelStore(private val context: Context) {
-    val root: File get() = File(context.filesDir, MODELS_DIR)
+class ModelStore(private val filesDir: File) {
+    val root: File get() = File(filesDir, MODELS_DIR)
 
     fun dir(spec: ModelSpec): File = File(root, spec.info.id)
 

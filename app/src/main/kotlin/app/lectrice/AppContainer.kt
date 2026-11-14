@@ -3,6 +3,7 @@ package app.lectrice
 import android.content.Context
 import androidx.core.content.ContextCompat
 import app.lectrice.core.data.AndroidAudiobookRepository
+import app.lectrice.core.data.AndroidInstallerDevice
 import app.lectrice.core.data.CoreExportRepository
 import app.lectrice.core.data.CoreLibraryRepository
 import app.lectrice.core.data.CoreVoiceRepository
@@ -57,7 +58,7 @@ class AppContainer(context: Context, debug: Boolean) {
     val settings: SettingsStore = PreferencesSettingsStore(appContext)
     val library: LibraryRepository = CoreLibraryRepository(appContext, core)
     val voices: VoiceRepository = CoreVoiceRepository(core)
-    val models = ModelStore(appContext)
+    val models = ModelStore(appContext.filesDir)
     val engine = EngineHost(core, models, EngineFactory(models), settings, scope)
     val positions = PositionSaver(library, scope)
     val audiobooks: AudiobookRepository = AndroidAudiobookRepository(appContext, core)
@@ -69,7 +70,7 @@ class AppContainer(context: Context, debug: Boolean) {
     val playback: PlaybackController = media3
     val voiceSamples: VoiceSamplePlayer = CoreVoiceSamplePlayer(appContext, core, engine, media3, scope)
     private val conditions = DeviceConditions(appContext)
-    val installer = ModelInstaller(appContext, models)
+    val installer = ModelInstaller(models, AndroidInstallerDevice(appContext))
     val exports = CoreExportRepository(appContext, core, core.dataDir, engine)
     val prepare = PrepareCenter(appContext, core, scope)
     val work = WorkCenter(appContext, installer, exports, prepare, engine, playback, settings, scope)

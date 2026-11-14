@@ -29,18 +29,7 @@ class RustCore(private val context: Context, private val debug: Boolean) {
     /** For callers already on a background thread (ExoPlayer's loader, the export callbacks). */
     fun <T> blocking(name: String, block: (LectriceCore) -> T): T {
         if (debug && Looper.myLooper() == Looper.getMainLooper()) error("core call $name on the main thread")
-        val started = System.nanoTime()
-        try {
-            return block(core)
-        } catch (failed: CoreException.Failed) {
-            Log.w(SCOPE, "$name failed: ${failed.name} (${failed.code})")
-            throw LectriceError(ErrorName.fromName(failed.name), failed)
-        } catch (error: CoreException) {
-            Log.w(SCOPE, "$name failed", error)
-            throw LectriceError(ErrorName.Internal, error)
-        } finally {
-            Log.d(SCOPE, "$name ${(System.nanoTime() - started) / NANOS_PER_MS} ms")
-        }
+        return function(name) { block(core) }
     }
 
     private fun open(): LectriceCore {
@@ -75,6 +64,23 @@ class RustCore(private val context: Context, private val debug: Boolean) {
 
     companion object {
         const val IMPORT_MAX_MB = 200uL
+
+        /** A core function that needs no `LectriceCore` (model unpacking): same error mapping and timing as [blocking]. */
+        fun <T> function(name: String, block: () -> T): T {
+            val started = System.nanoTime()
+            try {
+                return block()
+            } catch (failed: CoreException.Failed) {
+                Log.w(SCOPE, "$name failed: ${failed.name} (${failed.code})")
+                throw LectriceError(ErrorName.fromName(failed.name), failed)
+            } catch (error: CoreException) {
+                Log.w(SCOPE, "$name failed", error)
+                throw LectriceError(ErrorName.Internal, error)
+            } finally {
+                Log.d(SCOPE, "$name ${(System.nanoTime() - started) / NANOS_PER_MS} ms")
+            }
+        }
+
         private const val SCOPE = "RustCore"
         private const val CORE_SCOPE = "core"
         private const val DATA_DIR = "lectrice"

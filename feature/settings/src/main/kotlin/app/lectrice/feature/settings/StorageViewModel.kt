@@ -146,7 +146,7 @@ class StorageViewModel(
                     booksHeader = "${books.size} ${if (books.size == 1) "book" else "books"} · ${Sizes.format(libraryBytes)}, plus ${Sizes.format(cacheBytes)} of audio",
                     books = books.sortedByDescending { book -> book.libraryBytes + book.audioBytes },
                     cacheLine = "${Sizes.format(cacheBytes)} of ${Sizes.format(usage?.cacheCapBytes ?: 0)}",
-                    cacheFraction = if ((usage?.cacheCapBytes ?: 0) > 0) cacheBytes.toFloat() / usage!!.cacheCapBytes else 0f,
+                    cacheFraction = usage?.cacheCapBytes?.takeIf { it > 0 }?.let { cacheBytes.toFloat() / it } ?: 0f,
                     exports = exportRows,
                 )
             }

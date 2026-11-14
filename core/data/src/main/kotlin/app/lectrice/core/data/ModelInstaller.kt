@@ -35,12 +35,45 @@ data class DownloadProgress(
     val wifiOnly: Boolean,
 )
 
+/** What a download needs from the phone: space and the network. */
+interface InstallerDevice {
+    fun freeBytes(): Long
+
+    fun isMetered(): Boolean
+
+    /** A validated network, and an unmetered one when [wifiOnly]. */
+    fun hasNetwork(wifiOnly: Boolean): Boolean
+}
+
+class AndroidInstallerDevice(private val context: Context) : InstallerDevice {
+    override fun freeBytes(): Long {
+        val storage = context.getSystemService(StorageManager::class.java)
+        return storage.getAllocatableBytes(storage.getUuidForPath(context.filesDir))
+    }
+
+    override fun isMetered(): Boolean = context.getSystemService(ConnectivityManager::class.java).isActiveNetworkMetered
+
+    override fun hasNetwork(wifiOnly: Boolean): Boolean {
+        val connectivity = context.getSystemService(ConnectivityManager::class.java)
+        val capabilities = connectivity.getNetworkCapabilities(connectivity.activeNetwork) ?: return false
+        if (!capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) return false
+        return !wifiOnly || capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
+    }
+}
+
 /**
  * Downloads a model archive with resumable `Range` requests, checks its SHA-256 against the catalog, and unpacks it
- * through the core (file 01 §3.4, with one archive per model instead of single files: the models are released as
- * `.tar.bz2` on GitHub). Runs inside the foreground work service; one download at a time.
+ * through the core (one `.tar.bz2` per model, released on GitHub). Runs inside the foreground work service; one
+ * download at a time. [connect] and [unpack] are the network and the core's unpacker (replaced in tests).
  */
-class ModelInstaller(private val context: Context, private val models: ModelStore) {
+class ModelInstaller(
+    private val models: ModelStore,
+    private val device: InstallerDevice,
+    private val connect: (String) -> HttpURLConnection = { url -> URL(url).openConnection() as HttpURLConnection },
+    private val unpack: (archive: File, spec: ModelSpec, target: File) -> Unit = { archive, spec, target ->
+        RustCore.function("unpack_model_archive") { unpackModelArchive(archive.path, spec.archiveRoot, spec.keep, target.path) }
+    },
+) {
     private val progressState = MutableStateFlow<DownloadProgress?>(null)
     val progress: StateFlow<DownloadProgress?> = progressState.asStateFlow()
 
@@ -53,19 +86,11 @@ class ModelInstaller(private val context: Context, private val models: ModelStor
     /** Free space needed before starting or resuming: what's left to download + the unpacked size + 200 MB to work with. */
     fun spaceNeeded(spec: ModelSpec): Long = spec.info.downloadBytes - downloadedBytes(spec) + spec.info.installedBytes + WORK_MARGIN_BYTES
 
-    fun freeBytes(): Long {
-        val storage = context.getSystemService(StorageManager::class.java)
-        return storage.getAllocatableBytes(storage.getUuidForPath(context.filesDir))
-    }
+    fun freeBytes(): Long = device.freeBytes()
 
-    fun isMetered(): Boolean = context.getSystemService(ConnectivityManager::class.java).isActiveNetworkMetered
+    fun isMetered(): Boolean = device.isMetered()
 
-    fun hasNetwork(wifiOnly: Boolean): Boolean {
-        val connectivity = context.getSystemService(ConnectivityManager::class.java)
-        val capabilities = connectivity.getNetworkCapabilities(connectivity.activeNetwork) ?: return false
-        if (!capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) return false
-        return !wifiOnly || capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
-    }
+    private fun hasNetwork(wifiOnly: Boolean): Boolean = device.hasNetwork(wifiOnly)
 
     fun publish(progress: DownloadProgress?) {
         progressState.value = progress
@@ -117,7 +142,7 @@ class ModelInstaller(private val context: Context, private val models: ModelStor
                 Log.w(SCOPE, "archive hash mismatch, retrying id=${spec.info.id}")
                 continue
             }
-            unpack(spec, partFile(spec))
+            installArchive(spec, partFile(spec))
             partFile(spec).delete()
             return
         }
@@ -135,7 +160,7 @@ class ModelInstaller(private val context: Context, private val models: ModelStor
             val hash = sha256(temp)
             val spec = ModelSpec.entries.firstOrNull { it.archiveSha256 == hash } ?: throw LectriceError(ErrorName.ModelChecksumMismatch)
             if (freeBytes() < spec.info.installedBytes + WORK_MARGIN_BYTES) throw LectriceError(ErrorName.StorageFull, bytes = spec.info.installedBytes + WORK_MARGIN_BYTES)
-            unpack(spec, temp)
+            installArchive(spec, temp)
             return spec
         } catch (error: TooLargeException) {
             throw LectriceError(ErrorName.ModelChecksumMismatch, error)
@@ -154,7 +179,7 @@ class ModelInstaller(private val context: Context, private val models: ModelStor
         val part = partFile(spec)
         var done = part.length()
         if (done >= spec.info.downloadBytes) return
-        val connection = (URL(spec.url).openConnection() as HttpURLConnection).apply {
+        val connection = connect(spec.url).apply {
             connectTimeout = CONNECT_TIMEOUT_MS
             readTimeout = READ_TIMEOUT_MS
             instanceFollowRedirects = true
@@ -194,17 +219,17 @@ class ModelInstaller(private val context: Context, private val models: ModelStor
         }
     }
 
-    private fun unpack(spec: ModelSpec, archive: File) {
+    private fun installArchive(spec: ModelSpec, archive: File) {
         progressState.update { it?.copy(state = ModelInstallState.Installing) }
         val target = models.dir(spec)
         val staging = File(models.root, "${spec.info.id}.unpacking")
         staging.deleteRecursively()
         staging.mkdirs()
         try {
-            unpackModelArchive(archive.path, spec.archiveRoot, spec.keep, staging.path)
-        } catch (error: uniffi.lectrice_ffi.CoreException.Failed) {
+            unpack(archive, spec, staging)
+        } catch (error: LectriceError) {
             staging.deleteRecursively()
-            throw LectriceError(ErrorName.fromName(error.name), error)
+            throw error
         }
         target.deleteRecursively()
         if (!staging.renameTo(target)) throw LectriceError(ErrorName.StorageFailed)

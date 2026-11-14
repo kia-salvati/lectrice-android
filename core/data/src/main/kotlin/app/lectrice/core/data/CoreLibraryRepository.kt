@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.storage.StorageManager
 import android.provider.OpenableColumns
+import android.system.ErrnoException
+import android.system.OsConstants
 import app.lectrice.core.model.Document
 import app.lectrice.core.model.DocumentSummary
 import app.lectrice.core.model.ErrorName
@@ -140,6 +142,11 @@ class CoreLibraryRepository(private val context: Context, private val core: Rust
         private const val ID_LOG_CHARS = 12
         private const val NANOS_PER_MS = 1_000_000
 
-        fun isOutOfSpace(error: IOException): Boolean = error.message?.contains("ENOSPC") == true || error.message?.contains("No space left") == true
+        /** `ENOSPC` anywhere in the cause chain; the message only when no errno came with it. */
+        fun isOutOfSpace(error: IOException): Boolean {
+            val causes = generateSequence<Throwable>(error) { it.cause }.toList()
+            causes.filterIsInstance<ErrnoException>().firstOrNull()?.let { return it.errno == OsConstants.ENOSPC }
+            return causes.any { it.message?.contains("ENOSPC") == true || it.message?.contains("No space left") == true }
+        }
     }
 }
