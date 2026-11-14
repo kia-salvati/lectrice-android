@@ -1,11 +1,18 @@
 package app.lectrice.core.playback
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.ServiceInfo
+import android.os.Handler
+import android.os.Looper
 import android.os.Process
 import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.session.DefaultMediaNotificationProvider
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
 import app.lectrice.core.data.Log
@@ -39,6 +46,8 @@ interface PlaybackHost {
 class PlaybackService : MediaSessionService() {
     private var session: MediaSession? = null
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private val handler = Handler(Looper.getMainLooper())
+    private var promisePending = false
 
     private val controller: Media3PlaybackController get() = (application as PlaybackHost).playbackController
 
@@ -94,6 +103,51 @@ class PlaybackService : MediaSessionService() {
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession? = session
 
+    /** Media3 handles the intent; what it leaves unanswered is settled by [ForegroundPromise]. */
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val result = super.onStartCommand(intent, flags, startId)
+        if (intent == null) return result
+        when (ForegroundPromise.answer(inForeground(), mediaKey = intent.action == Intent.ACTION_MEDIA_BUTTON)) {
+            ForegroundPromise.Answer.Nothing -> Unit
+            ForegroundPromise.Answer.KeepIfStillIdle -> {
+                promisePending = true
+                handler.postDelayed(::keepPendingPromise, ForegroundPromise.MEDIA_KEY_GRACE_MS)
+            }
+            ForegroundPromise.Answer.KeepAndStop -> {
+                Log.w(SCOPE, "start with nothing to play: ended startId=$startId")
+                keepForegroundPromise()
+                stopSelf(startId)
+            }
+        }
+        return result
+    }
+
+    private fun inForeground(): Boolean = foregroundServiceType != ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE
+
+    private fun keepPendingPromise() {
+        if (!promisePending) return
+        promisePending = false
+        if (!inForeground()) keepForegroundPromise()
+    }
+
+    /** Enters the foreground and leaves it at once; the notification is gone before Android would show it. */
+    private fun keepForegroundPromise() {
+        val channel = NotificationChannel(
+            DefaultMediaNotificationProvider.DEFAULT_CHANNEL_ID,
+            getString(DefaultMediaNotificationProvider.DEFAULT_CHANNEL_NAME_RESOURCE_ID),
+            NotificationManager.IMPORTANCE_LOW,
+        )
+        getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+        val notification = Notification.Builder(this, channel.id).setSmallIcon(androidx.media3.session.R.drawable.media3_notification_small_icon).build()
+        try {
+            startForeground(PROMISE_NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
+        } catch (error: IllegalStateException) {
+            // Android 12+ refuses a foreground start from the background; asking still counts as the answer.
+            Log.w(SCOPE, "foreground start refused: ${error.javaClass.simpleName}")
+        }
+        stopForeground(STOP_FOREGROUND_REMOVE)
+    }
+
     /** Swiped away while paused: stop, so the notification goes. */
     override fun onTaskRemoved(rootIntent: Intent?) {
         val player = session?.player
@@ -104,6 +158,8 @@ class PlaybackService : MediaSessionService() {
     }
 
     override fun onDestroy() {
+        handler.removeCallbacksAndMessages(null)
+        keepPendingPromise()
         session?.release()
         session = null
         scope.cancel()
@@ -112,5 +168,8 @@ class PlaybackService : MediaSessionService() {
 
     private companion object {
         const val SCOPE = "PlaybackService"
+
+        /** Not Media3's own notification id (1001), so its notification is never replaced. */
+        const val PROMISE_NOTIFICATION_ID = 1002
     }
 }

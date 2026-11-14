@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
+        <!-- Not exported: another app could start it with a forged media key (and read the book aloud) or connect to
+             the session. The lock screen, the notification, Bluetooth and headset keys don't bind to it: they reach
+             the session through Android's own media session, and the app binds from the same uid. Exporting it
+             again (for a car's media browser) needs the checks in ControllerPolicy and ForegroundPromise. -->
         <service
             android:name="app.lectrice.core.playback.PlaybackService"
-            android:exported="true"
+            android:exported="false"
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
                 <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
         </service>
         <!-- Media3 playback resumption: a play key (headset, Bluetooth, lock screen) restarts the last book after the
-             process died. Media3 sets this receiver as the session's media button receiver. -->
+             process died. Media3 sets this receiver as the session's media button receiver; Android itself sends it
+             the key, which a non-exported receiver still gets. -->
         <receiver
             android:name="androidx.media3.session.MediaButtonReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>

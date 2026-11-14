@@ -1,8 +1,9 @@
 package app.lectrice.core.playback
 
 /**
- * Who may use the media session. The service has to be exported (the system UI, Bluetooth and cars bind to it), so any
- * installed app can ask for a connection; the items carry the sentence being read, the book's title and its id.
+ * Who may use the media session. The service isn't exported, but a controller can still ask for a connection through
+ * Android's own media session (a notification listener gets its token); the items carry the sentence being read, the
+ * book's title and its id.
  */
 internal object ControllerPolicy {
     enum class Access {
