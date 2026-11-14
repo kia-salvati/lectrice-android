@@ -36,6 +36,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -372,13 +373,18 @@ private fun Teleprompter(state: ReaderUiState, actions: ReaderActions, modifier:
                 .padding(start = 12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         ) {
-            val previous = if (finished) listen.current else listen.previous
-            val neighbour = LectriceTheme.type.serif(NEIGHBOUR_SP.sp, NEIGHBOUR_LINE_SP.sp)
-            Box(Modifier.heightIn(max = with(density) { (NEIGHBOUR_LINE_SP * NEIGHBOUR_LINES).sp.toDp() }).clipToBounds(), contentAlignment = Alignment.BottomStart) {
-                if (previous != null) Text(previous, style = neighbour, color = c.fg2)
+            if (density.fontScale >= TALL_FONT_SCALE) {
+                // At a very large font the neighbours give their space to the current sentence, which scrolls if it still doesn't fit.
+                Box(Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) { CurrentSlot(listen, readSkipped, finished, playing, whole = true) }
+            } else {
+                val previous = if (finished) listen.current else listen.previous
+                val neighbour = LectriceTheme.type.serif(NEIGHBOUR_SP.sp, NEIGHBOUR_LINE_SP.sp)
+                Box(Modifier.heightIn(max = with(density) { (NEIGHBOUR_LINE_SP * NEIGHBOUR_LINES).sp.toDp() }).clipToBounds(), contentAlignment = Alignment.BottomStart) {
+                    if (previous != null) Text(previous, style = neighbour, color = c.fg2)
+                }
+                CurrentSlot(listen, readSkipped, finished, playing, whole = false)
+                if (listen.next != null && !finished) Text(listen.next, style = neighbour, color = c.fg2, maxLines = NEIGHBOUR_LINES, overflow = TextOverflow.Ellipsis)
             }
-            CurrentSlot(listen, readSkipped, finished, playing)
-            if (listen.next != null && !finished) Text(listen.next, style = neighbour, color = c.fg2, maxLines = NEIGHBOUR_LINES, overflow = TextOverflow.Ellipsis)
         }
         flashIcon?.let { icon ->
             Box(
@@ -392,9 +398,12 @@ private fun Teleprompter(state: ReaderUiState, actions: ReaderActions, modifier:
     }
 }
 
-/** The current slot: the sentence (28/40 500, 24/34 past six lines), a heading at 600, or the R13c card for code and tables. */
+/**
+ * The current slot: the sentence (28/40 500, 24/34 past six lines), a heading at 600, or the R13c card for code and
+ * tables. [whole] shows every line of the sentence instead of cutting it at six.
+ */
 @Composable
-private fun CurrentSlot(listen: ListenInfo, readSkipped: Boolean, finished: Boolean, playing: Boolean) {
+private fun CurrentSlot(listen: ListenInfo, readSkipped: Boolean, finished: Boolean, playing: Boolean, whole: Boolean) {
     val c = LectriceTheme.colors
     val type = LectriceTheme.type
     val isBox = listen.currentBlockKind == BlockKind.Code || listen.currentBlockKind == BlockKind.Table
@@ -411,7 +420,7 @@ private fun CurrentSlot(listen: ListenInfo, readSkipped: Boolean, finished: Bool
                     BasicText(
                         listen.current,
                         style = style.copy(color = c.fg),
-                        maxLines = if (long) MAX_CURRENT_LINES else Int.MAX_VALUE,
+                        maxLines = if (long && !whole) MAX_CURRENT_LINES else Int.MAX_VALUE,
                         overflow = TextOverflow.Ellipsis,
                         onTextLayout = { if (!long && it.lineCount > MAX_CURRENT_LINES) long = true },
                     )
