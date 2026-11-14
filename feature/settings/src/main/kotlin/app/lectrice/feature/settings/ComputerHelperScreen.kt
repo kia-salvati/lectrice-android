@@ -89,7 +89,9 @@ import app.lectrice.core.model.FoundComputer
 import app.lectrice.core.model.HelperAttention
 import app.lectrice.core.model.HelperLink
 import app.lectrice.core.model.HelperState
+import app.lectrice.core.model.NeededModel
 import app.lectrice.core.model.PairedComputer
+import app.lectrice.core.model.Sizes
 
 /** What waits behind the H6 rationale sheet. */
 private enum class PermissionAsk { Enable, Pair }
@@ -171,7 +173,7 @@ private fun HelperPage(
                 trailing = { LectriceSwitch(helper.enabled, onEnable, contentDescription = switchLabel, enabled = paired) },
             )
             Text(stringResource(R.string.helper_explain), Modifier.padding(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 8.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-            if (attention != null) AttentionLine(attention, helper.active?.shownName, actions::retry, onPair, onOpenAppSettings)
+            if (attention != null) AttentionLine(attention, helper.active?.shownName, helper.neededModel, actions::retry, onPair, onOpenAppSettings)
 
             SectionHeader(stringResource(R.string.helper_computers))
             helper.computers.forEach { computer ->
@@ -212,13 +214,21 @@ private fun HelperPage(
 
 /** H9: the warn line under the switch; the denied permission (H6) is a card with "Open settings". */
 @Composable
-private fun AttentionLine(reason: HelperAttention, computerName: String?, onRetry: () -> Unit, onPair: () -> Unit, onOpenAppSettings: () -> Unit) {
+private fun AttentionLine(
+    reason: HelperAttention,
+    computerName: String?,
+    neededModel: NeededModel?,
+    onRetry: () -> Unit,
+    onPair: () -> Unit,
+    onOpenAppSettings: () -> Unit,
+) {
     if (reason == HelperAttention.PermissionDenied) {
         DeniedCard(onOpenAppSettings)
         return
     }
     val text = when (reason) {
-        HelperAttention.ModelMissing -> stringResource(R.string.helper_attention_model)
+        HelperAttention.ModelMissing -> neededModel?.let { stringResource(R.string.helper_attention_model_named, it.name, Sizes.format(it.downloadBytes)) }
+            ?: stringResource(R.string.helper_attention_model)
         HelperAttention.NotPaired -> stringResource(R.string.helper_attention_forgot, computerName ?: stringResource(R.string.helper_your_computer))
         else -> stringResource(R.string.helper_mismatch)
     }

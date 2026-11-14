@@ -4,6 +4,7 @@ import app.lectrice.core.model.HelperAttention
 import app.lectrice.core.model.HelperLink
 import app.lectrice.core.model.HelperState
 import app.lectrice.core.model.PlaybackState
+import app.lectrice.core.model.Sizes
 
 /** The player sheet's computer-helper line (file 24 §4, §11.2). Pure. */
 internal object HelperLines {
@@ -20,7 +21,10 @@ internal object HelperLines {
             HelperLink.Busy -> "$name is busy · $ready"
             HelperLink.Lost -> "Computer not reachable · $ready"
             is HelperLink.NeedsAttention -> when (link.reason) {
-                HelperAttention.ModelMissing -> "$name needs this phone's voice model to help. Open Lectrice on the computer to download it."
+                HelperAttention.ModelMissing -> {
+                    val model = helper.neededModel?.let { "the ${it.name} voice (${Sizes.format(it.downloadBytes)})" } ?: "this phone's voice model"
+                    "$name needs $model to help. Open Lectrice on the computer to download it."
+                }
                 HelperAttention.Incompatible -> "Lectrice on $name and on this phone don't match. Update the older one."
                 HelperAttention.NotPaired -> "$name forgot this phone. Pair again."
                 HelperAttention.PermissionDenied -> "Allow Nearby devices to use your computer."

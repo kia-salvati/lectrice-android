@@ -171,6 +171,7 @@
     <string name="helper_help">Needs Lectrice open on the computer, with ‘Let my phone use this computer’ turned on.</string>
     <string name="helper_your_computer">Your computer</string>
     <string name="helper_attention_model">Your computer needs this phone’s voice model to help. Open Lectrice on the computer to download it.</string>
+    <string name="helper_attention_model_named">Your computer needs the %1$s voice (%2$s) to help. Open Lectrice on the computer to download it.</string>
     <string name="helper_attention_forgot">%1$s forgot this phone. Pair again.</string>
     <string name="helper_mismatch">Lectrice on the computer and on this phone don’t match. Update the older one.</string>
     <string name="helper_retry">Retry</string>

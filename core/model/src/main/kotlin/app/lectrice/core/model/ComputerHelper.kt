@@ -63,7 +63,12 @@ data class HelperState(
     val onWifi: Boolean = false,
     /** Android 17+ only: the "Nearby devices" permission must be asked before discovery. */
     val needsPermission: Boolean = false,
+    /** While the computer lacks this phone's voice model: the one it must download (file 24 §3.11). */
+    val neededModel: NeededModel? = null,
 )
+
+/** The phone's own voice model, which the computer was asked for: "the Fast voice (140 MB)". */
+data class NeededModel(val name: String, val downloadBytes: Long)
 
 /** A Lectrice computer seen on this Wi-Fi while pairing. */
 data class FoundComputer(val peerId: String, val name: String, val address: String, val paired: Boolean)

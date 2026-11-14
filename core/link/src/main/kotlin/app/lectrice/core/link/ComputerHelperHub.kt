@@ -11,9 +11,11 @@ import app.lectrice.core.data.Log
 import app.lectrice.core.data.RustCore
 import app.lectrice.core.model.ComputerHelperRepository
 import app.lectrice.core.model.FoundComputer
+import app.lectrice.core.model.HelperAttention
 import app.lectrice.core.model.HelperLink
 import app.lectrice.core.model.HelperNotice
 import app.lectrice.core.model.HelperState
+import app.lectrice.core.model.NeededModel
 import app.lectrice.core.model.PairResult
 import app.lectrice.core.model.PairedComputer
 import app.lectrice.core.model.PlaybackState
@@ -306,8 +308,17 @@ class ComputerHelperHub(
 
     private fun publishLocked() {
         val link = HelperLinkState.of(coreState, running, peers.enabled && permissionDenied())
+        // The phone opened the link with its own model, so that is the one the computer lacks.
+        val needed = if (link == HelperLink.NeedsAttention(HelperAttention.ModelMissing)) engine.activeModel()?.info?.let { NeededModel(it.name, it.downloadBytes) } else null
         mutable.update {
-            it.copy(enabled = peers.enabled, computers = peers.peers.map(Peer::computer), active = peers.active?.computer, link = link, needsPermission = permissionNeeded())
+            it.copy(
+                enabled = peers.enabled,
+                computers = peers.peers.map(Peer::computer),
+                active = peers.active?.computer,
+                link = link,
+                needsPermission = permissionNeeded(),
+                neededModel = needed,
+            )
         }
     }
 

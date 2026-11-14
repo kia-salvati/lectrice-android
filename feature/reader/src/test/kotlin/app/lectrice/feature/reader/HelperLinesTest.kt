@@ -3,6 +3,7 @@ package app.lectrice.feature.reader
 import app.lectrice.core.model.HelperAttention
 import app.lectrice.core.model.HelperLink
 import app.lectrice.core.model.HelperState
+import app.lectrice.core.model.NeededModel
 import app.lectrice.core.model.PairedComputer
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.PlaybackState
@@ -28,6 +29,19 @@ class HelperLinesTest {
         assertFalse(attention.pillMark)
         assertNull(HelperLines.of(helper.copy(link = HelperLink.Off), playing))
         assertNull(HelperLines.of(helper.copy(enabled = false, link = HelperLink.Connected), playing))
+    }
+
+    @Test
+    fun aMissingModelIsNamedWithItsSize() {
+        val missing = helper.copy(link = HelperLink.NeedsAttention(HelperAttention.ModelMissing))
+        assertEquals(
+            "Laptop needs the Fast voice (140 MB) to help. Open Lectrice on the computer to download it.",
+            HelperLines.of(missing.copy(neededModel = NeededModel("Fast", 140_395_500)), playing)?.text,
+        )
+        assertEquals(
+            "Laptop needs this phone's voice model to help. Open Lectrice on the computer to download it.",
+            HelperLines.of(missing, playing)?.text,
+        )
     }
 
     @Test
