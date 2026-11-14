@@ -102,11 +102,23 @@ data class ExportUiState(
     val rangeFrom: Int = 0,
     val rangeTo: Int = 0,
     val confirmCancel: Boolean = false,
-    val message: String? = null,
+    val message: ExportMessage? = null,
     val voiceSample: VoiceSampleState = VoiceSampleState(),
     /** File 23 S1: "Listen from this file" worked; the page closes back to the reader. */
     val close: Boolean = false,
 )
+
+/** The export page's snackbar. */
+sealed interface ExportMessage {
+    /** "Saved to Audiobooks/Lectrice." */
+    data object SavedToAudiobooks : ExportMessage
+
+    /** "This audiobook can't follow the text." */
+    data object CantFollowText : ExportMessage
+
+    /** `StorageFull` "Your phone is out of space.", `VoiceUnknown` "That voice isn't available.", else "Something went wrong." */
+    data class Failed(val name: ErrorName) : ExportMessage
+}
 
 interface ExportActions {
     fun setVoice(voiceId: String)
@@ -390,7 +402,7 @@ class ExportViewModel(
                 platform.runExports()
             } catch (error: LectriceError) {
                 choosing = true
-                state.update { it.copy(message = message(error.name)) }
+                state.update { it.copy(message = ExportMessage.Failed(error.name)) }
             }
         }
     }
@@ -437,9 +449,9 @@ class ExportViewModel(
                 // The file moved: the link follows it to its MediaStore URI (file 23 §2 A).
                 val moved = exports.exports.value.firstOrNull { it.id == done.export.id }?.sharedUri
                 if (wasLinked && moved != null) suspendRunCatching { audiobooks.link(document.id, moved, AudiobookKind.OwnExport) }
-                state.update { it.copy(message = "Saved to Audiobooks/Lectrice.") }
+                state.update { it.copy(message = ExportMessage.SavedToAudiobooks) }
             } catch (error: LectriceError) {
-                state.update { it.copy(message = message(error.name)) }
+                state.update { it.copy(message = ExportMessage.Failed(error.name)) }
             }
         }
     }
@@ -451,7 +463,7 @@ class ExportViewModel(
 
     override fun saveAs(uri: String) {
         val done = state.value.page as? ExportPage.Done ?: return
-        viewModelScope.launch { suspendRunCatching { platform.copyTo(done.export, uri) }.onFailure { state.update { it.copy(message = "Something went wrong.") } } }
+        viewModelScope.launch { suspendRunCatching { platform.copyTo(done.export, uri) }.onFailure { state.update { it.copy(message = ExportMessage.Failed(ErrorName.Internal)) } } }
     }
 
     override fun makeAnother() = showChoose()
@@ -472,26 +484,20 @@ class ExportViewModel(
             try {
                 val link = audiobooks.link(document.id, uri, AudiobookKind.OwnExport)
                 if (link.mode != AudiobookMode.Sentences) {
-                    state.update { it.copy(message = "This audiobook can't follow the text.") }
+                    state.update { it.copy(message = ExportMessage.CantFollowText) }
                     return@launch
                 }
                 playback.setAudioSource(AudioSource.Audiobook)
                 state.update { it.copy(close = true) }
             } catch (error: LectriceError) {
-                state.update { it.copy(message = message(error.name)) }
+                state.update { it.copy(message = ExportMessage.Failed(error.name)) }
             }
         }
     }
 
     private fun launchExport(block: suspend (AudioExport) -> Unit) {
         val export = (state.value.page as? ExportPage.Progress)?.export ?: return
-        viewModelScope.launch { suspendRunCatching { block(export) }.onFailure { error -> state.update { it.copy(message = message((error as? LectriceError)?.name ?: ErrorName.Internal)) } } }
-    }
-
-    private fun message(name: ErrorName): String = when (name) {
-        ErrorName.StorageFull -> "Your phone is out of space."
-        ErrorName.VoiceUnknown -> "That voice isn't available."
-        else -> "Something went wrong."
+        viewModelScope.launch { suspendRunCatching { block(export) }.onFailure { error -> state.update { it.copy(message = ExportMessage.Failed((error as? LectriceError)?.name ?: ErrorName.Internal)) } } }
     }
 
     private companion object {

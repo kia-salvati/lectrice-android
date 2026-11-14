@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import app.lectrice.core.model.AudiobookKind
 import app.lectrice.core.model.AudiobookMode
+import app.lectrice.core.model.ErrorName
 
 /** Typed reader labels to the screen's words. */
 @Composable
@@ -28,5 +29,18 @@ internal fun AudiobookUi.followsText(): String = stringResource(
         AudiobookMode.Sentences -> R.string.audiobook_follows_sentences
         AudiobookMode.Chapters -> R.string.audiobook_follows_chapters
         AudiobookMode.Unaligned -> R.string.audiobook_follows_nothing
+    },
+)
+
+@Composable
+internal fun ExportMessage.text(): String = stringResource(
+    when (this) {
+        ExportMessage.SavedToAudiobooks -> R.string.export_snack_saved
+        ExportMessage.CantFollowText -> R.string.export_snack_cant_follow
+        is ExportMessage.Failed -> when (name) {
+            ErrorName.StorageFull -> R.string.export_snack_storage_full
+            ErrorName.VoiceUnknown -> R.string.export_snack_voice_unknown
+            else -> R.string.reader_failed
+        }
     },
 )

@@ -146,7 +146,7 @@ fun ExportPage(state: ExportUiState, actions: ExportActions, onBack: () -> Unit,
                 }
             }
         }
-        state.message?.let { LectriceSnackbar(it, Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp)) }
+        state.message?.let { LectriceSnackbar(it.text(), Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp)) }
         list?.let { end ->
             RangeListSheet(
                 title = stringResource(if (end == RangeEnd.From) R.string.export_from else R.string.export_to),

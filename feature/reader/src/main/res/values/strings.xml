@@ -149,6 +149,10 @@
     <string name="export_done_title">Audiobook ready</string>
     <string name="export_save">Save to Audiobooks</string>
     <string name="export_saved">Saved to Audiobooks</string>
+    <string name="export_snack_saved">Saved to Audiobooks/Lectrice.</string>
+    <string name="export_snack_cant_follow">This audiobook can’t follow the text.</string>
+    <string name="export_snack_storage_full">Your phone is out of space.</string>
+    <string name="export_snack_voice_unknown">That voice isn’t available.</string>
     <string name="export_save_caption">Audiobook players will find it there</string>
     <string name="export_save_as">Save as…</string>
     <string name="export_share">Share</string>
