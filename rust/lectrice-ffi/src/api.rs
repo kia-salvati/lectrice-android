@@ -64,6 +64,8 @@ pub struct LectriceCore {
     config: CoreConfig,
     storage: Storage,
     loaded: RwLock<Loaded>,
+    /// One engine reload at a time; held for the whole load, while `loaded` is locked only to swap.
+    reloading: Mutex<()>,
     helper: Mutex<HelperSlot>,
     next_request: AtomicU64,
 }
@@ -80,30 +82,41 @@ impl LectriceCore {
         purge_removed_at_start(&services)?;
         info!(target: TARGET, open_ms = elapsed_ms(started), "core opened");
         let loaded = Loaded::without_engine(services);
-        Ok(Arc::new(Self { config, storage, loaded: RwLock::new(loaded), helper: Mutex::default(), next_request: AtomicU64::new(0) }))
+        Ok(Arc::new(Self {
+            config,
+            storage,
+            loaded: RwLock::new(loaded),
+            reloading: Mutex::default(),
+            helper: Mutex::default(),
+            next_request: AtomicU64::new(0),
+        }))
     }
 
     pub fn engine_status(&self) -> EngineStatus {
         self.read().status.clone()
     }
 
-    /// Drops the old engine before loading the new one, so two models are never in memory at once. With the computer
-    /// helper configured, the engine is deferred (loads on the first sentence this phone makes itself, or
-    /// `preload_engine`) and the services fill through the computer.
+    /// Drops the old engine before loading the new one, so two models are never in memory at once. The model loads
+    /// without holding the services lock, so library calls (`list_recent`, `get_document`, `save_position`) don't
+    /// wait for it. With the computer helper configured, the engine is deferred (loads on the first sentence this
+    /// phone makes itself, or `preload_engine`) and the services fill through the computer.
     pub fn reload_engine(&self, engine: EngineConfig) -> EngineStatus {
+        let _reloading = lock(&self.reloading);
         let link = lock(&self.helper).link.clone();
-        let mut loaded = self.write();
-        if let (Some(link), Some((built_config, built_link))) = (&link, &loaded.built_for)
-            && *built_config == engine
-            && Arc::ptr_eq(link, built_link)
         {
-            return loaded.status.clone();
+            let mut loaded = self.write();
+            if let (Some(link), Some((built_config, built_link))) = (&link, &loaded.built_for)
+                && *built_config == engine
+                && Arc::ptr_eq(link, built_link)
+            {
+                return loaded.status.clone();
+            }
+            let without_engine = match assemble_services(&self.config, &self.storage, None, None) {
+                Ok(services) => services,
+                Err(error) => return failed(error),
+            };
+            *loaded = Loaded::without_engine(without_engine);
         }
-        let without_engine = match assemble_services(&self.config, &self.storage, None, None) {
-            Ok(services) => services,
-            Err(error) => return failed(error),
-        };
-        *loaded = Loaded::without_engine(without_engine);
 
         let (status, new_engine, deferred) = match &link {
             Some(_) => match load_engine_deferred(&engine) {
@@ -116,7 +129,9 @@ impl LectriceCore {
             }
         };
         let helper = link.as_ref().map(|link| link.port.clone());
-        loaded.status = match new_engine.map(|new_engine| (assemble_services(&self.config, &self.storage, Some(&new_engine), helper), new_engine)) {
+        let assembled = new_engine.map(|new_engine| (assemble_services(&self.config, &self.storage, Some(&new_engine), helper), new_engine));
+        let mut loaded = self.write();
+        loaded.status = match assembled {
             Some((Ok(services), new_engine)) => {
                 let built_for = link.map(|link| (engine, link));
                 *loaded = Loaded { services, engine: Some(new_engine), status: status.clone(), deferred, built_for };
