@@ -207,12 +207,8 @@ private fun SetupDialogView(dialog: SetupDialog, actions: ModelSetupActions) {
             LectriceTextButton(stringResource(R.string.model_delete_confirm), actions::confirmDelete, color = c.errFg)
         }
         is SetupDialog.ImportFailed -> {
-            val (title, body) = when (dialog.name) {
-                ErrorName.StorageFull -> null to spaceShortText(dialog.neededBytes)
-                ErrorName.FileUnreadable -> null to stringResource(R.string.import_unreadable)
-                ErrorName.ModelChecksumMismatch -> stringResource(R.string.import_failed_title) to stringResource(R.string.import_failed_body)
-                else -> null to stringResource(R.string.common_something_wrong)
-            }
+            val title = dialog.name.importFailedTitle()?.let { stringResource(it) }
+            val body = if (dialog.name == ErrorName.StorageFull) spaceShortText(dialog.neededBytes) else stringResource(dialog.name.importFailedBody())
             BottomSheet(actions::dismissDialog, contentDescription = title ?: body) {
                 Column(Modifier.padding(horizontal = 16.dp)) {
                     Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -282,8 +278,7 @@ private fun DownloadingView(download: DownloadUi?, actions: ModelSetupActions, o
 private fun DownloadBanner(download: DownloadUi, modifier: Modifier) {
     when {
         download.error == ErrorName.StorageFull -> Banner(BannerKind.Err, LectriceIcons.Error, spaceShortText(download.neededBytes), modifier)
-        download.error == ErrorName.ModelChecksumMismatch -> Banner(BannerKind.Err, LectriceIcons.Error, stringResource(R.string.download_damaged), modifier)
-        download.error != null -> Banner(BannerKind.Err, LectriceIcons.Error, stringResource(R.string.download_failed), modifier)
+        download.error != null -> Banner(BannerKind.Err, LectriceIcons.Error, stringResource(download.error.downloadFailedMessage()), modifier)
         download.waitingForWifi -> Banner(BannerKind.Warn, LectriceIcons.Warning, stringResource(R.string.download_waiting_wifi), modifier)
         download.waitingForNetwork -> Banner(BannerKind.Warn, LectriceIcons.Warning, stringResource(R.string.download_waiting_network), modifier)
     }
@@ -372,11 +367,7 @@ private fun ColumnScope.ModelCardState(card: ModelCard, download: DownloadUi?, a
             Text(stringResource(R.string.download_installing), Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
         }
         is ModelInstallState.Failed -> {
-            val text = when (install.name) {
-                ErrorName.StorageFull -> spaceShortText(download?.neededBytes)
-                ErrorName.ModelChecksumMismatch -> stringResource(R.string.download_damaged)
-                else -> stringResource(R.string.download_failed)
-            }
+            val text = if (install.name == ErrorName.StorageFull) spaceShortText(download?.neededBytes) else stringResource(install.name.downloadFailedMessage())
             Banner(BannerKind.Err, LectriceIcons.Error, text, Modifier.padding(top = 12.dp)) {
                 BannerAction(stringResource(R.string.common_try_again), BannerKind.Err, actions::retry)
             }

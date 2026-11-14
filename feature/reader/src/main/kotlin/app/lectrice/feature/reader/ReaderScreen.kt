@@ -81,7 +81,6 @@ import app.lectrice.core.designsystem.ProgressLine
 import app.lectrice.core.designsystem.Spinner
 import app.lectrice.core.designsystem.Text
 import app.lectrice.core.designsystem.motionSpring
-import app.lectrice.core.model.ErrorName
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.PlaybackStatus
 import app.lectrice.core.model.PrepareScope
@@ -343,14 +342,7 @@ fun ReaderScreen(
                 ReaderMessage.PrepareQueued -> stringResource(R.string.reader_snack_prepare_queued)
                 ReaderMessage.BookGone -> stringResource(R.string.reader_snack_book_gone)
                 is ReaderMessage.SentenceSkipped -> stringResource(R.string.reader_snack_skipped)
-                is ReaderMessage.AudiobookFailed -> stringResource(
-                    when (message.name) {
-                        ErrorName.AudiobookUnreadable -> R.string.reader_snack_audiobook_unreadable
-                        ErrorName.AudiobookOtherBook -> R.string.reader_snack_audiobook_other_book
-                        ErrorName.AudiobookNotLectrice -> R.string.reader_snack_audiobook_not_lectrice
-                        else -> R.string.reader_snack_audiobook_failed
-                    },
-                )
+                is ReaderMessage.AudiobookFailed -> stringResource(message.name.audiobookMessage())
             }
             LectriceSnackbar(text, Modifier.align(Alignment.BottomCenter).padding(start = 16.dp, end = 16.dp, bottom = abovePill))
         }
