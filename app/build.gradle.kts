@@ -49,8 +49,8 @@ android {
         applicationId = "app.lectrice"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = providers.gradleProperty("lectrice.versionCode").get().toInt()
+        versionName = providers.gradleProperty("lectrice.versionName").get()
         ndk { abiFilters += "arm64-v8a" }
     }
 
