@@ -14,31 +14,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-/** Which preference keys carry a book's id (the SHA-256 of the user's PDF) and so stay out of backups. */
-internal object BookKeys {
-    const val LAST_PLAYED = "lastPlayedDocumentId"
-    const val VOICE_PREFIX = "voice."
-    const val SPEED_PREFIX = "speed."
-    const val SLOW_TIP_PREFIX = "slowTip."
-    const val SOURCE_PREFIX = "source."
-    private val PREFIXES = listOf(VOICE_PREFIX, SPEED_PREFIX, SLOW_TIP_PREFIX, SOURCE_PREFIX)
-
-    fun isPerBook(key: String): Boolean = key == LAST_PLAYED || PREFIXES.any(key::startsWith)
-}
-
 /**
  * Settings in two small `SharedPreferences` files (a few keys; DataStore isn't worth a dependency here): `settings`
- * (app-wide, the only file in the backup rules) and `books` (everything keyed by a book's id: a backup must not say
- * which PDFs the user has, and after a restore those books aren't on the phone anyway). Reads once at start; every
- * update writes asynchronously (`apply`) and publishes the new value at once.
+ * (app-wide) and `books` (everything keyed by a book's id). Reads once at start; every update writes asynchronously
+ * (`apply`) and publishes the new value at once.
  */
 class PreferencesSettingsStore(context: Context) : SettingsStore {
     private val prefs: SharedPreferences = context.getSharedPreferences(FILE, Context.MODE_PRIVATE)
     private val books: SharedPreferences = context.getSharedPreferences(BOOKS_FILE, Context.MODE_PRIVATE)
-
-    init {
-        moveBookKeys()
-    }
 
     private val state = MutableStateFlow(read())
 
@@ -75,26 +58,6 @@ class PreferencesSettingsStore(context: Context) : SettingsStore {
 
     override fun forgetBook(documentId: String) {
         books.edit().remove(VOICE_PREFIX + documentId).remove(SPEED_PREFIX + documentId).remove(SLOW_TIP_PREFIX + documentId).remove(SOURCE_PREFIX + documentId).apply()
-    }
-
-    /** Versions before the split kept the per-book keys in `settings` (which is backed up): move them once. */
-    private fun moveBookKeys() {
-        val old = prefs.all.filterKeys(BookKeys::isPerBook)
-        if (old.isEmpty()) return
-        val target = books.edit()
-        old.forEach { (key, value) ->
-            when (value) {
-                is String -> target.putString(key, value)
-                is Int -> target.putInt(key, value)
-                is Boolean -> target.putBoolean(key, value)
-            }
-        }
-        // The copy is on disk before the originals go.
-        if (!target.commit()) return
-        val source = prefs.edit()
-        old.keys.forEach(source::remove)
-        source.apply()
-        Log.i(SCOPE, "moved per-book settings out of the backed-up file keys=${old.size}")
     }
 
     private fun read(): AppSettings {
@@ -141,9 +104,7 @@ class PreferencesSettingsStore(context: Context) : SettingsStore {
     private inline fun <reified T : Enum<T>> enumOr(name: String?, default: T): T = enumValues<T>().firstOrNull { it.name == name } ?: default
 
     private companion object {
-        const val SCOPE = "Settings"
         const val FILE = "settings"
-        /** Not in `backup_rules.xml` / `data_extraction_rules.xml`, on purpose. */
         const val BOOKS_FILE = "books"
         const val THEME = "theme"
         const val TEXT_SIZE = "textSize"
@@ -156,13 +117,13 @@ class PreferencesSettingsStore(context: Context) : SettingsStore {
         const val ACTIVE_MODEL = "activeModel"
         const val THREADS = "threads"
         const val FIRST_RUN_DONE = "firstRunDone"
-        const val LAST_PLAYED = BookKeys.LAST_PLAYED
+        const val LAST_PLAYED = "lastPlayedDocumentId"
         const val PILL_HINT = "hint.pill"
         const val LISTEN_HINT = "hint.listen"
         const val NOTIFICATION_ASKED = "notificationAsked"
-        const val VOICE_PREFIX = BookKeys.VOICE_PREFIX
-        const val SPEED_PREFIX = BookKeys.SPEED_PREFIX
-        const val SLOW_TIP_PREFIX = BookKeys.SLOW_TIP_PREFIX
-        const val SOURCE_PREFIX = BookKeys.SOURCE_PREFIX
+        const val VOICE_PREFIX = "voice."
+        const val SPEED_PREFIX = "speed."
+        const val SLOW_TIP_PREFIX = "slowTip."
+        const val SOURCE_PREFIX = "source."
     }
 }

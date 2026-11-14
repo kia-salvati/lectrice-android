@@ -8,8 +8,8 @@ import org.json.JSONObject
 import java.io.File
 
 /**
- * `filesDir/lectrice/link/`: app-private, and not in any backup rule (the backup rules include only `settings.xml`;
- * file 17, security review S10), so neither the key nor the pairings leave the phone.
+ * `filesDir/lectrice/link/`: app-private, and the app has no backup, so neither the key nor the pairings leave the
+ * phone.
  */
 internal class LinkFiles(context: Context) {
     val dir: File = File(context.filesDir, "lectrice/link").apply { mkdirs() }

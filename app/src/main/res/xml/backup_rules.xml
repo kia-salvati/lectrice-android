@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Android 11 and older: back up settings only (file 17). Books, models, audio and exports are large or regenerable. -->
-<full-backup-content>
-    <include domain="sharedpref" path="settings.xml" />
-</full-backup-content>
