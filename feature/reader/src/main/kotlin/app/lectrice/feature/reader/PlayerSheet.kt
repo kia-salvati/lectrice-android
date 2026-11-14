@@ -254,7 +254,7 @@ private fun ColumnScope.PlayerContent(state: ReaderUiState, actions: ReaderActio
         readCode,
         if (fromFile) Modifier.alpha(DISABLED_ALPHA) else Modifier,
         subtitle = if (fromFile) fromAudiobook else null,
-        leadingIcon = LectriceIcons.MenuBook,
+        leadingIcon = LectriceIcons.Code,
         trailing = { LectriceSwitch(player?.readSkipped == true, actions::setReadSkipped, contentDescription = readCode, enabled = !fromFile) },
     )
     Divider(inset = 0.dp)

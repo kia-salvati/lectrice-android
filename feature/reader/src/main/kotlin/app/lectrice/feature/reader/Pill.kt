@@ -455,14 +455,16 @@ private fun StatusButton(status: PillStatus?, enabled: Boolean, showExpandIcon: 
     ) {
         if (status == null) return@Row
         val color = if (!enabled) c.fg2 else if (status.accent) c.accent else c.fg
-        if (status.spinner) Spinner()
-        if (status.audiobookMark) LectriceIcon(LectriceIcons.Headphones, stringResource(R.string.pill_audiobook_a11y), tint = color, size = 16.dp)
-        if (status.computerMark) LectriceIcon(LectriceIcons.Computer, null, tint = color, size = 16.dp)
-        StatusLine(status.parts, Modifier.weight(1f, fill = false), style = LectriceTheme.type.label, color = color)
-        if (status.sleepIcon) {
-            Text(SEPARATOR, style = LectriceTheme.type.label, color = color, maxLines = 1)
-            LectriceIcon(LectriceIcons.Bedtime, null, tint = color, size = 16.dp)
-            status.sleepText?.let { Text(it, style = LectriceTheme.type.label, color = color, maxLines = 1, overflow = TextOverflow.Clip) }
+        Row(Modifier.weight(1f), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+            if (status.spinner) Spinner()
+            if (status.audiobookMark) LectriceIcon(LectriceIcons.Headphones, stringResource(R.string.pill_audiobook_a11y), tint = color, size = 16.dp)
+            if (status.computerMark) LectriceIcon(LectriceIcons.Computer, null, tint = color, size = 16.dp)
+            StatusLine(status.parts, Modifier.weight(1f, fill = false), style = LectriceTheme.type.label, color = color)
+            if (status.sleepIcon) {
+                Text(SEPARATOR, style = LectriceTheme.type.label, color = color, maxLines = 1)
+                LectriceIcon(LectriceIcons.Bedtime, null, tint = color, size = 16.dp)
+                status.sleepText?.let { Text(it, style = LectriceTheme.type.label, color = color, maxLines = 1, overflow = TextOverflow.Clip) }
+            }
         }
         if (showExpandIcon) LectriceIcon(LectriceIcons.OpenInFull, null, tint = c.fg2, size = 16.dp)
     }
