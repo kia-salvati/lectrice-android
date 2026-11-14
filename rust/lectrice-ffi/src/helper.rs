@@ -19,7 +19,7 @@ use lectrice_domain::{AppResult, HelperEngine, HelperEvent, HelperEvents, Helper
 use lectrice_infra::helper::{LinkHelperConfig, LinkSpeechHelper};
 use lectrice_link::client::{ClientConfig, SocketFactory, pair_via};
 use lectrice_link::limits::Timing;
-use lectrice_link::{LinkError, PairingCode, StaticKeys};
+use lectrice_link::{LinkError, PairingCode, PairingFailure, StaticKeys};
 use socket2::{Domain, Protocol, SockAddr, Socket, Type};
 use tracing::{info, warn};
 
@@ -136,8 +136,8 @@ pub(crate) fn pair(binder: Arc<dyn NetworkBinder>, address: &str, code: &str, pr
         Err(error) => {
             warn!(target: TARGET, error = %error, "pairing failed");
             match error {
-                LinkError::PairingFailed("wrong code") => PairOutcome::WrongCode,
-                LinkError::PairingFailed(_) => PairOutcome::NoCode,
+                LinkError::PairingFailed(PairingFailure::WrongCode) => PairOutcome::WrongCode,
+                LinkError::PairingFailed(PairingFailure::NoCodeShowing) => PairOutcome::NoCode,
                 LinkError::NotLocal => PairOutcome::NotLocal,
                 LinkError::Incompatible(_) => PairOutcome::Incompatible,
                 _ => PairOutcome::Unreachable,
