@@ -443,44 +443,44 @@ class Media3PlaybackController(
         val name = (error.cause as? SpeechIOException)?.error?.name ?: ErrorName.Internal
         val current = mutable.value.currentSentenceId
         Log.w(SCOPE, "player error ${name.name} sentence=$current fromFile=${fromFile()}")
-        if (fromFile() && (name == ErrorName.FileUnreadable || name == ErrorName.AudiobookUnreadable)) {
-            audiobookMissing = true
-            player.playWhenReady = false
-            mutable.update { it.copy(audiobookMissing = true) }
-            publish()
-            return
-        }
-        when (name) {
-            ErrorName.ModelMissing -> {
+        val action = PlaybackErrorPolicy.decide(name, fromFile(), retried = retriedSentence == current, failuresInARow)
+        when (action) {
+            PlaybackErrorPolicy.Action.AudiobookMissing -> {
+                audiobookMissing = true
+                player.playWhenReady = false
+                mutable.update { it.copy(audiobookMissing = true) }
+            }
+            PlaybackErrorPolicy.Action.VoiceMissing -> {
                 voiceMissing = true
                 player.playWhenReady = false
             }
-            ErrorName.SpeechEngineUnavailable -> {
+            PlaybackErrorPolicy.Action.VoiceFailed -> {
+                if (name != ErrorName.SpeechEngineUnavailable) countSkip()
                 voiceFailed = true
                 player.playWhenReady = false
             }
-            ErrorName.SentenceNotFound -> scope.launch(Dispatchers.Main) { reloadOrder() }
-            ErrorName.VoiceUnknown -> {
+            PlaybackErrorPolicy.Action.ReloadOrder -> scope.launch(Dispatchers.Main) { reloadOrder() }
+            PlaybackErrorPolicy.Action.DefaultVoice -> {
                 setVoice(Voices.DEFAULT_VOICE_ID)
                 return
             }
-            else -> if (retriedSentence != current) {
+            PlaybackErrorPolicy.Action.Retry -> {
                 retriedSentence = current
                 player.prepare()
                 return
-            } else {
-                failuresInARow++
-                mutable.update { it.copy(skippedCount = it.skippedCount + 1) }
-                if (failuresInARow >= MAX_FAILURES_IN_A_ROW) {
-                    voiceFailed = true
-                    player.playWhenReady = false
-                } else {
-                    player.seekToNextMediaItem()
-                    player.prepare()
-                }
+            }
+            PlaybackErrorPolicy.Action.Skip -> {
+                countSkip()
+                player.seekToNextMediaItem()
+                player.prepare()
             }
         }
         publish()
+    }
+
+    private fun countSkip() {
+        failuresInARow++
+        mutable.update { it.copy(skippedCount = it.skippedCount + 1) }
     }
 
     private suspend fun reloadOrder() {
@@ -638,7 +638,6 @@ class Media3PlaybackController(
         const val MAX_BUFFER_MS = 15_000
         const val BUFFER_FOR_PLAYBACK_MS = 250
         const val BUFFER_AFTER_REBUFFER_MS = 500
-        const val MAX_FAILURES_IN_A_ROW = 3
         const val STATS_INTERVAL_MS = 30_000L
         const val SLEEP_TICK_MS = 1_000L
         const val FADE_MS = 3_000L
