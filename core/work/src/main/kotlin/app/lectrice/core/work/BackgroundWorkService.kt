@@ -79,9 +79,15 @@ class BackgroundWorkService : Service() {
         val center = host.workCenter
         exportsThisRun.clear()
         downloadedThisRun = false
+        var ranBefore = emptySet<String>()
+        var engineBefore = host.engineHost.assembled.value
         while (true) {
             suspendRunCatching { center.exports.refresh() }
+            val engineNow = host.engineHost.assembled.value
+            if (engineNow != engineBefore) resumeAfterEngineRebuild(ranBefore)
+            engineBefore = engineNow
             val running = center.exports.exports.value.filter { it.status == ExportStatus.Queued || it.status == ExportStatus.Running }
+            ranBefore = running.mapTo(mutableSetOf()) { it.id }
             running.mapTo(exportsThisRun) { it.id }
             if (center.isDownloading) downloadedThisRun = true
             // The engine first: the core starts a prepare job only on a loaded engine (B7: SpeechEngineUnavailable).
@@ -108,6 +114,15 @@ class BackgroundWorkService : Service() {
         notifyResult()
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()
+    }
+
+    /** The core pauses a running export when its engine is rebuilt (e.g. pairing a computer); it goes on at once. */
+    private suspend fun resumeAfterEngineRebuild(ranBefore: Set<String>) {
+        val exports = host.workCenter.exports
+        val ids = pausedByEngineRebuild(ranBefore, exports.exports.value, exports.systemPauseCause.value.keys)
+        if (ids.isEmpty()) return
+        Log.i(SCOPE, "exports continued after an engine rebuild count=${ids.size}")
+        ids.forEach { id -> suspendRunCatching { exports.resume(id) } }
     }
 
     /**
