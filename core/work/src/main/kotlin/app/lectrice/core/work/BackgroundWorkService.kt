@@ -50,6 +50,9 @@ class BackgroundWorkService : Service() {
     private var loop: Job? = null
     private var holdingEngine = false
     private var lastListeningMs = 0L
+    /** What this run worked on: only those are announced when it ends (an export finished yesterday is not news). */
+    private val exportsThisRun = mutableSetOf<String>()
+    private var downloadedThisRun = false
     private val host: WorkHost get() = application as WorkHost
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -73,9 +76,13 @@ class BackgroundWorkService : Service() {
 
     private suspend fun run() {
         val center = host.workCenter
+        exportsThisRun.clear()
+        downloadedThisRun = false
         while (true) {
             runCatching { center.exports.refresh() }
             val running = center.exports.exports.value.filter { it.status == ExportStatus.Queued || it.status == ExportStatus.Running }
+            running.mapTo(exportsThisRun) { it.id }
+            if (center.isDownloading) downloadedThisRun = true
             // The engine first: the core starts a prepare job only on a loaded engine (B7: SpeechEngineUnavailable).
             if (center.prepare.hasWork()) {
                 holdEngine()
@@ -200,9 +207,9 @@ class BackgroundWorkService : Service() {
     private fun notifyResult() {
         val center = host.workCenter
         val text = when {
-            center.download.value?.state == ModelInstallState.Installed -> getString(R.string.work_voice_ready)
+            downloadedThisRun && center.download.value?.state == ModelInstallState.Installed -> getString(R.string.work_voice_ready)
             else -> {
-                val latest = center.exports.exports.value.firstOrNull() ?: return
+                val latest = center.exports.exports.value.firstOrNull { it.id in exportsThisRun } ?: return
                 when (latest.status) {
                     ExportStatus.Done -> getString(R.string.work_export_ready, latest.title)
                     ExportStatus.Failed -> getString(R.string.work_export_failed, latest.title)
