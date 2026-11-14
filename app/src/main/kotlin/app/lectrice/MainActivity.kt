@@ -285,7 +285,7 @@ private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: 
 @Composable
 private fun ExportRoute(documentId: String, navigator: Navigator, container: AppContainer, onBack: () -> Unit) {
     val context = LocalContext.current
-    val document by produceState<Document?>(null, documentId) { value = runCatching { container.library.getDocument(documentId) }.getOrNull() }
+    val document by produceState<Document?>(null, documentId) { value = runCatching { container.library.getDocument(documentId, markOpened = false) }.getOrNull() }
     val opened = document ?: return
     val viewModel: ExportViewModel = viewModel(key = "export-$documentId") {
         val platform = AndroidExportPlatform(AndroidExportFiles(context.applicationContext), container) { bytes -> navigator.push(Screen.Storage(bytes)) }

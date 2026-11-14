@@ -10,7 +10,8 @@ interface LibraryRepository {
     /** Copies the picked file to a temp file and imports it (file 03). */
     suspend fun importPdf(source: PdfSource, info: PdfInfo): ImportResult
 
-    suspend fun getDocument(documentId: String): Document
+    /** [markOpened]: the person opened the book, so it moves to the top of the library (not for a card or resumption). */
+    suspend fun getDocument(documentId: String, markOpened: Boolean): Document
 
     /** The book's summary without opening it (to know whether opening re-cleans it). */
     suspend fun summary(documentId: String): DocumentSummary

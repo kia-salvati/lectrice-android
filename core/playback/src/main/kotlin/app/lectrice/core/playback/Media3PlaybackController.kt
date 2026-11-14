@@ -619,7 +619,7 @@ class Media3PlaybackController(
     /** Media resumption after process death (file 09 §3.9): the last played book at its saved place. */
     suspend fun resumeLastBook(): Boolean {
         val id = settings.settings.value.lastPlayedDocumentId ?: return false
-        val opened = runCatching { library.getDocument(id) }.getOrNull() ?: return false
+        val opened = runCatching { library.getDocument(id, markOpened = false) }.getOrNull() ?: return false
         withContext(Dispatchers.Main) { load(opened, opened.lastSentenceId, play = false) }
         return true
     }

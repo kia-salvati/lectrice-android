@@ -91,7 +91,8 @@ class CoreLibraryRepository(private val context: Context, private val core: Rust
         }
     }
 
-    override suspend fun getDocument(documentId: String): Document = core.call("get_document") { Mappers.document(it.getDocument(documentId)) }
+    override suspend fun getDocument(documentId: String, markOpened: Boolean): Document =
+        core.call("get_document") { Mappers.document(it.getDocument(documentId, markOpened)) }
 
     override suspend fun summary(documentId: String): DocumentSummary = core.call("document_summary") { Mappers.summary(it.documentSummary(documentId)) }
 

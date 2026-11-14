@@ -96,7 +96,7 @@ class ReaderViewModel(
         try {
             val summary = library.summary(documentId)
             if (summary.cleanerVersion < library.currentCleanerVersion()) state.update { it.copy(content = ReaderContent.Recleaning) }
-            val opened = library.getDocument(documentId)
+            val opened = library.getDocument(documentId, markOpened = true)
             val readSkipped = settings.settings.value.readSkipped
             val ids = library.playbackOrder(documentId, readSkipped)
             val prepared = withContext(Dispatchers.Default) {

@@ -50,7 +50,7 @@ object NotUsed : LibraryRepository {
     override suspend fun listRecent(limit: Int, offset: Int) = error("unused")
     override suspend fun describe(source: PdfSource) = error("unused")
     override suspend fun importPdf(source: PdfSource, info: PdfInfo) = error("unused")
-    override suspend fun getDocument(documentId: String) = error("unused")
+    override suspend fun getDocument(documentId: String, markOpened: Boolean) = error("unused")
     override suspend fun summary(documentId: String) = error("unused")
     override suspend fun playbackOrder(documentId: String, readSkipped: Boolean) = error("unused")
     override suspend fun savePosition(documentId: String, sentenceId: Int) = error("unused")

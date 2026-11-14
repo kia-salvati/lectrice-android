@@ -138,12 +138,19 @@ impl LectriceCore {
         Ok(ImportResult::new(imported, duration_ms))
     }
 
-    pub fn get_document(&self, document_id: String) -> CoreResult<DocumentRecord> {
+    /// `mark_opened`: the person opened the book (it moves to the top of the library). Without it (the library's
+    /// Continue card, media resumption) the book is only read, unless it must be cleaned again first.
+    pub fn get_document(&self, document_id: String, mark_opened: bool) -> CoreResult<DocumentRecord> {
         let started = Instant::now();
         let id = DocumentId::parse(&document_id)?;
-        let opened = self.services().documents.get_document.run(&self.context(), GetDocumentArgs { id })?;
-        let record = DocumentRecord::new(opened.document, opened.last_sentence_id);
-        info!(target: TARGET, doc_id = %document_id, blocks = record.blocks.len(), mapping_ms = elapsed_ms(started), "document handed over");
+        let record = match self.peek_document(&id, mark_opened)? {
+            Some(record) => record,
+            None => {
+                let opened = self.services().documents.get_document.run(&self.context(), GetDocumentArgs { id })?;
+                DocumentRecord::new(opened.document, opened.last_sentence_id)
+            }
+        };
+        info!(target: TARGET, doc_id = %document_id, mark_opened, blocks = record.blocks.len(), mapping_ms = elapsed_ms(started), "document handed over");
         Ok(record)
     }
 
@@ -578,6 +585,20 @@ impl LectriceCore {
 
     fn write(&self) -> RwLockWriteGuard<'_, Loaded> {
         self.loaded.write().unwrap_or_else(|poisoned| poisoned.into_inner())
+    }
+
+    /// The saved document without marking it opened; `None` when it must be opened through the use case (asked to
+    /// mark it, or saved by an older cleaner).
+    fn peek_document(&self, id: &DocumentId, mark_opened: bool) -> CoreResult<Option<DocumentRecord>> {
+        if mark_opened {
+            return Ok(None);
+        }
+        let summary = self.storage.library.find_summary(id)?.ok_or_else(|| AppError::new(ErrorName::DocumentNotFound))?;
+        let document = self.storage.library.find(id)?.ok_or_else(|| AppError::new(ErrorName::DocumentNotFound))?;
+        if document.cleaner_version < self.current_cleaner_version() {
+            return Ok(None);
+        }
+        Ok(Some(DocumentRecord::new(document, summary.last_sentence_id)))
     }
 
     /// A clone, so a long call (an import, a synthesis) doesn't hold the lock an engine reload needs.

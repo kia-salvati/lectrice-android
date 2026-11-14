@@ -96,7 +96,7 @@ fn imports_an_invented_pdf_and_speaks_its_first_sentence() {
     let imported = core.import_pdf(pdf_path.display().to_string(), "boats.pdf".into()).unwrap();
     assert_eq!(imported.summary.page_count, 2);
     assert!(imported.summary.sentence_count >= 6, "got {} sentences", imported.summary.sentence_count);
-    let document = core.get_document(imported.summary.id.clone()).unwrap();
+    let document = core.get_document(imported.summary.id.clone(), false).unwrap();
     let order = core.playback_order(imported.summary.id.clone(), false).unwrap();
     assert_eq!(order.len() as u32, imported.summary.sentence_count);
     assert!(!document.blocks.is_empty());

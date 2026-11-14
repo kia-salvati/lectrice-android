@@ -134,7 +134,7 @@ class LibraryViewModel(
     /** Loads the card's document only, for its location and time left (file 02 §3.2). */
     private fun fillCard(summary: DocumentSummary) {
         viewModelScope.launch {
-            val document = runCatching { library.getDocument(summary.id) }.getOrNull() ?: return@launch
+            val document = runCatching { library.getDocument(summary.id, markOpened = false) }.getOrNull() ?: return@launch
             val listening = settings.bookListening(summary.id)
             val order = PlaybackOrder(library.playbackOrder(summary.id, settings.settings.value.readSkipped), document)
             val sentence = order.startingSentenceId(summary.lastSentenceId) ?: return@launch
