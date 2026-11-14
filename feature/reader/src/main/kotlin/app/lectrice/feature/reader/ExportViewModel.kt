@@ -141,6 +141,9 @@ interface ExportPlatform {
     fun openStorage(requestedBytes: Long?)
     fun playSample(voiceId: String)
     val sampleState: StateFlow<VoiceSampleState>
+
+    /** A started or resumed export runs in the foreground work service, which also keeps [ExportRepository.exports] fresh. */
+    fun runExports()
 }
 
 /** The export page inside the player sheet (file 10). */
@@ -383,6 +386,7 @@ class ExportViewModel(
             try {
                 choosing = false
                 exports.start(request(current, partRange))
+                platform.runExports()
             } catch (error: LectriceError) {
                 choosing = true
                 state.update { it.copy(message = message(error.name)) }
@@ -409,7 +413,10 @@ class ExportViewModel(
 
     override fun pause() = launchExport { exports.pause(it.id) }
 
-    override fun resume() = launchExport { exports.resume(it.id) }
+    override fun resume() = launchExport {
+        exports.resume(it.id)
+        platform.runExports()
+    }
 
     override fun askCancel() = state.update { it.copy(confirmCancel = true) }
 

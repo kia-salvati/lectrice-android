@@ -288,7 +288,8 @@ private fun ExportRoute(documentId: String, navigator: Navigator, container: App
     val document by produceState<Document?>(null, documentId) { value = runCatching { container.library.getDocument(documentId, markOpened = false) }.getOrNull() }
     val opened = document ?: return
     val viewModel: ExportViewModel = viewModel(key = "export-$documentId") {
-        val platform = AndroidExportPlatform(AndroidExportFiles(context.applicationContext), container) { bytes -> navigator.push(Screen.Storage(bytes)) }
+        val files = AndroidExportFiles(context.applicationContext)
+        val platform = AndroidExportPlatform(files, container.voiceSamples, container.work::onExportsChanged) { bytes -> navigator.push(Screen.Storage(bytes)) }
         ExportViewModel(opened, container.exports, container.voiceModels, container.voices, container.playback, container.settings, platform, container.audiobooks)
     }
     LaunchedEffect(viewModel) { container.work.onExportsChanged() }

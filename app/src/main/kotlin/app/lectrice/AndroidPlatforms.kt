@@ -9,6 +9,7 @@ import android.os.Process
 import android.os.storage.StorageManager
 import androidx.core.content.FileProvider
 import app.lectrice.core.model.AudioExport
+import app.lectrice.core.model.VoiceSamplePlayer
 import app.lectrice.feature.reader.ExportPlatform
 import app.lectrice.feature.settings.StoragePlatform
 import kotlinx.coroutines.Dispatchers
@@ -72,7 +73,12 @@ class AndroidStoragePlatform(private val context: Context, private val files: An
     }
 }
 
-class AndroidExportPlatform(private val files: AndroidExportFiles, private val container: AppContainer, private val openStorage: (Long?) -> Unit) : ExportPlatform {
+class AndroidExportPlatform(
+    private val files: AndroidExportFiles,
+    private val samples: VoiceSamplePlayer,
+    private val startWork: () -> Unit,
+    private val openStorage: (Long?) -> Unit,
+) : ExportPlatform {
     override fun share(export: AudioExport) = files.share(export)
 
     override suspend fun copyTo(export: AudioExport, uri: String) {
@@ -81,7 +87,9 @@ class AndroidExportPlatform(private val files: AndroidExportFiles, private val c
 
     override fun openStorage(requestedBytes: Long?) = openStorage.invoke(requestedBytes)
 
-    override fun playSample(voiceId: String) = container.voiceSamples.play(voiceId)
+    override fun playSample(voiceId: String) = samples.play(voiceId)
 
-    override val sampleState get() = container.voiceSamples.state
+    override val sampleState get() = samples.state
+
+    override fun runExports() = startWork()
 }
