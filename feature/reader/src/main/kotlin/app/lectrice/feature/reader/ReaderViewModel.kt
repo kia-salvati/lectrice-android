@@ -3,9 +3,6 @@ package app.lectrice.feature.reader
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.lectrice.core.model.AudioSource
-import app.lectrice.core.model.AudiobookKind
-import app.lectrice.core.model.AudiobookMode
-import app.lectrice.core.model.AudiobookRepository
 import app.lectrice.core.model.BlockKind
 import app.lectrice.core.model.Document
 import app.lectrice.core.model.ErrorName
@@ -16,11 +13,7 @@ import app.lectrice.core.model.PlaceLabels
 import app.lectrice.core.model.PlaybackController
 import app.lectrice.core.model.ComputerHelperRepository
 import app.lectrice.core.model.HelperNotice
-import app.lectrice.core.model.PrepareController
-import app.lectrice.core.model.PrepareRequest
 import app.lectrice.core.model.PrepareScope
-import app.lectrice.core.model.PrepareState
-import app.lectrice.core.model.VoiceModelRepository
 import app.lectrice.core.model.PlaybackOrder
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.PlaybackState
@@ -35,6 +28,7 @@ import app.lectrice.core.model.VoiceRepository
 import app.lectrice.core.model.VoiceSamplePlayer
 import app.lectrice.core.model.VoiceState
 import app.lectrice.core.model.suspendRunCatching
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -67,11 +61,12 @@ class ReaderViewModel(
     private val voiceSamples: VoiceSamplePlayer,
     private val voice: VoiceAvailability,
     private val navigation: ReaderNavigation,
-    private val prepares: PrepareController,
-    private val models: VoiceModelRepository,
-    private val audiobooks: AudiobookRepository,
-    private val helper: ComputerHelperRepository? = null,
+    private val preparing: PreparePresenter,
+    private val audiobook: AudiobookSourcePresenter,
+    private val helper: ComputerHelperRepository,
     private val clockMs: () -> Long = System::currentTimeMillis,
+    /** Where the book's lookups are built (off the main thread). */
+    private val computation: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel(), ReaderActions {
     private val state = MutableStateFlow(ReaderUiState())
     val uiState: StateFlow<ReaderUiState> = state.asStateFlow()
@@ -99,7 +94,7 @@ class ReaderViewModel(
             val opened = library.getDocument(documentId, markOpened = true)
             val readSkipped = settings.settings.value.readSkipped
             val ids = library.playbackOrder(documentId, readSkipped)
-            val prepared = withContext(Dispatchers.Default) {
+            val prepared = withContext(computation) {
                 val labels = Pages.labelLookup(opened.pages)
                 Prepared(PlaybackOrder(ids, opened), labels, ReaderModel.blocks(opened, labels), Toc.chapterNodeIndexes(opened.toc).map { opened.toc[it].sentenceId })
             }
@@ -133,19 +128,17 @@ class ReaderViewModel(
                 .collect { (playing, voiceState) -> onPlayback(playing, voiceState) }
         }
         viewModelScope.launch {
-            prepares.states.collect { publishPrepare() }
-        }
-        helper?.let { repository ->
-            viewModelScope.launch {
-                combine(repository.state, playback.state) { h, p -> h to p }.distinctUntilChanged().collect { (h, p) ->
-                    state.update { it.copy(helper = HelperLines.of(h, p)) }
-                }
-            }
-            viewModelScope.launch { repository.state.map { it.link.makesAudio to it.active?.shownName }.distinctUntilChanged().collect { publishPrepare() } }
-            viewModelScope.launch { repository.notices.collect { if (it == HelperNotice.ComputerLost) state.update { s -> s.copy(message = ReaderMessage.ComputerLost) } } }
+            preparing.states.collect { publishPrepare() }
         }
         viewModelScope.launch {
-            audiobooks.links.map { it[documentId] }.distinctUntilChanged().collect { onPlayback(playback.state.value, voice.state.value) }
+            combine(helper.state, playback.state) { h, p -> h to p }.distinctUntilChanged().collect { (h, p) ->
+                state.update { it.copy(helper = HelperLines.of(h, p)) }
+            }
+        }
+        viewModelScope.launch { helper.state.map { it.link.makesAudio to it.active?.shownName }.distinctUntilChanged().collect { publishPrepare() } }
+        viewModelScope.launch { helper.notices.collect { if (it == HelperNotice.ComputerLost) state.update { s -> s.copy(message = ReaderMessage.ComputerLost) } } }
+        viewModelScope.launch {
+            audiobook.links.map { it[documentId] }.distinctUntilChanged().collect { onPlayback(playback.state.value, voice.state.value) }
         }
         viewModelScope.launch {
             playback.state.map { it.source }.distinctUntilChanged().collect { publishPrepare() }
@@ -154,7 +147,7 @@ class ReaderViewModel(
             playback.state.map { it.readSkipped }.distinctUntilChanged().collect { readSkipped ->
                 val opened = document ?: return@collect
                 val ids = suspendRunCatching { library.playbackOrder(documentId, readSkipped) }.getOrNull() ?: return@collect
-                order = withContext(Dispatchers.Default) { PlaybackOrder(ids, opened) }
+                order = withContext(computation) { PlaybackOrder(ids, opened) }
                 onPlayback(playback.state.value, voice.state.value)
             }
         }
@@ -196,7 +189,7 @@ class ReaderViewModel(
             canNextSection = hasToc && Toc.nextSectionStart(opened.toc, sentenceId) != null,
             voice = state.value.voices.firstOrNull { it.id == playing.voiceId },
             readSkipped = playing.readSkipped,
-            audiobook = audiobookUi(playing),
+            audiobook = audiobook.ui(playing, state.value.voices),
         )
         state.update {
             it.copy(
@@ -224,108 +217,27 @@ class ReaderViewModel(
     }
 
     private fun publishPrepare() {
-        val computer = helper?.state?.value?.takeIf { it.link.makesAudio }?.active?.shownName
-        if (!models.isSlowPhone() && computer == null) {
-            state.update { it.copy(prepare = null) }
-            return
-        }
-        // File 23 §3.4: nothing to prepare while the book plays from its audiobook file.
-        if (playback.state.value.source == AudioSource.Audiobook) {
-            state.update { it.copy(prepare = null) }
-            return
-        }
-        val info = when (val prepared = prepares.states.value[documentId]) {
-            null -> PrepareInfo("Off", active = false, voiceWarning = null)
-            PrepareState.WaitingForCharger -> PrepareInfo("Waits for the charger", active = true, voiceWarning = null)
-            is PrepareState.Running -> PrepareInfo(
-                if (prepared.onComputer && computer != null) "Preparing on $computer · ${prepared.percent} %" else "Preparing · ${prepared.percent} %",
-                active = true,
-                voiceWarning = null,
-            )
-            is PrepareState.Ready -> PrepareInfo("Ready up to ${prepared.upToLabel}", active = true, voiceWarning = null)
-        }
-        state.update { it.copy(prepare = info.copy(onComputer = computer)) }
+        state.update { it.copy(prepare = preparing.info(playback.state.value.source)) }
     }
 
     override fun prepare(scope: PrepareScope) {
         val opened = document ?: return
         val currentOrder = order ?: return
-        val current = playback.state.value.currentSentenceId ?: return
-        val chapterIndexes = Toc.chapterNodeIndexes(opened.toc)
-        val nextChapters = chapterIndexes.map { opened.toc[it] }.filter { it.sentenceId > current }
-        val (end, label) = when (scope) {
-            PrepareScope.ThisChapter -> (nextChapters.firstOrNull()?.sentenceId?.minus(1) ?: (opened.sentenceIdEnd - 1)) to chapterLabelBefore(opened, nextChapters.firstOrNull()?.sentenceId)
-            PrepareScope.NextThreeChapters -> (nextChapters.getOrNull(NEXT_CHAPTERS)?.sentenceId?.minus(1) ?: (opened.sentenceIdEnd - 1)) to chapterLabelBefore(opened, nextChapters.getOrNull(NEXT_CHAPTERS)?.sentenceId)
-            PrepareScope.AsMuchAsFits -> {
-                var last = current
-                var cursor: Int? = current
-                while (cursor != null && currentOrder.secondsBetween(current, cursor, 1f) < MAX_PREPARE_SECONDS) {
-                    last = cursor
-                    cursor = currentOrder.stepFrom(cursor, 1)
-                }
-                last to chapterLabelBefore(opened, last + 1)
-            }
-        }
-        prepares.prepare(PrepareRequest(documentId, playback.state.value.voiceId, playback.state.value.readSkipped, current, end, label, clockMs()))
-        state.update { it.copy(message = ReaderMessage.PrepareQueued) }
+        if (preparing.prepare(opened, currentOrder, playback.state.value, scope)) state.update { it.copy(message = ReaderMessage.PrepareQueued) }
     }
 
-    /** "Ch. 9" (the chapter that ends right before [nextStart]), else "the end". */
-    private fun chapterLabelBefore(opened: Document, nextStart: Int?): String {
-        val last = (nextStart ?: opened.sentenceIdEnd) - 1
-        val location = Toc.location(opened.toc, last) ?: return "the end"
-        val label = Toc.chapterLabel(opened.toc[location.chapterIndex].title)
-        return label.number?.let { "Ch. $it" } ?: label.name
-    }
-
-    override fun cancelPrepare() = prepares.cancel(documentId)
-
-    // ---- Audiobook source (file 23) ----------------------------------------------------------------------------------
-
-    private fun audiobookUi(playing: PlaybackState): AudiobookUi? {
-        val link = audiobooks.links.value[documentId] ?: return null
-        val active = playing.source == AudioSource.Audiobook
-        val made = if (link.fileSpeedPercent != PlaybackSpeed.X1.percent) "made at ${PlaybackSpeed.fromPercent(link.fileSpeedPercent).label}" else null
-        val origin = if (link.kind == AudiobookKind.OwnExport) "from this phone" else "imported"
-        val voiceName = link.voiceId?.let { id -> state.value.voices.firstOrNull { it.id == id }?.name }
-        val follows = when (link.mode) {
-            AudiobookMode.Sentences -> "Text follows each sentence"
-            AudiobookMode.Chapters -> "Made from another version of this book · text follows chapters"
-            AudiobookMode.Unaligned -> "Can't follow the text"
-        }
-        return AudiobookUi(
-            active = active,
-            fileName = link.displayName,
-            detail = listOfNotNull(Progress.formatDuration(link.durationMs / MS_PER_SECOND.toDouble()), voiceName, made, origin).joinToString(" · "),
-            follows = follows,
-            missing = active && playing.audiobookMissing,
-        )
-    }
+    override fun cancelPrepare() = preparing.cancel()
 
     override fun setAudioSource(source: AudioSource) {
-        if (source == AudioSource.Audiobook && audiobooks.links.value[documentId]?.mode != AudiobookMode.Sentences) {
-            state.update { it.copy(message = ReaderMessage.AudiobookFailed(ErrorName.AudiobookNotLectrice)) }
-            return
-        }
-        playback.setAudioSource(source)
+        audiobook.setSource(source)?.let { message -> state.update { it.copy(message = message) } }
     }
 
     override fun linkAudiobook(uri: String) {
-        viewModelScope.launch {
-            try {
-                audiobooks.link(documentId, uri, AudiobookKind.Imported)
-                playback.setAudioSource(AudioSource.Audiobook)
-            } catch (error: LectriceError) {
-                state.update { it.copy(message = ReaderMessage.AudiobookFailed(error.name)) }
-            }
-        }
+        viewModelScope.launch { audiobook.link(uri)?.let { message -> state.update { it.copy(message = message) } } }
     }
 
     override fun removeAudiobookLink() {
-        viewModelScope.launch {
-            if (playback.state.value.source == AudioSource.Audiobook) playback.setAudioSource(AudioSource.Generated)
-            audiobooks.unlink(documentId)
-        }
+        viewModelScope.launch { audiobook.unlink() }
     }
 
     private fun listenInfo(opened: Document, currentOrder: PlaybackOrder, sentenceId: Int, labels: PlaceLabels, bookPercent: Int, rate: Float): ListenInfo {
@@ -493,9 +405,6 @@ class ReaderViewModel(
 
     private companion object {
         const val MAX_TICKS = 60
-        const val NEXT_CHAPTERS = 3
-        /** The cache cap less 100 MB, in seconds of 16-bit 24 kHz WAV (file 14 §3). */
-        const val MAX_PREPARE_SECONDS = (1024 - 100) * 1_048_576.0 / 48_000
         const val SLOW_LIMIT = 0.95f
         const val SMOOTH_LIMIT = 0.9f
         const val PERCENT = 100f

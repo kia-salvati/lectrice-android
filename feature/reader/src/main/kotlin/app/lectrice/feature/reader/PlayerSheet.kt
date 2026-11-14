@@ -216,7 +216,7 @@ private fun ColumnScope.PlayerContent(state: ReaderUiState, actions: ReaderActio
     if (audiobook != null) {
         ListRow(
             stringResource(R.string.sheet_audio),
-            subtitle = if (audiobook.active) stringResource(R.string.sheet_audio_file, audiobook.follows) else stringResource(R.string.audio_source_generated),
+            subtitle = if (audiobook.active) stringResource(R.string.sheet_audio_file, audiobook.followsText()) else stringResource(R.string.audio_source_generated),
             leadingIcon = LectriceIcons.Headphones,
             onClick = onAudioSource,
             trailing = { LectriceIcon(LectriceIcons.ChevronRight, null, tint = c.fg2) },
@@ -259,10 +259,9 @@ private fun ColumnScope.PlayerContent(state: ReaderUiState, actions: ReaderActio
     state.prepare?.let { prepare ->
         ListRow(
             prepare.onComputer?.let { stringResource(R.string.sheet_prepare_on, it) } ?: stringResource(R.string.sheet_prepare),
-            subtitle = prepare.summary,
+            subtitle = prepare.summary.text(),
             leadingIcon = if (prepare.onComputer != null) LectriceIcons.Bolt else LectriceIcons.BatteryFull,
             onClick = { prepareOpen = !prepareOpen },
-            extra = { prepare.voiceWarning?.let { Text(it, style = LectriceTheme.type.rowMeta, color = c.warnFg) } },
             trailing = { ExpandIcon(prepareOpen) },
         )
         if (prepareOpen) {

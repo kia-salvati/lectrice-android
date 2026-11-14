@@ -45,7 +45,9 @@ import app.lectrice.core.model.suspendRunCatching
 import app.lectrice.feature.library.LibraryNavigation
 import app.lectrice.feature.library.LibraryScreen
 import app.lectrice.feature.library.LibraryViewModel
+import app.lectrice.feature.reader.AudiobookSourcePresenter
 import app.lectrice.feature.reader.ExportPage
+import app.lectrice.feature.reader.PreparePresenter
 import app.lectrice.feature.reader.ExportViewModel
 import app.lectrice.feature.reader.ReaderMessage
 import app.lectrice.feature.reader.ReaderNavigation
@@ -267,9 +269,11 @@ private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: 
         }
     }
     val viewModel: ReaderViewModel = viewModel(key = screen.documentId) {
+        val preparing = PreparePresenter(screen.documentId, container.prepare, container.voiceModels, container.computerHelper)
+        val audiobook = AudiobookSourcePresenter(screen.documentId, container.audiobooks, container.playback)
         ReaderViewModel(
             screen.documentId, screen.play, container.library, container.playback, container.settings, container.voices, container.voiceSamples,
-            container.engine, navigation, container.prepare, container.voiceModels, container.audiobooks, container.computerHelper,
+            container.engine, navigation, preparing, audiobook, container.computerHelper,
         )
     }
     val state by viewModel.uiState.collectAsStateWithLifecycle()

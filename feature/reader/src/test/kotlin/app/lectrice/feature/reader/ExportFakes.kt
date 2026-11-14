@@ -77,7 +77,7 @@ internal class FakeExports(private val free: Long = 10_000_000_000) : ExportRepo
     override fun partsBytes(exportId: String) = 0L
 }
 
-internal class FakeModels : VoiceModelRepository {
+internal class FakeModels(private val slowPhone: Boolean = false) : VoiceModelRepository {
     private val model = VoiceModelInfo("fast", "engine-a", "Fast", "Invented model", 100_000_000, 110_000_000)
     override val statuses = MutableStateFlow(listOf(ModelStatus(model, ModelInstallState.Installed, inUse = true)))
     override val download = MutableStateFlow<DownloadInfo?>(null)
@@ -92,7 +92,7 @@ internal class FakeModels : VoiceModelRepository {
     override suspend fun freeBytes() = 10_000_000_000
     override fun spaceNeeded(modelId: String) = 0L
     override fun rtf(modelId: String) = 0.5f
-    override fun isSlowPhone() = false
+    override fun isSlowPhone() = slowPhone
 }
 
 internal class FakeVoices : VoiceRepository {

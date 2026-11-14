@@ -62,8 +62,8 @@ internal fun AudioSourceSheet(
                         LectriceTextButton(stringResource(R.string.audio_source_find), onPickAudiobook, color = fg, style = LectriceTheme.type.label)
                     }
                 } else {
-                    Text(audiobook.detail, Modifier.padding(start = CARD_INDENT, top = 4.dp), style = LectriceTheme.type.bodyS, color = fg2)
-                    Text(audiobook.follows, Modifier.padding(start = CARD_INDENT), style = LectriceTheme.type.bodyS, color = fg2)
+                    Text(audiobook.detailText(), Modifier.padding(start = CARD_INDENT, top = 4.dp), style = LectriceTheme.type.bodyS, color = fg2)
+                    Text(audiobook.followsText(), Modifier.padding(start = CARD_INDENT), style = LectriceTheme.type.bodyS, color = fg2)
                 }
             }
             FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {

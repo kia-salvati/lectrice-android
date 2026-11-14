@@ -1,6 +1,10 @@
 package app.lectrice.feature.reader
 
+import app.lectrice.core.model.AudioSource
+import app.lectrice.core.model.AudiobookKind
+import app.lectrice.core.model.AudiobookMode
 import app.lectrice.core.model.BlockKind
+import app.lectrice.core.model.PrepareScope
 import app.lectrice.core.model.ErrorName
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.VoiceSampleState
@@ -92,10 +96,14 @@ data class AudiobookUi(
     val active: Boolean,
     /** "The Long Book – Heart.m4b" */
     val fileName: String,
-    /** "2 h 41 min · made at 1.5× · from this phone" (or "· imported") */
-    val detail: String,
-    /** "Text follows each sentence" */
-    val follows: String,
+    /** The detail line is "{duration} · {voiceName} · made at {madeAt} · from this phone|imported" (absent parts left out). */
+    val duration: String,
+    val voiceName: String?,
+    /** The speed the file was made at, when not 1×. */
+    val madeAt: PlaybackSpeed?,
+    val kind: AudiobookKind,
+    /** How the text follows it: each sentence / chapters (another version of the book) / not at all. */
+    val mode: AudiobookMode,
     /** B4: the file can't be read; the Audiobook card shows "File missing" + "Find it again…". */
     val missing: Boolean,
 )
@@ -183,17 +191,29 @@ data class HelperLineUi(
     val pillSpoken: String?,
 )
 
-/** The player sheet's "Prepare while charging" row (file 14 §2). */
+/** The player sheet's "Prepare while charging" row. */
 data class PrepareInfo(
-    /** "Off", "Waits for the charger", "Preparing · 40 %", "Ready up to Ch. 9". */
-    val summary: String,
+    val summary: PrepareSummary,
     val active: Boolean,
-    /** "Prepared with Heart. Switch back to use it." when the voice changed. */
-    val voiceWarning: String?,
-    /** File 24 §11.4: the computer's name while it is connected; the row then reads "Prepare on <name>" with the `bolt`
-     *  icon (no charger needed). Null: the phone prepares while charging (battery icon). */
+    /** The computer's name while it is connected; the row then reads "Prepare on <name>" with the `bolt` icon (no
+     *  charger needed). Null: the phone prepares while charging (battery icon). */
     val onComputer: String? = null,
 )
+
+/** The Prepare row's subtitle. */
+sealed interface PrepareSummary {
+    /** "Off" */
+    data object Off : PrepareSummary
+
+    /** "Waits for the charger" */
+    data object WaitsForCharger : PrepareSummary
+
+    /** "Preparing · 40 %", or "Preparing on {computer} · 40 %" while the computer makes it. */
+    data class Preparing(val percent: Int, val computer: String?) : PrepareSummary
+
+    /** "Ready up to {upTo}" ("Ch. 9"). */
+    data class Ready(val upTo: String) : PrepareSummary
+}
 
 sealed interface ReaderMessage {
     /** File 24 §2, once per session: "Your computer isn't reachable. The phone carries on by itself." */
@@ -214,8 +234,25 @@ sealed interface ReaderMessage {
     data class AudiobookFailed(val name: ErrorName) : ReaderMessage
 }
 
+/** The Prepare row's choices. */
+interface PrepareActions {
+    /** This chapter · Next 3 chapters · As much as fits. */
+    fun prepare(scope: PrepareScope)
+    fun cancelPrepare()
+}
+
+/** The "Audio" row and the "Listen with" sheet. */
+interface AudiobookSourceActions {
+    /** "Made on this phone" / "Audiobook file". */
+    fun setAudioSource(source: AudioSource)
+    /** "Use another file…" / "Find it again…": a picked `content://` URI. */
+    fun linkAudiobook(uri: String)
+    /** "Remove link" (the file itself stays). */
+    fun removeAudiobookLink()
+}
+
 /** What the reader, its pill, sheets and the Listen view can ask for. */
-interface ReaderActions {
+interface ReaderActions : PrepareActions, AudiobookSourceActions {
     fun playPause()
     fun next()
     fun previous()
@@ -241,15 +278,6 @@ interface ReaderActions {
     fun messageShown()
     fun openLibrary()
     fun openModelSetup()
-    /** File 14: This chapter · Next 3 chapters · As much as fits. */
-    fun prepare(scope: app.lectrice.core.model.PrepareScope)
-    fun cancelPrepare()
-    /** File 23 B2: "Made on this phone" / "Audiobook file". */
-    fun setAudioSource(source: app.lectrice.core.model.AudioSource)
-    /** B2 "Use another file…" / B4 "Find it again…": a picked `content://` URI. */
-    fun linkAudiobook(uri: String)
-    /** B2 "Remove link" (the file itself stays). */
-    fun removeAudiobookLink()
-    /** File 24: the helper row (or its "Fix") opens Settings → Computer helper. */
+    /** The helper row (or its "Fix") opens Settings → Computer helper. */
     fun openComputerHelper()
 }
