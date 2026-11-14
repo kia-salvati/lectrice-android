@@ -27,10 +27,12 @@ class EngineHost(
     private val settings: SettingsStore,
     private val scope: CoroutineScope,
 ) : VoiceAvailability {
+    /** Held while the engine loads or unloads; the loaded model is also read without it ([loadedModel]), hence volatile. */
     private val mutex = Mutex()
     private val voiceState = MutableStateFlow(initialState())
-    private var loadedModelId: String? = null
-    private var loadedThreads: Int? = null
+    @Volatile private var loadedModelId: String? = null
+    @Volatile private var loadedThreads: Int? = null
+    /** [users] and [idleTimer] are guarded by `synchronized(this)`. */
     private var idleTimer: Job? = null
     private var users = 0
     private var loads = 0L
@@ -140,7 +142,7 @@ class EngineHost(
     suspend fun unload(reason: String) = withContext(Dispatchers.IO) { unloadLocked(reason) }
 
     private suspend fun unloadLocked(reason: String) = mutex.withLock {
-        if (loadedModelId == null || users > 0) return@withLock
+        if (loadedModelId == null || synchronized(this) { users > 0 }) return@withLock
         core.blocking("unload_engine") { it.unloadEngine() }
         loadedModelId = null
         assembledLoad.value = null
