@@ -17,6 +17,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import app.lectrice.core.model.ThemeSetting
 
 /**
@@ -119,19 +121,35 @@ class LectriceColors(set: TokenSet) {
     fun onTile(hue: Int): Color = onTiles[hue.mod(onTiles.size)]
 }
 
+/** The spacing steps screens lay out with. */
+@Immutable
+data class LectriceSpace(val xs: Dp = 4.dp, val s: Dp = 8.dp, val m: Dp = 12.dp, val l: Dp = 16.dp, val xl: Dp = 24.dp)
+
+/** The smallest touch target and the three icon sizes. */
+@Immutable
+data class LectriceSize(val touch: Dp = 48.dp, val iconS: Dp = 16.dp, val icon: Dp = 20.dp, val iconL: Dp = 24.dp)
+
 private val lightColors = LectriceColors(Tokens.light)
 private val darkColors = LectriceColors(Tokens.dark)
 private val blackColors = LectriceColors(Tokens.black)
 private val defaultType = LectriceType()
+private val defaultSpace = LectriceSpace()
+private val defaultSize = LectriceSize()
 
 val LocalLectriceColors = staticCompositionLocalOf { lightColors }
 val LocalLectriceType = staticCompositionLocalOf { defaultType }
+val LocalLectriceSpace = staticCompositionLocalOf { defaultSpace }
+val LocalLectriceSize = staticCompositionLocalOf { defaultSize }
 
 object LectriceTheme {
     val colors: LectriceColors
         @Composable get() = LocalLectriceColors.current
     val type: LectriceType
         @Composable get() = LocalLectriceType.current
+    val space: LectriceSpace
+        @Composable get() = LocalLectriceSpace.current
+    val size: LectriceSize
+        @Composable get() = LocalLectriceSize.current
 }
 
 /** System follows the phone and uses dark (not black). Also sets the status/navigation bar icon colours. */
@@ -154,6 +172,8 @@ fun LectriceTheme(theme: ThemeSetting, content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalLectriceColors provides colors,
         LocalLectriceType provides defaultType,
+        LocalLectriceSpace provides defaultSpace,
+        LocalLectriceSize provides defaultSize,
         LocalReducedMotion provides rememberReducedMotion(),
         LocalContentColor provides colors.fg,
         LocalIndication provides ripple(),

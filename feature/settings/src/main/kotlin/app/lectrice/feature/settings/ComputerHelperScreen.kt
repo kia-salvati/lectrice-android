@@ -172,7 +172,7 @@ private fun HelperPage(
                 titleColor = if (paired) c.fg else c.fg2,
                 trailing = { LectriceSwitch(helper.enabled, onEnable, contentDescription = switchLabel, enabled = paired) },
             )
-            Text(stringResource(R.string.helper_explain), Modifier.padding(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 8.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+            Text(stringResource(R.string.helper_explain), Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.xs, end = LectriceTheme.space.l, bottom = LectriceTheme.space.s), style = LectriceTheme.type.bodyS, color = c.fg2)
             if (attention != null) AttentionLine(attention, helper.active?.shownName, helper.neededModel, actions::retry, onPair, onOpenAppSettings)
 
             SectionHeader(stringResource(R.string.helper_computers))
@@ -188,9 +188,9 @@ private fun HelperPage(
                     onForget = { menuFor = null; forgetFor = computer.peerId },
                 )
             }
-            LectriceTextButton(stringResource(R.string.helper_pair), onPair, Modifier.padding(horizontal = 4.dp))
-            Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                LectriceIcon(LectriceIcons.Info, null, tint = c.fg2, size = 20.dp)
+            LectriceTextButton(stringResource(R.string.helper_pair), onPair, Modifier.padding(horizontal = LectriceTheme.space.xs))
+            Row(Modifier.padding(LectriceTheme.space.l), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
+                LectriceIcon(LectriceIcons.Info, null, tint = c.fg2, size = LectriceTheme.size.icon)
                 Text(stringResource(R.string.helper_help), Modifier.weight(1f), style = LectriceTheme.type.bodyS, color = c.fg2)
             }
             Spacer(Modifier.navigationBarsPadding().height(48.dp))
@@ -232,7 +232,7 @@ private fun AttentionLine(
         HelperAttention.NotPaired -> stringResource(R.string.helper_attention_forgot, computerName ?: stringResource(R.string.helper_your_computer))
         else -> stringResource(R.string.helper_mismatch)
     }
-    val modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)
+    val modifier = Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.s, end = LectriceTheme.space.l)
     when (reason) {
         HelperAttention.ModelMissing -> Banner(BannerKind.Warn, LectriceIcons.Warning, text, modifier) {
             BannerAction(stringResource(R.string.helper_retry), BannerKind.Warn, onRetry)
@@ -246,9 +246,9 @@ private fun AttentionLine(
 
 @Composable
 private fun DeniedCard(onOpenAppSettings: () -> Unit) {
-    LectriceCard(Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp).fillMaxWidth(), radius = 12.dp, padding = 0.dp) {
-        Text(stringResource(R.string.helper_denied), Modifier.padding(start = 16.dp, top = 12.dp, end = 16.dp), style = LectriceTheme.type.body)
-        Row(Modifier.fillMaxWidth().padding(end = 4.dp), horizontalArrangement = Arrangement.End) {
+    LectriceCard(Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.s, end = LectriceTheme.space.l).fillMaxWidth(), radius = 12.dp, padding = 0.dp) {
+        Text(stringResource(R.string.helper_denied), Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.m, end = LectriceTheme.space.l), style = LectriceTheme.type.body)
+        Row(Modifier.fillMaxWidth().padding(end = LectriceTheme.space.xs), horizontalArrangement = Arrangement.End) {
             LectriceTextButton(stringResource(R.string.helper_open_settings), onOpenAppSettings)
         }
     }
@@ -291,7 +291,7 @@ private fun ComputerMenu(onRename: () -> Unit, onForget: () -> Unit, onDismiss: 
     val drop = with(LocalDensity.current) { MENU_DROP.roundToPx() }
     val shape = RoundedCornerShape(12.dp)
     Popup(alignment = Alignment.TopEnd, offset = IntOffset(0, drop), onDismissRequest = onDismiss, properties = PopupProperties(focusable = true)) {
-        Column(Modifier.width(MENU_WIDTH).clip(shape).background(c.bg2).border(1.dp, c.line, shape).padding(vertical = 8.dp)) {
+        Column(Modifier.width(MENU_WIDTH).clip(shape).background(c.bg2).border(1.dp, c.line, shape).padding(vertical = LectriceTheme.space.s)) {
             ListRow(stringResource(R.string.helper_rename), onClick = onRename)
             ListRow(stringResource(R.string.helper_forget), titleColor = c.errFg, onClick = onForget)
         }
@@ -324,7 +324,7 @@ private fun RenameDialog(computer: PairedComputer, onSave: (String?) -> Unit, on
                 label = stringResource(R.string.helper_rename_label),
                 value = name,
                 onValueChange = { name = it.take(MAX_NAME_LENGTH) },
-                modifier = Modifier.padding(top = 16.dp),
+                modifier = Modifier.padding(top = LectriceTheme.space.l),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
                 onDone = save,
             )
@@ -339,9 +339,9 @@ private fun RenameDialog(computer: PairedComputer, onSave: (String?) -> Unit, on
 @Composable
 private fun NearbySheet(onContinue: () -> Unit, onDismiss: () -> Unit) {
     BottomSheet(onDismiss, contentDescription = stringResource(R.string.helper_nearby_a11y)) {
-        Text(stringResource(R.string.helper_nearby), Modifier.padding(horizontal = 16.dp), style = LectriceTheme.type.body)
-        PrimaryButton(stringResource(R.string.helper_continue), onContinue, Modifier.padding(start = 16.dp, top = 24.dp, end = 16.dp))
-        Box(Modifier.fillMaxWidth().padding(top = 8.dp), contentAlignment = Alignment.Center) {
+        Text(stringResource(R.string.helper_nearby), Modifier.padding(horizontal = LectriceTheme.space.l), style = LectriceTheme.type.body)
+        PrimaryButton(stringResource(R.string.helper_continue), onContinue, Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.xl, end = LectriceTheme.space.l))
+        Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s), contentAlignment = Alignment.Center) {
             LectriceTextButton(stringResource(R.string.helper_not_now), onDismiss)
         }
         SheetBottomSpacer()
@@ -357,9 +357,9 @@ private fun PairPage(title: String, onBack: () -> Unit, foot: (@Composable () ->
         TopBar(title, onBack, stringResource(R.string.common_back))
         Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState())) {
             body()
-            Spacer(if (foot == null) Modifier.navigationBarsPadding().height(24.dp) else Modifier.height(16.dp))
+            Spacer(if (foot == null) Modifier.navigationBarsPadding().height(LectriceTheme.space.xl) else Modifier.height(LectriceTheme.space.l))
         }
-        if (foot != null) Box(Modifier.navigationBarsPadding().padding(16.dp)) { foot() }
+        if (foot != null) Box(Modifier.navigationBarsPadding().padding(LectriceTheme.space.l)) { foot() }
     }
 }
 
@@ -379,7 +379,7 @@ private fun PairListPage(
             denied -> DeniedCard(onOpenAppSettings)
             !helper.onWifi -> Column(
                 Modifier.fillMaxWidth().padding(start = 32.dp, top = 48.dp, end = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 LectriceIcon(LectriceIcons.Wifi, null, tint = c.fg2, size = 40.dp)
@@ -395,7 +395,7 @@ private fun PairListPage(
                     LectriceTextButton(
                         stringResource(R.string.pair_enter_address),
                         actions::enterAddress,
-                        Modifier.padding(start = 4.dp, top = if (nothingFound) 16.dp else 0.dp),
+                        Modifier.padding(start = LectriceTheme.space.xs, top = if (nothingFound) 16.dp else 0.dp),
                         style = if (nothingFound) LectriceTheme.type.labelL else LectriceTheme.type.label,
                     )
                 }
@@ -408,11 +408,11 @@ private fun PairListPage(
 private fun LookingRow(dim: Boolean) {
     val c = LectriceTheme.colors
     Row(
-        Modifier.fillMaxWidth().heightIn(min = 48.dp).padding(horizontal = 16.dp, vertical = 8.dp).semantics { liveRegion = LiveRegionMode.Polite },
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        Modifier.fillMaxWidth().heightIn(min = LectriceTheme.size.touch).padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.s).semantics { liveRegion = LiveRegionMode.Polite },
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Spinner(Modifier.padding(horizontal = 4.dp))
+        Spinner(Modifier.padding(horizontal = LectriceTheme.space.xs))
         Text(
             stringResource(R.string.pair_looking),
             Modifier.weight(1f),
@@ -432,9 +432,9 @@ private fun NotFoundHelp() {
         boldPart(stringResource(R.string.pair_help_click, pairAPhone), pairAPhone),
     )
     val style = LectriceTheme.type.bodyS.copy(color = LectriceTheme.colors.fg2)
-    Column(Modifier.padding(start = 20.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 20.dp, end = LectriceTheme.space.l)) {
         lines.forEach { line ->
-            Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(Modifier.padding(top = LectriceTheme.space.s), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
                 BasicText(BULLET, Modifier.clearAndSetSemantics { }, style = style)
                 BasicText(line, Modifier.weight(1f), style = style)
             }
@@ -451,12 +451,12 @@ private fun AddressPage(step: PairStep.Address, actions: ComputerHelperActions, 
         onBack,
         foot = { PrimaryButton(stringResource(R.string.helper_continue), actions::submitAddress) },
     ) {
-        Column(Modifier.padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
             LabeledField(
                 label = stringResource(R.string.pair_address_label),
                 value = text,
                 onValueChange = { text = it; actions.addressChanged(it) },
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = LectriceTheme.space.s),
                 placeholder = stringResource(R.string.pair_address_placeholder),
                 error = step.invalid,
                 textStyle = LectriceTheme.type.code.copy(fontSize = ADDRESS_TEXT, lineHeight = ADDRESS_LINE),
@@ -466,7 +466,7 @@ private fun AddressPage(step: PairStep.Address, actions: ComputerHelperActions, 
             if (step.invalid) {
                 Text(
                     stringResource(R.string.pair_address_invalid),
-                    Modifier.padding(top = 8.dp).semantics { liveRegion = LiveRegionMode.Polite },
+                    Modifier.padding(top = LectriceTheme.space.s).semantics { liveRegion = LiveRegionMode.Polite },
                     style = LectriceTheme.type.bodyS,
                     color = LectriceTheme.colors.errFg,
                 )
@@ -486,7 +486,7 @@ private fun CodePage(step: PairStep.Code, actions: ComputerHelperActions, onBack
     val name = step.computerName.ifEmpty { stringResource(R.string.pair_code_your_computer) }
     val boxesLabel = stringResource(R.string.pair_code_a11y)
     PairPage(stringResource(R.string.helper_pair), onBack) {
-        Column(Modifier.padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
             Text(stringResource(R.string.pair_code_type, name), style = LectriceTheme.type.body)
             BasicTextField(
                 value = code,
@@ -496,7 +496,7 @@ private fun CodePage(step: PairStep.Code, actions: ComputerHelperActions, onBack
                     code = digits
                     if (complete) actions.submitCode(digits)
                 },
-                modifier = Modifier.padding(top = 24.dp).fillMaxWidth().focusRequester(focus).semantics { contentDescription = boxesLabel },
+                modifier = Modifier.padding(top = LectriceTheme.space.xl).fillMaxWidth().focusRequester(focus).semantics { contentDescription = boxesLabel },
                 enabled = !locked,
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.None),
@@ -512,7 +512,7 @@ private fun CodePage(step: PairStep.Code, actions: ComputerHelperActions, onBack
 private fun CodeBoxes(code: String, locked: Boolean) {
     val c = LectriceTheme.colors
     val shape = RoundedCornerShape(12.dp)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
         repeat(CODE_LENGTH) { index ->
             val next = !locked && index == code.length
             val border = when {
@@ -550,7 +550,7 @@ private fun CodeStatus(phase: CodePhase, computerName: String, onTypeAgain: () -
             PhaseLine(LectriceIcons.Error, AnnotatedString(stringResource(R.string.pair_code_wrong)), c.errFg)
             Text(
                 stringResource(R.string.pair_code_try, phase.attempt, ComputerHelperViewModel.MAX_TRIES),
-                Modifier.padding(start = PHASE_TEXT_INSET, top = 4.dp),
+                Modifier.padding(start = PHASE_TEXT_INSET, top = LectriceTheme.space.xs),
                 style = LectriceTheme.type.bodyS,
                 color = c.fg2,
             )
@@ -558,11 +558,11 @@ private fun CodeStatus(phase: CodePhase, computerName: String, onTypeAgain: () -
         CodePhase.NoCode -> {
             val pairAPhone = stringResource(R.string.pair_a_phone)
             PhaseLine(LectriceIcons.Info, boldPart(stringResource(R.string.pair_code_none, computerName, pairAPhone), pairAPhone), c.fg)
-            LectriceTextButton(stringResource(R.string.pair_code_new), onTypeAgain, Modifier.padding(top = 4.dp).offset(x = TEXT_BUTTON_OUTDENT))
+            LectriceTextButton(stringResource(R.string.pair_code_new), onTypeAgain, Modifier.padding(top = LectriceTheme.space.xs).offset(x = TEXT_BUTTON_OUTDENT))
         }
         CodePhase.Unreachable -> {
             PhaseLine(LectriceIcons.Error, AnnotatedString(stringResource(R.string.pair_code_unreachable)), c.errFg)
-            LectriceTextButton(stringResource(R.string.common_try_again), onTypeAgain, Modifier.padding(top = 4.dp).offset(x = TEXT_BUTTON_OUTDENT))
+            LectriceTextButton(stringResource(R.string.common_try_again), onTypeAgain, Modifier.padding(top = LectriceTheme.space.xs).offset(x = TEXT_BUTTON_OUTDENT))
         }
         CodePhase.NotLocal -> PhaseLine(LectriceIcons.Error, AnnotatedString(stringResource(R.string.pair_code_not_local)), c.errFg)
         CodePhase.Incompatible -> PhaseLine(LectriceIcons.Error, AnnotatedString(stringResource(R.string.helper_mismatch)), c.errFg)
@@ -572,8 +572,8 @@ private fun CodeStatus(phase: CodePhase, computerName: String, onTypeAgain: () -
 /** The line under the code boxes; a null [icon] draws the spinner. */
 @Composable
 private fun PhaseLine(icon: ImageVector?, text: AnnotatedString, color: Color) {
-    Row(Modifier.padding(top = 16.dp).semantics { liveRegion = LiveRegionMode.Polite }, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        if (icon == null) Spinner(Modifier.padding(2.dp)) else LectriceIcon(icon, null, tint = color, size = 20.dp)
+    Row(Modifier.padding(top = LectriceTheme.space.l).semantics { liveRegion = LiveRegionMode.Polite }, horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
+        if (icon == null) Spinner(Modifier.padding(2.dp)) else LectriceIcon(icon, null, tint = color, size = LectriceTheme.size.icon)
         BasicText(text, Modifier.weight(1f), style = LectriceTheme.type.bodyS.copy(color = color))
     }
 }
@@ -584,8 +584,8 @@ private fun DonePage(step: PairStep.Done, enabled: Boolean, actions: ComputerHel
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).statusBarsPadding().padding(top = DONE_TOP_GAP)) {
             Column(
-                Modifier.fillMaxWidth().padding(start = 24.dp, top = 32.dp, end = 24.dp, bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                Modifier.fillMaxWidth().padding(start = LectriceTheme.space.xl, top = 32.dp, end = LectriceTheme.space.xl, bottom = LectriceTheme.space.xl),
+                verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.m),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 LectriceIcon(LectriceIcons.CheckCircle, null, tint = c.okFg, size = 56.dp)
@@ -600,7 +600,7 @@ private fun DonePage(step: PairStep.Done, enabled: Boolean, actions: ComputerHel
             val switchLabel = stringResource(R.string.helper_switch)
             ListRow(switchLabel, trailing = { LectriceSwitch(enabled, actions::setEnabled, contentDescription = switchLabel) })
         }
-        Box(Modifier.navigationBarsPadding().padding(16.dp)) { PrimaryButton(stringResource(R.string.pair_done), actions::finishPairing) }
+        Box(Modifier.navigationBarsPadding().padding(LectriceTheme.space.l)) { PrimaryButton(stringResource(R.string.pair_done), actions::finishPairing) }
     }
 }
 
@@ -624,7 +624,7 @@ private fun LabeledField(
     val shape = RoundedCornerShape(12.dp)
     val focus = remember { FocusRequester() }
     LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }
-    Column(modifier.fillMaxWidth().clip(shape).background(c.bg).border(2.dp, tone, shape).padding(start = 16.dp, top = 6.dp, end = 16.dp, bottom = 10.dp)) {
+    Column(modifier.fillMaxWidth().clip(shape).background(c.bg).border(2.dp, tone, shape).padding(start = LectriceTheme.space.l, top = 6.dp, end = LectriceTheme.space.l, bottom = 10.dp)) {
         Text(label, Modifier.clearAndSetSemantics { }, style = LectriceTheme.type.caption.copy(fontWeight = FontWeight.Medium), color = tone)
         BasicTextField(
             value = value,

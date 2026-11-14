@@ -230,10 +230,10 @@ internal fun ListenView(
                     }
                 }
                 if (locked) {
-                    LectriceIcon(LectriceIcons.Lock, null, Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(top = 8.dp), tint = c.fg, size = 16.dp)
+                    LectriceIcon(LectriceIcons.Lock, null, Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(top = LectriceTheme.space.s), tint = c.fg, size = LectriceTheme.size.iconS)
                     Text(
                         stringResource(R.string.listen_unlock),
-                        Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 4.dp),
+                        Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = LectriceTheme.space.xs),
                         style = LectriceTheme.type.caption,
                         color = c.fg2,
                     )
@@ -254,7 +254,7 @@ private fun ListenTopBar(bookTitle: String, title: String, alpha: Float, onBack:
             .statusBarsPadding()
             .heightIn(min = TOP_BAR_HEIGHT)
             .alpha(alpha)
-            .padding(start = 4.dp, end = 16.dp)
+            .padding(start = LectriceTheme.space.xs, end = LectriceTheme.space.l)
             .pointerInput(Unit) {
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
@@ -272,11 +272,11 @@ private fun ListenTopBar(bookTitle: String, title: String, alpha: Float, onBack:
                     onRelease(tracker.calculateVelocity().y)
                 }
             },
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.xs),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LectriceIconButton(LectriceIcons.ExpandMore, stringResource(R.string.listen_back), onBack, Modifier.focusRequester(focus).focusable())
-        Column(Modifier.weight(1f).padding(start = 4.dp)) {
+        Column(Modifier.weight(1f).padding(start = LectriceTheme.space.xs)) {
             Text(bookTitle, style = LectriceTheme.type.bodyS, color = c.fg2, maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(title, style = LectriceTheme.type.labelL.copy(lineHeight = 22.sp), maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
@@ -336,7 +336,7 @@ private fun Teleprompter(state: ReaderUiState, actions: ReaderActions, modifier:
     Box(
         modifier
             .fillMaxWidth()
-            .padding(start = 4.dp, end = 16.dp)
+            .padding(start = LectriceTheme.space.xs, end = LectriceTheme.space.l)
             .clipToBounds()
             .drawWithContent {
                 drawContent()
@@ -370,8 +370,8 @@ private fun Teleprompter(state: ReaderUiState, actions: ReaderActions, modifier:
                 .fillMaxSize()
                 .offset { IntOffset(0, glide.value.roundToInt()) }
                 .alpha(1f - GLIDE_DIM * (abs(glide.value) / glidePx).coerceIn(0f, 1f))
-                .padding(start = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                .padding(start = LectriceTheme.space.m),
+            verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.l, Alignment.CenterVertically),
         ) {
             if (density.fontScale >= TALL_FONT_SCALE) {
                 // At a very large font the neighbours give their space to the current sentence, which scrolls if it still doesn't fit.
@@ -393,7 +393,7 @@ private fun Teleprompter(state: ReaderUiState, actions: ReaderActions, modifier:
             ) { LectriceIcon(icon, null, tint = c.inverseFg, size = 36.dp) }
         }
         if (hint) {
-            HintTooltip(stringResource(R.string.listen_hint), stringResource(R.string.hint_got_it), onHintDone, Modifier.align(Alignment.BottomCenter).padding(start = 12.dp, bottom = 12.dp))
+            HintTooltip(stringResource(R.string.listen_hint), stringResource(R.string.hint_got_it), onHintDone, Modifier.align(Alignment.BottomCenter).padding(start = LectriceTheme.space.m, bottom = LectriceTheme.space.m))
         }
     }
 }
@@ -408,7 +408,7 @@ private fun CurrentSlot(listen: ListenInfo, readSkipped: Boolean, finished: Bool
     val type = LectriceTheme.type
     val isBox = listen.currentBlockKind == BlockKind.Code || listen.currentBlockKind == BlockKind.Table
     var long by remember(listen.current) { mutableStateOf(false) }
-    Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
         Box(Modifier.width(3.dp).fillMaxHeight().padding(vertical = 6.dp).clip(RoundedCornerShape(2.dp)).background(c.accent))
         Box(Modifier.weight(1f).semantics { if (!playing) liveRegion = LiveRegionMode.Polite }) {
             when {
@@ -438,12 +438,12 @@ private fun BoxCard(listen: ListenInfo, readSkipped: Boolean) {
     val lines = remember(listen.currentBoxText, listen.current, readSkipped) {
         (if (readSkipped) listen.current else listen.currentBoxText.orEmpty()).lineSequence().take(BOX_LINES).joinToString("\n")
     }
-    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(c.bg2).border(1.dp, c.line, RoundedCornerShape(12.dp)).padding(16.dp)) {
+    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(c.bg2).border(1.dp, c.line, RoundedCornerShape(12.dp)).padding(LectriceTheme.space.l)) {
         Text(title, style = LectriceTheme.type.label)
-        Box(Modifier.fillMaxWidth().padding(top = 8.dp).endFade(scroll, c.bg2)) {
+        Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s).endFade(scroll, c.bg2)) {
             Text(lines, Modifier.horizontalScroll(scroll), style = LectriceTheme.type.code, color = c.fg2, maxLines = BOX_LINES)
         }
-        if (!readSkipped) Text(stringResource(R.string.reader_read_as, listen.current), Modifier.padding(top = 8.dp), style = LectriceTheme.type.caption, color = c.fg2)
+        if (!readSkipped) Text(stringResource(R.string.reader_read_as, listen.current), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.caption, color = c.fg2)
     }
 }
 
@@ -459,14 +459,14 @@ private fun ThumbZone(state: ReaderUiState, actions: ReaderActions, scrubber: Sc
         Modifier
             .fillMaxWidth()
             .navigationBarsPadding()
-            .padding(start = 16.dp, end = 16.dp, bottom = if (locked) ZONE_BOTTOM + LOCKED_LIFT else ZONE_BOTTOM),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = if (locked) ZONE_BOTTOM + LOCKED_LIFT else ZONE_BOTTOM),
+        verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
     ) {
         Column(Modifier.alpha(alpha)) {
             ChapterProgress(listen.chapterFraction, listen.sectionTicks, stringResource(R.string.listen_progress_a11y))
-            Row(Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.xs), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 Text(listen.progress, Modifier.weight(1f, fill = false), style = LectriceTheme.type.caption, color = c.fg2, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
                     if (preparing) {
                         Spinner()
                         Text(stringResource(if (player.status == PlaybackStatus.Preparing) R.string.pill_preparing else R.string.pill_catching_up), style = LectriceTheme.type.caption, color = c.fg2, maxLines = 1)
@@ -495,7 +495,7 @@ private fun ThumbZone(state: ReaderUiState, actions: ReaderActions, scrubber: Sc
             }
             RoundButton(SIDE_BUTTON, c.bg2, c.fg, LectriceIcons.SkipNext, 32.dp, stringResource(R.string.pill_next), enabled, Modifier.alpha(alpha), border = true, onClick = actions::next)
         }
-        Row(Modifier.fillMaxWidth().alpha(alpha), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Row(Modifier.fillMaxWidth().alpha(alpha), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l)) {
             SectionButton(stringResource(R.string.sheet_previous_section), LectriceIcons.KeyboardDoubleArrowLeft, iconFirst = true, enabled = enabled && player.canPreviousSection, onClick = actions::previousSection)
             SectionButton(stringResource(R.string.sheet_next_section), LectriceIcons.KeyboardDoubleArrowRight, iconFirst = false, enabled = enabled && player.canNextSection, onClick = actions::nextSection)
         }
@@ -571,12 +571,12 @@ private fun RowScope.SectionButton(label: String, icon: ImageVector, iconFirst: 
             .border(1.dp, c.line, CircleShape)
             .clickable(interactionSource = null, indication = ripple(), enabled = enabled, role = Role.Button, onClick = onClick)
             .semantics { contentDescription = label },
-        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (iconFirst) LectriceIcon(icon, null, tint = tint, size = 20.dp)
+        if (iconFirst) LectriceIcon(icon, null, tint = tint, size = LectriceTheme.size.icon)
         Text(stringResource(R.string.listen_section), style = LectriceTheme.type.label, color = tint)
-        if (!iconFirst) LectriceIcon(icon, null, tint = tint, size = 20.dp)
+        if (!iconFirst) LectriceIcon(icon, null, tint = tint, size = LectriceTheme.size.icon)
     }
 }
 
@@ -591,7 +591,7 @@ private fun ToolButton(tool: Tool) {
             .clickable(interactionSource = null, indication = ripple(), role = Role.Button, onClick = tool.onClick)
             .semantics(mergeDescendants = true) { contentDescription = tool.contentDescription },
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.xs, Alignment.CenterVertically),
     ) {
         tool.top()
         Text(tool.caption, style = LectriceTheme.type.caption, color = c.fg2, maxLines = 2, overflow = TextOverflow.Ellipsis)
@@ -609,8 +609,8 @@ private fun RowScope.ToolCell(tool: Tool) {
             .clip(RoundedCornerShape(12.dp))
             .clickable(interactionSource = null, indication = ripple(), role = Role.Button, onClick = tool.onClick)
             .semantics(mergeDescendants = true) { contentDescription = tool.contentDescription }
-            .padding(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+            .padding(horizontal = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         tool.top()
@@ -628,7 +628,7 @@ internal fun ListenSpeedSheet(speed: PlaybackSpeed, onPick: (PlaybackSpeed) -> U
             options = PlaybackSpeed.entries.map { it.label },
             selectedIndex = speed.ordinal,
             onSelect = { onPick(PlaybackSpeed.entries[it]) },
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = LectriceTheme.space.l),
             contentDescription = stringResource(R.string.sheet_speed_a11y, speed.label),
         )
         SheetBottomSpacer()
@@ -640,8 +640,8 @@ internal fun ListenSleepSheet(sleep: SleepTimer, hasToc: Boolean, onPick: (Sleep
     val title = stringResource(R.string.sheet_sleep)
     BottomSheet(onDismiss, contentDescription = title) {
         SheetHeader(title) { LectriceIconButton(LectriceIcons.Close, stringResource(R.string.common_close), onDismiss) }
-        SleepChips(sleep, hasToc, onPick, Modifier.padding(horizontal = 16.dp))
-        Spacer(Modifier.height(8.dp))
+        SleepChips(sleep, hasToc, onPick, Modifier.padding(horizontal = LectriceTheme.space.l))
+        Spacer(Modifier.height(LectriceTheme.space.s))
         SheetBottomSpacer()
     }
 }

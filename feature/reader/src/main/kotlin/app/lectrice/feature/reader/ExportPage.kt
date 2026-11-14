@@ -112,41 +112,41 @@ fun ExportPage(state: ExportUiState, actions: ExportActions, onBack: () -> Unit,
                 }
                 ExportPage.Choose -> {
                     PageHeader(stringResource(R.string.export_title), onBack)
-                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp)) { ChooseBody(state, actions) }
+                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = LectriceTheme.space.l)) { ChooseBody(state, actions) }
                     state.footer?.let { ChooseFooter(it, state, actions) }
                 }
                 ExportPage.Part -> {
                     PageHeader(stringResource(R.string.export_part), actions::backToChoose)
-                    Text(summary, Modifier.padding(horizontal = 16.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+                    Text(summary, Modifier.padding(horizontal = LectriceTheme.space.l), style = LectriceTheme.type.bodyS, color = c.fg2)
                     state.footer?.let { footer ->
                         Text(
                             stringResource(R.string.export_part_free_line, Sizes.format(footer.freeBytes), Sizes.format(wholeNeeded ?: footer.neededBytes)),
-                            Modifier.padding(start = 16.dp, top = 4.dp, end = 16.dp),
+                            Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.xs, end = LectriceTheme.space.l),
                             style = LectriceTheme.type.bodyS,
                             color = c.fg2,
                         )
                     }
-                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp)) {
-                        Spacer(Modifier.height(16.dp))
+                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = LectriceTheme.space.l)) {
+                        Spacer(Modifier.height(LectriceTheme.space.l))
                         RangeRow(stringResource(R.string.export_from), state.rangeChoices.getOrNull(state.rangeFrom)?.title.orEmpty()) { list = RangeEnd.From }
-                        Spacer(Modifier.height(8.dp))
+                        Spacer(Modifier.height(LectriceTheme.space.s))
                         RangeRow(stringResource(R.string.export_to), state.rangeChoices.getOrNull(state.rangeTo)?.title.orEmpty()) { list = RangeEnd.To }
                     }
                     state.footer?.let { PartFooter(it, actions) }
                 }
                 is ExportPage.Progress -> {
                     PageHeader(stringResource(R.string.export_title), onBack)
-                    Text(page.summary, Modifier.padding(horizontal = 16.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(start = 16.dp, top = 8.dp, end = 16.dp)) { ProgressBody(page, actions) }
+                    Text(page.summary, Modifier.padding(horizontal = LectriceTheme.space.l), style = LectriceTheme.type.bodyS, color = c.fg2)
+                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(start = LectriceTheme.space.l, top = LectriceTheme.space.s, end = LectriceTheme.space.l)) { ProgressBody(page, actions) }
                 }
                 is ExportPage.Done -> {
                     PageHeader(stringResource(R.string.export_title), onBack)
-                    Text(summary, Modifier.padding(horizontal = 16.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(start = 16.dp, top = 8.dp, end = 16.dp)) { DoneBody(page, actions, onSaveAs) }
+                    Text(summary, Modifier.padding(horizontal = LectriceTheme.space.l), style = LectriceTheme.type.bodyS, color = c.fg2)
+                    Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(start = LectriceTheme.space.l, top = LectriceTheme.space.s, end = LectriceTheme.space.l)) { DoneBody(page, actions, onSaveAs) }
                 }
             }
         }
-        state.message?.let { LectriceSnackbar(it.text(), Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp)) }
+        state.message?.let { LectriceSnackbar(it.text(), Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = 40.dp)) }
         list?.let { end ->
             RangeListSheet(
                 title = stringResource(if (end == RangeEnd.From) R.string.export_from else R.string.export_to),
@@ -170,7 +170,7 @@ fun ExportPage(state: ExportUiState, actions: ExportActions, onBack: () -> Unit,
 
 @Composable
 private fun PageHeader(title: String, onBack: () -> Unit) {
-    Row(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = LectriceTheme.space.l), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
         LectriceIconButton(LectriceIcons.ArrowBack, stringResource(R.string.common_back), onBack)
         Text(title, Modifier.weight(1f).semantics { heading() }, style = LectriceTheme.type.titleM, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
@@ -178,7 +178,7 @@ private fun PageHeader(title: String, onBack: () -> Unit) {
 
 @Composable
 private fun GroupHeader(text: String) {
-    Text(text, Modifier.padding(top = 16.dp, bottom = 8.dp).semantics { heading() }, style = LectriceTheme.type.sectionHeader, color = LectriceTheme.colors.fg)
+    Text(text, Modifier.padding(top = LectriceTheme.space.l, bottom = LectriceTheme.space.s).semantics { heading() }, style = LectriceTheme.type.sectionHeader, color = LectriceTheme.colors.fg)
 }
 
 @Composable
@@ -195,8 +195,8 @@ private fun ChooseBody(state: ExportUiState, actions: ExportActions) {
             .background(c.bg)
             .clickable(role = Role.Button) { voiceOpen = !voiceOpen }
             .heightIn(min = 56.dp)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(horizontal = LectriceTheme.space.m, vertical = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LectriceIcon(LectriceIcons.RecordVoiceOver, null)
@@ -216,8 +216,8 @@ private fun ChooseBody(state: ExportUiState, actions: ExportActions) {
         QualityRowView(row, selected = row.modelId == state.modelId, onSelect = { actions.setModel(row.modelId) }, onDownload = { actions.downloadModel(row.modelId) })
     }
     state.qualityNote?.let { note ->
-        Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            LectriceIcon(LectriceIcons.Info, null, Modifier.padding(top = 2.dp), tint = c.fg2, size = 20.dp)
+        Row(Modifier.padding(top = LectriceTheme.space.s), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
+            LectriceIcon(LectriceIcons.Info, null, Modifier.padding(top = 2.dp), tint = c.fg2, size = LectriceTheme.size.icon)
             Text(note, style = LectriceTheme.type.bodyS, color = c.fg2)
         }
     }
@@ -231,20 +231,20 @@ private fun ChooseBody(state: ExportUiState, actions: ExportActions) {
     )
     Text(
         if (state.speed == PlaybackSpeed.X1) stringResource(R.string.export_speed_note_1x) else stringResource(R.string.export_speed_note, state.speed.label),
-        Modifier.padding(top = 8.dp),
+        Modifier.padding(top = LectriceTheme.space.s),
         style = LectriceTheme.type.bodyS,
         color = c.fg2,
     )
 
     val readCode = stringResource(R.string.sheet_read_code)
-    Row(Modifier.fillMaxWidth().padding(top = 8.dp).heightIn(min = 48.dp), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s).heightIn(min = LectriceTheme.size.touch), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l), verticalAlignment = Alignment.CenterVertically) {
         LectriceIcon(LectriceIcons.MenuBook, null)
         Text(readCode, Modifier.weight(1f), style = LectriceTheme.type.rowTitle)
         LectriceSwitch(state.readSkipped, actions::setReadSkipped, contentDescription = readCode)
     }
 
-    Row(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp).clip(RoundedCornerShape(12.dp)).background(c.bg).padding(horizontal = 16.dp, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        LectriceIcon(LectriceIcons.Info, null, Modifier.padding(top = 2.dp), size = 20.dp)
+    Row(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s, bottom = LectriceTheme.space.l).clip(RoundedCornerShape(12.dp)).background(c.bg).padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.m), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.m)) {
+        LectriceIcon(LectriceIcons.Info, null, Modifier.padding(top = 2.dp), size = LectriceTheme.size.icon)
         Text(stringResource(R.string.export_reassure), style = LectriceTheme.type.body)
     }
 }
@@ -253,16 +253,16 @@ private fun ChooseBody(state: ExportUiState, actions: ExportActions) {
 private fun QualityRowView(row: QualityRow, selected: Boolean, onSelect: () -> Unit, onDownload: () -> Unit) {
     val c = LectriceTheme.colors
     Row(
-        Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(vertical = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
             Modifier
                 .weight(1f)
-                .heightIn(min = 48.dp)
+                .heightIn(min = LectriceTheme.size.touch)
                 .selectable(selected = selected, enabled = row.installed, role = Role.RadioButton, onClick = onSelect),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             RadioMark(selected, enabled = row.installed)
@@ -287,10 +287,10 @@ private fun ChooseFooter(footer: ExportFooter, state: ExportUiState, actions: Ex
                 Text(footer.makeTime, style = LectriceTheme.type.bodyS, color = c.fg2)
             } else {
                 Row(
-                    Modifier.fillMaxWidth().padding(top = 8.dp).clip(RoundedCornerShape(12.dp)).background(c.warnBg).padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s).clip(RoundedCornerShape(12.dp)).background(c.warnBg).padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.m),
+                    horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.m),
                 ) {
-                    LectriceIcon(LectriceIcons.SdCardAlert, null, Modifier.padding(top = 2.dp), tint = c.warnFg, size = 20.dp)
+                    LectriceIcon(LectriceIcons.SdCardAlert, null, Modifier.padding(top = 2.dp), tint = c.warnFg, size = LectriceTheme.size.icon)
                     Column {
                         Text(stringResource(R.string.export_space_title), style = LectriceTheme.type.labelL, color = c.warnFg)
                         Text(stringResource(R.string.export_space_needs, Sizes.format(footer.neededBytes), Sizes.format(footer.freeBytes)), Modifier.padding(top = 2.dp), style = LectriceTheme.type.bodyS, color = c.warnFg)
@@ -302,12 +302,12 @@ private fun ChooseFooter(footer: ExportFooter, state: ExportUiState, actions: Ex
             }
         }
         when {
-            footer.fits -> PrimaryButton(footer.startLabel, actions::start, Modifier.padding(top = 8.dp), enabled = installed)
+            footer.fits -> PrimaryButton(footer.startLabel, actions::start, Modifier.padding(top = LectriceTheme.space.s), enabled = installed)
             footer.canExportPart -> {
-                PrimaryButton(stringResource(R.string.export_part), actions::openPart, Modifier.padding(top = 8.dp))
+                PrimaryButton(stringResource(R.string.export_part), actions::openPart, Modifier.padding(top = LectriceTheme.space.s))
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_free_up), actions::freeUpSpace) }
             }
-            else -> PrimaryButton(stringResource(R.string.export_free_up), actions::freeUpSpace, Modifier.padding(top = 8.dp))
+            else -> PrimaryButton(stringResource(R.string.export_free_up), actions::freeUpSpace, Modifier.padding(top = LectriceTheme.space.s))
         }
     }
 }
@@ -324,7 +324,7 @@ private fun PartFooter(footer: ExportFooter, actions: ExportActions) {
                 Text(stringResource(R.string.export_no_fit, Sizes.format(footer.neededBytes), Sizes.format(footer.freeBytes)), style = LectriceTheme.type.bodyS, color = c.warnFg)
             }
         }
-        PrimaryButton(footer.startLabel, actions::start, Modifier.padding(top = 8.dp), enabled = footer.fits)
+        PrimaryButton(footer.startLabel, actions::start, Modifier.padding(top = LectriceTheme.space.s), enabled = footer.fits)
         if (!footer.fits) Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_pick_fits), actions::pickWhatFits) }
     }
 }
@@ -335,7 +335,7 @@ private fun FooterFrame(content: @Composable ColumnScope.() -> Unit) {
     val c = LectriceTheme.colors
     Column(Modifier.fillMaxWidth().background(c.bg2)) {
         Divider(inset = 0.dp)
-        Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp).navigationBarsPadding(), content = content)
+        Column(Modifier.padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.m).navigationBarsPadding(), content = content)
     }
 }
 
@@ -350,9 +350,9 @@ private fun RangeRow(caption: String, value: String, onClick: () -> Unit) {
             .background(c.bg)
             .clickable(role = Role.Button, onClick = onClick)
             .heightIn(min = 56.dp)
-            .padding(horizontal = 12.dp, vertical = 8.dp)
+            .padding(horizontal = LectriceTheme.space.m, vertical = LectriceTheme.space.s)
             .semantics(mergeDescendants = true) { contentDescription = description },
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
@@ -383,8 +383,8 @@ private fun RangeListSheet(title: String, choices: List<RangeChoice>, selected: 
                         .then(if (on) Modifier.background(c.accentContainer) else Modifier)
                         .selectable(selected = on, role = Role.RadioButton) { onPick(index) }
                         .heightIn(min = 56.dp)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        .padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.s),
+                    horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(Modifier.weight(1f)) {
@@ -417,35 +417,35 @@ private fun ProgressBody(page: ExportPage.Progress, actions: ExportActions) {
     }
     val outOfSpace = kind == ProgressKind.OutOfSpaceParts || kind == ProgressKind.OutOfSpaceAssemble
     if (outOfSpace && page.neededBytes != null && page.freeBytes != null) {
-        Text(stringResource(R.string.export_space_line, Sizes.format(page.neededBytes), Sizes.format(page.freeBytes)), Modifier.padding(top = 8.dp), style = LectriceTheme.type.bodyS)
+        Text(stringResource(R.string.export_space_line, Sizes.format(page.neededBytes), Sizes.format(page.freeBytes)), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.bodyS)
     }
     if (kind != ProgressKind.Failed) {
-        LinearProgress(percent / PERCENT, Modifier.padding(top = 16.dp), big = true)
+        LinearProgress(percent / PERCENT, Modifier.padding(top = LectriceTheme.space.l), big = true)
         val label = when (kind) {
             ProgressKind.PausedByUser -> stringResource(R.string.export_paused, percent)
             ProgressKind.WaitingOtherExport -> stringResource(R.string.export_waiting_other)
             ProgressKind.WaitingEngine -> stringResource(R.string.export_waiting_engine)
             else -> stringResource(R.string.export_exporting, percent)
         }
-        Text(label, Modifier.padding(top = 12.dp), style = LectriceTheme.type.labelL)
-        Text(page.detail, Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+        Text(label, Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.labelL)
+        Text(page.detail, Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = c.fg2)
         if (kind == ProgressKind.Running || kind == ProgressKind.PausedByUser || outOfSpace) {
-            Text(stringResource(R.string.export_note), Modifier.padding(top = 16.dp), style = LectriceTheme.type.body)
+            Text(stringResource(R.string.export_note), Modifier.padding(top = LectriceTheme.space.l), style = LectriceTheme.type.body)
         }
     }
-    Spacer(Modifier.height(24.dp))
+    Spacer(Modifier.height(LectriceTheme.space.xl))
     when (kind) {
-        ProgressKind.Running, ProgressKind.WaitingOtherExport, ProgressKind.WaitingEngine -> Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        ProgressKind.Running, ProgressKind.WaitingOtherExport, ProgressKind.WaitingEngine -> Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
             SecondaryButton(stringResource(R.string.export_pause), actions::pause, Modifier.weight(1f))
             LectriceTextButton(stringResource(R.string.export_cancel), actions::askCancel)
         }
-        ProgressKind.PausedByUser -> Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        ProgressKind.PausedByUser -> Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
             PrimaryButton(stringResource(R.string.export_continue), actions::resume, Modifier.weight(1f))
             LectriceTextButton(stringResource(R.string.export_cancel), actions::askCancel)
         }
         ProgressKind.PausedTimeLimit -> {
             PrimaryButton(stringResource(R.string.export_continue_now), actions::resume)
-            Box(Modifier.fillMaxWidth().padding(top = 8.dp), contentAlignment = Alignment.Center) {
+            Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s), contentAlignment = Alignment.Center) {
                 LectriceTextButton(stringResource(R.string.export_battery), { runCatching { context.startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) } })
             }
         }
@@ -453,41 +453,41 @@ private fun ProgressBody(page: ExportPage.Progress, actions: ExportActions) {
         ProgressKind.OutOfSpaceParts, ProgressKind.OutOfSpaceAssemble -> {
             val fits = (page.neededBytes ?: 0) <= (page.freeBytes ?: 0)
             PrimaryButton(stringResource(R.string.export_continue), actions::resume, enabled = fits)
-            Box(Modifier.fillMaxWidth().padding(top = 8.dp), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_free_up), actions::freeUpSpace) }
+            Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_free_up), actions::freeUpSpace) }
             Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_cancel), actions::askCancel) }
         }
         ProgressKind.Failed -> PrimaryButton(stringResource(R.string.export_start_again), actions::makeAnother)
     }
-    Spacer(Modifier.navigationBarsPadding().height(24.dp))
+    Spacer(Modifier.navigationBarsPadding().height(LectriceTheme.space.xl))
 }
 
 @Composable
 private fun StateBanner(kind: BannerKind, icon: ImageVector, text: String) {
-    Banner(kind, icon, text, Modifier.padding(top = 16.dp))
+    Banner(kind, icon, text, Modifier.padding(top = LectriceTheme.space.l))
 }
 
 @Composable
 private fun DoneBody(page: ExportPage.Done, actions: ExportActions, onSaveAs: () -> Unit) {
     val c = LectriceTheme.colors
-    Column(Modifier.fillMaxWidth().padding(top = 24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Column(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.xl), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.l)) {
         LectriceIcon(LectriceIcons.CheckCircle, null, Modifier.size(48.dp), tint = c.okFg, size = 48.dp)
         Text(stringResource(R.string.export_done_title), style = LectriceTheme.type.titleM, textAlign = TextAlign.Center)
         Text(page.summary, style = LectriceTheme.type.body, textAlign = TextAlign.Center)
     }
-    ListenFromFileButton(actions::listenFromFile, Modifier.padding(top = 24.dp))
-    Text(stringResource(R.string.export_listen_caption), Modifier.fillMaxWidth().padding(top = 4.dp), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
+    ListenFromFileButton(actions::listenFromFile, Modifier.padding(top = LectriceTheme.space.xl))
+    Text(stringResource(R.string.export_listen_caption), Modifier.fillMaxWidth().padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
     if (page.saved) {
-        PrimaryButton(stringResource(R.string.export_saved), {}, Modifier.padding(top = 12.dp), enabled = false, icon = LectriceIcons.Check)
+        PrimaryButton(stringResource(R.string.export_saved), {}, Modifier.padding(top = LectriceTheme.space.m), enabled = false, icon = LectriceIcons.Check)
     } else {
-        PrimaryButton(stringResource(R.string.export_save), actions::saveToAudiobooks, Modifier.padding(top = 12.dp))
+        PrimaryButton(stringResource(R.string.export_save), actions::saveToAudiobooks, Modifier.padding(top = LectriceTheme.space.m))
     }
-    Text(stringResource(R.string.export_save_caption), Modifier.fillMaxWidth().padding(top = 4.dp), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
-    SecondaryButton(stringResource(R.string.export_save_as), onSaveAs, Modifier.padding(top = 12.dp))
-    Box(Modifier.fillMaxWidth().padding(top = 8.dp), contentAlignment = Alignment.Center) {
+    Text(stringResource(R.string.export_save_caption), Modifier.fillMaxWidth().padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
+    SecondaryButton(stringResource(R.string.export_save_as), onSaveAs, Modifier.padding(top = LectriceTheme.space.m))
+    Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.s), contentAlignment = Alignment.Center) {
         LectriceTextButton(stringResource(R.string.export_share), actions::share, leading = { LectriceIcon(LectriceIcons.IosShare, null, tint = c.accent) })
     }
     Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { LectriceTextButton(stringResource(R.string.export_another), actions::makeAnother) }
-    Spacer(Modifier.navigationBarsPadding().height(24.dp))
+    Spacer(Modifier.navigationBarsPadding().height(LectriceTheme.space.xl))
 }
 
 /** S1 (file 23): the tonal button on E4, `accentContainer` with the headphones mark. */
@@ -501,8 +501,8 @@ private fun ListenFromFileButton(onClick: () -> Unit, modifier: Modifier = Modif
             .clip(CircleShape)
             .background(c.accentContainer)
             .clickable(interactionSource = null, indication = ripple(color = c.onAccentContainer), role = Role.Button, onClick = onClick)
-            .padding(horizontal = 24.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            .padding(horizontal = LectriceTheme.space.xl, vertical = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LectriceIcon(LectriceIcons.Headphones, null, tint = c.onAccentContainer)

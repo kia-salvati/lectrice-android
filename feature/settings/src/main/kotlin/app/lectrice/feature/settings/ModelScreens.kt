@@ -66,13 +66,13 @@ import app.lectrice.core.model.Voices
 fun WelcomeScreen(onGetVoice: () -> Unit, onNotNow: () -> Unit) {
     val c = LectriceTheme.colors
     Box(Modifier.fillMaxSize().background(c.bg)) {
-        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = 16.dp, top = WELCOME_TOP, end = 16.dp, bottom = BOTTOM_BUTTONS_SPACE)) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = LectriceTheme.space.l, top = WELCOME_TOP, end = LectriceTheme.space.l, bottom = BOTTOM_BUTTONS_SPACE)) {
             Box(Modifier.size(64.dp).clip(RoundedCornerShape(16.dp)).background(c.accent), contentAlignment = Alignment.Center) {
                 Text(stringResource(R.string.welcome_mark), style = LectriceTheme.type.serif(MARK_SP, MARK_SP, FontWeight.SemiBold), color = c.onAccent)
             }
-            Text(stringResource(R.string.welcome_title), Modifier.padding(top = 24.dp).semantics { heading() }, style = LectriceTheme.type.welcomeTitle)
-            Text(stringResource(R.string.welcome_tagline), Modifier.padding(top = 8.dp), style = LectriceTheme.type.titleM.copy(fontWeight = FontWeight.Normal))
-            Column(Modifier.padding(top = 32.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Text(stringResource(R.string.welcome_title), Modifier.padding(top = LectriceTheme.space.xl).semantics { heading() }, style = LectriceTheme.type.welcomeTitle)
+            Text(stringResource(R.string.welcome_tagline), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.titleM.copy(fontWeight = FontWeight.Normal))
+            Column(Modifier.padding(top = 32.dp), verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.l)) {
                 WelcomePoint(LectriceIcons.MenuBook, stringResource(R.string.welcome_point_clean))
                 WelcomePoint(LectriceIcons.Headphones, stringResource(R.string.welcome_point_voice))
                 WelcomePoint(LectriceIcons.CheckCircle, stringResource(R.string.welcome_point_offline))
@@ -88,7 +88,7 @@ fun WelcomeScreen(onGetVoice: () -> Unit, onNotNow: () -> Unit) {
 
 @Composable
 private fun WelcomePoint(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String) {
-    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l)) {
         LectriceIcon(icon, null, tint = LectriceTheme.colors.accent)
         Text(text, style = LectriceTheme.type.body)
     }
@@ -98,8 +98,8 @@ private fun WelcomePoint(icon: androidx.compose.ui.graphics.vector.ImageVector, 
 @Composable
 private fun BottomButtons(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     Column(
-        modifier.fillMaxWidth().background(LectriceTheme.colors.bg).navigationBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier.fillMaxWidth().background(LectriceTheme.colors.bg).navigationBarsPadding().padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = LectriceTheme.space.l),
+        verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.s),
         content = content,
     )
 }
@@ -112,16 +112,16 @@ fun ChooseModelScreen(state: ModelSetupUiState, actions: ModelSetupActions, onIm
     val selected = state.cards.firstOrNull { it.id == state.selectedId }
     Box(Modifier.fillMaxSize().background(c.bg)) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(bottom = CHOOSE_BOTTOM_SPACE)) {
-            Box(Modifier.padding(start = 4.dp, top = 4.dp)) { LectriceIconButton(LectriceIcons.ArrowBack, stringResource(R.string.common_back), onBack) }
-            Column(Modifier.padding(horizontal = 16.dp)) {
-                Text(stringResource(R.string.choose_title), Modifier.padding(top = 16.dp).semantics { heading() }, style = LectriceTheme.type.titleL)
-                Text(stringResource(R.string.choose_body), Modifier.padding(top = 8.dp), style = LectriceTheme.type.body, color = c.fg2)
-                Column(Modifier.padding(top = 24.dp).selectableGroup(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Box(Modifier.padding(start = LectriceTheme.space.xs, top = LectriceTheme.space.xs)) { LectriceIconButton(LectriceIcons.ArrowBack, stringResource(R.string.common_back), onBack) }
+            Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
+                Text(stringResource(R.string.choose_title), Modifier.padding(top = LectriceTheme.space.l).semantics { heading() }, style = LectriceTheme.type.titleL)
+                Text(stringResource(R.string.choose_body), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.body, color = c.fg2)
+                Column(Modifier.padding(top = LectriceTheme.space.xl).selectableGroup(), verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.m)) {
                     state.cards.forEach { card -> ModelCardView(card, selected = card.id == state.selectedId, onSelect = { actions.select(card.id) }) }
                 }
-                Text(stringResource(R.string.choose_hint), Modifier.padding(top = 16.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-                HintLine(LectriceIcons.SdStorage, state.freeLine, Modifier.padding(top = 8.dp))
-                HintLine(LectriceIcons.Wifi, stringResource(R.string.choose_wifi), Modifier.padding(top = 4.dp))
+                Text(stringResource(R.string.choose_hint), Modifier.padding(top = LectriceTheme.space.l), style = LectriceTheme.type.bodyS, color = c.fg2)
+                HintLine(LectriceIcons.SdStorage, state.freeLine, Modifier.padding(top = LectriceTheme.space.s))
+                HintLine(LectriceIcons.Wifi, stringResource(R.string.choose_wifi), Modifier.padding(top = LectriceTheme.space.xs))
             }
         }
         BottomButtons(Modifier.align(Alignment.BottomCenter)) {
@@ -146,8 +146,8 @@ fun ChooseModelScreen(state: ModelSetupUiState, actions: ModelSetupActions, onIm
 @Composable
 private fun HintLine(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String, modifier: Modifier = Modifier) {
     val c = LectriceTheme.colors
-    Row(modifier, horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-        LectriceIcon(icon, null, tint = c.fg2, size = 20.dp)
+    Row(modifier, horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
+        LectriceIcon(icon, null, tint = c.fg2, size = LectriceTheme.size.icon)
         Text(text, style = LectriceTheme.type.bodyS, color = c.fg2)
     }
 }
@@ -168,17 +168,17 @@ private fun ModelCardView(card: ModelCard, selected: Boolean? = null, onSelect: 
             .background(if (on) c.accentContainer else c.bg2)
             .border(if (on) 2.dp else 1.dp, if (on) c.accent else c.line, shape)
             .then(selectModifier)
-            .padding(16.dp),
+            .padding(LectriceTheme.space.l),
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.m), verticalAlignment = Alignment.CenterVertically) {
             if (selected != null) RadioMark(on, selectedColor = if (on) c.onAccentContainer else c.accent)
             Text(card.name, Modifier.weight(1f), style = LectriceTheme.type.titleM, color = fg)
             if (card.recommended) Text(stringResource(R.string.choose_recommended), style = LectriceTheme.type.label, color = if (on) c.onAccentContainer else c.accent)
             Text(Sizes.format(card.downloadBytes), style = LectriceTheme.type.labelL.copy(fontWeight = FontWeight.SemiBold), color = fg)
         }
         val indent = if (selected != null) CARD_INDENT else 0.dp
-        Text(card.description, Modifier.padding(start = indent, top = 4.dp), style = LectriceTheme.type.body, color = fg)
-        Text(card.sizeLine, Modifier.padding(start = indent, top = 4.dp), style = LectriceTheme.type.bodyS, color = fg2)
+        Text(card.description, Modifier.padding(start = indent, top = LectriceTheme.space.xs), style = LectriceTheme.type.body, color = fg)
+        Text(card.sizeLine, Modifier.padding(start = indent, top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = fg2)
         Text(card.speedNote, Modifier.padding(start = indent), style = LectriceTheme.type.bodyS, color = fg2)
         extra?.invoke(this)
     }
@@ -210,13 +210,13 @@ private fun SetupDialogView(dialog: SetupDialog, actions: ModelSetupActions) {
             val title = dialog.name.importFailedTitle()?.let { stringResource(it) }
             val body = if (dialog.name == ErrorName.StorageFull) spaceShortText(dialog.neededBytes) else stringResource(dialog.name.importFailedBody())
             BottomSheet(actions::dismissDialog, contentDescription = title ?: body) {
-                Column(Modifier.padding(horizontal = 16.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.m), verticalAlignment = Alignment.CenterVertically) {
                         LectriceIcon(LectriceIcons.Error, null, tint = c.errFg)
                         Text(title ?: body, Modifier.weight(1f), style = LectriceTheme.type.titleM)
                     }
-                    if (title != null) Text(body, Modifier.padding(top = 12.dp), style = LectriceTheme.type.body)
-                    PrimaryButton(stringResource(R.string.common_ok), actions::dismissDialog, Modifier.padding(top = 24.dp))
+                    if (title != null) Text(body, Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.body)
+                    PrimaryButton(stringResource(R.string.common_ok), actions::dismissDialog, Modifier.padding(top = LectriceTheme.space.xl))
                     SheetBottomSpacer()
                 }
             }
@@ -244,7 +244,7 @@ fun DownloadScreen(state: ModelSetupUiState, actions: ModelSetupActions, onOpenP
 private fun DownloadingView(download: DownloadUi?, actions: ModelSetupActions, onOpenPdf: () -> Unit) {
     val c = LectriceTheme.colors
     Box(Modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = 16.dp, top = DOWNLOAD_TOP, end = 16.dp, bottom = DOWNLOAD_BOTTOM_SPACE)) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = LectriceTheme.space.l, top = DOWNLOAD_TOP, end = LectriceTheme.space.l, bottom = DOWNLOAD_BOTTOM_SPACE)) {
             Text(stringResource(R.string.download_title), Modifier.semantics { heading() }, style = LectriceTheme.type.titleL)
             val installing = download?.installing == true
             LinearProgress(if (installing) null else (download?.percent ?: 0) / PERCENT, Modifier.padding(top = 32.dp), big = true)
@@ -254,14 +254,14 @@ private fun DownloadingView(download: DownloadUi?, actions: ModelSetupActions, o
                 download.paused -> stringResource(R.string.download_paused, download.progressLine)
                 else -> download.progressLine
             }
-            Text(label, Modifier.padding(top = 12.dp), style = LectriceTheme.type.labelL)
-            download?.speedLine?.let { Text(it, Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2) }
-            if (download != null) DownloadBanner(download, Modifier.padding(top = 16.dp))
-            InfoCard(stringResource(R.string.download_reassure), Modifier.padding(top = 24.dp))
+            Text(label, Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.labelL)
+            download?.speedLine?.let { Text(it, Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = c.fg2) }
+            if (download != null) DownloadBanner(download, Modifier.padding(top = LectriceTheme.space.l))
+            InfoCard(stringResource(R.string.download_reassure), Modifier.padding(top = LectriceTheme.space.xl))
         }
         BottomButtons(Modifier.align(Alignment.BottomCenter)) {
             LectriceTextButton(stringResource(R.string.download_meanwhile), onOpenPdf, Modifier.align(Alignment.CenterHorizontally))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
                 when {
                     download?.error != null -> PrimaryButton(stringResource(R.string.common_try_again), actions::retry, Modifier.weight(1f))
                     download?.paused == true -> PrimaryButton(stringResource(R.string.download_resume), actions::resume, Modifier.weight(1f))
@@ -288,11 +288,11 @@ private fun DownloadBanner(download: DownloadUi, modifier: Modifier) {
 private fun ReadyView(state: ModelSetupUiState, actions: ModelSetupActions, onOpenPdf: () -> Unit, onLibrary: () -> Unit) {
     val c = LectriceTheme.colors
     Box(Modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = 16.dp, top = WELCOME_TOP, end = 16.dp, bottom = BOTTOM_BUTTONS_SPACE)) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().padding(start = LectriceTheme.space.l, top = WELCOME_TOP, end = LectriceTheme.space.l, bottom = BOTTOM_BUTTONS_SPACE)) {
             LectriceIcon(LectriceIcons.CheckCircle, null, tint = c.okFg, size = 48.dp)
-            Text(stringResource(R.string.ready_title), Modifier.padding(top = 16.dp).semantics { heading() }, style = LectriceTheme.type.titleL)
-            LectriceCard(Modifier.padding(top = 24.dp).fillMaxWidth()) {
-                Row(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(stringResource(R.string.ready_title), Modifier.padding(top = LectriceTheme.space.l).semantics { heading() }, style = LectriceTheme.type.titleL)
+            LectriceCard(Modifier.padding(top = LectriceTheme.space.xl).fillMaxWidth()) {
+                Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l), verticalAlignment = Alignment.CenterVertically) {
                     val samplePhase = state.voiceSample.phaseOf(Voices.DEFAULT_VOICE_ID)
                     PlayButton(
                         playing = samplePhase == VoiceSampleState.Phase.Playing,
@@ -306,7 +306,7 @@ private fun ReadyView(state: ModelSetupUiState, actions: ModelSetupActions, onOp
                     }
                 }
             }
-            if (state.slowPhone) Text(stringResource(R.string.ready_slow), Modifier.padding(top = 16.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+            if (state.slowPhone) Text(stringResource(R.string.ready_slow), Modifier.padding(top = LectriceTheme.space.l), style = LectriceTheme.type.bodyS, color = c.fg2)
         }
         BottomButtons(Modifier.align(Alignment.BottomCenter)) {
             PrimaryButton(stringResource(R.string.ready_open), onOpenPdf)
@@ -323,7 +323,7 @@ fun ModelPageScreen(state: ModelSetupUiState, actions: ModelSetupActions, onBack
     Box(Modifier.fillMaxSize().background(c.bg)) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
             TopBar(stringResource(R.string.model_title), onBack, stringResource(R.string.common_back))
-            Column(Modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(Modifier.padding(horizontal = LectriceTheme.space.l), verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.m)) {
                 state.cards.forEach { card ->
                     ModelCardView(card) { ModelCardState(card, state.download?.takeIf { it.modelId == card.id }, actions) }
                 }
@@ -340,35 +340,35 @@ private fun ColumnScope.ModelCardState(card: ModelCard, download: DownloadUi?, a
     val c = LectriceTheme.colors
     when (val install = card.state) {
         ModelInstallState.Installed -> {
-            Text(stringResource(if (card.inUse) R.string.model_installed_in_use else R.string.model_installed), Modifier.padding(top = 8.dp), style = LectriceTheme.type.label, color = c.okFg)
+            Text(stringResource(if (card.inUse) R.string.model_installed_in_use else R.string.model_installed), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.label, color = c.okFg)
             if (!card.inUse) {
-                Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.padding(top = LectriceTheme.space.s), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
                     SecondaryButton(stringResource(R.string.model_use), { actions.use(card.id) }, Modifier.weight(1f))
                     LectriceTextButton(stringResource(R.string.model_delete, Sizes.format(card.installedBytes)), { actions.askDelete(card.id) }, color = c.errFg)
                 }
             }
         }
         ModelInstallState.NotInstalled -> {
-            Text(stringResource(R.string.model_not_installed), Modifier.padding(top = 8.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-            SecondaryButton(stringResource(R.string.choose_download, Sizes.format(card.downloadBytes)), { actions.download(card.id) }, Modifier.padding(top = 8.dp))
+            Text(stringResource(R.string.model_not_installed), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.bodyS, color = c.fg2)
+            SecondaryButton(stringResource(R.string.choose_download, Sizes.format(card.downloadBytes)), { actions.download(card.id) }, Modifier.padding(top = LectriceTheme.space.s))
         }
         is ModelInstallState.Downloading -> {
-            LinearProgress(install.let { if (it.totalBytes > 0) it.doneBytes.toFloat() / it.totalBytes else 0f }, Modifier.padding(top = 12.dp))
+            LinearProgress(install.let { if (it.totalBytes > 0) it.doneBytes.toFloat() / it.totalBytes else 0f }, Modifier.padding(top = LectriceTheme.space.m))
             val line = download?.let { if (it.paused) stringResource(R.string.download_paused, it.progressLine) else it.progressLine }
-            if (line != null) Text(line, Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
-            if (download != null) DownloadBanner(download, Modifier.padding(top = 8.dp))
-            Row(Modifier.padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            if (line != null) Text(line, Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = c.fg2)
+            if (download != null) DownloadBanner(download, Modifier.padding(top = LectriceTheme.space.s))
+            Row(Modifier.padding(top = LectriceTheme.space.xs), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.xs)) {
                 if (install.paused) LectriceTextButton(stringResource(R.string.download_resume), actions::resume) else LectriceTextButton(stringResource(R.string.download_pause), actions::pause)
                 LectriceTextButton(stringResource(R.string.download_cancel), actions::cancel)
             }
         }
         ModelInstallState.Installing -> {
-            LinearProgress(null, Modifier.padding(top = 12.dp))
-            Text(stringResource(R.string.download_installing), Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+            LinearProgress(null, Modifier.padding(top = LectriceTheme.space.m))
+            Text(stringResource(R.string.download_installing), Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = c.fg2)
         }
         is ModelInstallState.Failed -> {
             val text = if (install.name == ErrorName.StorageFull) spaceShortText(download?.neededBytes) else stringResource(install.name.downloadFailedMessage())
-            Banner(BannerKind.Err, LectriceIcons.Error, text, Modifier.padding(top = 12.dp)) {
+            Banner(BannerKind.Err, LectriceIcons.Error, text, Modifier.padding(top = LectriceTheme.space.m)) {
                 BannerAction(stringResource(R.string.common_try_again), BannerKind.Err, actions::retry)
             }
         }

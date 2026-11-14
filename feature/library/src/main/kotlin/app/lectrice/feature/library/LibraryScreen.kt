@@ -132,7 +132,7 @@ private fun IncomingDialog(confirm: IncomingConfirm, actions: LibraryActions) {
 @Composable
 private fun LibraryHeader(onSettings: () -> Unit) {
     Row(
-        Modifier.fillMaxWidth().statusBarsPadding().heightIn(min = 56.dp).padding(start = 16.dp, end = 4.dp),
+        Modifier.fillMaxWidth().statusBarsPadding().heightIn(min = 56.dp).padding(start = LectriceTheme.space.l, end = LectriceTheme.space.xs),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(stringResource(R.string.library_title), Modifier.weight(1f).semantics { heading() }, style = LectriceTheme.type.libraryTitle)
@@ -161,15 +161,15 @@ private fun LibraryList(state: LibraryUiState, actions: LibraryActions) {
         item("header") { LibraryHeader(actions::openSettings) }
         if (state.listFailed) {
             item("listFailed") {
-                Banner(BannerKind.Err, LectriceIcons.Error, stringResource(R.string.library_list_failed), Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
+                Banner(BannerKind.Err, LectriceIcons.Error, stringResource(R.string.library_list_failed), Modifier.padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = LectriceTheme.space.l)) {
                     BannerAction(stringResource(R.string.library_banner_try_again), BannerKind.Err, actions::retryList)
                 }
             }
         }
-        state.banner?.let { banner -> item("banner") { LibraryBannerView(banner, actions::bannerAction, Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) } }
+        state.banner?.let { banner -> item("banner") { LibraryBannerView(banner, actions::bannerAction, Modifier.padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = LectriceTheme.space.l)) } }
         state.continueCard?.let { card -> item("card") { ContinueCardView(card, actions, stacked) } }
         item("recent") {
-            Text(stringResource(R.string.library_recent), Modifier.padding(start = 16.dp, top = 24.dp, end = 16.dp).semantics { heading() }, style = LectriceTheme.type.sectionHeader)
+            Text(stringResource(R.string.library_recent), Modifier.padding(start = LectriceTheme.space.l, top = LectriceTheme.space.xl, end = LectriceTheme.space.l).semantics { heading() }, style = LectriceTheme.type.sectionHeader)
         }
         itemsIndexed(state.imports, key = { _, row -> "import-${row.key}" }) { _, row ->
             ImportRowView(row)
@@ -196,7 +196,7 @@ private fun LibraryBannerView(banner: LibraryBanner, onAction: () -> Unit, modif
             LectriceIcons.Download,
             stringResource(R.string.library_banner_downloading, banner.percent),
             modifier,
-            extra = { LinearProgress(banner.percent / PERCENT, Modifier.padding(top = 8.dp)) },
+            extra = { LinearProgress(banner.percent / PERCENT, Modifier.padding(top = LectriceTheme.space.s)) },
         ) { BannerAction(stringResource(R.string.library_banner_details), BannerKind.Warn, onAction) }
         LibraryBanner.EngineFailed -> Banner(BannerKind.Err, LectriceIcons.Error, stringResource(R.string.library_banner_engine_failed), modifier) {
             BannerAction(stringResource(R.string.library_banner_try_again), BannerKind.Err, onAction)
@@ -210,23 +210,23 @@ private fun ContinueCardView(card: ContinueCard, actions: LibraryActions, stacke
     val removeLabel = stringResource(R.string.book_sheet_remove)
     LectriceCard(
         Modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = LectriceTheme.space.l)
             .fillMaxWidth()
             .combinedClickable(interactionSource = null, indication = ripple(), onClick = { actions.openBook(card.documentId, false) }, onLongClick = { actions.openBookSheet(card.documentId) })
             .semantics { customActions = listOf(CustomAccessibilityAction(removeLabel) { actions.askRemove(card.documentId); true }) },
         padding = 0.dp,
     ) {
         Box {
-            Box(Modifier.matchParentSize().padding(vertical = 16.dp)) {
+            Box(Modifier.matchParentSize().padding(vertical = LectriceTheme.space.l)) {
                 Box(Modifier.width(ACCENT_BAR).fillMaxHeight().clip(RoundedCornerShape(2.dp)).background(c.accent))
             }
             val text: @Composable () -> Unit = {
                 Column {
                     Text(stringResource(if (card.finished) R.string.library_finished else R.string.library_continue), style = LectriceTheme.type.caption.copy(fontWeight = FontWeight.Medium), color = c.fg2)
-                    Text(card.title, Modifier.padding(top = 4.dp), style = LectriceTheme.type.titleM, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                    Text(card.title, Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.titleM, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     card.location?.let { StatusLine(it) }
-                    LinearProgress(card.percent / PERCENT, Modifier.padding(top = 12.dp))
-                    Text(if (card.timeLeft != null) "${card.percent} % · ${card.timeLeft}" else "${card.percent} %", Modifier.padding(top = 4.dp), style = LectriceTheme.type.caption, color = c.fg2)
+                    LinearProgress(card.percent / PERCENT, Modifier.padding(top = LectriceTheme.space.m))
+                    Text(if (card.timeLeft != null) "${card.percent} % · ${card.timeLeft}" else "${card.percent} %", Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.caption, color = c.fg2)
                 }
             }
             val playLabel = when (val label = card.playLabel) {
@@ -236,13 +236,13 @@ private fun ContinueCardView(card: ContinueCard, actions: LibraryActions, stacke
             }
             val play: @Composable () -> Unit = { PlayButton(card.playing, actions::togglePlayOnCard, playLabel) }
             if (stacked) {
-                Column(Modifier.padding(16.dp), horizontalAlignment = Alignment.End) {
+                Column(Modifier.padding(LectriceTheme.space.l), horizontalAlignment = Alignment.End) {
                     text()
-                    Spacer(Modifier.height(8.dp))
+                    Spacer(Modifier.height(LectriceTheme.space.s))
                     play()
                 }
             } else {
-                Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.padding(LectriceTheme.space.l), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l), verticalAlignment = Alignment.CenterVertically) {
                     Box(Modifier.weight(1f)) { text() }
                     play()
                 }
@@ -267,7 +267,7 @@ private fun RecentRowView(row: RecentRow, actions: LibraryActions, stacked: Bool
         stringResource(R.string.library_row_a11y_not_started, row.title, row.meta)
     }
     val action: @Composable (Modifier, Alignment.Horizontal) -> Unit = { modifier, align ->
-        Column(modifier, horizontalAlignment = align, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(modifier, horizontalAlignment = align, verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.xs)) {
             Text(progressText, style = LectriceTheme.type.label, color = c.accent)
             ProgressBarSmall((row.percent ?: 0) / PERCENT)
         }
@@ -284,7 +284,7 @@ private fun RecentRowView(row: RecentRow, actions: LibraryActions, stacked: Bool
             contentDescription = description,
             customActions = listOf(CustomAccessibilityAction(removeLabel) { actions.askRemove(row.documentId); true }),
             leading = { CoverTile(row.initials, row.hue) },
-            extra = if (stacked) ({ action(Modifier.padding(top = 8.dp), Alignment.Start) }) else null,
+            extra = if (stacked) ({ action(Modifier.padding(top = LectriceTheme.space.s), Alignment.Start) }) else null,
             trailing = if (stacked) null else ({ action(Modifier.widthIn(max = trailingMax), Alignment.End) }),
         )
     }
@@ -294,14 +294,14 @@ private fun RecentRowView(row: RecentRow, actions: LibraryActions, stacked: Bool
 private fun ImportRowView(row: ImportRow) {
     val c = LectriceTheme.colors
     Row(
-        Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(Modifier.size(40.dp, 56.dp).clip(RoundedCornerShape(8.dp)).background(c.line))
         Column(Modifier.weight(1f)) {
             Text(row.displayName, style = LectriceTheme.type.rowTitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Row(Modifier.padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.padding(top = LectriceTheme.space.xs), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.s), verticalAlignment = Alignment.CenterVertically) {
                 if (row.running) LinearProgress(null, Modifier.width(IMPORT_BAR_WIDTH))
                 Text(stringResource(if (row.running) R.string.library_import_reading else R.string.library_import_waiting), style = LectriceTheme.type.rowMeta, color = c.fg2)
             }
@@ -312,12 +312,12 @@ private fun ImportRowView(row: ImportRow) {
 @Composable
 private fun PlaceholderRow() {
     Row(
-        Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(horizontal = LectriceTheme.space.l, vertical = LectriceTheme.space.s),
+        horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         PlaceholderBlock(Modifier.size(40.dp, 56.dp))
-        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(LectriceTheme.space.s)) {
             PlaceholderBlock(Modifier.fillMaxWidth(PLACEHOLDER_TITLE_SHARE).height(16.dp))
             PlaceholderBlock(Modifier.fillMaxWidth(PLACEHOLDER_META_SHARE).height(12.dp))
         }
@@ -330,13 +330,13 @@ private fun EmptyLibrary() {
     Column(Modifier.fillMaxSize()) {
         LibraryHeader(onSettings = {})
         Column(
-            Modifier.weight(1f).fillMaxWidth().padding(horizontal = 16.dp),
+            Modifier.weight(1f).fillMaxWidth().padding(horizontal = LectriceTheme.space.l),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
             Text(stringResource(R.string.library_empty_title), style = LectriceTheme.type.titleL, textAlign = TextAlign.Center)
-            Text(stringResource(R.string.library_empty_body), Modifier.padding(top = 8.dp).width(EMPTY_TEXT_WIDTH), style = LectriceTheme.type.body, color = c.fg2, textAlign = TextAlign.Center)
-            Text(stringResource(R.string.library_empty_limits), Modifier.padding(top = 12.dp), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.library_empty_body), Modifier.padding(top = LectriceTheme.space.s).width(EMPTY_TEXT_WIDTH), style = LectriceTheme.type.body, color = c.fg2, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.library_empty_limits), Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.caption, color = c.fg2, textAlign = TextAlign.Center)
         }
     }
 }
@@ -348,7 +348,7 @@ private fun OpenPdfButton(onClick: () -> Unit, modifier: Modifier) {
     Box(
         modifier
             .navigationBarsPadding()
-            .padding(end = 16.dp, bottom = 16.dp)
+            .padding(end = LectriceTheme.space.l, bottom = LectriceTheme.space.l)
             .size(56.dp)
             .border(1.dp, c.bg, CircleShape)
             .clip(CircleShape)
@@ -367,12 +367,12 @@ private fun ImportMenu(onPdf: () -> Unit, onAudiobook: () -> Unit, modifier: Mod
     LectriceCard(
         modifier
             .navigationBarsPadding()
-            .padding(start = 16.dp, end = 16.dp, bottom = MENU_ABOVE_FAB)
+            .padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = MENU_ABOVE_FAB)
             .widthIn(max = MENU_MAX_WIDTH),
         radius = 12.dp,
         padding = 0.dp,
     ) {
-        Column(Modifier.padding(vertical = 8.dp)) {
+        Column(Modifier.padding(vertical = LectriceTheme.space.s)) {
             ListRow(stringResource(R.string.library_import_pdf), leadingIcon = LectriceIcons.PictureAsPdf, onClick = onPdf)
             ListRow(stringResource(R.string.library_import_audiobook), leadingIcon = LectriceIcons.Headphones, onClick = onAudiobook)
         }
@@ -401,7 +401,7 @@ private fun LibrarySnackbarHost(snackbar: LibrarySnackbar, actions: LibraryActio
     }
     LectriceSnackbar(
         text,
-        modifier.navigationBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = SNACK_ABOVE_FAB),
+        modifier.navigationBarsPadding().padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = SNACK_ABOVE_FAB),
         actionLabel = action?.first,
         onAction = action?.second,
     )
@@ -412,11 +412,11 @@ private fun LibrarySnackbarHost(snackbar: LibrarySnackbar, actions: LibraryActio
 private fun AudiobookBookMissingSheet(onOpenPdf: () -> Unit, onNotNow: () -> Unit) {
     val title = stringResource(R.string.audiobook_missing_title)
     BottomSheet(onNotNow, contentDescription = title) {
-        Column(Modifier.padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
             Text(title, Modifier.semantics { heading() }, style = LectriceTheme.type.titleM)
-            Text(stringResource(R.string.audiobook_missing_body), Modifier.padding(top = 12.dp), style = LectriceTheme.type.body)
-            PrimaryButton(stringResource(R.string.audiobook_missing_open), onOpenPdf, Modifier.padding(top = 24.dp))
-            Box(Modifier.fillMaxWidth().padding(top = 4.dp), contentAlignment = Alignment.Center) {
+            Text(stringResource(R.string.audiobook_missing_body), Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.body)
+            PrimaryButton(stringResource(R.string.audiobook_missing_open), onOpenPdf, Modifier.padding(top = LectriceTheme.space.xl))
+            Box(Modifier.fillMaxWidth().padding(top = LectriceTheme.space.xs), contentAlignment = Alignment.Center) {
                 LectriceTextButton(stringResource(R.string.audiobook_missing_not_now), onNotNow)
             }
             SheetBottomSpacer()
@@ -428,13 +428,13 @@ private fun AudiobookBookMissingSheet(onOpenPdf: () -> Unit, onNotNow: () -> Uni
 private fun ImportErrorSheet(error: ImportError, onDismiss: () -> Unit) {
     val c = LectriceTheme.colors
     BottomSheet(onDismiss, contentDescription = stringResource(R.string.library_error_title)) {
-        Column(Modifier.padding(horizontal = 16.dp)) {
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.padding(horizontal = LectriceTheme.space.l)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.m), verticalAlignment = Alignment.CenterVertically) {
                 LectriceIcon(LectriceIcons.Error, null, tint = c.errFg)
                 Text(stringResource(R.string.library_error_title), style = LectriceTheme.type.titleM)
             }
-            Text(importErrorText(error), Modifier.padding(top = 12.dp), style = LectriceTheme.type.body)
-            PrimaryButton(stringResource(R.string.library_error_ok), onDismiss, Modifier.padding(top = 24.dp))
+            Text(importErrorText(error), Modifier.padding(top = LectriceTheme.space.m), style = LectriceTheme.type.body)
+            PrimaryButton(stringResource(R.string.library_error_ok), onDismiss, Modifier.padding(top = LectriceTheme.space.xl))
             SheetBottomSpacer()
         }
     }
@@ -464,11 +464,11 @@ private fun BookSheet(sheet: BookSheet, actions: LibraryActions) {
         else -> stringResource(R.string.book_sheet_meta_no_audio, Sizes.format(sheet.libraryBytes))
     }
     BottomSheet(actions::closeBookSheet, contentDescription = stringResource(R.string.book_sheet_a11y)) {
-        Row(Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.padding(start = LectriceTheme.space.l, end = LectriceTheme.space.l, bottom = LectriceTheme.space.m), horizontalArrangement = Arrangement.spacedBy(LectriceTheme.space.l), verticalAlignment = Alignment.CenterVertically) {
             CoverTile(sheet.initials, sheet.hue)
             Column(Modifier.weight(1f)) {
                 Text(sheet.title, style = LectriceTheme.type.titleM, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                Text(meta, Modifier.padding(top = 4.dp), style = LectriceTheme.type.bodyS, color = c.fg2)
+                Text(meta, Modifier.padding(top = LectriceTheme.space.xs), style = LectriceTheme.type.bodyS, color = c.fg2)
             }
         }
         Divider(inset = 0.dp)
@@ -492,12 +492,12 @@ private fun RemoveDialog(confirm: RemoveConfirm, actions: LibraryActions) {
         body = stringResource(R.string.remove_body, frees),
         onDismiss = actions::cancelRemove,
         extra = {
-            if (confirm.hasRunningExport) Text(stringResource(R.string.remove_export_cancelled), Modifier.padding(top = 8.dp), style = LectriceTheme.type.body)
-            if (confirm.isPlaying) Text(stringResource(R.string.remove_playback_stops), Modifier.padding(top = 8.dp), style = LectriceTheme.type.body)
+            if (confirm.hasRunningExport) Text(stringResource(R.string.remove_export_cancelled), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.body)
+            if (confirm.isPlaying) Text(stringResource(R.string.remove_playback_stops), Modifier.padding(top = LectriceTheme.space.s), style = LectriceTheme.type.body)
             if (confirm.exportCount > 0) {
                 val size = Sizes.format(confirm.exportBytes)
                 val label = if (confirm.exportCount == 1) stringResource(R.string.remove_also_one, size) else stringResource(R.string.remove_also_many, confirm.exportCount, size)
-                CheckboxRow(deleteExports, label, { deleteExports = it }, Modifier.padding(top = 12.dp))
+                CheckboxRow(deleteExports, label, { deleteExports = it }, Modifier.padding(top = LectriceTheme.space.m))
             }
         },
     ) {
