@@ -15,9 +15,13 @@ internal object HelperLinkState {
         data class NeedsAttention(val errorName: String) : Core
     }
 
-    fun of(core: Core, running: Boolean, permissionDenied: Boolean): HelperLink = when {
+    /**
+     * [remembered]: what the computer last said needs the person (it forgot this phone, lacks the model, doesn't
+     * match). It is still shown while the link isn't running, so the helper page can say "Pair again" when nobody listens.
+     */
+    fun of(core: Core, running: Boolean, permissionDenied: Boolean, remembered: HelperAttention? = null): HelperLink = when {
         permissionDenied -> HelperLink.NeedsAttention(HelperAttention.PermissionDenied)
-        !running -> HelperLink.Off
+        !running -> remembered?.let(HelperLink::NeedsAttention) ?: HelperLink.Off
         else -> when (core) {
             Core.Off, Core.Connecting -> HelperLink.Searching
             Core.Connected -> HelperLink.Connected
@@ -30,6 +34,13 @@ internal object HelperLinkState {
                 else -> HelperLink.Lost
             }
         }
+    }
+
+    /** What to remember from a running link: set by the computer's answer, cleared once it makes audio again. */
+    fun remembered(previous: HelperAttention?, link: HelperLink): HelperAttention? = when {
+        link is HelperLink.NeedsAttention && link.reason != HelperAttention.PermissionDenied -> link.reason
+        link.makesAudio -> null
+        else -> previous
     }
 
     /** Went from making audio to not reachable: the phone must get ready to take over (file 24 §3.6). */

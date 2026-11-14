@@ -68,6 +68,8 @@ class ComputerHelperHub(
     private var active = false
     private var running = false
     private var noticeShown = false
+    /** Cleared when the person acts: pairs, forgets, switches, retries. */
+    private var attention: HelperAttention? = null
     private var watch: Job? = null
     /** This phone's wrong codes per address, for the "n of 3" text. */
     private val wrongCodes = mutableMapOf<String, Int>()
@@ -179,7 +181,12 @@ class ComputerHelperHub(
     }
 
     override fun retry() {
-        scope.launch { mutex.withLock { if (running) retryNow() else applyLocked() } }
+        scope.launch {
+            mutex.withLock {
+                attention = null
+                if (running) retryNow() else applyLocked()
+            }
+        }
     }
 
     override fun permissionChanged() {
@@ -189,6 +196,7 @@ class ComputerHelperHub(
     /** Hands the active computer to the core (or none); the engine is rebuilt around it on its next load. */
     private suspend fun configureLocked() {
         stopLocked()
+        attention = null
         val peer = peers.active.takeIf { peers.enabled && !permissionNeeded() }
         val config = peer?.let {
             val key = withContext(Dispatchers.IO) { identity.privateKey() }
@@ -317,7 +325,8 @@ class ComputerHelperHub(
     }
 
     private fun publishLocked() {
-        val link = HelperLinkState.of(coreState, running, peers.enabled && permissionNeeded())
+        val link = HelperLinkState.of(coreState, running, peers.enabled && permissionNeeded(), attention)
+        if (running) attention = HelperLinkState.remembered(attention, link)
         // The phone opened the link with its own model, so that is the one the computer lacks.
         val needed = if (link == HelperLink.NeedsAttention(HelperAttention.ModelMissing)) engine.activeModel()?.info?.let { NeededModel(it.name, it.downloadBytes) } else null
         mutable.update {

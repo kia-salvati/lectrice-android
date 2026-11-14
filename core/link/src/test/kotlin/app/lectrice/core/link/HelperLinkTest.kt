@@ -74,6 +74,17 @@ class HelperLinkTest {
     }
 
     @Test
+    fun whatTheComputerSaidNeedsThePersonStaysShownWhileTheLinkIsStopped() {
+        val notPaired = HelperLink.NeedsAttention(HelperAttention.NotPaired)
+        val remembered = HelperLinkState.remembered(null, notPaired)
+        assertEquals(HelperAttention.NotPaired, remembered)
+        assertEquals(notPaired, HelperLinkState.of(HelperLinkState.Core.Off, running = false, permissionDenied = false, remembered = remembered))
+        assertEquals(HelperAttention.NotPaired, HelperLinkState.remembered(remembered, HelperLink.Searching))
+        assertEquals(null, HelperLinkState.remembered(remembered, HelperLink.Connected))
+        assertEquals(remembered, HelperLinkState.remembered(remembered, HelperLink.NeedsAttention(HelperAttention.PermissionDenied)))
+    }
+
+    @Test
     fun theTakeOverStartsOnlyWhenTheComputerWasMakingAudio() {
         assertTrue(HelperLinkState.lostNow(HelperLink.Connected, HelperLink.Lost))
         assertTrue(HelperLinkState.lostNow(HelperLink.Busy, HelperLink.Lost))
