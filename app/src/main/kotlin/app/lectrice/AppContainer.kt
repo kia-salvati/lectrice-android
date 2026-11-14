@@ -1,6 +1,7 @@
 package app.lectrice
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import app.lectrice.core.data.AndroidAudiobookRepository
 import app.lectrice.core.data.CoreExportRepository
 import app.lectrice.core.data.CoreLibraryRepository
@@ -81,11 +82,13 @@ class AppContainer(context: Context, debug: Boolean) {
         conditions.start()
         scope.launch { runCatching { core.call("set_encoder_sink") { it.setEncoderSink(AacEncoderSink()) } } }
         // Prepare runs while charging (file 14): plugging in starts the work service if a book waits for it.
-        appContext.registerReceiver(object : android.content.BroadcastReceiver() {
+        val powerConnected = object : android.content.BroadcastReceiver() {
             override fun onReceive(context: Context, intent: android.content.Intent) {
                 if (prepare.hasWork()) work.startService()
             }
-        }, android.content.IntentFilter(android.content.Intent.ACTION_POWER_CONNECTED))
+        }
+        val filter = android.content.IntentFilter(android.content.Intent.ACTION_POWER_CONNECTED)
+        ContextCompat.registerReceiver(appContext, powerConnected, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
         scope.launch(Dispatchers.Main) { conditions.conditions.collect(media3.readAhead::onConditions) }
         startComputerHelper()
     }

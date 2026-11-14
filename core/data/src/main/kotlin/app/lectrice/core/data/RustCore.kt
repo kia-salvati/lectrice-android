@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Looper
 import app.lectrice.core.model.ErrorName
 import app.lectrice.core.model.LectriceError
+import app.lectrice.core.model.Voices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import uniffi.lectrice_ffi.CoreConfig
@@ -47,7 +48,7 @@ class RustCore(private val context: Context, private val debug: Boolean) {
             dataDir = dataDir.path,
             cacheDir = File(context.cacheDir, DATA_DIR).path,
             pdfiumLibrary = PDFIUM_LIBRARY,
-            defaultVoice = DEFAULT_VOICE,
+            defaultVoice = Voices.DEFAULT_VOICE_ID,
             readAheadMinutes = READ_AHEAD_MINUTES,
             keepMinutesPerDocument = KEEP_MINUTES_PER_DOCUMENT,
             cacheMaxMb = CACHE_MAX_MB,
@@ -79,7 +80,6 @@ class RustCore(private val context: Context, private val debug: Boolean) {
         private const val DATA_DIR = "lectrice"
         /** A bare name: the system linker finds it in the app's native library folder. */
         private const val PDFIUM_LIBRARY = "libpdfium.so"
-        private const val DEFAULT_VOICE = "af_heart"
         private const val READ_AHEAD_MINUTES = 10u
         private const val KEEP_MINUTES_PER_DOCUMENT = 60u
         /** The phone's audio cache cap (file 08 §3.2). */
