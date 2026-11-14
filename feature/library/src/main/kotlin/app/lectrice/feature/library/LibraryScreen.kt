@@ -392,6 +392,7 @@ private fun LibrarySnackbarHost(snackbar: LibrarySnackbar, actions: LibraryActio
         is LibrarySnackbar.AudiobookLinked -> stringResource(R.string.library_snack_audiobook_linked, snackbar.title)
         LibrarySnackbar.AudiobookForeign -> stringResource(R.string.library_snack_audiobook_foreign)
         LibrarySnackbar.ImportsFull -> stringResource(R.string.library_snack_imports_full)
+        LibrarySnackbar.BookGone -> stringResource(R.string.library_snack_book_gone)
     }
     val action: Pair<String, () -> Unit>? = when (snackbar) {
         is LibrarySnackbar.Removed -> stringResource(R.string.library_snack_undo) to actions::undoRemove

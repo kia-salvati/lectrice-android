@@ -12,6 +12,8 @@ import app.lectrice.core.model.ImportQueue
 import app.lectrice.core.model.IncomingFiles
 import app.lectrice.core.model.IncomingKind
 import app.lectrice.core.model.LectriceError
+import app.lectrice.core.model.LibraryNotice
+import app.lectrice.core.model.LibraryNotices
 import app.lectrice.core.model.LibraryRepository
 import app.lectrice.core.model.Pages
 import app.lectrice.core.model.PdfSource
@@ -49,6 +51,7 @@ class LibraryViewModel(
     private val navigation: LibraryNavigation,
     private val audiobooks: AudiobookRepository,
     private val incoming: IncomingFiles,
+    private val notices: LibraryNotices,
     private val now: () -> Long = { System.currentTimeMillis() / MS_PER_SECOND },
 ) : ViewModel(), LibraryActions {
     private val state = MutableStateFlow(LibraryUiState())
@@ -68,6 +71,12 @@ class LibraryViewModel(
             }
         }
         viewModelScope.launch { voice.state.collect { voiceState -> state.update { it.copy(banner = banner(voiceState)) } } }
+        viewModelScope.launch {
+            notices.notice.collect { notice ->
+                if (notice == LibraryNotice.BookGone) state.update { it.copy(snackbar = LibrarySnackbar.BookGone) }
+                notice?.let(notices::consume)
+            }
+        }
         viewModelScope.launch {
             playback.state.collect { playing ->
                 state.update { current -> current.copy(continueCard = current.continueCard?.let { it.copy(playing = playing.documentId == it.documentId && playing.isPlaying) }) }

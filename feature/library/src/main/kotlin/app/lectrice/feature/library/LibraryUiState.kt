@@ -100,6 +100,9 @@ sealed interface LibrarySnackbar {
 
     /** Too many imports are running or waiting: the file was not taken. */
     data object ImportsFull : LibrarySnackbar
+
+    /** The reader found the book gone (removed meanwhile, or its files are missing). */
+    data object BookGone : LibrarySnackbar
 }
 
 /**

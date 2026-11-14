@@ -39,6 +39,7 @@ import app.lectrice.core.designsystem.LectriceTheme
 import app.lectrice.core.model.Document
 import app.lectrice.core.model.IncomingKind
 import app.lectrice.core.model.IncomingRules
+import app.lectrice.core.model.LibraryNotice
 import app.lectrice.core.model.PlaybackStatus
 import app.lectrice.feature.library.LibraryNavigation
 import app.lectrice.feature.library.LibraryScreen
@@ -243,7 +244,7 @@ private fun LibraryRoute(navigator: Navigator, container: AppContainer) {
         }
     }
     val viewModel: LibraryViewModel = viewModel {
-        LibraryViewModel(container.library, container.playback, container.imports, container.removal, container.settings, container.engine, navigation, container.audiobooks, container.incoming)
+        LibraryViewModel(container.library, container.playback, container.imports, container.removal, container.settings, container.engine, navigation, container.audiobooks, container.incoming, container.libraryNotices)
     }
     LaunchedEffect(viewModel) { viewModel.reload() }
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -256,7 +257,10 @@ private fun LibraryRoute(navigator: Navigator, container: AppContainer) {
 private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: AppContainer) {
     val navigation = remember(navigator) {
         object : ReaderNavigation {
-            override fun backToLibrary(message: ReaderMessage?) = navigator.resetTo(Screen.Library)
+            override fun backToLibrary(message: ReaderMessage?) {
+                if (message == ReaderMessage.BookGone) container.libraryNotices.post(LibraryNotice.BookGone)
+                navigator.resetTo(Screen.Library)
+            }
             override fun openModelSetup() = navigator.push(Screen.ChooseModel)
             override fun openComputerHelper() = navigator.push(Screen.ComputerHelper)
         }

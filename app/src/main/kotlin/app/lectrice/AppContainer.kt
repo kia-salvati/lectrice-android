@@ -14,6 +14,7 @@ import app.lectrice.core.data.RustCore
 import app.lectrice.core.model.AudiobookRepository
 import app.lectrice.core.model.ImportQueue
 import app.lectrice.core.model.IncomingFiles
+import app.lectrice.core.model.LibraryNotices
 import app.lectrice.core.playback.CoreVoiceSamplePlayer
 import app.lectrice.core.playback.DeviceConditions
 import app.lectrice.core.playback.Media3PlaybackController
@@ -61,6 +62,7 @@ class AppContainer(context: Context, debug: Boolean) {
 
     /** Files from "Open with" / "Share", waiting for the user's yes on the library screen. */
     val incoming = IncomingFiles()
+    val libraryNotices = LibraryNotices()
     val media3 = Media3PlaybackController(appContext, core, engine, library, settings, positions, scope, PlaybackService::class.java, audiobooks)
     val playback: PlaybackController = media3
     val voiceSamples: VoiceSamplePlayer = CoreVoiceSamplePlayer(appContext, core, engine, media3, scope)

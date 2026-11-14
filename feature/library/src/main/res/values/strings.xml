@@ -48,6 +48,7 @@
     <string name="library_snack_listen">Listen</string>
     <string name="library_snack_audiobook_foreign">This audiobook wasn’t made by Lectrice, so it can’t follow the text. Playing it comes in a later version.</string>
 
+    <string name="library_snack_book_gone">That book isn’t in the library any more.</string>
     <string name="library_snack_imports_full">Too many files are waiting. Try again when these are done.</string>
 
     <string name="incoming_title_pdf">Import “%1$s”?</string>
