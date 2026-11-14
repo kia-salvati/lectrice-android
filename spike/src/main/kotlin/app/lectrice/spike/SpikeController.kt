@@ -71,7 +71,7 @@ class SpikeController(private val context: Context) {
         // A neutral name: the result file and the core's log never see the real one.
         val result = try { core.importPdf(copy.path, IMPORT_FILE_NAME) } finally { copy.delete() }
         val documentStarted = SystemClock.elapsedRealtime()
-        val document = core.getDocument(result.summary.id)
+        val document = core.getDocument(result.summary.id, markOpened = false)
         val getDocumentMs = SystemClock.elapsedRealtime() - documentStarted
         val sentenceRecords = document.blocks.sumOf { block -> block.sentences.size + (if (block.cue != null) 1 else 0) }
         val topLevel = document.toc.minOfOrNull { it.level }
