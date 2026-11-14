@@ -70,9 +70,11 @@ import app.lectrice.feature.settings.StorageScreen
 import app.lectrice.feature.settings.StorageViewModel
 import app.lectrice.feature.settings.WelcomeScreen
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 
 /** The one Activity (spec §4.5). Screens are composables on our own back stack. */
@@ -114,11 +116,9 @@ class MainActivity : ComponentActivity() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || container.settings.settings.value.notificationAsked) return
         if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) return
         lifecycleScope.launch {
-            val playing = launch { container.playback.state.first { it.status == PlaybackStatus.Preparing || it.status == PlaybackStatus.Playing } }
-            val downloading = launch { container.work.download.first { it != null } }
-            while (playing.isActive && downloading.isActive) delay(POLL_MS)
-            playing.cancel()
-            downloading.cancel()
+            val playing = container.playback.state.filter { it.status == PlaybackStatus.Preparing || it.status == PlaybackStatus.Playing }
+            val downloading = container.work.download.filterNotNull()
+            merge(playing, downloading).first()
             if (!container.settings.settings.value.notificationAsked) notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
@@ -195,7 +195,6 @@ class MainActivity : ComponentActivity() {
 
     private companion object {
         const val SCOPE = "MainActivity"
-        const val POLL_MS = 500L
         const val STACK_KEY = "lectrice.stack"
         const val DEBUG_PLAY_EXTRA = "lectrice.play"
         const val DEBUG_EXPORT_EXTRA = "lectrice.export"
