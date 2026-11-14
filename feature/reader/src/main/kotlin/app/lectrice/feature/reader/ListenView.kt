@@ -512,8 +512,8 @@ private fun ThumbZone(state: ReaderUiState, actions: ReaderActions, scrubber: Sc
             Tool(stringResource(R.string.listen_chapters), stringResource(R.string.listen_chapters), handlers.onChapters) { LectriceIcon(LectriceIcons.Toc, null) },
             Tool(stringResource(R.string.listen_more), stringResource(R.string.pill_more), { if (locked) handlers.whenUnlocked(handlers.onMore) else handlers.onMore() }) { LectriceIcon(LectriceIcons.MoreHoriz, null) },
         )
-        // At 200 % font on a narrow screen the four captions don't fit side by side: a 2 × 2 grid of icon-beside-caption cells.
-        val grid = narrow && LocalDensity.current.fontScale >= TALL_FONT_SCALE
+        // At 200 % font the four captions don't fit side by side on any phone width: a 2 × 2 grid of icon-beside-caption cells.
+        val grid = LocalDensity.current.fontScale >= TALL_FONT_SCALE
         if (grid) {
             Column(Modifier.fillMaxWidth().alpha(alpha), verticalArrangement = Arrangement.spacedBy(TOOL_GRID_GAP)) {
                 tools.chunked(TOOL_GRID_COLUMNS).forEach { pair ->
