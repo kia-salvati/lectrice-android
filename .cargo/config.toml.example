@@ -3,3 +3,4 @@
 lectrice-domain = { path = "../lectrice/backend/crates/lectrice-domain" }
 lectrice-app = { path = "../lectrice/backend/crates/lectrice-app" }
 lectrice-infra = { path = "../lectrice/backend/crates/lectrice-infra" }
+lectrice-link = { path = "../lectrice/backend/crates/lectrice-link" }

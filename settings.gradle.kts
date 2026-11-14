@@ -28,13 +28,20 @@ val googleGroups = Action<RepositoryContentDescriptor> {
     includeGroupByRegex("com\\.google.*")
 }
 
+// `-Plectrice.mavenCentralMirror=<url>` does the same for Maven Central when repo1.maven.org is unreachable too
+// (signatures and checksums are still checked against gradle/verification-metadata.xml).
+val centralMirror: String? = providers.gradleProperty("lectrice.mavenCentralMirror").orNull
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         if (googleMirror == null) google { content(googleGroups) } else maven(googleMirror) { name = "GoogleMirror"; content(googleGroups) }
-        mavenCentral { url = uri("https://repo1.maven.org/maven2/") }
+        mavenCentral { url = uri(centralMirror ?: "https://repo1.maven.org/maven2/") }
     }
 }
 
 rootProject.name = "lectrice-android"
 include(":spike")
+include(":app")
+include(":core:model", ":core:data", ":core:playback", ":core:work", ":core:designsystem", ":core:link")
+include(":feature:library", ":feature:reader", ":feature:settings")

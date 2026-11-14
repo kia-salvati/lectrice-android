@@ -96,18 +96,19 @@ fn imports_an_invented_pdf_and_speaks_its_first_sentence() {
     let imported = core.import_pdf(pdf_path.display().to_string(), "boats.pdf".into()).unwrap();
     assert_eq!(imported.summary.page_count, 2);
     assert!(imported.summary.sentence_count >= 6, "got {} sentences", imported.summary.sentence_count);
-    let document = core.get_document(imported.summary.id.clone()).unwrap();
+    let document = core.get_document(imported.summary.id.clone(), false).unwrap();
     let order = core.playback_order(imported.summary.id.clone(), false).unwrap();
     assert_eq!(order.len() as u32, imported.summary.sentence_count);
     assert!(!document.blocks.is_empty());
 
     let model_dir = sibling("LECTRICE_MODEL_DIR", "models/kokoro-multi-lang-v1_0").display().to_string();
-    let engine = EngineConfig::Kokoro { model_dir, variant: KokoroVariant::Fp32, num_threads: 4, provider: "cpu".into() };
+    let engine = EngineConfig::Kokoro { model_dir, variant: KokoroVariant::Fp32, num_threads: 4, provider: "cpu".into(), engine_id: None };
     let status = core.reload_engine(engine);
     assert!(matches!(status, EngineStatus::Ready { .. }), "{status:?}");
     assert_eq!(core.list_voices().unwrap().voices.len(), 28);
 
-    let args = SpeakArgs { document_id: imported.summary.id, sentence_id: order[1], voice_id: "af_heart".into(), rate: 1.0, read_skipped: false };
+    let args =
+        SpeakArgs { document_id: imported.summary.id, sentence_id: order[1], voice_id: "af_heart".into(), rate: 1.0, read_skipped: false, plan_ahead: true };
     let spoken = core.speak_sentence(args).unwrap();
     assert!(spoken.duration_ms > 1000, "got {} ms", spoken.duration_ms);
     assert_eq!(&spoken.wav[..4], b"RIFF");
@@ -127,7 +128,7 @@ fn bench_reports_one_sample_per_text() {
     let work = tempfile::tempdir().unwrap();
     let core = LectriceCore::new(config(work.path()), Arc::new(CollectingSink::default())).unwrap();
     let model_dir = sibling("LECTRICE_MODEL_DIR", "models/kokoro-int8-multi-lang-v1_0").display().to_string();
-    let status = core.reload_engine(EngineConfig::Kokoro { model_dir, variant: KokoroVariant::Int8, num_threads: 4, provider: "cpu".into() });
+    let status = core.reload_engine(EngineConfig::Kokoro { model_dir, variant: KokoroVariant::Int8, num_threads: 4, provider: "cpu".into(), engine_id: None });
     assert!(matches!(status, EngineStatus::Ready { .. }), "{status:?}");
 
     let texts = vec!["The kettle clicked off just as the rain began.".to_string(), "Two cups, one spoon, no sugar.".to_string()];

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="channel_work">Downloads and exports</string>
+    <string name="channel_results">Export results</string>
+    <string name="work_downloading">Downloading the voice · %1$d %%</string>
+    <string name="work_exporting">Exporting %1$s · %2$d %%</string>
+    <string name="work_export_waiting">Export waiting · %1$s</string>
+    <string name="work_export_waiting_listening">Continues when you stop listening.</string>
+    <string name="work_export_ready">Audiobook ready · %1$s</string>
+    <string name="work_export_failed">The export stopped · %1$s</string>
+    <string name="work_export_paused">Export paused · %1$s</string>
+    <string name="work_voice_ready">The voice is ready</string>
+    <string name="work_preparing">Getting ready…</string>
+    <string name="work_pause">Pause</string>
+    <string name="work_cancel">Cancel</string>
+</resources>

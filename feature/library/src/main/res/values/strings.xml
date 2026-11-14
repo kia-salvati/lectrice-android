@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_title">Lectrice</string>
+    <string name="library_settings">Settings</string>
+    <string name="library_continue">Continue listening</string>
+    <string name="library_finished">Finished · listen again</string>
+    <string name="library_card_play">Play %1$s</string>
+    <string name="library_card_play_from_page">Play %1$s from page %2$s</string>
+    <string name="library_card_play_again">Play %1$s again</string>
+    <string name="library_recent">Recent</string>
+    <string name="library_open_pdf">Open PDF</string>
+    <string name="library_row_continue">Continue · %1$d %%</string>
+    <string name="library_row_start">Start</string>
+    <string name="library_row_a11y_started">%1$s, %2$d percent read, %3$s</string>
+    <string name="library_row_a11y_not_started">%1$s, not started, %2$s</string>
+    <string name="library_import_reading">Reading… cleaning text</string>
+    <string name="library_import_waiting">Waiting…</string>
+    <string name="library_empty_title">Open a PDF to start listening</string>
+    <string name="library_empty_body">Lectrice cleans up the text and reads it aloud with a voice that runs on this phone. Nothing leaves your device.</string>
+    <string name="library_empty_limits">PDFs with a text layer, up to 200 MB</string>
+
+    <string name="library_banner_voice_missing">Voice not installed. You can read now and listen after the download.</string>
+    <string name="library_banner_download">Download</string>
+    <string name="library_banner_downloading">Downloading the voice · %1$d %%</string>
+    <string name="library_banner_details">Details</string>
+    <string name="library_banner_engine_failed">The voice couldn’t start. Try again, or download it again in Settings.</string>
+    <string name="library_banner_try_again">Try again</string>
+    <string name="library_list_failed">Something went wrong.</string>
+
+    <string name="library_error_title">Can’t read this PDF</string>
+    <string name="library_error_no_text">“%1$s” is a scanned image with no text inside, so there’s nothing to read aloud. Lectrice can’t read scans yet.</string>
+    <string name="library_error_encrypted">“%1$s” is password-protected. Save an unprotected copy in another app and try again.</string>
+    <string name="library_error_too_large">“%1$s” is %2$s. Lectrice opens PDFs up to 200 MB.</string>
+    <string name="library_error_too_large_unknown">“%1$s” is larger than 200 MB, the most Lectrice opens.</string>
+    <string name="library_error_invalid">“%1$s” looks damaged or isn’t a PDF.</string>
+    <string name="library_error_too_complex">“%1$s” is too long or too complex to open on this phone.</string>
+    <string name="library_error_storage_full">Your phone is out of space. Free up about %1$s and try again.</string>
+    <string name="library_error_storage_full_unknown">Your phone is out of space. Free up space and try again.</string>
+    <string name="library_error_unreadable">“%1$s” couldn’t be opened. If it’s in a cloud folder, download it first and try again.</string>
+    <string name="library_error_other">Something went wrong.</string>
+    <string name="library_error_ok">OK</string>
+
+    <string name="library_snack_already">Already in your library. Continuing where you left off.</string>
+    <string name="library_snack_removed">Removed “%1$s”.</string>
+    <string name="library_snack_undo">Undo</string>
+    <string name="library_snack_storage_full">Your phone is out of space.</string>
+    <string name="library_snack_audiobook_linked">Linked to “%1$s”.</string>
+    <string name="library_snack_listen">Listen</string>
+    <string name="library_snack_audiobook_foreign">This audiobook wasn’t made by Lectrice, so it can’t follow the text. Playing it comes in a later version.</string>
+
+    <string name="library_snack_book_gone">That book isn’t in the library any more.</string>
+    <string name="library_snack_imports_full">Too many files are waiting. Try again when these are done.</string>
+
+    <string name="incoming_title_pdf">Import “%1$s”?</string>
+    <string name="incoming_body_pdf">Another app sent this PDF to Lectrice. Import it only if you asked for it.</string>
+    <string name="incoming_title_audiobook">Link “%1$s”?</string>
+    <string name="incoming_body_audiobook">Another app sent this audiobook to Lectrice. It is copied to this phone and linked to its book.</string>
+    <string name="incoming_import">Import</string>
+    <string name="incoming_link">Link</string>
+    <string name="incoming_not_now">Not now</string>
+
+    <string name="library_import_pdf">PDF book</string>
+    <string name="library_import_audiobook">Audiobook file (M4B)</string>
+    <string name="audiobook_missing_title">This audiobook belongs to another book</string>
+    <string name="audiobook_missing_body">Open that book’s PDF to read along.</string>
+    <string name="audiobook_missing_open">Open PDF…</string>
+    <string name="audiobook_missing_not_now">Not now</string>
+
+    <string name="book_sheet_a11y">Book</string>
+    <string name="book_sheet_meta">PDF and text %1$s · audio %2$s</string>
+    <string name="book_sheet_meta_no_audio">PDF and text %1$s</string>
+    <string name="book_sheet_meta_loading">…</string>
+    <string name="book_sheet_clear">Clear this book’s audio</string>
+    <string name="book_sheet_clear_size">Clear this book’s audio · %1$s</string>
+    <string name="book_sheet_remove">Remove from library</string>
+
+    <string name="remove_title">Remove “%1$s”?</string>
+    <string name="remove_body">This removes the book, its reading place and its audio from this phone, and frees about %1$s. You can open the PDF again later.</string>
+    <string name="remove_export_cancelled">Its export in progress is cancelled.</string>
+    <string name="remove_playback_stops">Playback stops.</string>
+    <string name="remove_also_one">Also delete its exported audiobook (%1$s)</string>
+    <string name="remove_also_many">Also delete its %1$d exported audiobooks (%2$s)</string>
+    <string name="remove_cancel">Cancel</string>
+    <string name="remove_confirm">Remove</string>
+</resources>

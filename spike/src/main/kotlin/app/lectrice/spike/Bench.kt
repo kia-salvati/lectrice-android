@@ -42,7 +42,7 @@ class Bench(private val spike: SpikeCore, private val results: ResultFile, priva
         val pin = CpuAffinity.pinCurrentThread(choice.cores)
         threadsBeforeLoad = ThreadCensus.threadIds()
         val startedAt = System.currentTimeMillis()
-        val config = EngineConfig.Kokoro(spike.modelDir(choice.bundle).path, choice.bundle.variant, choice.threads.toUInt(), choice.provider)
+        val config = EngineConfig.Kokoro(spike.modelDir(choice.bundle).path, choice.bundle.variant, choice.threads.toUInt(), choice.provider, null)
         val status = core.reloadEngine(config)
         loadedBundle = choice.bundle
         // After the load, so VmHWM later is this engine's synthesis peak (the old engine is gone by now).
@@ -55,7 +55,7 @@ class Bench(private val spike: SpikeCore, private val results: ResultFile, priva
         log("cores ${pin.getString("policy")}: asked ${pin.getString("requestedCpus")}, speech thread on ${pin.getString("appliedCpus")}; engine threads ${allowedSummary(json.getJSONArray("newThreads"))}")
         when (status) {
             is EngineStatus.Ready -> json.put("status", "ready").put("engineId", status.engineId).put("loadMs", status.loadMs.toLong())
-            is EngineStatus.Missing -> json.put("status", "missing")
+            is EngineStatus.Missing, is EngineStatus.Unloaded -> json.put("status", "missing")
             is EngineStatus.Failed -> json.put("status", "failed").put("error", status.error.name)
         }
         results.add("engine", json)
