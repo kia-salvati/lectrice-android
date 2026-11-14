@@ -12,6 +12,7 @@ import app.lectrice.core.model.TextSize
 import app.lectrice.core.model.ThemeSetting
 import app.lectrice.core.model.VoiceRepository
 import app.lectrice.core.model.VoiceSamplePlayer
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -67,12 +68,12 @@ class SettingsViewModel(
     /** Numbers that change elsewhere (a book removed, the cache cleared): recomputed on return. */
     fun refresh() {
         viewModelScope.launch {
-            val list = runCatching { voices.listVoices() }.getOrDefault(emptyList())
+            val list = suspendRunCatching { voices.listVoices() }.getOrDefault(emptyList())
             val voiceId = settings.settings.value.defaultVoiceId
             state.update { it.copy(voices = list, defaultVoiceSummary = list.firstOrNull { v -> v.id == voiceId }?.summary ?: "Heart · US · female") }
         }
-        viewModelScope.launch { state.update { it.copy(modelSummary = runCatching { platform.modelSummary() }.getOrDefault("—")) } }
-        viewModelScope.launch { state.update { it.copy(storageSummary = runCatching { platform.storageSummary() }.getOrDefault("—")) } }
+        viewModelScope.launch { state.update { it.copy(modelSummary = suspendRunCatching { platform.modelSummary() }.getOrDefault("—")) } }
+        viewModelScope.launch { state.update { it.copy(storageSummary = suspendRunCatching { platform.storageSummary() }.getOrDefault("—")) } }
     }
 
     override fun setTheme(theme: ThemeSetting) = settings.update { it.copy(theme = theme) }

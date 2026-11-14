@@ -10,6 +10,7 @@ import android.os.Process
 import android.os.storage.StorageManager
 import android.provider.Settings
 import app.lectrice.core.model.Sizes
+import app.lectrice.core.model.suspendRunCatching
 import app.lectrice.feature.settings.SettingsPlatform
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,7 +31,7 @@ class AndroidSettingsPlatform(private val context: Context, private val containe
         "${Sizes.format(stats.appBytes + stats.dataBytes)} used · ${Sizes.format(free)} free"
     }
 
-    override fun versionLine(): String = "Version ${BuildConfig.VERSION_NAME} · core ${runCatching { coreVersion() }.getOrDefault("?")}"
+    override fun versionLine(): String = "Version ${BuildConfig.VERSION_NAME} · core ${suspendRunCatching { coreVersion() }.getOrDefault("?")}"
 
     override fun openBatterySettings() {
         context.startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

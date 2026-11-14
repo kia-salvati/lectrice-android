@@ -12,6 +12,7 @@ import app.lectrice.core.model.ModelInstallState
 import app.lectrice.core.model.RemovalController
 import app.lectrice.core.model.Sizes
 import app.lectrice.core.model.VoiceModelRepository
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -111,9 +112,9 @@ class StorageViewModel(
 
     fun refresh() {
         viewModelScope.launch {
-            val usage = runCatching { library.storageUsage() }.getOrNull()
-            runCatching { exports.refresh() }
-            val titles = runCatching { library.listRecent(MAX_BOOKS, 0).items.associate { it.id to it.title } }.getOrDefault(emptyMap())
+            val usage = suspendRunCatching { library.storageUsage() }.getOrNull()
+            suspendRunCatching { exports.refresh() }
+            val titles = suspendRunCatching { library.listRecent(MAX_BOOKS, 0).items.associate { it.id to it.title } }.getOrDefault(emptyMap())
             val modelRows = models.statuses.value.filter { it.state == ModelInstallState.Installed }.map {
                 StorageModelRow(it.model.id, it.model.name, Sizes.format(it.model.installedBytes) + if (it.inUse) " · in use" else "")
             }
@@ -123,8 +124,8 @@ class StorageViewModel(
                 StorageBookRow(book.documentId, title, Covers.initials(title), Covers.hue(title), book.libraryBytes, book.cacheBytes, "PDF and text ${Sizes.format(book.libraryBytes)} · audio ${Sizes.format(book.cacheBytes)}")
             }
             val exportRows = exports.exports.value.filter { it.status == ExportStatus.Done || it.isUnfinished }.map(::exportRow)
-            val total = runCatching { platform.totalBytes() }.getOrDefault(0)
-            val free = runCatching { platform.freeBytes() }.getOrDefault(0)
+            val total = suspendRunCatching { platform.totalBytes() }.getOrDefault(0)
+            val free = suspendRunCatching { platform.freeBytes() }.getOrDefault(0)
             val libraryBytes = usage?.libraryBytes ?: 0
             val cacheBytes = usage?.cacheBytes ?: 0
             val exportBytes = (usage?.exportBytes ?: 0) + (usage?.exportPartsBytes ?: 0)
@@ -165,7 +166,7 @@ class StorageViewModel(
 
     override fun clearAudioCache() {
         viewModelScope.launch {
-            runCatching { library.clearAudioCache() }.onSuccess { cleared -> state.update { it.copy(message = "Cleared ${Sizes.format(cleared)}.") } }
+            suspendRunCatching { library.clearAudioCache() }.onSuccess { cleared -> state.update { it.copy(message = "Cleared ${Sizes.format(cleared)}.") } }
             refresh()
         }
     }
@@ -187,7 +188,7 @@ class StorageViewModel(
 
     override fun clearBookAudio(documentId: String) {
         viewModelScope.launch {
-            runCatching { library.clearDocumentAudio(documentId) }
+            suspendRunCatching { library.clearDocumentAudio(documentId) }
             refresh()
         }
     }
@@ -214,7 +215,7 @@ class StorageViewModel(
         val row = state.value.confirmDeleteExport ?: return
         state.update { it.copy(confirmDeleteExport = null) }
         viewModelScope.launch {
-            runCatching { if (row.unfinished) exports.cancel(row.id) else exports.delete(row.id) }
+            suspendRunCatching { if (row.unfinished) exports.cancel(row.id) else exports.delete(row.id) }
             refresh()
         }
     }

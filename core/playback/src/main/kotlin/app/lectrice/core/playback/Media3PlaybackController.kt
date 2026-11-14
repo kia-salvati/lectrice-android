@@ -40,6 +40,7 @@ import app.lectrice.core.model.SettingsStore
 import app.lectrice.core.model.SleepTimer
 import app.lectrice.core.model.Toc
 import app.lectrice.core.model.Voices
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -206,7 +207,7 @@ class Media3PlaybackController(
         player.pause()
         player.clearMediaItems()
         scope.launch(Dispatchers.Main) {
-            if (source == AudioSource.Audiobook) runCatching { core.call("stop_read_ahead") { it.stopReadAhead(opened.id) } }
+            if (source == AudioSource.Audiobook) suspendRunCatching { core.call("stop_read_ahead") { it.stopReadAhead(opened.id) } }
             load(opened, current, wasPlaying)
         }
     }
@@ -285,7 +286,7 @@ class Media3PlaybackController(
         params.voiceId = voiceId
         mutable.update { it.copy(voiceId = voiceId) }
         rememberListening()
-        document?.id?.let { id -> scope.launch { runCatching { core.call("stop_read_ahead") { it.stopReadAhead(id) } } } }
+        document?.id?.let { id -> scope.launch { suspendRunCatching { core.call("stop_read_ahead") { it.stopReadAhead(id) } } } }
         mutable.value.currentSentenceId?.let { restartAt(it) }
     }
 
@@ -294,8 +295,8 @@ class Media3PlaybackController(
         if (fromFile()) return@onMain
         params.readSkipped = readSkipped
         scope.launch(Dispatchers.Main) {
-            val built = runCatching { buildOrder(opened, readSkipped) }.getOrNull() ?: return@launch
-            runCatching { core.call("stop_read_ahead") { it.stopReadAhead(opened.id) } }
+            val built = suspendRunCatching { buildOrder(opened, readSkipped) }.getOrNull() ?: return@launch
+            suspendRunCatching { core.call("stop_read_ahead") { it.stopReadAhead(opened.id) } }
             order = built
             window = PlaylistWindow(built.sentenceIds.size)
             mutable.update { it.copy(readSkipped = readSkipped) }
@@ -329,7 +330,7 @@ class Media3PlaybackController(
         val current = mutable.value.currentSentenceId
         player.pause()
         scope.launch(Dispatchers.Main) {
-            runCatching { core.call("stop_all_read_ahead") { it.stopAllReadAhead() } }
+            suspendRunCatching { core.call("stop_all_read_ahead") { it.stopAllReadAhead() } }
             engine.modelChanged()
             if (current != null) restartAt(current)
             if (wasPlaying) play()
@@ -484,7 +485,7 @@ class Media3PlaybackController(
 
     private suspend fun reloadOrder() {
         val opened = document ?: return
-        val built = runCatching { buildOrder(opened, params.readSkipped) }.getOrNull() ?: return
+        val built = suspendRunCatching { buildOrder(opened, params.readSkipped) }.getOrNull() ?: return
         order = built
         window = PlaylistWindow(built.sentenceIds.size)
         val current = mutable.value.currentSentenceId?.let(built::resolvePlayable) ?: return
@@ -515,7 +516,7 @@ class Media3PlaybackController(
         statsJob = scope.launch {
             while (true) {
                 delay(STATS_INTERVAL_MS)
-                val stats = runCatching { core.call("speech_stats") { it.speechStats() } }.getOrNull()
+                val stats = suspendRunCatching { core.call("speech_stats") { it.speechStats() } }.getOrNull()
                 mutable.update { it.copy(rtf = stats?.rtfMedian) }
             }
         }
@@ -619,7 +620,7 @@ class Media3PlaybackController(
     /** Media resumption after process death (file 09 §3.9): the last played book at its saved place. */
     suspend fun resumeLastBook(): Boolean {
         val id = settings.settings.value.lastPlayedDocumentId ?: return false
-        val opened = runCatching { library.getDocument(id, markOpened = false) }.getOrNull() ?: return false
+        val opened = suspendRunCatching { library.getDocument(id, markOpened = false) }.getOrNull() ?: return false
         withContext(Dispatchers.Main) { load(opened, opened.lastSentenceId, play = false) }
         return true
     }

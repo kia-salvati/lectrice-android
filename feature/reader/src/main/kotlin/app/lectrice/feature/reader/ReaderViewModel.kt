@@ -34,6 +34,7 @@ import app.lectrice.core.model.VoiceAvailability
 import app.lectrice.core.model.VoiceRepository
 import app.lectrice.core.model.VoiceSamplePlayer
 import app.lectrice.core.model.VoiceState
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -121,7 +122,7 @@ class ReaderViewModel(
     private class Prepared(val order: PlaybackOrder, val labels: Map<Int, String>, val blocks: List<ReaderBlock>, val chapterStarts: List<Int>)
 
     private suspend fun loadVoices() {
-        val list = runCatching { voices.listVoices() }.getOrDefault(emptyList())
+        val list = suspendRunCatching { voices.listVoices() }.getOrDefault(emptyList())
         state.update { it.copy(voices = list) }
     }
 
@@ -152,7 +153,7 @@ class ReaderViewModel(
         viewModelScope.launch {
             playback.state.map { it.readSkipped }.distinctUntilChanged().collect { readSkipped ->
                 val opened = document ?: return@collect
-                val ids = runCatching { library.playbackOrder(documentId, readSkipped) }.getOrNull() ?: return@collect
+                val ids = suspendRunCatching { library.playbackOrder(documentId, readSkipped) }.getOrNull() ?: return@collect
                 order = withContext(Dispatchers.Default) { PlaybackOrder(ids, opened) }
                 onPlayback(playback.state.value, voice.state.value)
             }

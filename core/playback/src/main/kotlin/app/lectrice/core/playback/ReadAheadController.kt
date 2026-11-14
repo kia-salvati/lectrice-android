@@ -4,6 +4,7 @@ import android.os.SystemClock
 import app.lectrice.core.data.Log
 import app.lectrice.core.data.RustCore
 import app.lectrice.core.model.SettingsStore
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -145,7 +146,7 @@ class ReadAheadController(
         if (minutes != null && minutes != appliedMinutes && engineAssembled.value != null) {
             appliedMinutes = minutes
             scope.launch {
-                runCatching { core.call("set_read_ahead_minutes") { it.setReadAheadMinutes(minutes) } }
+                suspendRunCatching { core.call("set_read_ahead_minutes") { it.setReadAheadMinutes(minutes) } }
                     .onFailure { synchronized(this@ReadAheadController) { if (appliedMinutes == minutes) appliedMinutes = null } }
             }
         }
@@ -172,7 +173,7 @@ class ReadAheadController(
     }
 
     private fun stopFor(documentId: String) {
-        scope.launch { runCatching { core.call("stop_read_ahead") { it.stopReadAhead(documentId) } } }
+        scope.launch { suspendRunCatching { core.call("stop_read_ahead") { it.stopReadAhead(documentId) } } }
     }
 
     private companion object {

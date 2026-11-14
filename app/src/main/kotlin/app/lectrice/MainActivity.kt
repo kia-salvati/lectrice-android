@@ -41,6 +41,7 @@ import app.lectrice.core.model.IncomingKind
 import app.lectrice.core.model.IncomingRules
 import app.lectrice.core.model.LibraryNotice
 import app.lectrice.core.model.PlaybackStatus
+import app.lectrice.core.model.suspendRunCatching
 import app.lectrice.feature.library.LibraryNavigation
 import app.lectrice.feature.library.LibraryScreen
 import app.lectrice.feature.library.LibraryViewModel
@@ -143,7 +144,7 @@ class MainActivity : ComponentActivity() {
         val uri: Uri = when (intent?.action) {
             Intent.ACTION_VIEW -> intent.data
             // The two-argument getParcelableExtra exists from Android 13 only; minSdk is 29.
-            Intent.ACTION_SEND -> runCatching { IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri::class.java) }.getOrNull()
+            Intent.ACTION_SEND -> suspendRunCatching { IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri::class.java) }.getOrNull()
             else -> null
         } ?: return
         val action = intent?.action
@@ -151,8 +152,8 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             // Asking the sender's provider for the type and the name can block or throw: off the main thread, and guarded.
             val (type, name) = withContext(Dispatchers.IO) {
-                val type = declaredType ?: runCatching { contentResolver.getType(uri) }.getOrNull()
-                type to runCatching { displayName(uri) }.getOrNull()
+                val type = declaredType ?: suspendRunCatching { contentResolver.getType(uri) }.getOrNull()
+                type to suspendRunCatching { displayName(uri) }.getOrNull()
             }
             val kind = IncomingRules.kind(action, uri.scheme, uri.authority, type, packageName)
             if (kind == null) {
@@ -174,7 +175,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             val model = container.engine.activeModel() ?: return@launch
             val request = app.lectrice.core.model.ExportRequest(documentId, app.lectrice.core.model.Voices.DEFAULT_VOICE_ID, model.info.id, false, app.lectrice.core.model.PlaybackSpeed.fromPercent(speedPercent))
-            runCatching { container.exports.start(request) }.onFailure { app.lectrice.core.data.Log.w(SCOPE, "debug export failed", it) }
+            suspendRunCatching { container.exports.start(request) }.onFailure { app.lectrice.core.data.Log.w(SCOPE, "debug export failed", it) }
             container.work.onExportsChanged()
         }
     }
@@ -297,7 +298,7 @@ private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: 
 @Composable
 private fun ExportRoute(documentId: String, navigator: Navigator, container: AppContainer, onBack: () -> Unit) {
     val context = LocalContext.current
-    val document by produceState<Document?>(null, documentId) { value = runCatching { container.library.getDocument(documentId, markOpened = false) }.getOrNull() }
+    val document by produceState<Document?>(null, documentId) { value = suspendRunCatching { container.library.getDocument(documentId, markOpened = false) }.getOrNull() }
     val opened = document ?: return
     val viewModel: ExportViewModel = viewModel(key = "export-$documentId") {
         val files = AndroidExportFiles(context.applicationContext)

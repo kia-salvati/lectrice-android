@@ -52,7 +52,7 @@ class ImportQueue(private val library: LibraryRepository, private val scope: Cor
             key
         }
         scope.launch {
-            val name = runCatching { library.describe(source).displayName }.getOrDefault("")
+            val name = suspendRunCatching { library.describe(source).displayName }.getOrDefault("")
             jobsState.update { jobs -> jobs.map { if (it.key == key && it.displayName.isEmpty()) it.copy(displayName = name) else it } }
             pending.send(key to source)
         }

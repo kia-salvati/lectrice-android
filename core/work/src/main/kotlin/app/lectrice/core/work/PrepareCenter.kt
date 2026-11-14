@@ -9,6 +9,7 @@ import app.lectrice.core.data.RustCore
 import app.lectrice.core.model.PrepareController
 import app.lectrice.core.model.PrepareRequest
 import app.lectrice.core.model.PrepareState
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,7 +50,7 @@ class PrepareCenter(private val context: Context, private val core: RustCore, pr
         requests.update { it - documentId }
         save()
         mutableStates.update { it - documentId }
-        scope.launch { runCatching { core.call("cancel_prepare") { it.cancelPrepare(documentId) } } }
+        scope.launch { suspendRunCatching { core.call("cancel_prepare") { it.cancelPrepare(documentId) } } }
     }
 
     fun hasWork(): Boolean = requests.value.keys.any { mutableStates.value[it] !is PrepareState.Ready } && canRun()
@@ -78,8 +79,8 @@ class PrepareCenter(private val context: Context, private val core: RustCore, pr
                 cancel(request.documentId)
                 return@mapNotNull null
             }
-            val status = runCatching { core.call("prepare_status") { it.prepareStatus(request.documentId) } }.getOrNull()
-            val onHelper = status?.running == true && runCatching { core.call("prepare_on_helper") { it.prepareOnHelper(request.documentId) } }.getOrDefault(false)
+            val status = suspendRunCatching { core.call("prepare_status") { it.prepareStatus(request.documentId) } }.getOrNull()
+            val onHelper = status?.running == true && suspendRunCatching { core.call("prepare_on_helper") { it.prepareOnHelper(request.documentId) } }.getOrDefault(false)
             Look(request, status, onHelper)
         }
         // The computer makes one range at a time: a second start replaces the first, so two books would take turns
@@ -95,7 +96,7 @@ class PrepareCenter(private val context: Context, private val core: RustCore, pr
                 // Made on the computer, which has moved on to another book's range since (its progress is gone).
                 before is PrepareState.Ready && status?.running != true -> before
                 !runnable || misplaced -> {
-                    if (status?.running == true) runCatching { core.call("stop_prepare") { it.stopPrepare(documentId) } }
+                    if (status?.running == true) suspendRunCatching { core.call("stop_prepare") { it.stopPrepare(documentId) } }
                     PrepareState.WaitingForCharger
                 }
                 status?.running == true -> PrepareState.Running(percent(status.ready, status.total), onComputer)
@@ -103,7 +104,7 @@ class PrepareCenter(private val context: Context, private val core: RustCore, pr
                 status != null && onComputer && endedShort(documentId, status, nowMs) -> PrepareState.Running(percent(status.ready, status.total), onComputer = true)
                 onComputer && computerTaken -> PrepareState.Running(0, onComputer = true)
                 else -> {
-                    val started = runCatching {
+                    val started = suspendRunCatching {
                         val (from, to) = request.fromSentence.toUInt() to request.toSentence.toUInt()
                         if (onComputer) {
                             core.call("start_prepare_on_helper") { it.startPrepareOnHelper(documentId, request.voiceId, request.readSkipped, from, to) }
@@ -137,7 +138,7 @@ class PrepareCenter(private val context: Context, private val core: RustCore, pr
     private data class Look(val request: PrepareRequest, val status: PrepareStatusRecord?, val onHelper: Boolean)
 
     private fun load(): Map<String, PrepareRequest> = prefs.all.mapNotNull { (key, value) ->
-        runCatching {
+        suspendRunCatching {
             val json = JSONObject(value as String)
             key to PrepareRequest(
                 documentId = key,

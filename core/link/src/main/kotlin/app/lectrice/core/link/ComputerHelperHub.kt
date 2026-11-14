@@ -19,6 +19,7 @@ import app.lectrice.core.model.NeededModel
 import app.lectrice.core.model.PairResult
 import app.lectrice.core.model.PairedComputer
 import app.lectrice.core.model.PlaybackState
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -254,7 +255,7 @@ class ComputerHelperHub(
         var connectedForMs = 0L
         while (true) {
             delay(WATCH_MS)
-            val status = runCatching { core.call("helper_status") { it.helperStatus() } }.getOrNull() ?: continue
+            val status = suspendRunCatching { core.call("helper_status") { it.helperStatus() } }.getOrNull() ?: continue
             lostForMs = if (status.state == HelperStateRecord.Lost) lostForMs + WATCH_MS else 0L
             if (lostForMs >= REDISCOVER_MS) {
                 lostForMs = 0L
@@ -264,7 +265,7 @@ class ComputerHelperHub(
             connectedForMs = if (connected && status.engineLoaded) connectedForMs + WATCH_MS else 0L
             if (connectedForMs >= RELEASE_MODEL_MS) {
                 connectedForMs = 0L
-                runCatching { core.blocking("unload_engine") { it.unloadEngine() } }
+                suspendRunCatching { core.blocking("unload_engine") { it.unloadEngine() } }
                 Log.i(SCOPE, "phone model released, the computer makes the audio")
             }
             val busy = connected && status.inFlight > 0u
@@ -276,7 +277,7 @@ class ComputerHelperHub(
     }
 
     private fun retryNow() {
-        scope.launch { runCatching { core.call("helper_retry_now") { it.helperRetryNow() } } }
+        scope.launch { suspendRunCatching { core.call("helper_retry_now") { it.helperRetryNow() } } }
     }
 
     private fun onSighting(sighting: Sighting) {
@@ -321,7 +322,7 @@ class ComputerHelperHub(
             noticeShown = true
             mutableNotices.tryEmit(HelperNotice.ComputerLost)
         }
-        scope.launch(Dispatchers.IO) { runCatching { core.blocking("preload_engine") { it.preloadEngine() } } }
+        scope.launch(Dispatchers.IO) { suspendRunCatching { core.blocking("preload_engine") { it.preloadEngine() } } }
     }
 
     private fun publishLocked() {
@@ -341,7 +342,7 @@ class ComputerHelperHub(
         }
     }
 
-    private suspend fun saveLocked() = withContext(Dispatchers.IO) { runCatching { files.writePeers(peers) }.onFailure { Log.w(SCOPE, "peers not saved", it) } }
+    private suspend fun saveLocked() = withContext(Dispatchers.IO) { suspendRunCatching { files.writePeers(peers) }.onFailure { Log.w(SCOPE, "peers not saved", it) } }
 
     /** Android 17 with target SDK 37+: "Nearby devices" (file 24 §3.10). Never true on today's target SDK 36. */
     private fun permissionNeeded(): Boolean =
@@ -351,7 +352,7 @@ class ComputerHelperHub(
     @SuppressLint("HardwareIds")
     private fun deviceName(): String = Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)?.takeIf { it.isNotBlank() } ?: Build.MODEL
 
-    private fun appVersion(): String = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: "0"
+    private fun appVersion(): String = suspendRunCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: "0"
 
     private inner class Listener : HelperListener {
         override fun onState(state: HelperStateRecord) {

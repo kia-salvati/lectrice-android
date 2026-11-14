@@ -25,6 +25,7 @@ import app.lectrice.core.model.RemovalController
 import app.lectrice.core.model.SettingsStore
 import app.lectrice.core.model.VoiceAvailability
 import app.lectrice.core.model.VoiceState
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -143,7 +144,7 @@ class LibraryViewModel(
     /** Loads the card's document only, for its location and time left (file 02 §3.2). */
     private fun fillCard(summary: DocumentSummary) {
         viewModelScope.launch {
-            val document = runCatching { library.getDocument(summary.id, markOpened = false) }.getOrNull() ?: return@launch
+            val document = suspendRunCatching { library.getDocument(summary.id, markOpened = false) }.getOrNull() ?: return@launch
             val listening = settings.bookListening(summary.id)
             val order = PlaybackOrder(library.playbackOrder(summary.id, settings.settings.value.readSkipped), document)
             val finished = order.isFinishedAt(summary.lastSentenceId) || Progress.isFinished(Progress.percentRead(summary.lastSentenceId, summary.sentenceCount))
@@ -241,7 +242,7 @@ class LibraryViewModel(
         val summary = summaries.firstOrNull { it.id == documentId } ?: return
         state.update { it.copy(bookSheet = BookSheet(documentId, summary.title, Covers.initials(summary.title), Covers.hue(summary.title), null, null)) }
         viewModelScope.launch {
-            val usage = runCatching { library.storageUsage() }.getOrNull()?.documents?.firstOrNull { it.documentId == documentId }
+            val usage = suspendRunCatching { library.storageUsage() }.getOrNull()?.documents?.firstOrNull { it.documentId == documentId }
             state.update { current -> current.copy(bookSheet = current.bookSheet?.takeIf { it.documentId == documentId }?.copy(libraryBytes = usage?.libraryBytes ?: 0, audioBytes = usage?.cacheBytes ?: 0)) }
         }
     }

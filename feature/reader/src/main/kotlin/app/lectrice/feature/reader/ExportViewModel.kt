@@ -28,6 +28,7 @@ import app.lectrice.core.model.Voice
 import app.lectrice.core.model.VoiceModelRepository
 import app.lectrice.core.model.VoiceRepository
 import app.lectrice.core.model.VoiceSampleState
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -168,7 +169,7 @@ class ExportViewModel(
         val listening = settings.bookListening(document.id)
         val active = models.statuses.value.firstOrNull { it.inUse }?.model?.id ?: models.statuses.value.firstOrNull()?.model?.id.orEmpty()
         state.update { it.copy(voiceId = listening.voiceId, modelId = active, readSkipped = settings.settings.value.readSkipped) }
-        viewModelScope.launch { state.update { it.copy(voices = runCatching { voices.listVoices() }.getOrDefault(emptyList())) } }
+        viewModelScope.launch { state.update { it.copy(voices = suspendRunCatching { voices.listVoices() }.getOrDefault(emptyList())) } }
         viewModelScope.launch { platform.sampleState.collect { sample -> state.update { it.copy(voiceSample = sample) } } }
         viewModelScope.launch {
             combine(exports.exports, exports.systemPauseCause, models.statuses, models.download) { list, causes, _, _ -> list to causes }.collect { (list, causes) ->
@@ -181,7 +182,7 @@ class ExportViewModel(
                 }
             }
         }
-        viewModelScope.launch { runCatching { exports.refresh() } }
+        viewModelScope.launch { suspendRunCatching { exports.refresh() } }
     }
 
     private fun showChoose() {
@@ -259,7 +260,7 @@ class ExportViewModel(
         estimateJob = viewModelScope.launch {
             delay(DEBOUNCE_MS)
             val current = state.value
-            val whole = runCatching { exports.estimate(request(current, range = null)) }.getOrNull() ?: return@launch
+            val whole = suspendRunCatching { exports.estimate(request(current, range = null)) }.getOrNull() ?: return@launch
             estimate = whole
             val choices = rangeChoices(whole, current.speed)
             val free = exports.freeBytes()
@@ -325,7 +326,7 @@ class ExportViewModel(
         viewModelScope.launch {
             val range = choices[current.rangeFrom].firstSentence..choices[current.rangeTo].lastSentence
             val label = rangeLabel(current.rangeFrom, current.rangeTo)
-            val partEstimate = runCatching { exports.estimate(request(current, range)) }.getOrNull()
+            val partEstimate = suspendRunCatching { exports.estimate(request(current, range)) }.getOrNull()
             val audio = partEstimate?.audioMs1x ?: rangeMs(whole, current.rangeFrom, current.rangeTo, choices)
             val footer = footer(audio, partEstimate?.cachedMs1x ?: 0, current, exports.freeBytes(), label)
             state.update { it.copy(footer = footer) }
@@ -435,7 +436,7 @@ class ExportViewModel(
                 exports.saveToAudiobooks(done.export.id)
                 // The file moved: the link follows it to its MediaStore URI (file 23 §2 A).
                 val moved = exports.exports.value.firstOrNull { it.id == done.export.id }?.sharedUri
-                if (wasLinked && moved != null) runCatching { audiobooks.link(document.id, moved, AudiobookKind.OwnExport) }
+                if (wasLinked && moved != null) suspendRunCatching { audiobooks.link(document.id, moved, AudiobookKind.OwnExport) }
                 state.update { it.copy(message = "Saved to Audiobooks/Lectrice.") }
             } catch (error: LectriceError) {
                 state.update { it.copy(message = message(error.name)) }
@@ -450,7 +451,7 @@ class ExportViewModel(
 
     override fun saveAs(uri: String) {
         val done = state.value.page as? ExportPage.Done ?: return
-        viewModelScope.launch { runCatching { platform.copyTo(done.export, uri) }.onFailure { state.update { it.copy(message = "Something went wrong.") } } }
+        viewModelScope.launch { suspendRunCatching { platform.copyTo(done.export, uri) }.onFailure { state.update { it.copy(message = "Something went wrong.") } } }
     }
 
     override fun makeAnother() = showChoose()
@@ -484,7 +485,7 @@ class ExportViewModel(
 
     private fun launchExport(block: suspend (AudioExport) -> Unit) {
         val export = (state.value.page as? ExportPage.Progress)?.export ?: return
-        viewModelScope.launch { runCatching { block(export) }.onFailure { error -> state.update { it.copy(message = message((error as? LectriceError)?.name ?: ErrorName.Internal)) } } }
+        viewModelScope.launch { suspendRunCatching { block(export) }.onFailure { error -> state.update { it.copy(message = message((error as? LectriceError)?.name ?: ErrorName.Internal)) } } }
     }
 
     private fun message(name: ErrorName): String = when (name) {

@@ -18,6 +18,7 @@ import app.lectrice.core.model.ErrorName
 import app.lectrice.core.model.IncomingRules
 import app.lectrice.core.model.LectriceError
 import app.lectrice.core.model.TimedSentence
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -106,7 +107,7 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
     override suspend fun import(uri: String, fromAnotherApp: Boolean): AudiobookImport {
         val info = inspect(uri)
         val documentId = info.mapDocumentId ?: return AudiobookImport.Foreign.also { Log.i(SCOPE, "import: no Lectrice map") }
-        val summary = runCatching { core.call("document_summary") { it.documentSummary(documentId) } }.getOrNull()
+        val summary = suspendRunCatching { core.call("document_summary") { it.documentSummary(documentId) } }.getOrNull()
             ?: return AudiobookImport.BookMissing.also { Log.i(SCOPE, "import: book not in the library") }
         return AudiobookImport.Linked(link(documentId, uri, AudiobookKind.Imported, ownCopy = fromAnotherApp), summary.title)
     }
@@ -126,7 +127,7 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
 
     override suspend fun timeline(documentId: String): AudiobookTimeline? {
         val link = state.value[documentId] ?: return null
-        val described = withContext(Dispatchers.IO) { runCatching { describe(link.uri) }.getOrNull() }
+        val described = withContext(Dispatchers.IO) { suspendRunCatching { describe(link.uri) }.getOrNull() }
         if (described == null) {
             missing += documentId
             Log.i(SCOPE, "audiobook file missing doc=$documentId")
@@ -137,7 +138,7 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
         if (size != link.sizeBytes || modified != link.lastModified) {
             Log.i(SCOPE, "audiobook changed, matching again doc=$documentId")
             timelines -= documentId
-            return runCatching { link(documentId, link.uri, link.kind) }.getOrNull()?.let { timelines[documentId] }
+            return suspendRunCatching { link(documentId, link.uri, link.kind) }.getOrNull()?.let { timelines[documentId] }
         }
         return timelines[documentId] ?: withContext(Dispatchers.IO) { readTimeline(documentId) }?.also { timelines[documentId] = it }
     }
@@ -197,7 +198,7 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
     private fun keepPermission(uri: String): Boolean {
         val parsed = Uri.parse(uri)
         if (parsed.scheme != ContentResolver.SCHEME_CONTENT) return true
-        return runCatching { context.contentResolver.takePersistableUriPermission(parsed, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
+        return suspendRunCatching { context.contentResolver.takePersistableUriPermission(parsed, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
             .onFailure { Log.i(SCOPE, "no persistable permission, copying the file into app storage") }
             .isSuccess
     }
@@ -239,10 +240,10 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
     }
 
     private fun releasePermission(uri: String) {
-        runCatching { context.contentResolver.releasePersistableUriPermission(Uri.parse(uri), Intent.FLAG_GRANT_READ_URI_PERMISSION) }
+        suspendRunCatching { context.contentResolver.releasePersistableUriPermission(Uri.parse(uri), Intent.FLAG_GRANT_READ_URI_PERMISSION) }
     }
 
-    private fun readLinks(): Map<String, AudiobookLink> = runCatching {
+    private fun readLinks(): Map<String, AudiobookLink> = suspendRunCatching {
         if (!linksFile.isFile) return emptyMap()
         val array = JSONArray(linksFile.readText())
         (0 until array.length()).map { linkFrom(array.getJSONObject(it)) }.associateBy { it.documentId }
@@ -268,7 +269,7 @@ class AndroidAudiobookRepository(private val context: Context, private val core:
         File(mapsDir, "$documentId.json").writeText(body.toString())
     }
 
-    private fun readTimeline(documentId: String): AudiobookTimeline? = runCatching {
+    private fun readTimeline(documentId: String): AudiobookTimeline? = suspendRunCatching {
         val body = JSONObject(File(mapsDir, "$documentId.json").readText())
         val array = body.getJSONArray("sentences")
         val sentences = (0 until array.length()).map { index ->

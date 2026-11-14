@@ -35,6 +35,7 @@ import app.lectrice.core.work.PrepareCenter
 import app.lectrice.core.work.WorkCenter
 import app.lectrice.core.link.ComputerHelperHub
 import app.lectrice.core.model.AudioSource
+import app.lectrice.core.model.suspendRunCatching
 import app.lectrice.core.playback.ReadAheadGovernor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,7 +81,7 @@ class AppContainer(context: Context, debug: Boolean) {
     /** Battery and heat feed the read-ahead governor (file 08 §3.3). Main thread. */
     fun start() {
         conditions.start()
-        scope.launch { runCatching { core.call("set_encoder_sink") { it.setEncoderSink(AacEncoderSink()) } } }
+        scope.launch { suspendRunCatching { core.call("set_encoder_sink") { it.setEncoderSink(AacEncoderSink()) } } }
         // Prepare runs while charging (file 14): plugging in starts the work service if a book waits for it.
         val powerConnected = object : android.content.BroadcastReceiver() {
             override fun onReceive(context: Context, intent: android.content.Intent) {
@@ -104,7 +105,7 @@ class AppContainer(context: Context, debug: Boolean) {
         // File 24 §3.12: a book playing from its audiobook file gets nothing from the computer.
         scope.launch {
             media3.state.map { it.documentId to it.source }.distinctUntilChanged().collect { (documentId, source) ->
-                if (documentId != null && source == AudioSource.Audiobook) runCatching { core.call("helper_stop_document") { it.helperStopDocument(documentId) } }
+                if (documentId != null && source == AudioSource.Audiobook) suspendRunCatching { core.call("helper_stop_document") { it.helperStopDocument(documentId) } }
             }
         }
         scope.launch { prepare.states.map { prepare.runsOnHelper() }.distinctUntilChanged().collect { computerHelper.onKeepAliveChanged() } }

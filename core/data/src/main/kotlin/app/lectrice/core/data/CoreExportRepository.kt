@@ -17,6 +17,7 @@ import app.lectrice.core.model.PartOffset
 import app.lectrice.core.model.PauseReason
 import app.lectrice.core.model.PlaybackSpeed
 import app.lectrice.core.model.SystemPauseCause
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -86,15 +87,15 @@ class CoreExportRepository(private val context: Context, private val core: RustC
 
     /** Pauses every running export for the system (time limit, heat, battery). */
     suspend fun pauseAllForSystem(cause: SystemPauseCause) {
-        val paused = runCatching { core.call("pause_all_exports") { it.pauseAllExports(PauseReasonRecord.SYSTEM) } }.getOrDefault(emptyList())
+        val paused = suspendRunCatching { core.call("pause_all_exports") { it.pauseAllExports(PauseReasonRecord.SYSTEM) } }.getOrDefault(emptyList())
         paused.forEach { setSystemPauseCause(it.id, cause) }
         refresh()
     }
 
     /** Continues what the system or an engine switch paused. */
     suspend fun resumeSystemPaused() {
-        runCatching { withEngine() }
-        runCatching { core.call("resume_exports") { it.resumeExports() } }
+        suspendRunCatching { withEngine() }
+        suspendRunCatching { core.call("resume_exports") { it.resumeExports() } }
         causes.value = emptyMap()
         refresh()
     }
@@ -107,7 +108,7 @@ class CoreExportRepository(private val context: Context, private val core: RustC
 
     override suspend fun delete(exportId: String) {
         val export = state.value.firstOrNull { it.id == exportId }
-        export?.sharedUri?.let { uri -> withContext(Dispatchers.IO) { runCatching { context.contentResolver.delete(Uri.parse(uri), null, null) } } }
+        export?.sharedUri?.let { uri -> withContext(Dispatchers.IO) { suspendRunCatching { context.contentResolver.delete(Uri.parse(uri), null, null) } } }
         core.call("delete_export") { it.deleteExport(exportId) }
         refresh()
     }

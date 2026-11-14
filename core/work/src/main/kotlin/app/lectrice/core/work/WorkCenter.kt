@@ -16,6 +16,7 @@ import app.lectrice.core.model.ModelInstallState
 import app.lectrice.core.model.PauseReason
 import app.lectrice.core.model.PlaybackController
 import app.lectrice.core.model.SettingsStore
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -97,7 +98,7 @@ class WorkCenter(
     /** After a start, a resume, or when the app comes to the foreground (the 6-hour budget resets then). */
     fun onExportsChanged() {
         scope.launch {
-            runCatching { exports.refresh() }
+            suspendRunCatching { exports.refresh() }
             if (hasRunnableExport()) startService()
         }
     }
@@ -105,7 +106,7 @@ class WorkCenter(
     /** App in front again: continue what the system paused (file 10 §3.7.5). */
     fun onAppForeground() {
         scope.launch {
-            runCatching { exports.refresh() }
+            suspendRunCatching { exports.refresh() }
             if (exports.exports.value.any { it.status == ExportStatus.Paused && it.pausedBy == PauseReason.System }) exports.resumeSystemPaused()
             // Prepare also starts here: the charger may have been plugged in while the app was closed.
             if (hasRunnableExport() || prepare.hasWork()) startService()

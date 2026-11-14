@@ -13,6 +13,7 @@ import app.lectrice.core.model.VoiceModelRepository
 import app.lectrice.core.model.VoiceSamplePlayer
 import app.lectrice.core.model.VoiceSampleState
 import app.lectrice.core.model.Voices
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -242,7 +243,7 @@ class ModelSetupViewModel(
         val dialog = state.value.dialog as? SetupDialog.Delete ?: return
         state.update { it.copy(dialog = null) }
         viewModelScope.launch {
-            runCatching { models.delete(dialog.modelId) }
+            suspendRunCatching { models.delete(dialog.modelId) }
             refreshFree()
         }
     }

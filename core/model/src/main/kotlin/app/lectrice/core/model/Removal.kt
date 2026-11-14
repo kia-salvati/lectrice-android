@@ -61,7 +61,7 @@ class RemovalController(
         val removal = pendingState.value ?: return
         timer?.cancel()
         pendingState.value = null
-        runCatching { library.purgeRemoved(if (removal.deleteExports) listOf(removal.documentId) else emptyList()) }
+        suspendRunCatching { library.purgeRemoved(if (removal.deleteExports) listOf(removal.documentId) else emptyList()) }
         settings.forgetBook(removal.documentId)
         onPurged(removal.documentId)
     }

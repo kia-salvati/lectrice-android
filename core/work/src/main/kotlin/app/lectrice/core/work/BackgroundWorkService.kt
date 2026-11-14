@@ -19,6 +19,7 @@ import app.lectrice.core.model.AudioExport
 import app.lectrice.core.model.ExportStatus
 import app.lectrice.core.model.ModelInstallState
 import app.lectrice.core.model.SystemPauseCause
+import app.lectrice.core.model.suspendRunCatching
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -66,8 +67,8 @@ class BackgroundWorkService : Service() {
         goForeground(notification(working = true))
         when (intent?.action) {
             ACTION_PAUSE_DOWNLOAD -> host.workCenter.pauseDownload()
-            ACTION_PAUSE_EXPORT -> intent.getStringExtra(EXTRA_EXPORT_ID)?.let { id -> scope.launch { runCatching { host.workCenter.exports.pause(id) } } }
-            ACTION_CANCEL_EXPORT -> intent.getStringExtra(EXTRA_EXPORT_ID)?.let { id -> scope.launch { runCatching { host.workCenter.exports.cancel(id) } } }
+            ACTION_PAUSE_EXPORT -> intent.getStringExtra(EXTRA_EXPORT_ID)?.let { id -> scope.launch { suspendRunCatching { host.workCenter.exports.pause(id) } } }
+            ACTION_CANCEL_EXPORT -> intent.getStringExtra(EXTRA_EXPORT_ID)?.let { id -> scope.launch { suspendRunCatching { host.workCenter.exports.cancel(id) } } }
             ACTION_CONTINUE_EXPORTS -> scope.launch { host.workCenter.exports.resumeSystemPaused() }
         }
         if (loop?.isActive != true) loop = scope.launch { run() }
@@ -79,7 +80,7 @@ class BackgroundWorkService : Service() {
         exportsThisRun.clear()
         downloadedThisRun = false
         while (true) {
-            runCatching { center.exports.refresh() }
+            suspendRunCatching { center.exports.refresh() }
             val running = center.exports.exports.value.filter { it.status == ExportStatus.Queued || it.status == ExportStatus.Running }
             running.mapTo(exportsThisRun) { it.id }
             if (center.isDownloading) downloadedThisRun = true
