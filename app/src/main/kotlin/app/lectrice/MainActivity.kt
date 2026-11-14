@@ -258,7 +258,6 @@ private fun ReaderRoute(screen: Screen.Reader, navigator: Navigator, container: 
         object : ReaderNavigation {
             override fun backToLibrary(message: ReaderMessage?) = navigator.resetTo(Screen.Library)
             override fun openModelSetup() = navigator.push(Screen.ChooseModel)
-            override fun openExport(documentId: String) = Unit
             override fun openComputerHelper() = navigator.push(Screen.ComputerHelper)
         }
     }

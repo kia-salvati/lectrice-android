@@ -23,7 +23,7 @@ data class PlaceLabels(
         chapter?.number != null -> listOf(StatusPart("Ch. ${chapter.number}"), StatusPart("p. $pageLabel"))
         chapter != null -> listOf(StatusPart(chapter.name, shrinks = true), StatusPart("p. $pageLabel"))
         hasToc -> listOf(StatusPart("p. $pageLabel"))
-        else -> listOf(StatusPart("p. $pageLabel of ${lastPageLabelOrCount()}"))
+        else -> listOf(StatusPart("p. $pageLabel of $pageCount"))
     }
 
     /** Continue card: "Ch. 7 · Long Documents · p. 265", "Preface · p. xi", "p. 265". */
@@ -54,7 +54,7 @@ data class PlaceLabels(
     fun chapterLineTitle(): String = when {
         chapterTitle != null && sectionTitle != null -> "$chapterTitle › $sectionTitle"
         chapterTitle != null -> chapterTitle
-        else -> "Page $pageLabel of ${lastPageLabelOrCount()} · PDF page $pdfPage"
+        else -> "Page $pageLabel of $pageCount · PDF page $pdfPage"
     }
 
     /** Player sheet chapter line 2: "38 % of this chapter · 9 min left in it · Page 265 · PDF page 279 of 589". */
@@ -64,8 +64,6 @@ data class PlaceLabels(
         val left = Progress.formatTimeLeft(chapterSecondsLeft).removeSuffix(" left")
         return "$chapterPercent % of this chapter · $left left in it · $page"
     }
-
-    private fun lastPageLabelOrCount(): String = pageCount.toString()
 
     companion object {
         fun of(document: Document, order: PlaybackOrder?, sentenceId: Int, rate: Float, pageLabels: Map<Int, String>): PlaceLabels {

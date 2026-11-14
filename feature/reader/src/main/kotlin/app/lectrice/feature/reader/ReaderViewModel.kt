@@ -52,7 +52,6 @@ import kotlin.math.roundToInt
 interface ReaderNavigation {
     fun backToLibrary(message: ReaderMessage? = null)
     fun openModelSetup()
-    fun openExport(documentId: String)
     fun openComputerHelper()
 }
 
@@ -488,8 +487,6 @@ class ReaderViewModel(
     override fun openLibrary() = navigation.backToLibrary()
 
     override fun openModelSetup() = navigation.openModelSetup()
-
-    override fun openExport() = navigation.openExport(documentId)
 
     override fun openComputerHelper() = navigation.openComputerHelper()
 

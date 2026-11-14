@@ -241,7 +241,6 @@ interface ReaderActions {
     fun messageShown()
     fun openLibrary()
     fun openModelSetup()
-    fun openExport()
     /** File 14: This chapter · Next 3 chapters · As much as fits. */
     fun prepare(scope: app.lectrice.core.model.PrepareScope)
     fun cancelPrepare()

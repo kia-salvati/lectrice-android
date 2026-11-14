@@ -189,7 +189,7 @@ class ComputerHelperHub(
     /** Hands the active computer to the core (or none); the engine is rebuilt around it on its next load. */
     private suspend fun configureLocked() {
         stopLocked()
-        val peer = peers.active.takeIf { peers.enabled && !permissionDenied() }
+        val peer = peers.active.takeIf { peers.enabled && !permissionNeeded() }
         val config = peer?.let {
             val key = withContext(Dispatchers.IO) { identity.privateKey() }
             HelperConfig(key, HelperComputer(it.computer.peerId, it.computer.name, it.staticPublic), listOfNotNull(it.computer.lastAddress), deviceName(), appVersion())
@@ -204,7 +204,7 @@ class ComputerHelperHub(
 
     /** Runs the link while someone listens (or a Prepare range needs it), stops it otherwise. */
     private suspend fun applyLocked() {
-        val wanted = (active || keepAlive()) && peers.enabled && peers.active != null && !permissionDenied()
+        val wanted = (active || keepAlive()) && peers.enabled && peers.active != null && !permissionNeeded()
         if (wanted && !running) startLocked() else if (!wanted && running) stopLocked()
         publishLocked()
     }
@@ -317,7 +317,7 @@ class ComputerHelperHub(
     }
 
     private fun publishLocked() {
-        val link = HelperLinkState.of(coreState, running, peers.enabled && permissionDenied())
+        val link = HelperLinkState.of(coreState, running, peers.enabled && permissionNeeded())
         // The phone opened the link with its own model, so that is the one the computer lacks.
         val needed = if (link == HelperLink.NeedsAttention(HelperAttention.ModelMissing)) engine.activeModel()?.info?.let { NeededModel(it.name, it.downloadBytes) } else null
         mutable.update {
@@ -338,8 +338,6 @@ class ComputerHelperHub(
     private fun permissionNeeded(): Boolean =
         Build.VERSION.SDK_INT >= LOCAL_NETWORK_SDK && context.applicationInfo.targetSdkVersion >= LOCAL_NETWORK_SDK &&
             context.checkSelfPermission(LOCAL_NETWORK_PERMISSION) != PackageManager.PERMISSION_GRANTED
-
-    private fun permissionDenied(): Boolean = permissionNeeded()
 
     @SuppressLint("HardwareIds")
     private fun deviceName(): String = Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)?.takeIf { it.isNotBlank() } ?: Build.MODEL
