@@ -11,6 +11,8 @@ data class VoiceModelInfo(
     val description: String,
     val downloadBytes: Long,
     val installedBytes: Long,
+    /** The one the setup screens suggest. */
+    val recommended: Boolean = false,
 )
 
 sealed interface ModelInstallState {

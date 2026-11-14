@@ -4,7 +4,7 @@ import app.lectrice.core.model.VoiceModelInfo
 import uniffi.lectrice_ffi.KokoroVariant
 
 /**
- * The voice models the app offers, in the order shown (user 2026-10-25): Fast (ours, default), Full quality (official
+ * The voice models the app offers, in the order shown: Fast (ours, recommended and the default), Full quality (official
  * fp32), Small (ours). The archive SHA-256 is checked before unpacking; only [KEEP] is unpacked (the English engine's
  * files). A new model is one more entry here plus its engine config in [EngineFactory].
  */
@@ -25,6 +25,7 @@ enum class ModelSpec(
             description = "Our own build of the same voice. Sounds the same as Full quality in our tests, and makes speech fastest.",
             downloadBytes = 140_395_500,
             installedBytes = 169_233_154,
+            recommended = true,
         ),
         KokoroVariant.INT8,
         "https://github.com/kia-salvati/lectrice/releases/download/model-kokoro-lectrice-fast-v1/kokoro-lectrice-q8-multi-lang-v1_0.tar.bz2",

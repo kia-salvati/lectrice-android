@@ -142,7 +142,7 @@ class ModelSetupViewModel(
             description = info.description,
             sizeLine = "Download ${Sizes.format(info.downloadBytes)} · ${Sizes.format(info.installedBytes)} on the phone",
             speedNote = speedNote,
-            recommended = info.id == RECOMMENDED_ID,
+            recommended = info.recommended,
             state = status.state,
             inUse = status.inUse,
             downloadBytes = info.downloadBytes,
@@ -252,7 +252,6 @@ class ModelSetupViewModel(
     override fun playSample() = samples.play(Voices.DEFAULT_VOICE_ID)
 
     private companion object {
-        const val RECOMMENDED_ID = "kokoro-lectrice-fast"
         const val PERCENT = 100
         const val SECONDS_PER_MINUTE = 60L
         const val BYTES_PER_MB = 1_000_000.0
