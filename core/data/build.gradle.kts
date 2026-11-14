@@ -8,6 +8,8 @@ plugins {
 /** Runs rust/build-android.sh: liblectrice_ffi.so with its native libraries, and the Kotlin bindings. */
 abstract class BuildRustFfi : DefaultTask() {
     @get:Internal abstract val repoRoot: DirectoryProperty
+    /** Which sherpa-onnx build the core links (`rust/build-android.sh`): `-Plectrice.sherpaSet=sherpa2` to try 2.0. */
+    @get:Input abstract val sherpaSet: Property<String>
     @get:OutputDirectory abstract val jniLibsDir: DirectoryProperty
     @get:OutputDirectory abstract val kotlinDir: DirectoryProperty
     @get:Inject abstract val execOperations: ExecOperations
@@ -17,7 +19,7 @@ abstract class BuildRustFfi : DefaultTask() {
         val root = repoRoot.get().asFile
         execOperations.exec {
             workingDir = root
-            commandLine(root.resolve("rust/build-android.sh").path, "sherpa1", jniLibsDir.get().asFile.path, kotlinDir.get().asFile.path)
+            commandLine(root.resolve("rust/build-android.sh").path, sherpaSet.get(), jniLibsDir.get().asFile.path, kotlinDir.get().asFile.path)
         }
     }
 }
@@ -26,6 +28,7 @@ val buildRust = tasks.register<BuildRustFfi>("buildRustFfi") {
     // cargo decides what is out of date.
     outputs.upToDateWhen { false }
     repoRoot.set(rootProject.layout.projectDirectory)
+    sherpaSet.set(providers.gradleProperty("lectrice.sherpaSet").orElse("sherpa1"))
     jniLibsDir.set(layout.buildDirectory.dir("rust/jniLibs"))
     kotlinDir.set(layout.buildDirectory.dir("generated/uniffi"))
 }

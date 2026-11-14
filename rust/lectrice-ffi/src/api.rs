@@ -16,12 +16,12 @@ use lectrice_domain::{
     SentenceId, VoiceId, match_audiobook,
 };
 use lectrice_infra::export::mp4_map;
-use lectrice_infra::{DeferredSpeechEngine, KokoroSpeechEngine, WavDecoder};
+use lectrice_infra::{DeferredSpeechEngine, WavDecoder};
 use tracing::{info, warn};
 
 use crate::android_exporter::{AndroidExporter, AudioEncoderSink};
 use crate::audiobook_records::{AudiobookFileRecord, AudiobookTimelineRecord};
-use crate::composition::{LoadedEngine, Storage, assemble_services, elapsed_ms, load_engine, load_engine_deferred};
+use crate::composition::{LoadedEngine, Storage, assemble_services, elapsed_ms, load_engine, load_engine_deferred, voice_catalog};
 use crate::errors::{CoreErrorInfo, CoreResult};
 use crate::export_records::{AudioExportRecord, ExportEstimateRecord, ExportRequest, PauseReasonRecord, pause_reason};
 use crate::helper::{HelperConfig, HelperLink, HelperListener, HelperStateRecord, NetworkBinder, PairOutcome, lock};
@@ -183,14 +183,11 @@ impl LectriceCore {
         Ok(playback_order(&document, read_skipped).into_iter().map(|sentence| sentence.0).collect())
     }
 
-    /// The engine's voices; without an engine, the Kokoro catalog (the same list) so menus work before the model loads.
+    /// The engine's voices; without an engine, the catalog (the same list) so menus work before the model loads.
     pub fn list_voices(&self) -> CoreResult<VoiceList> {
         match self.services().speech() {
             Ok(speech) => Ok(speech.list_voices.run(&self.context(), ())?.into()),
-            Err(_) => Ok(VoiceList {
-                voices: KokoroSpeechEngine::voice_catalog().into_iter().map(Into::into).collect(),
-                default_voice_id: self.config.default_voice.clone(),
-            }),
+            Err(_) => Ok(VoiceList { voices: voice_catalog().into_iter().map(Into::into).collect(), default_voice_id: self.config.default_voice.clone() }),
         }
     }
 

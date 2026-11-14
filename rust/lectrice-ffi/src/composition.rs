@@ -9,7 +9,7 @@ use lectrice_app::exports::ExportSettings;
 use lectrice_app::services::{Adapters, Services, Settings, SpeechOptions, assemble_with};
 use lectrice_app::speech::ReadAheadSettings;
 use lectrice_domain::cleaning::RuleBasedCleaner;
-use lectrice_domain::{AppResult, SpeechEngine, SpeechHelper, VoiceId};
+use lectrice_domain::{AppResult, SpeechEngine, SpeechHelper, Voice, VoiceId};
 use lectrice_infra::{
     CachedLibrary, DeferredSpeechEngine, FsAudioCache, FsDocumentRepository, FsExportRecordStore, FsVoiceSampleCache, KokoroSettings, KokoroSpeechEngine,
     PdfiumTextSource, SentencexSplitter, Sha256ContentHasher, SonicTimeStretch, SystemClock, WavDecoder, WavEncoder,
@@ -100,6 +100,11 @@ pub fn load_engine_deferred(config: &EngineConfig) -> (EngineStatus, Option<(Loa
     info!(target: TARGET, engine_id = deferred.id(), num_threads, "speech engine ready to load on first use");
     let status = EngineStatus::Ready { engine_id: deferred.id().to_string(), load_ms: 0 };
     (status, Some((LoadedEngine { engine: deferred.clone(), load_ms: 0 }, deferred)))
+}
+
+/// The engine's voices without loading it, so the voice menus work before a model is there.
+pub fn voice_catalog() -> Vec<Voice> {
+    KokoroSpeechEngine::voice_catalog()
 }
 
 /// `helper`: the paired computer, when the helper is on (file 24); the services then fill through it.
