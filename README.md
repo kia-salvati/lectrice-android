@@ -5,10 +5,11 @@ that cleans PDFs into a reading view and reads them aloud with the Kokoro voice.
 
 - **App:** Kotlin + Jetpack Compose.
 - **Core:** the shared Rust core from the main Lectrice repo (`lectrice-domain`, `lectrice-app`,
-  `lectrice-infra`), used as Cargo git dependencies pinned to release tags, through the
+  `lectrice-infra`, `lectrice-link`), used as Cargo git dependencies pinned to release tags, through the
   `lectrice-ffi` bridge crate in this repo (uniffi → Kotlin).
 
-Status: planning. See the Android spec and the first spike plan in the main repo's `docs/`.
+Status: beta (v0.1.0, core v0.4.0). The signed APK is on the [releases page](https://github.com/kia-salvati/lectrice-android/releases).
+The feature specs are in the main repo's `docs/android-logic/`.
 
 ## License
 

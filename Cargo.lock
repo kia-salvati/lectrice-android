@@ -1126,7 +1126,8 @@ checksum = "20870f649af7073d53e38067b2a84312175d56ea15217e1b15bc83506ec50afb"
 
 [[package]]
 name = "lectrice-app"
-version = "0.3.0"
+version = "0.4.0"
+source = "git+https://github.com/kia-salvati/lectrice?tag=v0.4.0#92662192302eb434516217e581c4bb2807b947be"
 dependencies = [
  "lectrice-domain",
  "tracing",
@@ -1134,7 +1135,8 @@ dependencies = [
 
 [[package]]
 name = "lectrice-domain"
-version = "0.3.0"
+version = "0.4.0"
+source = "git+https://github.com/kia-salvati/lectrice?tag=v0.4.0#92662192302eb434516217e581c4bb2807b947be"
 dependencies = [
  "chrono",
  "regex",
@@ -1163,7 +1165,8 @@ dependencies = [
 
 [[package]]
 name = "lectrice-infra"
-version = "0.3.0"
+version = "0.4.0"
+source = "git+https://github.com/kia-salvati/lectrice?tag=v0.4.0#92662192302eb434516217e581c4bb2807b947be"
 dependencies = [
  "chrono",
  "hound",
@@ -1181,7 +1184,8 @@ dependencies = [
 
 [[package]]
 name = "lectrice-link"
-version = "0.3.0"
+version = "0.4.0"
+source = "git+https://github.com/kia-salvati/lectrice?tag=v0.4.0#92662192302eb434516217e581c4bb2807b947be"
 dependencies = [
  "claxon",
  "curve25519-dalek",
