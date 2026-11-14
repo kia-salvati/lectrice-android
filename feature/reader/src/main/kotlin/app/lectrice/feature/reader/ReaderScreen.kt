@@ -20,6 +20,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -50,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.pointer.PointerEventPass
@@ -59,6 +63,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -79,6 +84,7 @@ import app.lectrice.core.designsystem.LinearProgress
 import app.lectrice.core.designsystem.LocalReducedMotion
 import app.lectrice.core.designsystem.ProgressLine
 import app.lectrice.core.designsystem.Spinner
+import app.lectrice.core.designsystem.StatusBarScrim
 import app.lectrice.core.designsystem.Text
 import app.lectrice.core.designsystem.motionSpring
 import app.lectrice.core.model.PlaybackSpeed
@@ -283,6 +289,8 @@ fun ReaderScreen(
         val status = rememberPillStatus(player, state.voiceMissing, screenWidth, state.helper)
         val navInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
         val statusInset = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+        val cutout = WindowInsets.displayCutout.asPaddingValues()
+        val layoutDirection = LocalLayoutDirection.current
         val pillHeight = if (tall) PILL_HEIGHT_TALL else PILL_HEIGHT
         val abovePill = navInset + PILL_BOTTOM + pillHeight + 12.dp
 
@@ -298,13 +306,22 @@ fun ReaderScreen(
                 currentBlock = currentBlock,
                 listState = listState,
                 layouts = layouts,
-                contentPadding = PaddingValues(top = statusInset + 24.dp, bottom = abovePill + 36.dp + tipHeight),
+                contentPadding = PaddingValues(
+                    start = cutout.calculateStartPadding(layoutDirection),
+                    top = statusInset + 24.dp,
+                    end = cutout.calculateEndPadding(layoutDirection),
+                    bottom = abovePill + 36.dp + tipHeight,
+                ),
                 scrollConnection = scrollConnection,
                 onTapSentence = { follow = true; actions.jumpToSentence(it) },
                 onTapBlock = { follow = true; actions.tapBlock(it) },
             )
         }
-        Box(Modifier.fillMaxWidth().height(statusInset).background(c.bg.copy(alpha = STATUS_SCRIM_ALPHA)))
+        // Opaque behind the status bar, then a short fade, so the text never meets the clock.
+        Column(Modifier.fillMaxWidth()) {
+            StatusBarScrim()
+            Box(Modifier.fillMaxWidth().height(STATUS_FADE).background(Brush.verticalGradient(listOf(c.bg, c.bg.copy(alpha = 0f)))))
+        }
 
         state.banner?.let { banner ->
             when (banner) {
@@ -567,7 +584,6 @@ private suspend fun scrollToSentence(listState: LazyListState, layouts: ReaderLa
 private val BAND = Band(0.2f, 0.6f, 0.35f)
 private val BAND_TALL = Band(0.15f, 0.5f, 0.35f)
 internal const val TALL_FONT_SCALE = 2f
-private const val STATUS_SCRIM_ALPHA = 0.94f
 private const val PERCENT = 100f
 private const val IDLE_COLLAPSE_MS = 4_000L
 private const val HINT_DELAY_MS = 3_000L
@@ -575,4 +591,5 @@ private const val SNACK_MS = 4_000L
 private const val SPINNER_DELAY_MS = 150L
 private const val LAYOUT_WAIT_MS = 500L
 private val COLLAPSE_SCROLL = 24.dp
+private val STATUS_FADE = 12.dp
 private val TIP_CLOSE_ICON = 20.dp

@@ -377,11 +377,13 @@ fun InfoCard(text: String, modifier: Modifier = Modifier) {
 @Composable
 fun CoverTile(initials: String, hue: Int, modifier: Modifier = Modifier, width: Dp = 40.dp, height: Dp = 56.dp, radius: Dp = 8.dp) {
     val c = LectriceTheme.colors
+    // The tile has a fixed size, so its initials must not grow with the font scale.
+    val textSize = (height.value * TILE_TEXT_SHARE / LocalDensity.current.fontScale).sp
     Box(
         modifier.size(width, height).clip(RoundedCornerShape(radius)).background(c.tile(hue)).clearAndSetSemantics { },
         contentAlignment = Alignment.Center,
     ) {
-        Text(initials, style = LectriceTheme.type.serif((height.value * TILE_TEXT_SHARE).sp, (height.value * TILE_TEXT_SHARE).sp, FontWeight.SemiBold), color = c.onTile(hue), maxLines = 1)
+        Text(initials, style = LectriceTheme.type.serif(textSize, textSize, FontWeight.SemiBold), color = c.onTile(hue), maxLines = 1)
     }
 }
 
